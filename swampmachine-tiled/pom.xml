@@ -82,6 +82,10 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>net.kiberion</groupId>
+            <artifactId>swampmachine-core</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
