@@ -19,35 +19,33 @@ import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 import net.kiberion.assets.UiManager;
-import net.kiberion.multimedia.Music;
-import net.kiberion.multimedia.Sound;
 
 /**
  * Pyramide flavor of gdx's Game class
  *
  * @author kibertoad
  */
-@SuppressWarnings("rawtypes")
 public class GameApplication extends Game {
+	
+	private GameConfig config = new GameConfig();
 	
 	public String dataDirectory = "src/main/resources";
 
-    protected void loadConfig() {
-        Music.instance().setEnabled (false);
+    @SuppressWarnings("unchecked")
+	protected void loadConfig() {
+        config.setMusicEnabled(false);
 
         Yaml yaml = new Yaml();
-        Map config;
+        Map<String, Object> configMap;
         if (Gdx.files.internal("data/config.yml").exists()) {
             try {
-                config = (Map) yaml.load(new String(Files.readAllBytes(Paths.get("data", "config.yml"))));
-                if (config.containsKey("music")) {
-                    Music.instance().setEnabled ((Boolean) config.get("music"));
+                configMap = (Map<String, Object>) yaml.load(new String(Files.readAllBytes(Paths.get("data", "config.yml"))));
+                if (configMap.containsKey("music")) {
+                    config.setMusicEnabled(((Boolean) configMap.get("music")));
                 }
             } catch (IOException ex) {
                 Logger.getLogger(GameApplication.class.getName()).log(Level.WARNING, null, ex);
             }
-        } else {
-            Music.instance().setEnabled (false);
         }
     }
 
@@ -57,10 +55,13 @@ public class GameApplication extends Game {
         super.render();
     }
 
+    //ToDo find a proper non-coupling way
+    /*
     public void loadAllData() {
         Music.instance().load();
         Sound.instance().load();
     }
+    */
 
     @Override
     public void create() {
