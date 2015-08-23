@@ -6,6 +6,10 @@ import java.nio.file.Paths;
 
 import com.badlogic.gdx.Gdx;
 
+import net.kiberion.assets.readers.AbstractFileReader;
+import net.kiberion.assets.readers.GDXFileReader;
+import net.kiberion.assets.readers.SimpleFileReader;
+
 public class AssetProvider {
 
 	private static AssetProvider _instance;	
@@ -24,6 +28,11 @@ public class AssetProvider {
     }
     
     public static AssetProvider instance() {
+    	
+    	AnnotationScanner scanner = new AnnotationScanner();
+    	scanner.scan();
+    	
+    	
         try {
             return instance(defaultPathToAssets);
         } catch (IOException e) {
@@ -73,5 +82,9 @@ public class AssetProvider {
     private static void setDefaultPathToAssets(String pathToAssets) {
 		defaultPathToAssets = pathToAssets;
 	}
+    
+    public static String getDefaultPathToAssets (){
+    	return defaultPathToAssets;
+    }
 
 }

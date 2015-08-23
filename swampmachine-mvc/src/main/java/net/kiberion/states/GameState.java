@@ -43,7 +43,9 @@ public class GameState<V extends StateView> implements Screen{
     }
 
     public void postInjection() {
-    	view.postInjection();
+		if (view != null) {
+			view.postInjection();
+		}
     	
     	for (StateView subView : subViews) {
     		subView.postInjection();
@@ -112,5 +114,5 @@ public class GameState<V extends StateView> implements Screen{
 	@Override
 	public void dispose() {
 	}
-    
+	
 }

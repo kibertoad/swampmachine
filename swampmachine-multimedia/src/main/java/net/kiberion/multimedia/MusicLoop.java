@@ -7,8 +7,8 @@ import java.util.List;
 
 import com.badlogic.gdx.audio.Music.OnCompletionListener;
 
-import net.kiberion.assets.AbstractFileReader;
-import net.kiberion.assets.GDXFileReader;
+import net.kiberion.assets.readers.AbstractFileReader;
+import net.kiberion.assets.readers.GDXFileReader;
 
 public class MusicLoop {
 
