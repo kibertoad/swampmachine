@@ -11,6 +11,7 @@ public class OrtographicTiledMapView extends AbstractTiledMapView{
     @Override
     protected void instantiateRenderer() {
         renderer = new OrthogonalTiledMapRendererWithObjects(getMap());
+        super.instantiateRenderer();
     }
 
     @Override

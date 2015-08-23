@@ -6,13 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Pixmap.Format;
+import org.apache.commons.lang3.Validate;
+
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.renderers.BatchTiledMapRenderer;
 import com.google.inject.Inject;
 
 import lombok.Getter;
@@ -31,12 +29,15 @@ import net.kiberion.tiled.managers.MapObjectManager;
 import net.kiberion.tiled.model.GenericTiledMapModel;
 import net.kiberion.tiled.model.TiledMapInfo;
 import net.kiberion.tiled.overlays.TiledMapOverlay;
+import net.kiberion.tiled.renderers.OrthogonalTiledMapRendererWithObjects;
+import net.kiberion.tiled.renderers.ShaderRegistry;
 
 public abstract class AbstractTiledMapView<T extends GenericTiledMapModel<?>> extends StateView<T>{
 
-	protected BatchTiledMapRenderer renderer;
+	@Inject
+	private ShaderRegistry shaderRegistry;
 	
-	private FrameBuffer occlusionFbo;
+	protected OrthogonalTiledMapRendererWithObjects renderer;
 	
 	@Getter
     private TiledMapCamera camera;
@@ -58,7 +59,7 @@ public abstract class AbstractTiledMapView<T extends GenericTiledMapModel<?>> ex
     
     public AbstractTiledMapView() {
         overlays = new ArrayList<>();
-        occlusionFbo = new FrameBuffer(Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
+//        occlusionFbo = new FrameBuffer(Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
     }
 
     public void setMap(TiledMapInfo mapInfo) {
@@ -79,7 +80,11 @@ public abstract class AbstractTiledMapView<T extends GenericTiledMapModel<?>> ex
         return mapInfo.getMap();
     }
 
-    protected abstract void instantiateRenderer();
+    protected void instantiateRenderer() {
+    	Validate.notNull(renderer);
+    	Validate.notNull(shaderRegistry);
+    	renderer.setShaderRegistry(shaderRegistry);
+    }
     
     public void addOverlay(TiledMapOverlay overlay) {
         overlays.add(overlay);
@@ -90,13 +95,7 @@ public abstract class AbstractTiledMapView<T extends GenericTiledMapModel<?>> ex
     }
 
     public void draw() {
-        renderer.setView(camera.getOrthoCam());
-        
-
-        occlusionFbo.begin();
-        renderer.render();
-        occlusionFbo.end();
-        
+        renderer.setView(camera.getOrthoCam());        
         renderer.render();
 
         // render overlays
