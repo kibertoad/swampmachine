@@ -5,8 +5,8 @@ package net.kiberion.entities.common.api;
  */
 public interface TaggedEntity {
 
-    public void setContainerID(int containerID);
-    public int getContainerID();
+    public void setContainerID(String containerID);
+    public String getContainerID();
 
     public String getId();
 

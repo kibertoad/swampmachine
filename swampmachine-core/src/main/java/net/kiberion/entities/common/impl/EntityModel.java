@@ -74,7 +74,7 @@ public class EntityModel extends GenericMetadataHolderAspect implements NodeInte
     }
 
     @Override
-    public int getContainerID() {
+    public String getContainerID() {
         return getMetadata().getContainerID();
     }
 
@@ -84,7 +84,7 @@ public class EntityModel extends GenericMetadataHolderAspect implements NodeInte
     }
 
     @Override
-    public void setContainerID(int containerID) {
+    public void setContainerID(String containerID) {
         this.getMetadata().setContainerID(containerID);
     }
     @Override

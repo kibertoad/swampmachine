@@ -3,12 +3,14 @@ package net.kiberion.assets;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 
 import net.kiberion.assets.readers.AbstractFileReader;
 import net.kiberion.assets.readers.GDXFileReader;
 import net.kiberion.assets.readers.SimpleFileReader;
+import net.kiberion.entities.modelinfo.CreatureModelInfo;
 
 public class AssetProvider {
 
@@ -86,5 +88,9 @@ public class AssetProvider {
     public static String getDefaultPathToAssets (){
     	return defaultPathToAssets;
     }
+
+	public Map<String, CreatureModelInfo> getCreatures() {
+		return null;
+	}
 
 }

@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.BatchTiledMapRenderer;
@@ -17,18 +20,23 @@ import lombok.NonNull;
 import lombok.Setter;
 import net.kiberion.aspects.api.MetadataHolderAspect;
 import net.kiberion.aspects.api.PositionHolderAspect;
+import net.kiberion.assets.GameViewInfoProvider;
 import net.kiberion.assets.UiManager;
+import net.kiberion.assets.viewinfo.CreatureViewInfo;
 import net.kiberion.entities.map.api.Position;
 import net.kiberion.entities.map.impl.PositionAspect;
 import net.kiberion.mvc.StateView;
 import net.kiberion.tiled.camera.TiledMapCamera;
 import net.kiberion.tiled.managers.MapObjectManager;
+import net.kiberion.tiled.model.GenericTiledMapModel;
 import net.kiberion.tiled.model.TiledMapInfo;
 import net.kiberion.tiled.overlays.TiledMapOverlay;
 
-public abstract class AbstractTiledMapView extends StateView{
+public abstract class AbstractTiledMapView<T extends GenericTiledMapModel<?>> extends StateView<T>{
 
 	protected BatchTiledMapRenderer renderer;
+	
+	private FrameBuffer occlusionFbo;
 	
 	@Getter
     private TiledMapCamera camera;
@@ -50,6 +58,7 @@ public abstract class AbstractTiledMapView extends StateView{
     
     public AbstractTiledMapView() {
         overlays = new ArrayList<>();
+        occlusionFbo = new FrameBuffer(Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
     }
 
     public void setMap(TiledMapInfo mapInfo) {
@@ -82,6 +91,12 @@ public abstract class AbstractTiledMapView extends StateView{
 
     public void draw() {
         renderer.setView(camera.getOrthoCam());
+        
+
+        occlusionFbo.begin();
+        renderer.render();
+        occlusionFbo.end();
+        
         renderer.render();
 
         // render overlays
@@ -127,10 +142,9 @@ public abstract class AbstractTiledMapView extends StateView{
     	return mapInfo;
     }
 
-    /*
     public void placeCreatures() {
         for (MetadataHolderAspect entity : this.getModel().getCreatures()) {
-            CreatureViewInfo viewInfo = GameViewInfoProvider.instance().fullCreatureViewInfoList.getByCode(entity.getMetadata().getId());
+            CreatureViewInfo viewInfo = GameViewInfoProvider.instance().fullCreatureViewInfoList.get(entity.getMetadata().getId());
             Objects.requireNonNull(viewInfo);
             TextureMapObject tmo = this.addMapObject(
                     entity,
@@ -138,11 +152,9 @@ public abstract class AbstractTiledMapView extends StateView{
                     viewInfo.image);
         }
     }
-    */
     
-    /*
     public void centerCameraOnPlayer() {
         getCamera().centerIsometrically(getModel().getPlayer().getPositionAspect(), getModel().getMapInfo());
     } 
-    */   
+
 }

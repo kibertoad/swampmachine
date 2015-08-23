@@ -16,7 +16,7 @@ public class DataNode extends EntityModel {
     public String group;
     public String subGroup;
 
-    public int groupID;
+    public String groupID;
 
     public int rating = -1;
 
@@ -31,7 +31,7 @@ public class DataNode extends EntityModel {
 		this.description = description;
 	}
 
-	public int subGroupID;
+	public String subGroupID;
 
     public DataNode() {
     }

@@ -6,7 +6,7 @@ import net.kiberion.aspects.api.MetadataAspect;
 
 public class GenericMetadataAspect implements MetadataAspect {
 
-    public int containerID;
+    public String containerID;
     public int UID = -1;
 
     private String id;
@@ -90,7 +90,7 @@ public class GenericMetadataAspect implements MetadataAspect {
     }
 
     @Override
-    public int getContainerID() {
+    public String getContainerID() {
         return containerID; // To change body of implemented methods use File |
                             // Settings | File Templates.
     }
@@ -111,7 +111,7 @@ public class GenericMetadataAspect implements MetadataAspect {
     }
 
     @Override
-    public void setContainerID(int containerID) {
+    public void setContainerID(String containerID) {
         this.containerID = containerID;
     }
 

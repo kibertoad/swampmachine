@@ -7,11 +7,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import lombok.Getter;
 import lombok.Setter;
 
-public class StateView extends Container<Actor> implements PostInjectionProcessed{
+public class StateView<T> extends Container<Actor> implements PostInjectionProcessed{
 
     @Getter
     @Setter
     private Stage stage;
+
+    @Getter
+    @Setter
+    private T model;
     
     public void show() {
     	setVisible(true);
@@ -21,12 +25,6 @@ public class StateView extends Container<Actor> implements PostInjectionProcesse
     	setVisible(false);
     }
 
-	@Override
-	public void postInjection() {
-	}
-	
-	
-	
     @Override
     public void act(float delta) {
     	/*
@@ -48,6 +46,10 @@ public class StateView extends Container<Actor> implements PostInjectionProcesse
         */
 
     }
+
+	@Override
+	public void postInjection() {
+	}
 
     /*
     public void addAnimation(PyramideAnimation animation) {
