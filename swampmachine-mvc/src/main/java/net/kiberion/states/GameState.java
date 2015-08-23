@@ -11,7 +11,7 @@ import lombok.Setter;
 import net.kiberion.entities.common.api.DeltaUpdatable;
 import net.kiberion.mvc.StateView;
 
-public class GameState<V extends StateView> implements Screen{
+public class GameState<V extends StateView, M> implements Screen{
 
     @Getter
     private final String key;
@@ -27,6 +27,9 @@ public class GameState<V extends StateView> implements Screen{
     
     @Getter
     private V view;
+
+    @Getter
+    private M model;
     
     public List<DeltaUpdatable> entitiesForUpdate = new ArrayList<>();
     private List<StateView> subViews = new ArrayList<>();
@@ -56,6 +59,10 @@ public class GameState<V extends StateView> implements Screen{
     	this.view = view;
     	view.setStage(getStage());
     }
+    
+    public void setModel(M model) {
+		this.model = model;
+	}
 
 	@Override
 	public void show() {
