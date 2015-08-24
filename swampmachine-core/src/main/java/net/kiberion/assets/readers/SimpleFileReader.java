@@ -19,25 +19,25 @@ public class SimpleFileReader extends AbstractFileReader {
         super(baseDir);
     }
 
-    @Override
-    public List<Path> getListOfFilesByWildcard(Path path, Set<String> wildcard) throws IOException {
-        List<Path> result = new ArrayList<>();
+	@Override
+	public List<Path> getListOfFilesByWildcard(Path path, Set<String> wildcard) throws IOException {
+		List<Path> result = new ArrayList<>();
 
-        DirectoryStream.Filter<Path> filter = (entry) -> {
-            return wildcard.contains(com.google.common.io.Files.getFileExtension(entry.toString()));
-        };
+		DirectoryStream.Filter<Path> filter = (entry) -> {
+			return wildcard.contains(com.google.common.io.Files.getFileExtension(entry.toString()));
+		};
 
-        DirectoryStream<Path> stream = Files.newDirectoryStream(path, filter);
+		try (DirectoryStream<Path> stream = Files.newDirectoryStream(path, filter)) {
+			for (Path file : stream) {
+				result.add(file);
+			}
+		}
 
-        for (Path file : stream) {
-            result.add(file);
-        }
-        return result;
-    }
+		return result;
+	}
 
     @Override
     public InputStream getFileAsStream(Path file) throws IOException {
-        
         InputStream in = new FileInputStream(file.toFile());
         BufferedInputStream bis = new BufferedInputStream(in);
         AutoCloseInputStream acis = new AutoCloseInputStream (bis);

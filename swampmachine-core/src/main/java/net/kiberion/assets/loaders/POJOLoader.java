@@ -19,6 +19,7 @@ import net.kiberion.assets.readers.AbstractFileReader;
 import net.kiberion.assets.readers.GDXFileReader;
 import net.kiberion.assets.readers.SimpleFileReader;
 import net.kiberion.entities.common.impl.EntityModel;
+import net.kiberion.utils.MapUtils;
 import net.kiberion.utils.SetUtils;
 
 /**
@@ -117,9 +118,7 @@ public class POJOLoader<T extends EntityModel> implements AbstractLoader<T> {
 
             for (Path fileEntry : filesToLoad) {
                 List<T> loadedEntries = loadFile(fileEntry);
-                for (T entry : loadedEntries) {
-                    result.put(entry.getId(), entry);
-                }
+                MapUtils.putAll(result, loadedEntries);
             }
         }
         return result;

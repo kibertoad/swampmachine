@@ -1,6 +1,7 @@
 package net.kiberion.aspects.impl;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import net.kiberion.aspects.api.MetadataAspect;
 
@@ -13,6 +14,8 @@ public class GenericMetadataAspect implements MetadataAspect {
     private String id;
     private String name; // used for display to user
     private String description;
+    
+    private Set<String> tags = new HashSet<>();
 
     @Override
 	public String getDescription() {
@@ -24,14 +27,14 @@ public class GenericMetadataAspect implements MetadataAspect {
 		this.description = description;
 	}
 
-	@Override
-    public int getCustomValue(String valueCode) {
-        throw new UnsupportedOperationException();
+    @Override
+    public boolean hasTag(String tag) {
+        return tags.contains(tag);
     }
 
     @Override
-    public boolean hasTag(String theTag) {
-        throw new UnsupportedOperationException();
+    public Set<String> getTags() {
+        return tags;
     }
 
     /*
@@ -71,16 +74,6 @@ public class GenericMetadataAspect implements MetadataAspect {
     }
 
     @Override
-    public void outputTags() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public List<String> getTags() {
-        return null;
-    }
-
-    @Override
     public String getId() {
         return id;
     }
@@ -91,12 +84,6 @@ public class GenericMetadataAspect implements MetadataAspect {
     }
 
     @Override
-    public String getContainerID() {
-        return containerID; // To change body of implemented methods use File |
-                            // Settings | File Templates.
-    }
-
-    @Override
     public int getUID() {
         return UID;
     }
@@ -104,16 +91,6 @@ public class GenericMetadataAspect implements MetadataAspect {
     @Override
     public void setUID(int UID) {
         this.UID = UID;
-    }
-
-    @Override
-    public int getRating() {
-        throw new RuntimeException("unimpl");
-    }
-
-    @Override
-    public void setContainerID(String containerID) {
-        this.containerID = containerID;
     }
 
     @Override

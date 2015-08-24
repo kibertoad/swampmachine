@@ -4,34 +4,38 @@
  */
 package net.kiberion.entities.common.impl;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.badlogic.gdx.Gdx;
+
+import lombok.Getter;
+import lombok.Setter;
+import net.kiberion.entities.common.api.TaggedEntity;
 
 /**
  * @author kibertoad
  */
-public class DataNode extends EntityModel {
+public class DataNode extends EntityModel implements TaggedEntity {
 
+	@Setter
     public String group;
+	
+	@Setter
+	@Getter
     public String subGroup;
+    public Set<String> tags = new HashSet<>();
 
     public String groupID;
-
+    public String subGroupID;
+    
     public int rating = -1;
 
-    public ArrayList<String> tags = new ArrayList<String>();
-
+    @Getter
+    @Setter
     private String description; 
-    public String getDescription() {
-		return description;
-	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String subGroupID;
+	
 
     public DataNode() {
     }
@@ -39,16 +43,6 @@ public class DataNode extends EntityModel {
     public DataNode(String setName, String setCode) {
         setName (setName);
         setId(setCode);
-    }
-
-    @Override
-    public String toString() {
-        return getMetadata().getName();
-    }
-
-    @Override
-    public String getGroup() {
-        return group;
     }
 
     @Override
@@ -63,20 +57,29 @@ public class DataNode extends EntityModel {
     }
 
     @Override
+    public Set<String> getTags() {
+        return tags;
+    }
+    
+
+    @Override
+    public String toString() {
+        return getMetadata().getName();
+    }
+
+    @Override
+    public String getGroup() {
+        return group;
+    }
+
     public int getRating() {
         return rating;
     }
 
-    @Override
     public void outputTags() {
         for (String s : tags) {
             Gdx.app.log("debug", "Tag: " + s);
         }
-    }
-
-    @Override
-    public ArrayList<String> getTags() {
-        return tags;
     }
 
     @Override
@@ -86,16 +89,6 @@ public class DataNode extends EntityModel {
         } else {
             return super.getName();
         }
-    }
-
-    @Override
-    public void setGroup(String toGroup) {
-        group = toGroup;
-    }
-
-    @Override
-    public void setSubGroup(String toGroup) {
-        subGroup = toGroup;
     }
 
     @Override

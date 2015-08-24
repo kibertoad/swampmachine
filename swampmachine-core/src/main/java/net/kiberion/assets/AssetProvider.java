@@ -31,10 +31,6 @@ public class AssetProvider {
     
     public static AssetProvider instance() {
     	
-    	AnnotationScanner scanner = new AnnotationScanner();
-    	scanner.scan();
-    	
-    	
         try {
             return instance(defaultPathToAssets);
         } catch (IOException e) {

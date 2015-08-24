@@ -53,8 +53,6 @@ public class EntityViewInfoLoader extends DataNodeLoader<CreatureViewInfo> {
             Objects.requireNonNull(image, "Unknown image: " + ya.getString("image"));
         }
 
-
-        creature.setContainerID (entities.get(entityCode).getContainerID());
         creature.setId (entities.get(entityCode).getId());
 
         if (image != null) {

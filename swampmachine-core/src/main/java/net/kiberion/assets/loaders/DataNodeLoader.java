@@ -188,11 +188,11 @@ public class DataNodeLoader<t extends DataNode> implements AbstractLoader<t> {
                 log.error("Unknown group: " + node.group);
             }
 
-            node.groupID = groups.get(node.group).getContainerID();
+            node.groupID = groups.get(node.group).getId();
         } else {
             if (globalGroup != null) {
                 node.group = globalGroup;
-                node.groupID = groups.get(node.group).getContainerID();
+                node.groupID = groups.get(node.group).getId();
             }
         }
 
@@ -208,11 +208,11 @@ public class DataNodeLoader<t extends DataNode> implements AbstractLoader<t> {
             Objects.requireNonNull(groups.get(node.group).subGroups);
             Objects.requireNonNull(groups.get(node.group).subGroups.get(node.subGroup));
 
-            node.subGroupID = groups.get(node.group).subGroups.get(node.subGroup).getContainerID();
+            node.subGroupID = groups.get(node.group).subGroups.get(node.subGroup).getId();
         } else {
             if (globalSubGroup != null) {
                 node.subGroup = globalSubGroup;
-                node.subGroupID = groups.get(node.group).subGroups.get(node.subGroup).getContainerID();
+                node.subGroupID = groups.get(node.group).subGroups.get(node.subGroup).getId();
             }
         }
     }

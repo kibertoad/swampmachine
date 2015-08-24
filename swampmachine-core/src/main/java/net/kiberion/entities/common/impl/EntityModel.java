@@ -1,26 +1,13 @@
 package net.kiberion.entities.common.impl;
 
-import java.util.List;
-
 import net.kiberion.aspects.impl.GenericMetadataHolderAspect;
-import net.kiberion.entities.common.api.NodeInterface;
-import net.kiberion.entities.common.api.TaggedEntity;
+import net.kiberion.entities.common.api.NodeEntity;
 
 
 /**
  * @author kibertoad
  */
-public class EntityModel extends GenericMetadataHolderAspect implements NodeInterface, TaggedEntity {
-
-    @Override
-    public int getCustomValue(String valueCode) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean hasTag(String theTag) {
-        throw new UnsupportedOperationException();
-    }
+public abstract class EntityModel extends GenericMetadataHolderAspect implements NodeEntity {
 
     /*
      * E. g. for equipment slot return both slot and item name
@@ -41,26 +28,16 @@ public class EntityModel extends GenericMetadataHolderAspect implements NodeInte
 
     @Override
     public String getGroup() {
-        return "-";
+        return this.getMetadata().getGroup();
     }
 
     @Override
     public void setGroup(String toGroup) {
-
+    	throw new UnsupportedOperationException("Unsupported operation");
     }
 
     public void setSubGroup(String toGroup) {
-
-    }
-
-    @Override
-    public void outputTags() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public List<String> getTags() {
-        return null;
+    	throw new UnsupportedOperationException("Unsupported operation");
     }
 
     @Override
@@ -73,20 +50,6 @@ public class EntityModel extends GenericMetadataHolderAspect implements NodeInte
         getMetadata().setId(id);
     }
 
-    @Override
-    public String getContainerID() {
-        return getMetadata().getContainerID();
-    }
-
-    @Override
-    public int getRating() {
-        return -1;
-    }
-
-    @Override
-    public void setContainerID(String containerID) {
-        this.getMetadata().setContainerID(containerID);
-    }
     @Override
     public String toString() {
         return this.getMetadata().toString();

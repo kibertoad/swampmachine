@@ -1,7 +1,6 @@
 package net.kiberion.assets.loaders;
 
 import java.util.Map;
-import java.util.UUID;
 
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
@@ -50,10 +49,7 @@ public class GameViewInfoLoader extends DataNodeLoader<ViewInfo>{
         TextureRegion image = ya.getImage("image");
         //image.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        if (listOfModelInfo == null) {
-            viewInfo.setContainerID (UUID.randomUUID().toString());
-        } else {
-            viewInfo.setContainerID (listOfModelInfo.get(entityCode).getContainerID());
+        if (listOfModelInfo != null) {
             viewInfo.tags.addAll(listOfModelInfo.get(entityCode).getTags());
             viewInfo.group = listOfModelInfo.get(entityCode).getGroup();
 

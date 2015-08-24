@@ -78,6 +78,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>net.kiberion</groupId>
+            <artifactId>swampmachine-core</artifactId>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>

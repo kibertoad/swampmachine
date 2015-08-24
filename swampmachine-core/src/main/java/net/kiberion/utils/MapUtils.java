@@ -1,9 +1,12 @@
 package net.kiberion.utils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import net.kiberion.entities.common.api.NodeEntity;
 
 /**
  * @author kibertoad
@@ -31,11 +34,11 @@ public class MapUtils {
     }
 
 
-    public static List<Integer> getIntegerListSafe(Map map, String key) {
+    public static List<Integer> getIntegerListSafe(Map<?, ?> map, String key) {
         return getIntegerListSafe(map, key, false);
     }
 
-    public static List<Integer> getIntegerListSafe(Map map, String key, boolean decrementValues) {
+    public static List<Integer> getIntegerListSafe(Map<?, ?> map, String key, boolean decrementValues) {
         int delta;
         if (decrementValues) {
             delta = -1;
@@ -76,5 +79,18 @@ public class MapUtils {
         }
 
         return map;
+    }
+    
+    @SuppressWarnings("unchecked")
+	public <T> T getRandom (Map<?, ?> entityMap) {
+        int indexValue = Dice.getRandomInt(0, entityMap.size()).getIntValue();
+        return (T) entityMap.values().toArray()[indexValue];
+    }
+    
+    public static <T extends NodeEntity> void putAll(Map<String, T> targetMap, Collection<T> sourceCollection) {
+    	for (T entity : sourceCollection) {
+    		targetMap.put(entity.getId(), entity);
+    	}
+    	
     }
 }
