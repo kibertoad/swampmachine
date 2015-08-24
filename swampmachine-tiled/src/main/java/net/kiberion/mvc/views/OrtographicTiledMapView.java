@@ -19,5 +19,11 @@ public class OrtographicTiledMapView<T extends AbstractTiledMapModel<?>> extends
     public Position getPositionForModelEntity (MetadataHolderAspect entityModel, PositionAspect position) {
         return TiledOrthographicCoordsUtils.getOrthographicScreenCoords(position, getMapInfo());
     }    
+    
+    @Override
+    public void centerCameraOnPlayer() {
+        getCamera().centerOn2(getModel().getPlayer().getPositionAspect());
+    } 
+
 	
 }
