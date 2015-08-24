@@ -3,11 +3,14 @@ package net.kiberion.blueprint.common.registries;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.inject.Singleton;
+
 import lombok.Getter;
 import net.kiberion.assets.viewinfo.AnimationViewInfo;
 import net.kiberion.assets.viewinfo.CreatureViewInfo;
 import net.kiberion.assets.viewinfo.ViewInfo;
 
+@Singleton
 public class CommonViewInfoRegistry {
 
     @Getter
