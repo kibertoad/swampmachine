@@ -25,6 +25,9 @@ public class CreatureModelInfo extends DataNode{
     //public Inventory equippedItems;
     public String templateID = null;
 
+    public CreatureModelInfo() {
+    }
+    
     public CreatureModelInfo(String setName, String setCode, Map<String, ItemInfo> items) {
         super(setName, setCode);
 

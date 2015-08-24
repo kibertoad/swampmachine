@@ -8,13 +8,13 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import net.kiberion.entities.map.api.Position;
+import net.kiberion.mvc.model.AbstractTiledMapModel;
+import net.kiberion.tiled.aspects.api.CollidableAspect;
 import net.kiberion.tiled.aspects.holders.MapMetadataHolderAspect;
-import net.kiberion.tiled.aspects.interfaces.CollidableAspect;
-import net.kiberion.tiled.model.GenericTiledMapModel;
 import net.kiberion.tiled.model.TiledMapInfo;
 
 @Singleton
-public class CreatureCollisionProcessor<TModel extends GenericTiledMapModel<? extends MapMetadataHolderAspect>> {
+public class CreatureCollisionProcessor<TModel extends AbstractTiledMapModel<? extends MapMetadataHolderAspect>> {
 
     private static final Logger log = LogManager.getLogger();
 

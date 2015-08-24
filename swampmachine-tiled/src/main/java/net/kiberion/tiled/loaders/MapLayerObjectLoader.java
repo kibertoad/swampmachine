@@ -9,12 +9,12 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import net.kiberion.entities.map.api.Position;
 import net.kiberion.entities.map.impl.PositionAspect;
+import net.kiberion.mvc.model.AbstractTiledMapModel;
 import net.kiberion.tiled.TiledIsometricCoordsUtils;
-import net.kiberion.tiled.aspects.holders.GenericMapMetadataHolderAspect;
-import net.kiberion.tiled.model.GenericTiledMapModel;
+import net.kiberion.tiled.aspects.holders.CommonMapMetadataHolderAspect;
 import net.kiberion.tiled.model.TiledMapInfo;
 
-public class MapLayerObjectLoader <TModel extends GenericTiledMapModel>{
+public class MapLayerObjectLoader <TModel extends AbstractTiledMapModel>{
 
     private static final Logger log = LogManager.getLogger();
     
@@ -27,7 +27,7 @@ public class MapLayerObjectLoader <TModel extends GenericTiledMapModel>{
         MapLayer activeObjectLayer = map.getLayers().get("activeobjects");
         if (activeObjectLayer != null) {
             for (MapObject object : activeObjectLayer.getObjects()) {
-                GenericMapMetadataHolderAspect activeObject = new GenericMapMetadataHolderAspect();
+                CommonMapMetadataHolderAspect activeObject = new CommonMapMetadataHolderAspect();
                 activeObject.getMetadata().setId(object.getProperties().get("id", String.class));
                 
                 float x = object.getProperties().get("x", Float.class).floatValue();

@@ -3,7 +3,7 @@ package net.kiberion.aspects.impl;
 import net.kiberion.aspects.api.MetadataAspect;
 import net.kiberion.aspects.api.MetadataHolderAspect;
 
-public class GenericMetadataHolderAspect implements MetadataHolderAspect{
+public class CommonMetadataHolderAspect implements MetadataHolderAspect{
 
     private MetadataAspect metadata;
 
@@ -12,8 +12,8 @@ public class GenericMetadataHolderAspect implements MetadataHolderAspect{
         return metadata;
     }
 
-    public GenericMetadataHolderAspect() {
-        metadata = new GenericMetadataAspect();
+    public CommonMetadataHolderAspect() {
+        metadata = new CommonMetadataAspect();
     }
 
     @Override

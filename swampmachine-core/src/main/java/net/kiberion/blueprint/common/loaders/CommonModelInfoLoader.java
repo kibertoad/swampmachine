@@ -1,4 +1,4 @@
-package net.kiberion.assets;
+package net.kiberion.blueprint.common.loaders;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -9,13 +9,10 @@ import org.apache.logging.log4j.Logger;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import lombok.Getter;
-import lombok.Setter;
 import net.kiberion.assets.loaders.AssetLoader;
 import net.kiberion.assets.loaders.POJOLoader;
 import net.kiberion.assets.readers.ReaderHelper;
 import net.kiberion.blueprint.common.registries.CommonModelInfoRegistry;
-import net.kiberion.entities.modelinfo.CreatureInfoList;
 import net.kiberion.entities.modelinfo.CreatureModelInfo;
 import net.kiberion.utils.MapUtils;
 
@@ -30,10 +27,6 @@ public class CommonModelInfoLoader implements AssetLoader {
     @Inject
     private ReaderHelper readerHelper;
 
-    @Getter
-    @Setter
-    private CreatureInfoList creatures;
-
     public CommonModelInfoLoader() {
         readerHelper = new ReaderHelper();
     }
@@ -42,8 +35,11 @@ public class CommonModelInfoLoader implements AssetLoader {
 
         try {
             if (fileExists("model-creature/")) {
+                
+                log.info("Loading creatures from: "+getPathToAssets().resolve("model-creature/").toString());
+                
                 POJOLoader<CreatureModelInfo> creatureLoader = new POJOLoader<>(
-                        getPathToAssets().resolve("/model-creature/"), CreatureModelInfo.class, "creatures");
+                        getPathToAssets().resolve("model-creature/"), CreatureModelInfo.class, "creatures");
 
                 List<CreatureModelInfo> creatures = creatureLoader.loadList();
 
@@ -61,14 +57,7 @@ public class CommonModelInfoLoader implements AssetLoader {
     }
 
     private boolean fileExists(String directoryName) {
-        boolean result = readerHelper.getReader().fileExists((readerHelper.getPathToAssets().resolve(directoryName)));
-
-        if (!result) {
-            {
-                log.warn("No " + directoryName + " directory exists.");
-            }
-        }
-        return result;
+        return readerHelper.fileExists(directoryName);
     }
 
     @Override

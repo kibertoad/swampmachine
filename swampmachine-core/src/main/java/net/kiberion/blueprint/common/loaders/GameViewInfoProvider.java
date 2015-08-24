@@ -1,4 +1,4 @@
-package net.kiberion.assets;
+package net.kiberion.blueprint.common.loaders;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.badlogic.gdx.Gdx;
 
+import net.kiberion.assets.AssetProvider;
 import net.kiberion.assets.loaders.AbstractLoader;
 import net.kiberion.assets.loaders.EntityViewInfoLoader;
 import net.kiberion.assets.loaders.GameViewInfoLoader;

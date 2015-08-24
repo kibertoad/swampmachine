@@ -8,6 +8,7 @@ import net.kiberion.slick2d.util.pathfinding.heuristics.ClosestHeuristic;
 
 
 
+
 /**
  * A path finder implementation that uses the AStar heuristic based algorithm
  * to determine a path. 

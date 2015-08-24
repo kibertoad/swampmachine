@@ -1,13 +1,13 @@
 package net.kiberion.entities.common.impl;
 
-import net.kiberion.aspects.impl.GenericMetadataHolderAspect;
+import net.kiberion.aspects.impl.CommonMetadataHolderAspect;
 import net.kiberion.entities.common.api.NodeEntity;
 
 
 /**
  * @author kibertoad
  */
-public abstract class EntityModel extends GenericMetadataHolderAspect implements NodeEntity {
+public abstract class EntityModel extends CommonMetadataHolderAspect implements NodeEntity {
 
     /*
      * E. g. for equipment slot return both slot and item name

@@ -18,22 +18,25 @@ import lombok.NonNull;
 import lombok.Setter;
 import net.kiberion.aspects.api.MetadataHolderAspect;
 import net.kiberion.aspects.api.PositionHolderAspect;
-import net.kiberion.assets.GameViewInfoProvider;
 import net.kiberion.assets.UiManager;
 import net.kiberion.assets.viewinfo.CreatureViewInfo;
+import net.kiberion.blueprint.common.registries.CommonViewInfoRegistry;
 import net.kiberion.entities.map.api.Position;
 import net.kiberion.entities.map.impl.PositionAspect;
 import net.kiberion.mvc.StateView;
+import net.kiberion.mvc.model.AbstractTiledMapModel;
 import net.kiberion.tiled.camera.TiledMapCamera;
 import net.kiberion.tiled.managers.MapObjectManager;
-import net.kiberion.tiled.model.GenericTiledMapModel;
 import net.kiberion.tiled.model.TiledMapInfo;
 import net.kiberion.tiled.overlays.TiledMapOverlay;
 import net.kiberion.tiled.renderers.OrthogonalTiledMapRendererWithObjects;
 import net.kiberion.tiled.renderers.ShaderRegistry;
 
-public abstract class AbstractTiledMapView<T extends GenericTiledMapModel<?>> extends StateView<T>{
+public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> extends StateView<T>{
 
+    @Inject
+    private CommonViewInfoRegistry viewInfoRegistry;
+    
 	@Inject
 	private ShaderRegistry shaderRegistry;
 	
@@ -143,7 +146,7 @@ public abstract class AbstractTiledMapView<T extends GenericTiledMapModel<?>> ex
 
     public void placeCreatures() {
         for (MetadataHolderAspect entity : this.getModel().getCreatures()) {
-            CreatureViewInfo viewInfo = GameViewInfoProvider.instance().fullCreatureViewInfoList.get(entity.getMetadata().getId());
+            CreatureViewInfo viewInfo = viewInfoRegistry.getFullCreatureViewInfoList().get(entity.getMetadata().getId());
             Objects.requireNonNull(viewInfo);
             TextureMapObject tmo = this.addMapObject(
                     entity,

@@ -1,4 +1,4 @@
-package net.kiberion.tiled.model;
+package net.kiberion.mvc.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,17 +9,21 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.google.inject.Inject;
 
 import net.kiberion.entities.map.api.Position;
+import net.kiberion.tiled.aspects.api.CollidableAspect;
 import net.kiberion.tiled.aspects.holders.MapMetadataHolderAspect;
-import net.kiberion.tiled.aspects.interfaces.CollidableAspect;
+import net.kiberion.tiled.factories.api.MapCreatureFactory;
+import net.kiberion.tiled.model.TiledMapInfo;
 
-public class GenericTiledMapModel<T extends CollidableAspect>{
+
+public class AbstractTiledMapModel<T extends CollidableAspect>{
 
 	protected static final Logger log = LogManager.getLogger();
 	
-    //@Inject
-    //protected AbstractCreatureFactory<T> creatureFactory;
+    @Inject
+    protected MapCreatureFactory<T> creatureFactory;
 
     private TiledMap map;
     private TiledMapInfo mapInfo;
@@ -27,11 +31,11 @@ public class GenericTiledMapModel<T extends CollidableAspect>{
     private T player;
     private final List<T> creatures = new ArrayList<>();
     private final List<T> aiCreatures = new ArrayList<>();
+
     private final List<MapMetadataHolderAspect> activeObjects = new ArrayList<>();
-    
     private final Map<Position, MapMetadataHolderAspect> activeObjectsMap = new HashMap<> ();
     
-    public void spawnCreatures () {}
+    public void spawnCreatures () {};
 
     public List<T> getCreatures() {
         return creatures;
@@ -72,7 +76,5 @@ public class GenericTiledMapModel<T extends CollidableAspect>{
     public Map<Position, MapMetadataHolderAspect> getActiveObjectsMap() {
         return activeObjectsMap;
     }
-
-    
 
 }

@@ -6,7 +6,7 @@ import java.util.Set;
 import net.kiberion.aspects.api.MetadataAspect;
 
 
-public class GenericMetadataAspect implements MetadataAspect {
+public class CommonMetadataAspect implements MetadataAspect {
 
     public String containerID;
     public int UID = -1;

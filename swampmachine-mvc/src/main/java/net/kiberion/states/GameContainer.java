@@ -6,9 +6,11 @@ import com.google.inject.Module;
 import com.google.inject.Singleton;
 
 import lombok.Getter;
-import net.kiberion.assets.CommonModelInfoLoader;
 import net.kiberion.assets.registries.LoaderRegistry;
+import net.kiberion.blueprint.common.loaders.CommonModelInfoLoader;
+import net.kiberion.blueprint.common.loaders.CommonViewInfoLoader;
 import net.kiberion.blueprint.common.registries.CommonModelInfoRegistry;
+import net.kiberion.blueprint.common.registries.CommonViewInfoRegistry;
 
 /**
  * Container clas for game stats and global registries (for game assets, map, model info etc)
@@ -33,10 +35,18 @@ public class GameContainer implements Module{
     @Getter
     @Inject
     private CommonModelInfoRegistry commonModelInfoRegistry;
+
+    @Getter
+    @Inject
+    private CommonViewInfoRegistry commonViewInfoRegistry;
+    
+    @Getter
+    @Inject
+    private CommonViewInfoLoader viewInfoLoader;
     
     @Inject
     @Getter
-    private CommonModelInfoLoader modelInfoProvider;
+    private CommonModelInfoLoader modelInfoLoader;
     
     /**
      * This method should be called after injection was already performed

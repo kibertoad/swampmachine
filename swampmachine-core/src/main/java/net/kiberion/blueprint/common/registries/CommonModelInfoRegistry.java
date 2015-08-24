@@ -3,6 +3,8 @@ package net.kiberion.blueprint.common.registries;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.inject.Singleton;
+
 import lombok.Getter;
 import net.kiberion.entities.common.impl.DataNode;
 import net.kiberion.entities.modelinfo.ActionInfo;
@@ -11,6 +13,7 @@ import net.kiberion.entities.modelinfo.GroupInfo;
 import net.kiberion.entities.modelinfo.ItemInfo;
 import net.kiberion.entities.modelinfo.PersonalName;
 
+@Singleton
 public class CommonModelInfoRegistry{
 
 	@Getter

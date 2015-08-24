@@ -1,4 +1,4 @@
-package net.kiberion.tiled.aspects.interfaces;
+package net.kiberion.tiled.aspects.api;
 
 
 import com.badlogic.gdx.math.Rectangle;

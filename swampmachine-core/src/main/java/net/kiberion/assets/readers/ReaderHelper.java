@@ -3,6 +3,9 @@ package net.kiberion.assets.readers;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.badlogic.gdx.Gdx;
 import com.google.inject.Singleton;
 
@@ -11,6 +14,8 @@ import lombok.Getter;
 @Singleton
 public class ReaderHelper {
 
+    private static final Logger log = LogManager.getLogger();
+    
 	private AbstractFileReader reader;
 
 	@Getter
@@ -32,4 +37,13 @@ public class ReaderHelper {
 		reader = null;
 	}
 
-}
+    public boolean fileExists(String directoryName) {
+        boolean result = getReader().fileExists((getPathToAssets().resolve(directoryName)));
+
+        if (!result) {
+            {
+                log.warn("No " + directoryName + " directory exists.");
+            }
+        }
+        return result;
+    }}

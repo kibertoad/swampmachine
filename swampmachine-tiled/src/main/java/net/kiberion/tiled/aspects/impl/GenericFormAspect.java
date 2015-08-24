@@ -3,7 +3,7 @@ package net.kiberion.tiled.aspects.impl;
 import com.badlogic.gdx.math.Rectangle;
 
 import net.kiberion.entities.map.api.Position;
-import net.kiberion.tiled.aspects.interfaces.FormAspect;
+import net.kiberion.tiled.aspects.api.FormAspect;
 
 public class GenericFormAspect implements FormAspect{
 

@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import net.kiberion.entities.common.api.NodeEntity;
 
@@ -91,6 +92,13 @@ public class MapUtils {
     	for (T entity : sourceCollection) {
     		targetMap.put(entity.getId(), entity);
     	}
-    	
     }
+
+    public static <T extends NodeEntity> void putAll(Map<String, T> targetMap, Map <String, T> sourceMap) {
+        for (Entry<String, T> entityEntry : sourceMap.entrySet()) {
+            targetMap.put(entityEntry.getKey(), entityEntry.getValue());
+        }
+    }
+    
+    
 }

@@ -125,6 +125,12 @@ public class POJOLoader<T extends EntityModel> implements AbstractLoader<T> {
     }
 
     @Override
+    public List<T> loadList() throws IOException {
+        return new ArrayList<>(loadToMap().values());
+    }
+    
+
+    @Override
     public POJOLoader<T> setWildcardFileExtension(String... wildcards) {
         wildcardFileExtension = SetUtils.buildSet(wildcards);
         return this;

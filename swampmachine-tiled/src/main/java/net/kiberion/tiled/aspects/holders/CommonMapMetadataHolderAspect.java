@@ -1,9 +1,9 @@
 package net.kiberion.tiled.aspects.holders;
 
-import net.kiberion.aspects.impl.GenericMetadataHolderAspect;
+import net.kiberion.aspects.impl.CommonMetadataHolderAspect;
 import net.kiberion.entities.map.impl.PositionAspect;
 
-public class GenericMapMetadataHolderAspect extends GenericMetadataHolderAspect implements MapMetadataHolderAspect{
+public class CommonMapMetadataHolderAspect extends CommonMetadataHolderAspect implements MapMetadataHolderAspect{
     
     private final PositionAspect position = new PositionAspect(0, 0);
 

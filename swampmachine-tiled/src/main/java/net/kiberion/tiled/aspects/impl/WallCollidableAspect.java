@@ -2,8 +2,8 @@ package net.kiberion.tiled.aspects.impl;
 
 import net.kiberion.aspects.api.MetadataAspect;
 import net.kiberion.entities.map.impl.PositionAspect;
-import net.kiberion.tiled.aspects.interfaces.CollidableAspect;
-import net.kiberion.tiled.aspects.interfaces.FormAspect;
+import net.kiberion.tiled.aspects.api.CollidableAspect;
+import net.kiberion.tiled.aspects.api.FormAspect;
 
 
 public class WallCollidableAspect implements CollidableAspect{

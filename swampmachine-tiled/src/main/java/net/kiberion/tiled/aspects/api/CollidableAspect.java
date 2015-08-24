@@ -1,8 +1,8 @@
-package net.kiberion.tiled.aspects.interfaces;
+package net.kiberion.tiled.aspects.api;
 
 import net.kiberion.aspects.api.MetadataHolderAspect;
 import net.kiberion.aspects.api.PositionHolderAspect;
-import net.kiberion.tiled.aspects.holders.FormHolderAspect;
+import net.kiberion.tiled.aspects.impl.FormHolderAspect;
 
 public interface CollidableAspect extends FormHolderAspect, PositionHolderAspect, MetadataHolderAspect {
 

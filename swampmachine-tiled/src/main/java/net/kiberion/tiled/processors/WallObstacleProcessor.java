@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 import com.google.inject.Singleton;
 
 import net.kiberion.entities.map.api.Position;
-import net.kiberion.tiled.aspects.interfaces.FormAspect;
+import net.kiberion.tiled.aspects.api.FormAspect;
 import net.kiberion.tiled.model.TiledMapInfo;
 
 @Singleton
