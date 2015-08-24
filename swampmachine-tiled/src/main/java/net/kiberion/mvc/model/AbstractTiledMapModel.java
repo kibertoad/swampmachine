@@ -18,7 +18,7 @@ import net.kiberion.tiled.factories.api.MapCreatureFactory;
 import net.kiberion.tiled.model.TiledMapInfo;
 
 
-public class AbstractTiledMapModel<T extends CollidableAspect>{
+public abstract class AbstractTiledMapModel<T extends CollidableAspect>{
 
 	protected static final Logger log = LogManager.getLogger();
 	
@@ -46,7 +46,7 @@ public class AbstractTiledMapModel<T extends CollidableAspect>{
     }
     
 
-    protected void placeCreatures () {}
+    protected abstract void placeCreatures ();
 
     public TiledMap getMap() {
         return map;
