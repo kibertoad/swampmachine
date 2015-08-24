@@ -35,6 +35,9 @@ public class OrthogonalTiledMapRendererWithObjects extends OrthogonalTiledMapRen
     private FrameBuffer shadowmapFbo;
     private Texture shadowmapTex;
     
+    @Setter
+    private int mapSizeY;
+    
     private Color lightColor;
     
     private Light mouseLight;
@@ -56,8 +59,11 @@ public class OrthogonalTiledMapRendererWithObjects extends OrthogonalTiledMapRen
     
     private OrthographicCamera orthoCam;
     
+    
+    
     public OrthogonalTiledMapRendererWithObjects(TiledMap map) {
         super(map);
+        
         this.occlusionFbo = new FrameBuffer(Format.RGBA8888, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, false);
         this.shadowmapFbo = new FrameBuffer(Format.RGBA8888, Gdx.graphics.getWidth() / 2, 1, false);
         
@@ -92,6 +98,8 @@ public class OrthogonalTiledMapRendererWithObjects extends OrthogonalTiledMapRen
     	
     	renderLight(mouseLight);
     
+    	log.info("Camera coords: "+ orthoCam.position.x+"/"+ orthoCam.position.y);
+    	
     	beginRender();  {
     		for (MapLayer layer : map.getLayers()) {
     			if (layer.isVisible()) {
@@ -112,10 +120,11 @@ public class OrthogonalTiledMapRendererWithObjects extends OrthogonalTiledMapRen
         if(object instanceof TextureMapObject) {
             TextureMapObject textureObj = (TextureMapObject) object;
                 batch.draw(textureObj.getTextureRegion(), textureObj.getX(), textureObj.getY());
-                
                 log.info("TextureMapObject coords: "+ textureObj.getX()+"/"+ textureObj.getY());
         }
     } 
+    
+    
     
     private void renderLight(Light light) {
     	float lightWidth = 600;

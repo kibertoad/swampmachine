@@ -21,7 +21,8 @@ public class TiledOrthographicCoordsUtils {
         float mapScreenSizeY = (mapInfo.getMapHeight()-1) * mapInfo.getTileHeight();		
 		
 	    result.setX ( screenPositionX);
-        result.setY ( mapScreenSizeY - screenPositionY);
+        //result.setY ( mapScreenSizeY - screenPositionY);
+	    result.setY ( screenPositionY);
         
         return result;
 	}
