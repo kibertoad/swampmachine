@@ -55,12 +55,11 @@
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
                             <useUniqueVersions>false</useUniqueVersions>
-                            <mainClass>nexthumans.NextHumans</mainClass>
                         </manifest>
                     </archive>
 
                     <includes>
-                        <include>nexthumans/**</include>
+                        <include>net/kiberion/**</include>
                     </includes>
                 </configuration>
             </plugin>
@@ -80,6 +79,14 @@
         <dependency>
             <groupId>net.kiberion</groupId>
             <artifactId>swampmachine-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.kiberion</groupId>
+            <artifactId>swampmachine-mvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.kiberion</groupId>
+            <artifactId>swampmachine-tiled</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

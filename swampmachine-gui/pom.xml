@@ -55,12 +55,11 @@
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
                             <useUniqueVersions>false</useUniqueVersions>
-                            <mainClass>nexthumans.NextHumans</mainClass>
                         </manifest>
                     </archive>
 
                     <includes>
-                        <include>nexthumans/**</include>
+                        <include>net/kiberion/**</include>
                     </includes>
                 </configuration>
             </plugin>

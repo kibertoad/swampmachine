@@ -3,6 +3,9 @@ package net.kiberion.states;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
@@ -11,11 +14,11 @@ import lombok.Setter;
 import net.kiberion.entities.common.api.DeltaUpdatable;
 import net.kiberion.mvc.StateView;
 
-public class GameState<V extends StateView, M> implements Screen{
+public class GameState<V extends StateView, M> implements Screen {
 
     @Getter
     private final String key;
-    
+
     @Getter
     @Setter
     private Stage stage;
@@ -23,14 +26,19 @@ public class GameState<V extends StateView, M> implements Screen{
     @Getter
     @Setter
     private Stage overlayStage;
-    
-    
+
     @Getter
     private V view;
 
     @Getter
     private M model;
-    
+
+    @Getter
+    @Setter
+    private InputAdapter input;
+
+    private InputMultiplexer inputMultiplexer = new InputMultiplexer();
+
     public List<DeltaUpdatable> entitiesForUpdate = new ArrayList<>();
     private List<StateView> subViews = new ArrayList<>();
 
@@ -38,44 +46,55 @@ public class GameState<V extends StateView, M> implements Screen{
         super();
         this.key = key;
         this.stage = new Stage();
-        
+
     }
-    
-    public void addSubView (StateView view) {
+
+    public void addSubView(StateView view) {
         view.setStage(stage);
     }
 
     public void postInjection() {
-		if (view != null) {
-			view.postInjection();
-		}
-    	
-    	for (StateView subView : subViews) {
-    		subView.postInjection();
-    	}
+        if (view != null) {
+            view.postInjection();
+        }
+
+        for (StateView subView : subViews) {
+            subView.postInjection();
+        }
     }
-    
-    protected void setView (V view) {
-    	this.view = view;
-    	view.setStage(getStage());
+
+    protected void setView(V view) {
+        this.view = view;
+        view.setStage(getStage());
     }
-    
+
     public void setModel(M model) {
-		this.model = model;
-	}
+        this.model = model;
+    }
 
-	@Override
-	public void show() {
-		view.show();
-		
-	}
+    @Override
+    public void show() {
+        view.show();
 
-	@Override
-	public void render(float delta) {
+        Gdx.input.setInputProcessor(inputMultiplexer);
+        inputMultiplexer.clear();
+
+        inputMultiplexer.addProcessor(getStage());
+        if (getOverlayStage() != null) {
+            inputMultiplexer.addProcessor(getOverlayStage());
+        }
+
+        if (input != null) {
+            inputMultiplexer.addProcessor(input);
+        }
+    }
+
+    @Override
+    public void render(float delta) {
         for (DeltaUpdatable entity : entitiesForUpdate) {
             entity.update(delta);
         }
-        
+
         if (getStage() != null) {
             getStage().act(delta);
             getStage().draw();
@@ -89,37 +108,37 @@ public class GameState<V extends StateView, M> implements Screen{
         for (StateView view : subViews) {
             view.act(delta);
         }
-	}
+    }
 
-	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void resize(int width, int height) {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void pause() {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void hide() {
+    }
+
+    @Override
+    public void resume() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void hide() {
         view.hide();
-        
+
         for (StateView subView : subViews) {
             subView.hide();
         }
-	}
+    }
 
-	@Override
-	public void dispose() {
-	}
-	
+    @Override
+    public void dispose() {
+    }
+
 }
