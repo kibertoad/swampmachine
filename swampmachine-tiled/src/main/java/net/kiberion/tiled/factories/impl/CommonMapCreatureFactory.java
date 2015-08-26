@@ -12,6 +12,7 @@ public class CommonMapCreatureFactory implements MapCreatureFactory<CommonCreatu
         creature.getMetadata().setId(creatureTypeID);
         creature.getPositionAspect().setX(x);
         creature.getPositionAspect().setY(y);
+        creature.getFormAspect().produceRectangle(creature.getPositionAspect());
         
         return creature;
     }

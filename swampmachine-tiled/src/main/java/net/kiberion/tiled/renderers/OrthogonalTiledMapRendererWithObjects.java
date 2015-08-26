@@ -7,7 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -26,6 +25,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 import lombok.Setter;
+import net.kiberion.entities.map.api.Position;
 
 public class OrthogonalTiledMapRendererWithObjects extends OrthogonalTiledMapRenderer{
 
@@ -57,12 +57,19 @@ public class OrthogonalTiledMapRendererWithObjects extends OrthogonalTiledMapRen
     @Setter
     private ShaderRegistry shaderRegistry;
     
+    @Setter
     private OrthographicCamera orthoCam;
+    
+    @Setter
+    private Position positionToCenter;
+    
+    private static final boolean Y_DOWN = false;
     
     
     
     public OrthogonalTiledMapRendererWithObjects(TiledMap map) {
         super(map);
+        
         
         this.occlusionFbo = new FrameBuffer(Format.RGBA8888, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, false);
         this.shadowmapFbo = new FrameBuffer(Format.RGBA8888, Gdx.graphics.getWidth() / 2, 1, false);
@@ -71,13 +78,15 @@ public class OrthogonalTiledMapRendererWithObjects extends OrthogonalTiledMapRen
         this.shadowmapTex.setFilter(TextureFilter.Linear, TextureFilter.Linear);
         this.shadowmapTex.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
         
-        this.orthoCam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        this.orthoCam.setToOrtho(false);
+        //this.orthoCam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        //this.orthoCam.setToOrtho(Y_DOWN);
         
         this.lights = new ArrayList<Light>();
         this.mouseLight = new Light(0, 0, Color.WHITE);
     }
 
+    
+    /*
     @Override
 	public void render() {
     	Gdx.gl.glClearColor(0, 0, 0, 0);
@@ -98,7 +107,7 @@ public class OrthogonalTiledMapRendererWithObjects extends OrthogonalTiledMapRen
     	
     	renderLight(mouseLight);
     
-    	log.info("Camera coords: "+ orthoCam.position.x+"/"+ orthoCam.position.y);
+    	//log.info("Camera coords: "+ orthoCam.position.x+"/"+ orthoCam.position.y);
     	
     	beginRender();  {
     		for (MapLayer layer : map.getLayers()) {
@@ -114,13 +123,16 @@ public class OrthogonalTiledMapRendererWithObjects extends OrthogonalTiledMapRen
     		}
     	} endRender();
     }
+    */
+    
     
     @Override
     public void renderObject(MapObject object) {
+        
         if(object instanceof TextureMapObject) {
             TextureMapObject textureObj = (TextureMapObject) object;
                 batch.draw(textureObj.getTextureRegion(), textureObj.getX(), textureObj.getY());
-                log.info("TextureMapObject coords: "+ textureObj.getX()+"/"+ textureObj.getY());
+                //log.info("TextureMapObject coords: "+ textureObj.getX()+"/"+ textureObj.getY());
         }
     } 
     
@@ -136,7 +148,9 @@ public class OrthogonalTiledMapRendererWithObjects extends OrthogonalTiledMapRen
     	int levelIndex = 0;
     	batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
     	
-    	orthoCam.setToOrtho(false, lightWidth, lightHeight);
+    	orthoCam.lookAt(positionToCenter.getX(), positionToCenter.getY(), 0);
+    	
+    	orthoCam.setToOrtho(Y_DOWN, lightWidth, lightHeight);
     	orthoCam.translate(
     		light.x - lightWidth  / 2,
     		light.y - lightHeight / 2
@@ -176,7 +190,7 @@ public class OrthogonalTiledMapRendererWithObjects extends OrthogonalTiledMapRen
     	shadowmapFbo.begin(); {    		
         	Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         	
-        	orthoCam.setToOrtho(false, lightWidth, 1);
+        	orthoCam.setToOrtho(Y_DOWN, lightWidth, 1);
     		batch.setProjectionMatrix(orthoCam.combined);
         	batch.setShader(shadowmapProgram);
     		
@@ -186,7 +200,7 @@ public class OrthogonalTiledMapRendererWithObjects extends OrthogonalTiledMapRen
         	} batch.end();
     	} shadowmapFbo.end();
     	
-    	orthoCam.setToOrtho(false);
+    	orthoCam.setToOrtho(Y_DOWN);
     	batch.setProjectionMatrix(orthoCam.combined);
     	
     	batch.setShader(shadowrenderProgram);

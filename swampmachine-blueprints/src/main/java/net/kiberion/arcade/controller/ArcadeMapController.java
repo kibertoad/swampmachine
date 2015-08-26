@@ -66,6 +66,7 @@ public class ArcadeMapController<TModel extends AbstractTiledMapModel<? extends 
         if (!isCollided (entity, entity.getPositionAspect().produceCloneWithAppliedDelta(deltaX, deltaY), entity.getFormAspect())) {
             performMove (entity, deltaX, deltaY);
             log.info("Moved successfully: "+entity.getPositionAspect() );
+            //log.info("Camera: "+getCamera().getPosition() );
             return true;
         }
         return false;

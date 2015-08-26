@@ -5,12 +5,14 @@ import net.kiberion.entities.map.api.Position;
 import net.kiberion.entities.map.impl.PositionAspect;
 import net.kiberion.mvc.model.AbstractTiledMapModel;
 import net.kiberion.tiled.TiledOrthographicCoordsUtils;
+import net.kiberion.tiled.model.TiledMapInfo;
 import net.kiberion.tiled.renderers.OrthogonalTiledMapRendererWithObjects;
 
 public class OrtographicTiledMapView<T extends AbstractTiledMapModel<?>> extends AbstractTiledMapView<T>{
 
     @Override
     protected void instantiateRenderer() {
+        //Validate.notNull(getCamera());
         renderer = new OrthogonalTiledMapRendererWithObjects(getMap());
         super.instantiateRenderer();
     }
@@ -22,8 +24,16 @@ public class OrtographicTiledMapView<T extends AbstractTiledMapModel<?>> extends
     
     @Override
     public void centerCameraOnPlayer() {
-        getCamera().centerOn2(getModel().getPlayer().getPositionAspect());
+        getCamera().centerOn(getModel().getPlayer().getPositionAspect());
     } 
+    
+    @Override
+    public void setMap(TiledMapInfo mapInfo) {
+        super.setMap(mapInfo);
+
+        renderer.setOrthoCam(getCamera().getOrthoCam());;
+        renderer.setPositionToCenter(getModel().getPlayer().getPositionAspect());
+    }
 
 	
 }

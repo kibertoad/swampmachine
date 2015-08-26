@@ -62,8 +62,10 @@ public class TiledMapCamera {
     }
     
     //to be used in new renderer
+    //doesn't seem to work, so
     public void centerOn2(PositionAspect positionAspect) {
         orthoCamera.position.set(positionAspect.getX() + (tileWidth / 2), positionAspect.getY() - (tileHeight / 2), 0);
+        //orthoCamera.position.set(positionAspect.getX() + (tileWidth / 2), 0, 0);
         orthoCamera.update();
     }
     

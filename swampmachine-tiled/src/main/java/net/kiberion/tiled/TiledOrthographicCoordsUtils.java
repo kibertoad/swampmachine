@@ -17,7 +17,7 @@ public class TiledOrthographicCoordsUtils {
 		PositionAspect result = new PositionAspect ();
 
         float screenPositionX = (position.getX() * mapInfo.getTileWidth());
-        float screenPositionY = (position.getY() * mapInfo.getTileHeight()); 
+        float screenPositionY = ((position.getY()-1) * mapInfo.getTileHeight()); //-1 is a hack that shouldn't be needed, but the hell do I know 
         float mapScreenSizeY = (mapInfo.getMapHeight()-1) * mapInfo.getTileHeight();		
 		
 	    result.setX ( screenPositionX);

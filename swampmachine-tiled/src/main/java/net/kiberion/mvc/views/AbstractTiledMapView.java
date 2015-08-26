@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.apache.commons.lang3.Validate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
@@ -33,6 +35,8 @@ import net.kiberion.tiled.renderers.OrthogonalTiledMapRendererWithObjects;
 import net.kiberion.tiled.renderers.ShaderRegistry;
 
 public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> extends StateView<T>{
+    
+    private static final Logger log = LogManager.getLogger();
 
     @Inject
     private CommonViewInfoRegistry viewInfoRegistry;
@@ -98,6 +102,9 @@ public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> e
     }
 
     public void draw() {
+        
+        //log.info("Camera coords: "+ camera.getOrthoCam().position.x+"/"+ camera.getOrthoCam().position.y);
+        
         renderer.setView(camera.getOrthoCam());        
         renderer.render();
 
@@ -156,7 +163,8 @@ public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> e
     }
     
     public void centerCameraOnPlayer() {
-        getCamera().centerIsometrically(getModel().getPlayer().getPositionAspect(), getModel().getMapInfo());
+        //getCamera().centerIsometrically(getModel().getPlayer().getPositionAspect(), getModel().getMapInfo());
+        throw new UnsupportedOperationException("unsupported");
     } 
 
 }

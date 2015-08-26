@@ -33,11 +33,11 @@ public class WallObstacleProcessor {
     public boolean isTileBlocked (Position position) {
         //log.info("actual coords:"+position.toString());
         //log.info("Tested coords: "+(int) position.getX()+"/"+ (int) position.getY());
-        boolean result =  isTileBlocked((int) position.getX(), (int) position.getY());
+        boolean result =  isTileBlocked((int) position.getX(), mapInfo.getMapHeight() - (int) position.getY());
         
         if (result) {
-            getMapInfo().getWallInfo().outputAllWalls();
-            //log.info("Wall position: "+position.toString());
+            //getMapInfo().getWallInfo().outputAllWalls();
+            log.info("Wall position: "+position.toString());
         }
         return result;
     }
@@ -68,7 +68,7 @@ public class WallObstacleProcessor {
         }
         
         
-        return false;               
+        return false;
     }
     
     
