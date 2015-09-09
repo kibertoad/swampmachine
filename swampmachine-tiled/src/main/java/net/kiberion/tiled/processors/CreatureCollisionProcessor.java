@@ -10,11 +10,12 @@ import com.google.inject.Singleton;
 import net.kiberion.entities.map.api.Position;
 import net.kiberion.mvc.model.AbstractTiledMapModel;
 import net.kiberion.tiled.aspects.api.CollidableAspect;
+import net.kiberion.tiled.aspects.api.CollidableEntitiesSource;
 import net.kiberion.tiled.aspects.holders.MapMetadataHolderAspect;
 import net.kiberion.tiled.model.TiledMapInfo;
 
 @Singleton
-public class CreatureCollisionProcessor<TModel extends AbstractTiledMapModel<? extends MapMetadataHolderAspect>> {
+public class CreatureCollisionProcessor<TModel extends AbstractTiledMapModel<? extends MapMetadataHolderAspect> & CollidableEntitiesSource> {
 
     private static final Logger log = LogManager.getLogger();
 
@@ -44,10 +45,9 @@ public class CreatureCollisionProcessor<TModel extends AbstractTiledMapModel<? e
     }
 
     public CollidableAspect getCreatureForPosition(CollidableAspect agent, Position position) {
-
         Rectangle rectangle = new Rectangle (position.getX(), position.getY(), agent.getFormAspect().getWidthInTiles(), agent.getFormAspect().getHeightInTiles());
         
-        for (CollidableAspect creature : mapModel.getCreatures()) {
+        for (CollidableAspect creature : mapModel.getCollidableEntities()) {
             if (creature.getFormAspect().getRectangle().overlaps(rectangle)
                     && agent.canCollide(creature) && creature.canCollide(agent)) {
                 return creature;

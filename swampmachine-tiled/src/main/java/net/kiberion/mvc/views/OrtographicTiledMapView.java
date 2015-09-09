@@ -27,12 +27,16 @@ public class OrtographicTiledMapView<T extends AbstractTiledMapModel<?>> extends
         getCamera().centerOn(getModel().getPlayer().getPositionAspect());
     } 
     
+    protected void setRendererCameraToCenter () {
+        renderer.setPositionToCenter(getModel().getPlayer().getPositionAspect());
+    }
+    
     @Override
     public void setMap(TiledMapInfo mapInfo) {
         super.setMap(mapInfo);
 
         renderer.setOrthoCam(getCamera().getOrthoCam());;
-        renderer.setPositionToCenter(getModel().getPlayer().getPositionAspect());
+        setRendererCameraToCenter();
     }
 
 	

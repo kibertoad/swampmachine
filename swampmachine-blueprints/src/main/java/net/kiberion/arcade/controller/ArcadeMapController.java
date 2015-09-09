@@ -12,6 +12,7 @@ import net.kiberion.entities.map.impl.PositionAspect;
 import net.kiberion.mvc.model.AbstractTiledMapModel;
 import net.kiberion.mvc.views.AbstractTiledMapView;
 import net.kiberion.tiled.aspects.api.CollidableAspect;
+import net.kiberion.tiled.aspects.api.CollidableEntitiesSource;
 import net.kiberion.tiled.aspects.api.FormAspect;
 import net.kiberion.tiled.aspects.holders.MapMetadataHolderAspect;
 import net.kiberion.tiled.aspects.impl.WallCollidableAspect;
@@ -21,7 +22,7 @@ import net.kiberion.tiled.processors.CreatureCollisionProcessor;
 import net.kiberion.tiled.processors.WallObstacleProcessor;
 
 @Singleton
-public class ArcadeMapController<TModel extends AbstractTiledMapModel<? extends MapMetadataHolderAspect>> {
+public class ArcadeMapController<TModel extends AbstractTiledMapModel<? extends MapMetadataHolderAspect> & CollidableEntitiesSource> {
 
     private static final Logger log = LogManager.getLogger();
     private final CollidableAspect wallCollision = new WallCollidableAspect();

@@ -13,13 +13,12 @@ import com.google.inject.Inject;
 
 import net.kiberion.entities.map.api.Position;
 import net.kiberion.mvc.model.helpers.SpawningHelper;
-import net.kiberion.tiled.aspects.api.CollidableAspect;
 import net.kiberion.tiled.aspects.holders.MapMetadataHolderAspect;
 import net.kiberion.tiled.factories.api.MapCreatureFactory;
 import net.kiberion.tiled.model.TiledMapInfo;
 
 
-public abstract class AbstractTiledMapModel<T extends CollidableAspect>{
+public abstract class AbstractTiledMapModel<T extends MapMetadataHolderAspect>{
 
 	protected static final Logger log = LogManager.getLogger();
 	
