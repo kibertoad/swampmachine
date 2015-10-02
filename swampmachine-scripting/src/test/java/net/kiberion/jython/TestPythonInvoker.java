@@ -27,8 +27,13 @@ public class TestPythonInvoker {
         invoker.scanPathForScript(FilePathUtils.getResourceRootPath(TestPythonInvoker.class, "test.py"), "py");
         invoker.init();
         
+        TestCaster caster = new TestCaster();
+        assertEquals (0, caster.getSaidMoo());
+        assertEquals (0, caster.getMutableNumber().intValue());
+        
         Map<String, Object> params = new HashMap<>();
         params.put("x", 1);
+        params.put("caster", caster);
         
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
@@ -41,5 +46,8 @@ public class TestPythonInvoker {
         PyStringMap localVars = invoker.getActiveScript().getLocalVars();
         assertNotNull (localVars);
         assertEquals (2, ((PyInteger)localVars.get(Py.newString("x"))).getValue());
+        
+        assertEquals (1, caster.getSaidMoo());
+        assertEquals (1, caster.getMutableNumber().intValue());
     }
 }
