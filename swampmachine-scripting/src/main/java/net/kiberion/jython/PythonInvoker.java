@@ -12,7 +12,6 @@ import java.util.Properties;
 
 import org.python.core.Py;
 import org.python.core.PyCode;
-import org.python.core.PyObject;
 import org.python.core.PyString;
 import org.python.core.PySystemState;
 import org.python.google.common.collect.ImmutableSet;
@@ -68,7 +67,7 @@ public class PythonInvoker {
         return scripts;
     }
     
-    public PyObject invoke (Map<String, Object> params){
+    public PyMapWrapper invoke (Map<String, Object> params){
         //PyStringMap locals=Py.newStringMap();
         //Py.runCode(activeScript, locals, locals);
         return activeScript.invoke(params);

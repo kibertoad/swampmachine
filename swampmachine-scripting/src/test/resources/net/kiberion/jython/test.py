@@ -3,3 +3,4 @@ x = 2
 print 'Also x is %d' % x
 caster.sayMoo()
 caster.mutableNumber.add (1)
+result = True

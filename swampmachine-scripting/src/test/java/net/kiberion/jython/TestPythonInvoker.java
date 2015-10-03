@@ -9,7 +9,6 @@ import java.util.Map;
 import org.junit.Test;
 import org.python.core.Py;
 import org.python.core.PyInteger;
-import org.python.core.PyObject;
 import org.python.core.PyStringMap;
 
 import net.kiberion.utils.FilePathUtils;
@@ -37,7 +36,7 @@ public class TestPythonInvoker {
         
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
-        PyObject result = invoker.invoke(params);
+        PyMapWrapper result = invoker.invoke(params);
         stopWatch.endAndLog("Python");
         
         
@@ -49,5 +48,7 @@ public class TestPythonInvoker {
         
         assertEquals (1, caster.getSaidMoo());
         assertEquals (1, caster.getMutableNumber().intValue());
+        
+        assertEquals (true, result.getBoolean("result"));
     }
 }
