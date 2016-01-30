@@ -19,6 +19,7 @@ import net.kiberion.entities.common.api.TaggedEntity;
 public class DataNode extends EntityModel implements TaggedEntity {
 
 	@Setter
+	@Getter
     public String group;
 	
 	@Setter
@@ -29,8 +30,6 @@ public class DataNode extends EntityModel implements TaggedEntity {
     public String groupID;
     public String subGroupID;
     
-    public int rating = -1;
-
     @Getter
     @Setter
     private String description; 
@@ -67,14 +66,6 @@ public class DataNode extends EntityModel implements TaggedEntity {
         return getMetadata().getName();
     }
 
-    @Override
-    public String getGroup() {
-        return group;
-    }
-
-    public int getRating() {
-        return rating;
-    }
 
     public void outputTags() {
         for (String s : tags) {
