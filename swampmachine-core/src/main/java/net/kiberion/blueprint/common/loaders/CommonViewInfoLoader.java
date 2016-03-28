@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -12,6 +13,7 @@ import com.google.inject.Singleton;
 import net.kiberion.assets.loaders.AssetLoader;
 import net.kiberion.assets.loaders.EntityViewInfoLoader;
 import net.kiberion.assets.readers.ReaderHelper;
+import net.kiberion.assets.util.LoadOnStartup;
 import net.kiberion.assets.viewinfo.CreatureViewInfo;
 import net.kiberion.blueprint.common.registries.CommonModelInfoRegistry;
 import net.kiberion.blueprint.common.registries.CommonViewInfoRegistry;
@@ -19,6 +21,8 @@ import net.kiberion.entities.modelinfo.CreatureModelInfo;
 import net.kiberion.utils.MapUtils;
 
 @Singleton
+@Component
+@LoadOnStartup
 public class CommonViewInfoLoader implements AssetLoader{
 
     private static final Logger log = LogManager.getLogger();
@@ -31,6 +35,11 @@ public class CommonViewInfoLoader implements AssetLoader{
 
     @Inject
     private ReaderHelper readerHelper;
+    
+    @Override
+    public int getPriority() {
+        return 100;
+    }
     
     public void loadCreatureViewInfoFromModel(Map <String, CreatureModelInfo> fullCreatureList) {
         
