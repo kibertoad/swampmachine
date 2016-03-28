@@ -26,6 +26,13 @@ public class DeterministicRandomProvider implements RandomProvider{
     	}
     }
     
+    public void setValues (Integer... integers) {
+        counter.set(0);
+        values.clear();
+        addValues (integers);
+    }
+    
+    
     @Override
     public int getRandomInt(int minInclusive, int maxInclusive) {
         int result =  values.get(counter.getAndIncrement());
