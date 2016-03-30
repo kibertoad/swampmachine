@@ -11,7 +11,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <gdx.version>1.7.0</gdx.version>
+        <gdx.version>1.9.2</gdx.version>
     </properties>
 
     <modules>
@@ -22,7 +22,12 @@
         <module>../swampmachine-multimedia</module>
         <module>../swampmachine-blueprints</module>
         <module>../swampmachine-scripting</module>
+        
+        <!-- 
         <module>../swampmachine-persistence</module>
+         -->
+        
+        <module>../swampmachine-utils</module>
     </modules>
 
     <repositories>
@@ -78,7 +83,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.3</version>
+                    <version>3.5</version>
                     <configuration>
                         <source>1.8</source>
                         <target>1.8</target>
@@ -128,14 +133,13 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>2.5</version>
+                    <version>2.6</version>
                     <configuration>
                         <archive>
                             <manifest>
                                 <addClasspath>true</addClasspath>
                                 <classpathPrefix>lib/</classpathPrefix>
                                 <useUniqueVersions>false</useUniqueVersions>
-                                <mainClass>nexthumans.NextHumans</mainClass>
                             </manifest>
                         </archive>
 
@@ -154,6 +158,13 @@
                         <goals>deploy assembly:single</goals>
                     </configuration>
                 </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.19.1</version>
+                </plugin>
+
             </plugins>
         </pluginManagement>
     </build>
@@ -163,6 +174,19 @@
             <dependency>
                 <groupId>net.kiberion</groupId>
                 <artifactId>swampmachine-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.kiberion</groupId>
+                <artifactId>swampmachine-core</artifactId>
+                <version>${project.version}</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>net.kiberion</groupId>
+                <artifactId>swampmachine-persistence</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -186,6 +210,29 @@
                 <artifactId>junit</artifactId>
                 <version>4.12</version>
                 <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>4.2.5.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>4.2.5.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>4.2.5.RELEASE</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.underwaterapps.overlap2druntime</groupId>
+                <artifactId>overlap2d-runtime-libgdx</artifactId>
+                <version>0.1.1</version>
             </dependency>
 
             <dependency>
@@ -276,14 +323,20 @@
             </dependency>
 
             <dependency>
-                <groupId>de.juplo</groupId>
-                <artifactId>scannotation</artifactId>
-                <version>1.0.4</version>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>0.9.10</version>
             </dependency>
+
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>3.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-math3</artifactId>
+                <version>3.6.1</version>
             </dependency>
 
             <dependency>

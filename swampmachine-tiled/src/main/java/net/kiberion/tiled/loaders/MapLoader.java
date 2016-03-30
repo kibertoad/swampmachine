@@ -6,18 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import org.apache.commons.lang3.Validate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import lombok.Getter;
 import net.kiberion.assets.UiManager;
 import net.kiberion.assets.loaders.AssetLoader;
 import net.kiberion.tiled.MapRegistry;
 
+@Singleton
 public class MapLoader implements AssetLoader{
 
     private static final Logger log = LogManager.getLogger();
@@ -25,13 +27,12 @@ public class MapLoader implements AssetLoader{
     @Getter
     private List<Path> queuedMaps = new ArrayList<>();
     
-    private final MapRegistry mapRegistry;
+    @Inject
+    private MapRegistry mapRegistry;
     
     
-	public MapLoader(MapRegistry mapRegistry) {
+	public MapLoader() {
 		super();
-		Validate.notNull(mapRegistry);
-		this.mapRegistry = mapRegistry;
 	}
     
     public void queueMapLoading(Path path) {

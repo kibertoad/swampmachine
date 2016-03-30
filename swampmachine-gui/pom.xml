@@ -80,7 +80,7 @@
             <groupId>net.kiberion</groupId>
             <artifactId>swampmachine-core</artifactId>
         </dependency>
-    
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -158,6 +158,11 @@
                     <artifactId>guice-assistedinject</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.underwaterapps.overlap2druntime</groupId>
+            <artifactId>overlap2d-runtime-libgdx</artifactId>
         </dependency>
 
         <dependency>

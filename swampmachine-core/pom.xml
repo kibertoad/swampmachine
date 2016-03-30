@@ -61,6 +61,21 @@
                         <include>net/kiberion/**</include>
                     </includes>
                 </configuration>
+
+                <executions>
+                    <execution>
+                        <id>jar</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>testjar</id>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
@@ -69,6 +84,13 @@
                     <!-- During release:perform, enable the "release" profile -->
                     <releaseProfiles>release</releaseProfiles>
                     <goals>deploy assembly:single</goals>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
                 </configuration>
             </plugin>
         </plugins>
@@ -140,23 +162,19 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-math3</artifactId>
-            <version>3.5</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>4.2.5.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>4.2.5.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>4.2.5.RELEASE</version>
         </dependency>
 
 
@@ -174,10 +192,6 @@
                     <artifactId>guice-assistedinject</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>de.juplo</groupId>
-            <artifactId>scannotation</artifactId>
         </dependency>
         <dependency>
             <groupId>org.reflections</groupId>

@@ -2,9 +2,9 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>swampmachine-tiled</artifactId>
+    <artifactId>swampmachine-utils</artifactId>
     <packaging>jar</packaging>
-    <name>swampmachine-tiled</name>
+    <name>swampmachine-utils</name>
 
     <parent>
         <groupId>net.kiberion</groupId>
@@ -77,30 +77,14 @@
 
     <dependencies>
         <dependency>
+            <groupId>net.kiberion</groupId>
+            <artifactId>swampmachine-core</artifactId>
+        </dependency>
+    
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>net.kiberion</groupId>
-            <artifactId>swampmachine-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.kiberion</groupId>
-            <artifactId>swampmachine-core</artifactId>
-            <type>test-jar</type>
-            <scope>test</scope>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>net.kiberion</groupId>
-            <artifactId>swampmachine-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.kiberion</groupId>
-            <artifactId>swampmachine-mvc</artifactId>
         </dependency>
 
         <dependency>
@@ -175,14 +159,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-math3</artifactId>
-        </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+            </dependency>
+
 
         <dependency>
             <groupId>org.projectlombok</groupId>

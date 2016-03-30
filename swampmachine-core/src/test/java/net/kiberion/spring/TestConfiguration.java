@@ -7,4 +7,6 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan("net.kiberion")
 public class TestConfiguration {
 
+
+    
 }

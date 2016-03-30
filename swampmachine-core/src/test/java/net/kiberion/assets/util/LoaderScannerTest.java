@@ -12,9 +12,9 @@ import net.kiberion.blueprint.common.loaders.CommonModelInfoLoader;
 public class LoaderScannerTest {
 
     @LoadOnStartup
-    private CommonModelInfoLoader loader = new CommonModelInfoLoader();
+    protected CommonModelInfoLoader loader = new CommonModelInfoLoader();
 
-    private SimpleFileReader fileReader = new SimpleFileReader(Paths.get("dummy"));
+    protected SimpleFileReader fileReader = new SimpleFileReader(Paths.get("dummy"));
     
     @Test
     public void testScanner () {

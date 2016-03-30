@@ -6,6 +6,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfiguration.class)
-public class ContextBasedTest{
+public abstract class ContextBasedTest{
 
+    
+    
+    
 }
