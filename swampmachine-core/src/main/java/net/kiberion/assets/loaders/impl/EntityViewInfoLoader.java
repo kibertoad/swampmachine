@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.kiberion.assets.loaders;
+package net.kiberion.assets.loaders.impl;
 
 import java.util.Map;
 import java.util.Objects;

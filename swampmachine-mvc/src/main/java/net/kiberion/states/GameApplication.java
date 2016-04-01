@@ -18,6 +18,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
+import net.kiberion.assets.GameConfig;
 import net.kiberion.assets.UiManager;
 
 /**

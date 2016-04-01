@@ -10,10 +10,10 @@ import org.apache.logging.log4j.Logger;
 import com.badlogic.gdx.Gdx;
 
 import net.kiberion.assets.AssetProvider;
-import net.kiberion.assets.loaders.AbstractLoader;
-import net.kiberion.assets.loaders.EntityViewInfoLoader;
-import net.kiberion.assets.loaders.GameViewInfoLoader;
-import net.kiberion.assets.loaders.POJOLoader;
+import net.kiberion.assets.loaders.api.AbstractLoader;
+import net.kiberion.assets.loaders.api.POJOLoader;
+import net.kiberion.assets.loaders.impl.EntityViewInfoLoader;
+import net.kiberion.assets.loaders.impl.GameViewInfoLoader;
 import net.kiberion.assets.readers.AbstractFileReader;
 import net.kiberion.assets.readers.GDXFileReader;
 import net.kiberion.assets.readers.SimpleFileReader;

@@ -1,4 +1,4 @@
-package net.kiberion.assets.loaders;
+package net.kiberion.assets.loaders.util;
 
 import com.badlogic.gdx.Gdx;
 

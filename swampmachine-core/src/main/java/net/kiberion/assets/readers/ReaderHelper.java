@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import com.badlogic.gdx.Gdx;
 import com.google.inject.Singleton;
@@ -12,6 +13,7 @@ import com.google.inject.Singleton;
 import lombok.Getter;
 
 @Singleton
+@Component
 public class ReaderHelper {
 
     private static final Logger log = LogManager.getLogger();

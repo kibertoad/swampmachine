@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
-import net.kiberion.assets.loaders.AssetLoader;
+import net.kiberion.assets.loaders.api.AssetLoader;
 import net.kiberion.assets.registries.LoaderRegistry;
 import net.kiberion.blueprint.common.loaders.CommonModelInfoLoader;
 import net.kiberion.blueprint.common.loaders.CommonViewInfoLoader;

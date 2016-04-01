@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.kiberion.assets.loaders;
+package net.kiberion.assets.loaders.impl;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -19,6 +19,9 @@ import org.apache.logging.log4j.Logger;
 
 import com.badlogic.gdx.Gdx;
 
+import net.kiberion.assets.loaders.api.AbstractLoader;
+import net.kiberion.assets.loaders.util.GroovyTranslator;
+import net.kiberion.assets.loaders.util.YamlLoader;
 import net.kiberion.assets.readers.AbstractFileReader;
 import net.kiberion.assets.readers.GDXFileReader;
 import net.kiberion.assets.readers.SimpleFileReader;

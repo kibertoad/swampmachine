@@ -7,7 +7,7 @@ import java.util.List;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 
-import net.kiberion.assets.loaders.AssetLoader;
+import net.kiberion.assets.loaders.api.AssetLoader;
 
 public class LoaderScanner {
 

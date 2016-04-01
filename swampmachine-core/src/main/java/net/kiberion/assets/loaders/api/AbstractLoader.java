@@ -1,4 +1,4 @@
-package net.kiberion.assets.loaders;
+package net.kiberion.assets.loaders.api;
 
 import java.io.IOException;
 import java.util.ArrayList;

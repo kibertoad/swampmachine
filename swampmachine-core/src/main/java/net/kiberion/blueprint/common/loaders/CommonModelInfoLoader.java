@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import net.kiberion.assets.loaders.AssetLoader;
-import net.kiberion.assets.loaders.POJOLoader;
+import net.kiberion.assets.loaders.api.AssetLoader;
+import net.kiberion.assets.loaders.api.POJOLoader;
 import net.kiberion.assets.util.LoadOnStartup;
 import net.kiberion.blueprint.common.registries.CommonModelInfoRegistry;
 import net.kiberion.entities.modelinfo.CreatureModelInfo;

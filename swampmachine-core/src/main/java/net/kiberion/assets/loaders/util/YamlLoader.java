@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.kiberion.assets.loaders;
+package net.kiberion.assets.loaders.util;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -31,17 +31,15 @@ import net.kiberion.utils.MapUtils;
  */
 public class YamlLoader {
 
-	private static final Logger log = LogManager.getLogger();
-	
+    private static final Logger log = LogManager.getLogger();
+
     public Yaml yaml = new Yaml();
     public Iterable<Object> dataYamls;
-    public Map asMap;
-
-    //public Map<String, Object> map;
+    public Map<String, Object> asMap;
     public List<Object> list;
 
     private AbstractFileReader fileReader;
-    
+
     public YamlLoader() {
         if (Gdx.app != null) {
             fileReader = new GDXFileReader(AssetProvider.getPathToAssets());
@@ -49,11 +47,11 @@ public class YamlLoader {
             fileReader = new SimpleFileReader(AssetProvider.getPathToAssets());
         }
     }
-    
+
     public void openFile(String name) {
-        openFile (Paths.get(name));
+        openFile(Paths.get(name));
     }
-    
+
     public void openFile(Path name) {
         try {
             dataYamls = yaml.loadAll(fileReader.getFileAsStream(name));
@@ -69,9 +67,8 @@ public class YamlLoader {
     public Animation getAnimation(String image, int FRAME_COLS, int FRAME_ROWS, float frameDuration) {
         TextureAtlas.AtlasRegion atlasRegion = getImage("image");
 
-        TextureRegion[][] tmp = atlasRegion.split(atlasRegion.getRegionWidth() /
-                FRAME_COLS, atlasRegion.getRegionHeight() / FRAME_ROWS);
-
+        TextureRegion[][] tmp = atlasRegion.split(atlasRegion.getRegionWidth() / FRAME_COLS,
+                atlasRegion.getRegionHeight() / FRAME_ROWS);
 
         TextureRegion[] walkFrames = new TextureRegion[FRAME_COLS * FRAME_ROWS];
         int index = 0;
@@ -94,7 +91,7 @@ public class YamlLoader {
             TextureAtlas.AtlasRegion region = UiManager.instance().atlas().findRegion(photoName);
 
             if (region == null) {
-            	log.warn("No image in atlas: " + photoName);
+                log.warn("No image in atlas: " + photoName);
             }
 
             return region;
@@ -117,49 +114,32 @@ public class YamlLoader {
     }
 
     public String getString(String byKey) {
-
-        //if (asMap.get(byKey) == null) {
-        //    Log.error("Unknown key: " + byKey);
-        //}
-
         return (String) asMap.get(byKey);
     }
 
-    public List getList(String byKey) {
-        list = (List) asMap.get(byKey);
+    @SuppressWarnings("unchecked")
+    public List<Object> getList(String byKey) {
+        list = (List<Object>) asMap.get(byKey);
         return list;
     }
 
-    public Map getMap(String byKey) {
-        return (Map) asMap.get(byKey);
+    @SuppressWarnings("unchecked")
+    public Map<String, Object> getMap(String byKey) {
+        return (Map<String, Object>) asMap.get(byKey);
     }
 
     /**
      * Set the node to be used by get* methods
      */
+    @SuppressWarnings("unchecked")
     public void setNextYamlNode(Object o) {
         if (o == null) {
-        	log.error("Null node for parsing!");
+            log.error("Null node for parsing!");
         }
-        asMap = (Map) o;
+        asMap = (Map<String, Object>) o;
     }
 
     public List<Integer> getIntegerListSafe(String key) {
-        /*
-        Object o = asMap.get(key);
-        List<Integer> result = new ArrayList<>();
-
-        if (o instanceof Integer) {
-            result.add((Integer) o);
-        } else {
-            String[] arr = getString(key).split(" ");
-            for (String s : arr) {
-                result.add(Integer.parseInt(s));
-            }
-        }
-
-        return result;
-        */
         return MapUtils.getIntegerListSafe(asMap, key);
     }
 }

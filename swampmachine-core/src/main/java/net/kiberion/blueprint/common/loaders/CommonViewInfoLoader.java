@@ -5,13 +5,14 @@ import java.util.Objects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import net.kiberion.assets.loaders.AssetLoader;
-import net.kiberion.assets.loaders.EntityViewInfoLoader;
+import net.kiberion.assets.loaders.api.AssetLoader;
+import net.kiberion.assets.loaders.impl.EntityViewInfoLoader;
 import net.kiberion.assets.readers.ReaderHelper;
 import net.kiberion.assets.util.LoadOnStartup;
 import net.kiberion.assets.viewinfo.CreatureViewInfo;
@@ -28,12 +29,15 @@ public class CommonViewInfoLoader implements AssetLoader{
     private static final Logger log = LogManager.getLogger();
 
     @Inject
+    @Autowired
     private CommonViewInfoRegistry viewInfoRegistry;
     
     @Inject
+    @Autowired
     private CommonModelInfoRegistry modelInfoRegistry;
 
     @Inject
+    @Autowired
     private ReaderHelper readerHelper;
     
     @Override

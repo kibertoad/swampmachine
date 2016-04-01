@@ -18,9 +18,15 @@ public class TiledMapTest extends ContextBasedTest{
     @Autowired
     private MapLoader mapLoader;
     
+    @Autowired
+    private MapRegistry mapRegistry;
+    
     @Before
     public void setup () {
         Assert.assertNotNull(mapLoader);
+        
+        loadAssets();
+        Assert.assertEquals (1, mapRegistry.getRegisteredMaps().size());
     }
     
     @Test

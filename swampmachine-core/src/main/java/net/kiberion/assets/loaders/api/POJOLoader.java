@@ -1,4 +1,4 @@
-package net.kiberion.assets.loaders;
+package net.kiberion.assets.loaders.api;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -13,11 +13,8 @@ import org.apache.logging.log4j.Logger;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
-import com.badlogic.gdx.Gdx;
-
+import net.kiberion.assets.loaders.util.FileReaderFactory;
 import net.kiberion.assets.readers.AbstractFileReader;
-import net.kiberion.assets.readers.GDXFileReader;
-import net.kiberion.assets.readers.SimpleFileReader;
 import net.kiberion.entities.common.impl.EntityModel;
 import net.kiberion.utils.MapUtils;
 import net.kiberion.utils.SetUtils;
@@ -47,12 +44,7 @@ public class POJOLoader<T extends EntityModel> implements AbstractLoader<T> {
     public POJOLoader(Path path, Class clazz) {
         this.path = path;
         this.clazz = clazz;
-
-        if (Gdx.app != null) {
-            this.fileReader = new GDXFileReader(path);
-        } else {
-            this.fileReader = new SimpleFileReader(path);
-        }
+        this.fileReader = FileReaderFactory.buildFileReader(path);
     }
 
     public POJOLoader(Path path, Class clazz, String... wildcardFileExtension) {

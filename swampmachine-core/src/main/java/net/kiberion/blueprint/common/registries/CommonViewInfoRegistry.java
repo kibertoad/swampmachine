@@ -3,6 +3,8 @@ package net.kiberion.blueprint.common.registries;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
 import com.google.inject.Singleton;
 
 import lombok.Getter;
@@ -11,6 +13,7 @@ import net.kiberion.assets.viewinfo.CreatureViewInfo;
 import net.kiberion.assets.viewinfo.ViewInfo;
 
 @Singleton
+@Component
 public class CommonViewInfoRegistry {
 
     @Getter

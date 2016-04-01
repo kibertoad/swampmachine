@@ -30,10 +30,9 @@ public class GDXFileReader extends AbstractFileReader{
                 list.add(entry.file().toPath());
             }
         }
-        
         return list;
     }
-
+    
     @Override
     public InputStream getFileAsStream(Path path) {
         return Gdx.files.internal(path.toString()).read();

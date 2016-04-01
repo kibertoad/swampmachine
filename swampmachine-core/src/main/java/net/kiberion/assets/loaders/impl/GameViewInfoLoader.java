@@ -1,4 +1,4 @@
-package net.kiberion.assets.loaders;
+package net.kiberion.assets.loaders.impl;
 
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package net.kiberion.assets.loaders;
+package net.kiberion.assets.loaders.api;
 
 public interface AssetLoader extends Comparable<AssetLoader>{
 

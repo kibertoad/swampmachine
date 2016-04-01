@@ -1,5 +1,7 @@
 package net.kiberion.assets;
 
+import java.nio.file.Path;
+
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -105,6 +107,10 @@ public class UiManager {
 
     public static void reset() {
         _instance = null;
+    }
+    
+    public String getPathForAssetManager (Path path) {
+        return path.toString().replace("\\", "/");        
     }
     
 }

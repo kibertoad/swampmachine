@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import com.google.inject.Singleton;
 
 import lombok.Getter;
-import net.kiberion.assets.loaders.AssetLoader;
+import net.kiberion.assets.loaders.api.AssetLoader;
 
 @Singleton
 @Component

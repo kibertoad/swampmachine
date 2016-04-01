@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 import com.google.inject.Inject;
 
 import lombok.Getter;
-import net.kiberion.assets.loaders.POJOLoader;
+import net.kiberion.assets.loaders.api.POJOLoader;
 import net.kiberion.assets.readers.ReaderHelper;
 import net.kiberion.entities.common.impl.DataNode;
 import net.kiberion.utils.MapUtils;
