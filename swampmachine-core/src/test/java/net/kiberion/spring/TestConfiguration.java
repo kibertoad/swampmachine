@@ -7,8 +7,6 @@ import org.springframework.context.annotation.Import;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.backends.headless.HeadlessFiles;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 import net.kiberion.assets.GameConfig;
 import net.kiberion.assets.UiManager;
@@ -24,8 +22,10 @@ public class TestConfiguration {
         GameConfig.config.setPathToResourcesAsString("src/test/resources/");
         
         Gdx.files = new HeadlessFiles();
-        AssetManager assetManager = new AssetManager(); 
-        assetManager.setLoader(TiledMap.class, new TmxMapLoader());
+        Gdx.gl = new HeadlessGl();
+        
+        AssetManager assetManager = new HeadlessAssetManager(); 
+        //assetManager.setLoader(TiledMap.class, new TmxMapLoader());
         UiManager.instance().setAssets(assetManager);
     }
     

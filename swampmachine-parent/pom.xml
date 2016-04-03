@@ -22,11 +22,9 @@
         <module>../swampmachine-multimedia</module>
         <module>../swampmachine-blueprints</module>
         <module>../swampmachine-scripting</module>
-        
-        <!-- 
-        <module>../swampmachine-persistence</module>
-         -->
-        
+
+        <!-- <module>../swampmachine-persistence</module> -->
+
         <module>../swampmachine-utils</module>
     </modules>
 
@@ -268,6 +266,13 @@
                 <artifactId>gdx-tools</artifactId>
                 <version>${gdx.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.badlogicgames.gdx</groupId>
+                <artifactId>gdx-ai</artifactId>
+                <version>1.8.0</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.google.inject</groupId>
                 <artifactId>guice</artifactId>

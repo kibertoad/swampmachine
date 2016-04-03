@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.apache.commons.lang3.Validate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ import net.kiberion.utils.SetUtils;
 @LoadOnStartup
 public class MapLoader extends AbstractAssetLoader {
 
+    public static final String MAP_ID_PROPERTY = "id";
+    
     private static final Logger log = LogManager.getLogger();
     public static final String MAP_EXTENSION = "tmx";
     public static final String MAP_RESOURCES_DIRECTORY = "map-tiled";
@@ -84,7 +87,9 @@ public class MapLoader extends AbstractAssetLoader {
 
         for (Path path : queuedMaps) {
             TiledMap map = finishLoadingMap(path);
-            mapRegistry.getRegisteredMaps().put("map", map);
+            String id = (String) map.getProperties().get(MAP_ID_PROPERTY);
+            Validate.notNull(id, "Map id was null for map "+path.toString());
+            mapRegistry.getRegisteredMaps().put(id, map);
         }
     }
 
