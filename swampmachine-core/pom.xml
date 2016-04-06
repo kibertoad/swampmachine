@@ -57,9 +57,7 @@
                             <useUniqueVersions>false</useUniqueVersions>
                         </manifest>
                     </archive>
-                    <includes>
-                        <include>net/kiberion/**</include>
-                    </includes>
+                
                 </configuration>
 
                 <executions>

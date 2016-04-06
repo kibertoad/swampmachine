@@ -58,9 +58,6 @@
                         </manifest>
                     </archive>
 
-                    <includes>
-                        <include>net/kiberion/**</include>
-                    </includes>
                 </configuration>
             </plugin>
 
@@ -79,6 +76,7 @@
         <dependency>
             <groupId>net.kiberion</groupId>
             <artifactId>swampmachine-core</artifactId>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
