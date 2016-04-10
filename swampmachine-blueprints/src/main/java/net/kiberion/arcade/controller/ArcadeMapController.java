@@ -4,8 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.google.inject.Inject;
-
 import net.kiberion.aspects.api.MetadataHolderAspect;
 import net.kiberion.entities.map.api.Position;
 import net.kiberion.entities.map.impl.PositionAspect;
@@ -33,7 +31,7 @@ public class ArcadeMapController<TModel extends AbstractTiledMapModel<? extends 
     protected CreatureCollisionProcessor<TModel> creatureCollisisionProcessor;
     
     //Needs binding code like binder.bind(new TypeLiteral<AbstractTiledMapView<MapModel>>(){}).to(MapView.class);
-    @Inject
+    @Autowired
     protected AbstractTiledMapView<TModel> view;
 
     public void setMap(TiledMapInfo mapInfo) {
