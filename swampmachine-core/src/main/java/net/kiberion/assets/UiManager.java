@@ -18,6 +18,7 @@ import net.kiberion.styling.StyleFactory;
  */
 public class UiManager {
 
+    public static final String BLANK_IMAGE = "BLANK"; 
     public StyleFactory fontGenerator = new StyleFactory();
 
     private static UiManager _instance;
@@ -91,7 +92,7 @@ public class UiManager {
     }
     
     public TextureAtlas.AtlasRegion getImage (String id){
-        if (!id.equals("BLANK")) {
+        if (!id.equals(BLANK_IMAGE)) {
 
             TextureAtlas.AtlasRegion region = atlas().findRegion(id);
 

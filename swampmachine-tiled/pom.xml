@@ -62,6 +62,21 @@
                         <include>net/kiberion/**</include>
                     </includes>
                 </configuration>
+
+                <executions>
+                    <execution>
+                        <id>jar</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>testjar</id>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
@@ -91,7 +106,6 @@
             <artifactId>swampmachine-core</artifactId>
             <type>test-jar</type>
             <scope>test</scope>
-            <version>${project.version}</version>
         </dependency>
 
         <dependency>

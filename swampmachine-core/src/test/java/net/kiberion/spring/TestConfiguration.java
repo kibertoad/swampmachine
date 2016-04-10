@@ -25,7 +25,6 @@ public class TestConfiguration {
         Gdx.gl = new HeadlessGl();
         
         AssetManager assetManager = new HeadlessAssetManager(); 
-        //assetManager.setLoader(TiledMap.class, new TmxMapLoader());
         UiManager.instance().setAssets(assetManager);
     }
     
