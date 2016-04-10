@@ -14,12 +14,10 @@ import net.kiberion.spring.ContextBasedTest;
 import net.kiberion.tiled.loaders.MapLoader;
 import net.kiberion.tiled.model.TiledMapInfo;
 import net.kiberion.tiled.model.TiledMapPathfindingInfo;
-import net.kiberion.tiled.spring.TestConfigurationTiled;
+import net.kiberion.tiled.spring.TiledTestConfiguration;
 
-@ContextConfiguration(classes = TestConfigurationTiled.class)
+@ContextConfiguration(classes = TiledTestConfiguration.class)
 public class TiledMapTest extends ContextBasedTest{
-
-    private static final String pathToTileMap = "test_map.tmx";
     
     @Autowired
     private MapLoader mapLoader;

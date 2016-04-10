@@ -7,14 +7,13 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.google.inject.Inject;
 
 import net.kiberion.entities.map.api.Position;
 import net.kiberion.mvc.model.helpers.SpawningHelper;
 import net.kiberion.tiled.aspects.holders.MapMetadataHolderAspect;
-import net.kiberion.tiled.factories.api.MapCreatureFactory;
 import net.kiberion.tiled.model.TiledMapInfo;
 
 
@@ -22,12 +21,9 @@ public abstract class AbstractTiledMapModel<T extends MapMetadataHolderAspect>{
 
 	protected static final Logger log = LogManager.getLogger();
 	
-	@Inject
+	@Autowired
 	protected SpawningHelper spawningHelper;
 	
-    @Inject
-    protected MapCreatureFactory<T> creatureFactory;
-
     private TiledMap map;
     private TiledMapInfo mapInfo;
     

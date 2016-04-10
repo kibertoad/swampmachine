@@ -9,11 +9,11 @@ import java.util.Objects;
 import org.apache.commons.lang3.Validate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.google.inject.Inject;
 
 import lombok.Getter;
 import lombok.NonNull;
@@ -25,24 +25,23 @@ import net.kiberion.assets.viewinfo.CreatureViewInfo;
 import net.kiberion.blueprint.common.registries.CommonViewInfoRegistry;
 import net.kiberion.entities.map.api.Position;
 import net.kiberion.entities.map.impl.PositionAspect;
-import net.kiberion.mvc.StateView;
+import net.kiberion.mvc.StateViewBase;
 import net.kiberion.mvc.model.AbstractTiledMapModel;
 import net.kiberion.tiled.camera.TiledMapCamera;
 import net.kiberion.tiled.managers.MapObjectManager;
 import net.kiberion.tiled.model.TiledMapInfo;
 import net.kiberion.tiled.overlays.TiledMapOverlay;
 import net.kiberion.tiled.renderers.OrthogonalTiledMapRendererWithObjects;
-import net.kiberion.tiled.renderers.ShaderRegistry;
 
-public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> extends StateView<T>{
+public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> extends StateViewBase<T>{
     
     private static final Logger log = LogManager.getLogger();
 
-    @Inject
+    @Autowired
     private CommonViewInfoRegistry viewInfoRegistry;
     
-	@Inject
-	private ShaderRegistry shaderRegistry;
+	//@Autowired
+	//private ShaderRegistry shaderRegistry;
 	
 	protected OrthogonalTiledMapRendererWithObjects renderer;
 	
@@ -55,7 +54,7 @@ public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> e
     @Setter
     @Getter
     @NonNull
-    @Inject
+    @Autowired
     //Something like 
     //    binder.bind(MapObjectManager.class).to(OrthographicMapObjectManager.class);
     //should be included in injection binding class
@@ -89,8 +88,8 @@ public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> e
 
     protected void instantiateRenderer() {
     	Validate.notNull(renderer);
-    	Validate.notNull(shaderRegistry);
-    	renderer.setShaderRegistry(shaderRegistry);
+    	//Validate.notNull(shaderRegistry);
+    	//renderer.setShaderRegistry(shaderRegistry);
     }
     
     public void addOverlay(TiledMapOverlay overlay) {

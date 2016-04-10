@@ -12,16 +12,23 @@ import org.xguzm.pathfinding.grid.NavigationGrid;
 import org.xguzm.pathfinding.grid.finders.GridFinderOptions;
 import org.xguzm.pathfinding.grid.heuristics.ManhattanDistance;
 
+import net.kiberion.tiled.processors.CollisionInfoProvider;
+import net.kiberion.tiled.processors.SimpleCollisionInfoProvider;
+
 
 public class AStarFinderTest {
 
 	NavigationGrid<GridCell> grid;
 	AStarFinder<GridCell> finder;
 	GridFinderOptions opt;
+	CollisionInfoProvider collisionInfoProvider;
 	
 	@Before
 	public void init(){
+	    collisionInfoProvider = new SimpleCollisionInfoProvider();
+	    
 		grid = NavGraphFactory.getGridCellMap();	
+		grid.setCollisionInfoProvider(collisionInfoProvider);
 		opt = new GridFinderOptions();
 		finder = new AStarFinder<GridCell>(GridCell.class, opt);
 	}
@@ -79,6 +86,7 @@ public class AStarFinderTest {
 	public void autoAssignXYMapTest(){
 		System.out.println("\nRunning AStarFinderTest.autoAssignXYMapTest");
 		NavigationGrid<GridCell> grid = NavGraphFactory.getAutoAssignedGridCellMap();
+		grid.setCollisionInfoProvider(collisionInfoProvider);
 		GridCell c = grid.getCell(3, 1);
 		
 		assertTrue("GridCell at Grid(3,2) didn't have it's x and y auto assigned correctly", c.x == 3 && c.y == 1);

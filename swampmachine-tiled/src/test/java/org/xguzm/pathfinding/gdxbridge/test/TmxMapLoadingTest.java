@@ -35,6 +35,9 @@ public class TmxMapLoadingTest {
         }
 
         assertTrue("failed to find path from 0,0 to 9,9", app.path.size() > 0);
+        GridCell cell = app.path.get(0);
+        assertEquals (1, cell.x);
+        assertEquals (2, cell.y);
     }
 
     class MapLoadingGdxApp extends ApplicationAdapter{

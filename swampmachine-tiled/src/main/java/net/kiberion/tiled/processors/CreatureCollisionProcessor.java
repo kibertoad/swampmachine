@@ -2,10 +2,10 @@ package net.kiberion.tiled.processors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.badlogic.gdx.math.Rectangle;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 import net.kiberion.entities.map.api.Position;
 import net.kiberion.mvc.model.AbstractTiledMapModel;
@@ -14,14 +14,15 @@ import net.kiberion.tiled.aspects.api.CollidableEntitiesSource;
 import net.kiberion.tiled.aspects.holders.MapMetadataHolderAspect;
 import net.kiberion.tiled.model.TiledMapInfo;
 
-@Singleton
-public class CreatureCollisionProcessor<TModel extends AbstractTiledMapModel<? extends MapMetadataHolderAspect> & CollidableEntitiesSource> {
+@Component
+public class CreatureCollisionProcessor<TModel extends AbstractTiledMapModel<? extends MapMetadataHolderAspect> & CollidableEntitiesSource>
+        implements CollisionInfoProvider {
 
     private static final Logger log = LogManager.getLogger();
 
     private TiledMapInfo mapInfo;
-    
-    @Inject
+
+    @Autowired
     private TModel mapModel;
 
     public TModel getMapModel() {
@@ -44,9 +45,12 @@ public class CreatureCollisionProcessor<TModel extends AbstractTiledMapModel<? e
         return getCreatureForPosition(agent, agent.getPositionAspect());
     }
 
-    public CollidableAspect getCreatureForPosition(CollidableAspect agent, Position position) {
-        Rectangle rectangle = new Rectangle (position.getX(), position.getY(), agent.getFormAspect().getWidthInTiles(), agent.getFormAspect().getHeightInTiles());
-        
+    public CollidableAspect getCreatureForPosition(CollidableAspect agent,
+            Position position) {
+        Rectangle rectangle = new Rectangle(position.getX(), position.getY(),
+                agent.getFormAspect().getWidthInTiles(),
+                agent.getFormAspect().getHeightInTiles());
+
         for (CollidableAspect creature : mapModel.getCollidableEntities()) {
             if (creature.getFormAspect().getRectangle().overlaps(rectangle)
                     && agent.canCollide(creature) && creature.canCollide(agent)) {
@@ -55,6 +59,17 @@ public class CreatureCollisionProcessor<TModel extends AbstractTiledMapModel<? e
         }
         return null;
     }
-    
-    
+
+    @Override
+    public boolean isOccupiedByCollidable(int x, int y) {
+        Rectangle rectangle = new Rectangle(x, y, 1, 1);
+
+        for (CollidableAspect creature : mapModel.getCollidableEntities()) {
+            if (creature.getFormAspect().getRectangle().overlaps(rectangle)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

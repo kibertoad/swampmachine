@@ -8,6 +8,8 @@ import org.xguzm.pathfinding.NavigationNode;
 import org.xguzm.pathfinding.PathFinderOptions;
 import org.xguzm.pathfinding.grid.finders.GridFinderOptions;
 
+import net.kiberion.tiled.processors.CollisionInfoProvider;
+
 /**
  * A {@link NavigationGraph} which is represented as a grid or a table.
  * The nodes are accessible through (x, y) coordinates. 
@@ -23,6 +25,7 @@ public class NavigationGrid<T extends NavigationGridGraphNode> implements Naviga
 	
 	/** The nodes contained in the grid. They are stored as Grid[x][y] */
 	protected T[][] nodes;
+	protected CollisionInfoProvider collisionInfoProvider;
 	
 
 	/**
@@ -89,7 +92,7 @@ public class NavigationGrid<T extends NavigationGridGraphNode> implements Naviga
 	 * @return true if the node at [x,y] is walkable, false if it is not walkable (or if [x,y] is not within the grid's limit)
 	 */
 	public boolean isWalkable(int x, int y) {
-	    return this.contains(x, y) && this.nodes[x][y].isWalkable();
+	    return this.contains(x, y) && this.nodes[x][y].isWalkable() && !collisionInfoProvider.isOccupiedByCollidable(x, y);
 	};
 
 
@@ -324,4 +327,8 @@ public class NavigationGrid<T extends NavigationGridGraphNode> implements Naviga
 		return true;
 		
 	}
+	
+	public void setCollisionInfoProvider(CollisionInfoProvider collisionInfoProvider) {
+        this.collisionInfoProvider = collisionInfoProvider;
+    }
 }

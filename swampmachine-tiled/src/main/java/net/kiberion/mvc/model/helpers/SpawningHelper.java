@@ -2,7 +2,7 @@ package net.kiberion.mvc.model.helpers;
 
 import java.util.List;
 
-import com.google.inject.Singleton;
+import org.springframework.stereotype.Component;
 
 import net.kiberion.entities.map.api.Position;
 import net.kiberion.entities.map.impl.PositionAspect;
@@ -10,7 +10,7 @@ import net.kiberion.tiled.aspects.api.CollidableAspect;
 import net.kiberion.tiled.model.TiledMapInfo;
 import net.kiberion.utils.Dice;
 
-@Singleton
+@Component
 public class SpawningHelper {
 
     /**

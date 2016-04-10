@@ -2,14 +2,13 @@ package net.kiberion.tiled.processors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import com.google.inject.Singleton;
+import org.springframework.stereotype.Component;
 
 import net.kiberion.entities.map.api.Position;
 import net.kiberion.tiled.aspects.api.FormAspect;
 import net.kiberion.tiled.model.TiledMapInfo;
 
-@Singleton
+@Component
 public class WallObstacleProcessor {
 
     private static final Logger log = LogManager.getLogger();

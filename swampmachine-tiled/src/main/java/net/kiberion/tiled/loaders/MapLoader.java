@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +26,6 @@ import net.kiberion.assets.util.LoadOnStartup;
 import net.kiberion.tiled.MapRegistry;
 import net.kiberion.utils.SetUtils;
 
-@Singleton
 @LoadOnStartup
 public class MapLoader extends AbstractAssetLoader {
 
@@ -67,12 +65,15 @@ public class MapLoader extends AbstractAssetLoader {
         assets.finishLoading();
 
         TiledMap map = assets.get(UiManager.instance().getPathForAssetManager(path), TiledMap.class);
+        log.info("Finished loading map. ID: " + map.getProperties().get("id"));
         return map;
     }
 
     @Override
     public void load() {
         if (autoScan) {
+            log.info("Autoscan for maps is enabled, checking for maps at "+getConfig().getPathToResources());
+            Validate.notNull(getConfig(), "Config is null");
             AbstractFileReader reader = FileReaderFactory.buildFileReader(getConfig().getPathToResources());
             try {
                 queuedMaps = reader.getListOfRelativeFilesByWildcard(MAP_RESOURCES_DIRECTORY, SetUtils.buildSet(MAP_EXTENSION));
@@ -88,7 +89,7 @@ public class MapLoader extends AbstractAssetLoader {
         for (Path path : queuedMaps) {
             TiledMap map = finishLoadingMap(path);
             String id = (String) map.getProperties().get(MAP_ID_PROPERTY);
-            Validate.notNull(id, "Map id was null for map "+path.toString());
+            Validate.notNull(id, "Map id was null for map "+path.toString()+". Please set it via Tiled custom map properties.");
             mapRegistry.getRegisteredMaps().put(id, map);
         }
     }

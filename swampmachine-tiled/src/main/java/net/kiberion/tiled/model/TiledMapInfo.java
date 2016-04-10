@@ -1,5 +1,7 @@
 package net.kiberion.tiled.model;
 
+import org.apache.commons.lang3.Validate;
+
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
 public class TiledMapInfo {
@@ -20,6 +22,7 @@ public class TiledMapInfo {
     
 
     public TiledMapInfo(TiledMap map) {
+        Validate.notNull(map, "Map is null.");
         tileWidth = map.getProperties().get("tilewidth", Integer.class);
         tileHeight = map.getProperties().get("tileheight", Integer.class);
         tileHalfWidth = tileWidth / 2;
