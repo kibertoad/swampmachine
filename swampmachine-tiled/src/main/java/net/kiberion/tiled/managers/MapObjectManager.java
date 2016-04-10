@@ -20,6 +20,8 @@ import net.kiberion.tiled.model.TiledMapInfo;
 
 public abstract class MapObjectManager {
 
+    public static final String OBJECT_LAYER_NAME = "objects";
+    
 	protected static final Logger log = LogManager.getLogger();
     protected Map<MetadataHolderAspect, TextureMapObject> textureMapObjectsMap = new HashMap<>();
     private TiledMapInfo mapInfo;
@@ -39,12 +41,12 @@ public abstract class MapObjectManager {
 	
 	
 	// Tiled "Object layer" named "objects" should be created for this to work
-    public void addMapObject(MetadataHolderAspect entityModel, Position position, String imageCode) {
-        addMapObject(entityModel, position, UiManager.instance().getImage(imageCode));
+    public TextureMapObject addMapObject(MetadataHolderAspect entityModel, Position position, String imageCode) {
+        return addMapObject(entityModel, position, UiManager.instance().getImage(imageCode));
     }
     
     public void removeMapObject (MetadataHolderAspect entityModel) {
-        MapLayer objectLayer = getMap().getLayers().get("objects");
+        MapLayer objectLayer = getMap().getLayers().get(OBJECT_LAYER_NAME);
         TextureMapObject tmo = textureMapObjectsMap.get(entityModel);
         objectLayer.getObjects().remove(tmo);
         textureMapObjectsMap.remove(entityModel);
@@ -58,7 +60,7 @@ public abstract class MapObjectManager {
      * @param image
      */
     public TextureMapObject addMapObject(MetadataHolderAspect entityModel, Position position, TextureRegion image) {
-        MapLayer objectLayer = getMap().getLayers().get("objects");
+        MapLayer objectLayer = getMap().getLayers().get(OBJECT_LAYER_NAME);
 
         TextureMapObject tmo = new TextureMapObject(image);
         Position screenPosition = getPositionForModelEntity (entityModel, position);
