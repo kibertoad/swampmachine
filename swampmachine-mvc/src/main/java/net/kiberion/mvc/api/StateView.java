@@ -6,8 +6,6 @@ public interface StateView {
 
     public void setStage(Stage stage);
 
-    public void postInjection();
-
     public void act(float delta);
 
     public void hide();
@@ -16,5 +14,6 @@ public interface StateView {
 
     public Stage getStage();
     
+    public void initGUIElements ();
 
 }

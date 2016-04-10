@@ -1,5 +1,7 @@
 package net.kiberion.mvc;
 
+import org.apache.commons.lang3.Validate;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -10,7 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 import net.kiberion.mvc.api.StateView;
 
-public class StateViewBase<T> extends Container<Actor> implements PostInjectionProcessed, StateView{
+public class StateViewBase<T> extends Container<Actor> implements StateView, InitializingBean{
 
     @Getter
     @Setter
@@ -21,17 +23,19 @@ public class StateViewBase<T> extends Container<Actor> implements PostInjectionP
     @Autowired
     private T model;
     
+    @Override
     public void show() {
-    	setVisible(true);
+        setVisible(true);
     }
     
+    @Override
     public void hide() {
-    	setVisible(false);
+        setVisible(false);
     }
 
     @Override
     public void act(float delta) {
-    	/*
+        /*
         for (PyramideAnimation animation : animationList) {
             animation.act(delta);
 
@@ -50,10 +54,16 @@ public class StateViewBase<T> extends Container<Actor> implements PostInjectionP
         */
 
     }
-
-	@Override
-	public void postInjection() {
-	}
+  
+    //Attach gui elements to stage here
+    @Override
+    public void initGUIElements () {
+        Validate.notNull(getStage(), "Stage is null.");
+    }
+    
+    @Override
+    public void afterPropertiesSet() throws Exception {
+    }
 
     /*
     public void addAnimation(PyramideAnimation animation) {
@@ -63,5 +73,5 @@ public class StateViewBase<T> extends Container<Actor> implements PostInjectionP
     public void addAnimationSafe(PyramideAnimation animation) {
         animationAdditionList.add(animation);
     }
-    */	
+    */  
 }

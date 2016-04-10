@@ -3,6 +3,8 @@ package net.kiberion.states;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.InitializingBean;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
@@ -14,7 +16,7 @@ import lombok.Setter;
 import net.kiberion.entities.common.api.DeltaUpdatable;
 import net.kiberion.mvc.api.StateView;
 
-public abstract class GameState implements Screen {
+public abstract class GameState implements Screen, InitializingBean {
 
     @Getter
     private final String key;
@@ -47,14 +49,11 @@ public abstract class GameState implements Screen {
         view.setStage(stage);
     }
 
-    public void postInjection() {
+    @Override
+    public void afterPropertiesSet() throws Exception {
         if (getView() != null) {
             getView().setStage(stage);
-            getView().postInjection();
-        }
-
-        for (StateView subView : subViews) {
-            subView.postInjection();
+            getView().initGUIElements();
         }
     }
 
