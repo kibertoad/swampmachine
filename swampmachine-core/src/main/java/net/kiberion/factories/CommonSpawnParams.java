@@ -32,4 +32,13 @@ public class CommonSpawnParams implements SpawnParams{
         return new PositionAspect (x, y);
     }
     
+    public CommonSpawnParams() {
+    }
+    
+    public CommonSpawnParams (String id, int x, int y) {
+        this.id = id;
+        this.x = x;
+        this.y = y;
+    }
+    
 }

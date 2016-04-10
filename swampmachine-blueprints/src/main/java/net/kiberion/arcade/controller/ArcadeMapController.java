@@ -2,9 +2,9 @@ package net.kiberion.arcade.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 import net.kiberion.aspects.api.MetadataHolderAspect;
 import net.kiberion.entities.map.api.Position;
@@ -21,16 +21,15 @@ import net.kiberion.tiled.model.TiledMapInfo;
 import net.kiberion.tiled.processors.CreatureCollisionProcessor;
 import net.kiberion.tiled.processors.WallObstacleProcessor;
 
-@Singleton
 public class ArcadeMapController<TModel extends AbstractTiledMapModel<? extends MapMetadataHolderAspect> & CollidableEntitiesSource> {
 
     private static final Logger log = LogManager.getLogger();
     private final CollidableAspect wallCollision = new WallCollidableAspect();
     
-    @Inject
+    @Autowired
     protected WallObstacleProcessor wallObstacleProcessor;
     
-    @Inject
+    @Autowired
     protected CreatureCollisionProcessor<TModel> creatureCollisisionProcessor;
     
     //Needs binding code like binder.bind(new TypeLiteral<AbstractTiledMapView<MapModel>>(){}).to(MapView.class);

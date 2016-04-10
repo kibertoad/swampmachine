@@ -5,8 +5,6 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
-import com.google.inject.Singleton;
-
 import lombok.Getter;
 import net.kiberion.entities.common.impl.DataNode;
 import net.kiberion.entities.modelinfo.ActionInfo;
@@ -15,7 +13,6 @@ import net.kiberion.entities.modelinfo.GroupInfo;
 import net.kiberion.entities.modelinfo.ItemInfo;
 import net.kiberion.entities.modelinfo.PersonalName;
 
-@Singleton
 @Component
 public class CommonModelInfoRegistry{
 

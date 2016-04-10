@@ -12,9 +12,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import net.kiberion.entities.common.api.DeltaUpdatable;
-import net.kiberion.mvc.StateView;
+import net.kiberion.mvc.api.StateView;
 
-public class GameState<V extends StateView, M> implements Screen {
+public abstract class GameState implements Screen {
 
     @Getter
     private final String key;
@@ -28,19 +28,13 @@ public class GameState<V extends StateView, M> implements Screen {
     private Stage overlayStage;
 
     @Getter
-    private V view;
-
-    @Getter
-    private M model;
-
-    @Getter
     @Setter
     private InputAdapter input;
 
     private InputMultiplexer inputMultiplexer = new InputMultiplexer();
 
     public List<DeltaUpdatable> entitiesForUpdate = new ArrayList<>();
-    private List<StateView> subViews = new ArrayList<>();
+    private List<? extends StateView> subViews = new ArrayList<>();
 
     public GameState(String key) {
         super();
@@ -54,8 +48,9 @@ public class GameState<V extends StateView, M> implements Screen {
     }
 
     public void postInjection() {
-        if (view != null) {
-            view.postInjection();
+        if (getView() != null) {
+            getView().setStage(stage);
+            getView().postInjection();
         }
 
         for (StateView subView : subViews) {
@@ -63,18 +58,9 @@ public class GameState<V extends StateView, M> implements Screen {
         }
     }
 
-    protected void setView(V view) {
-        this.view = view;
-        view.setStage(getStage());
-    }
-
-    public void setModel(M model) {
-        this.model = model;
-    }
-
     @Override
     public void show() {
-        view.show();
+        getView().show();
 
         Gdx.input.setInputProcessor(inputMultiplexer);
         inputMultiplexer.clear();
@@ -130,7 +116,7 @@ public class GameState<V extends StateView, M> implements Screen {
 
     @Override
     public void hide() {
-        view.hide();
+        getView().hide();
 
         for (StateView subView : subViews) {
             subView.hide();
@@ -140,5 +126,7 @@ public class GameState<V extends StateView, M> implements Screen {
     @Override
     public void dispose() {
     }
+    
+    public abstract StateView getView(); //don't forget to set View stage from gamestate stage
 
 }

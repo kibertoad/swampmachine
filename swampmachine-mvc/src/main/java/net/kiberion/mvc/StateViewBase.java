@@ -1,13 +1,16 @@
 package net.kiberion.mvc;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.kiberion.mvc.api.StateView;
 
-public class StateView<T> extends Container<Actor> implements PostInjectionProcessed{
+public class StateViewBase<T> extends Container<Actor> implements PostInjectionProcessed, StateView{
 
     @Getter
     @Setter
@@ -15,6 +18,7 @@ public class StateView<T> extends Container<Actor> implements PostInjectionProce
 
     @Getter
     @Setter
+    @Autowired
     private T model;
     
     public void show() {

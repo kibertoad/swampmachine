@@ -1,4 +1,4 @@
-package net.kiberion.states;
+package net.kiberion.states.util;
 
 import com.google.inject.Binder;
 import com.google.inject.Inject;
@@ -21,8 +21,8 @@ import net.kiberion.blueprint.common.registries.CommonViewInfoRegistry;
 @Singleton
 public class GameContainer implements Module{
 
-    @Getter
-    private GameState<?, ?> activeState;
+    //@Getter
+    //private GameState<?, ?> activeState;
 
     @Getter
     @Inject
@@ -52,6 +52,8 @@ public class GameContainer implements Module{
      * This method should be called after injection was already performed
      * @param state
      */
+    
+    /*
     public void addState(GameState<?, ?> state) {
         if (!stateRegistry.getStates().containsValue(state)) {
         	stateRegistry.getStates().put (state.getKey(), state);
@@ -74,12 +76,13 @@ public class GameContainer implements Module{
         activeState.show();
     }
 
-
+    */
 
     @Override
     public void configure(Binder binder) {
     }
     
-    
+
+
     
 }

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.kiberion.states;
+package net.kiberion.states.util;
 
 import java.io.IOException;
 import java.nio.file.Files;

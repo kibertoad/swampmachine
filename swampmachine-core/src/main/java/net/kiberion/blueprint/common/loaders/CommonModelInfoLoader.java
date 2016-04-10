@@ -4,10 +4,8 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 import net.kiberion.assets.loaders.api.AssetLoader;
 import net.kiberion.assets.loaders.api.POJOLoader;
@@ -16,14 +14,13 @@ import net.kiberion.blueprint.common.registries.CommonModelInfoRegistry;
 import net.kiberion.entities.modelinfo.CreatureModelInfo;
 import net.kiberion.utils.MapUtils;
 
-@Singleton
 @LoadOnStartup
 @Component
 public class CommonModelInfoLoader extends AbstractLoader implements AssetLoader {
 
     private static final Logger log = LogManager.getLogger();
 
-    @Inject
+    @Autowired
     private CommonModelInfoRegistry modelInfoRegistry;
 
     

@@ -5,12 +5,9 @@ import java.nio.file.Paths;
 
 import org.springframework.stereotype.Component;
 
-import com.google.inject.Singleton;
-
 import lombok.Getter;
 import lombok.Setter;
 
-@Singleton
 @Component
 public class GameConfig {
 
