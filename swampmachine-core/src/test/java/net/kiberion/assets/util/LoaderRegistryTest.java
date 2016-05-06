@@ -41,7 +41,8 @@ public class LoaderRegistryTest extends ContextBasedTest{
     @SuppressWarnings("unchecked")
     @Test
     public void testRegistry () {
-        List <AssetLoader> loaders = new ArrayList<AssetLoader>((Collection<? extends AssetLoader>) ctx.getBeansWithAnnotation(LoadOnStartup.class).values());
+        @SuppressWarnings("rawtypes")
+		List <AssetLoader> loaders = new ArrayList<AssetLoader>((Collection) ctx.getBeansWithAnnotation(LoadOnStartup.class).values());
         assertEquals (2, loaders.size());
         
         loaderRegistry.registerLoaders(loaders);;
