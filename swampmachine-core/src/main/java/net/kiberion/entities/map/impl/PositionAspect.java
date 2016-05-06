@@ -116,4 +116,9 @@ public class PositionAspect implements Position {
     public Position produceCloneWithTrimmedValues() {
         return new PositionAspect (getIntX(), getIntY());
     }
+
+    @Override
+    public Position invertY(int mapHeight) {
+        return new PositionAspect (getX(), mapHeight - (int) getY());
+    }
 }

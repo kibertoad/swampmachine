@@ -25,18 +25,20 @@ public class WallObstacleProcessor {
         this.mapInfo = mapInfo;
     }
     
-    public boolean isTileBlocked (int x, int y) {
+    private boolean isTileBlocked (int x, int y) {
         return mapInfo.getWallInfo().isWall(x, y);
     }
-    
+
     public boolean isTileBlocked (Position position) {
         //log.info("actual coords:"+position.toString());
         //log.info("Tested coords: "+(int) position.getX()+"/"+ (int) position.getY());
-        boolean result =  isTileBlocked((int) position.getX(), mapInfo.getMapHeight() - (int) position.getY());
+        
+        Position invertedPosition = position.invertY(mapInfo.getMapHeight());
+        boolean result =  isTileBlocked((int) invertedPosition.getX(), (int) invertedPosition.getY());
         
         if (result) {
             //getMapInfo().getWallInfo().outputAllWalls();
-            log.info("Wall position: "+position.toString());
+            log.info("Wall position: "+invertedPosition.toString());
         }
         return result;
     }

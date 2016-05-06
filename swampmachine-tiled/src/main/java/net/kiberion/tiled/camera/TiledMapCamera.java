@@ -45,21 +45,39 @@ public class TiledMapCamera {
      * model coordinates.
      * @param object 
      */
+    /*
     public void centerOn(Position object){
+        float centerX = object.getX() * tileWidth + tileWidth / 2f;
+        float centerY = object.getY() * tileHeight + tileHeight / 2f;
+        orthoCamera.position.set(centerX, centerY, 0);
+        orthoCamera.update();
+    }
+    */
+    
+    public void centerOn(PositionAspect position) {
+        float centerX = position.getX() * tileWidth + tileWidth / 2f;
+        float centerY = position.getY() * tileHeight + tileHeight / 2f;
+        orthoCamera.position.set(centerX, centerY, 0);
+        orthoCamera.update();
+    }
+    
+    /*
+    public void centerOnWithInvertedY(Position object){
         float centerX = object.getX() * tileWidth + tileWidth / 2f;
         float yInverted = mapHeight - object.getY() - 1f;
         float centerY = yInverted * tileHeight + tileHeight / 2f;
         orthoCamera.position.set(centerX, centerY, 0);
         orthoCamera.update();
     }
+    */
     
-    public void centerOn(PositionAspect position) {
+    public void centerOnWithInvertedY(PositionAspect position) {
         float centerX = position.getX() * tileWidth + tileWidth / 2f;
         float yInverted = position.getY() - 1f;
         float centerY = yInverted * tileHeight + tileHeight / 2f;
         orthoCamera.position.set(centerX, centerY, 0);
         orthoCamera.update();
-    }
+    }    
     
     //to be used in new renderer
     //doesn't seem to work, so
@@ -92,6 +110,11 @@ public class TiledMapCamera {
      */
     public void scroll(float dx, float dy){
         orthoCamera.position.add(dx*orthoCamera.zoom, -dy*orthoCamera.zoom, 0);
+        orthoCamera.update();
+    }
+
+    public void scroll(float dx, float dy, float zoom){
+        orthoCamera.position.add(dx*zoom, -dy*zoom, 0);
         orthoCamera.update();
     }
     

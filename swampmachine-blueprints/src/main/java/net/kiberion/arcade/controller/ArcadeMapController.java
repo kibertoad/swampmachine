@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import net.kiberion.arcade.controller.api.CreatureMovementController;
 import net.kiberion.aspects.api.MetadataHolderAspect;
 import net.kiberion.entities.map.api.Position;
 import net.kiberion.entities.map.impl.PositionAspect;
@@ -19,7 +20,7 @@ import net.kiberion.tiled.model.TiledMapInfo;
 import net.kiberion.tiled.processors.CreatureCollisionProcessor;
 import net.kiberion.tiled.processors.WallObstacleProcessor;
 
-public class ArcadeMapController<TModel extends AbstractTiledMapModel<? extends MapMetadataHolderAspect> & CollidableEntitiesSource> {
+public class ArcadeMapController<TModel extends AbstractTiledMapModel<? extends MapMetadataHolderAspect> & CollidableEntitiesSource> implements CreatureMovementController{
 
     private static final Logger log = LogManager.getLogger();
     private final CollidableAspect wallCollision = new WallCollidableAspect();
@@ -58,12 +59,12 @@ public class ArcadeMapController<TModel extends AbstractTiledMapModel<? extends 
      }    
 
     public boolean moveCreature(CollidableAspect entity, float deltaX, float deltaY) {
-        log.info("Trying to move creature from point: "+entity.getPositionAspect());
-        log.info("Delta: "+deltaX+"/"+deltaY);
+        //log.info("Trying to move creature from point: "+entity.getPositionAspect());
+        //log.info("Delta: "+deltaX+"/"+deltaY);
         
         if (!isCollided (entity, entity.getPositionAspect().produceCloneWithAppliedDelta(deltaX, deltaY), entity.getFormAspect())) {
             performMove (entity, deltaX, deltaY);
-            log.info("Moved successfully: "+entity.getPositionAspect() );
+            //log.info("Moved successfully: "+entity.getPositionAspect() );
             //log.info("Camera: "+getCamera().getPosition() );
             return true;
         }
@@ -71,6 +72,7 @@ public class ArcadeMapController<TModel extends AbstractTiledMapModel<? extends 
     }
     
 
+    @Override
     public boolean moveCreature(CollidableAspect entity, PositionAspect delta) {
         return moveCreature (entity, delta.getX(), delta.getY());
     }
@@ -93,6 +95,7 @@ public class ArcadeMapController<TModel extends AbstractTiledMapModel<? extends 
     
 
     
+    @Override
     public void removeEntityFromView (MetadataHolderAspect entity) {
         view.removeMapObject(entity);
     }

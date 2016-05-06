@@ -23,4 +23,6 @@ public interface Position {
     public void applyDelta(float deltaX, float deltaY);
     public float distanceTo (Position other);    
     
+    public Position invertY(int mapHeight);
+    
 }

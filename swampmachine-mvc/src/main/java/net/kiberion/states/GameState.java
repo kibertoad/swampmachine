@@ -15,6 +15,7 @@ import lombok.Getter;
 import lombok.Setter;
 import net.kiberion.entities.common.api.DeltaUpdatable;
 import net.kiberion.mvc.api.StateView;
+import net.kiberion.processors.TimedProcessor;
 
 public abstract class GameState implements Screen, InitializingBean {
 
@@ -37,6 +38,9 @@ public abstract class GameState implements Screen, InitializingBean {
 
     public List<DeltaUpdatable> entitiesForUpdate = new ArrayList<>();
     private List<? extends StateView> subViews = new ArrayList<>();
+
+    @Getter
+    private final List<TimedProcessor> realtimeProcessors = new ArrayList<>();  
 
     public GameState(String key) {
         super();
@@ -79,6 +83,11 @@ public abstract class GameState implements Screen, InitializingBean {
         for (DeltaUpdatable entity : entitiesForUpdate) {
             entity.update(delta);
         }
+        
+        for (TimedProcessor processor : realtimeProcessors) {
+            processor.update(delta);
+        }
+        
 
         if (getStage() != null) {
             getStage().act(delta);

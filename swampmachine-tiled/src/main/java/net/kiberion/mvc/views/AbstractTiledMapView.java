@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -115,7 +116,9 @@ public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> e
 
     // Tiled "Object layer" named "objects" should be created for this to work
     public void addMapObject(MetadataHolderAspect entityModel, PositionAspect position, String imageCode) {
-        addMapObject(entityModel, position, UiManager.instance().getImage(imageCode));
+        TextureAtlas.AtlasRegion image = UiManager.instance().getImage(imageCode);
+        Validate.notNull(image, "Unknown image: "+imageCode);
+        addMapObject(entityModel, position, image);
     }
     
     public void removeMapObject (MetadataHolderAspect entityModel) {
@@ -130,6 +133,7 @@ public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> e
      * @param image
      */
     public TextureMapObject addMapObject(MetadataHolderAspect entityModel, PositionAspect position, TextureRegion image) {
+        Validate.notNull(image);
     	return mapObjectManager.addMapObject(entityModel, position, image);
     }
     

@@ -21,6 +21,7 @@ import net.kiberion.factories.SpawnParams;
 public class MetaFactory implements ApplicationEventPublisherAware,
         ApplicationListener<SpawnEntityEvent>, ApplicationContextAware, InitializingBean {
 
+    @SuppressWarnings("rawtypes")
     private Map<Class<?>, EntityFactory> factoryMap;
     private ApplicationEventPublisher eventPublisher;
     private ApplicationContext ctx;
@@ -43,6 +44,7 @@ public class MetaFactory implements ApplicationEventPublisherAware,
         eventPublisher.publishEvent(new AfterSpawnEntityEvent(factory, entity));
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void afterPropertiesSet() throws Exception {
         factoryMap = new HashMap<>();
