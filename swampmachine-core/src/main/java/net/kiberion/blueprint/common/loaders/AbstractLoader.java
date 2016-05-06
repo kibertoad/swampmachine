@@ -6,8 +6,7 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import com.google.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.Getter;
 import net.kiberion.assets.loaders.api.POJOLoader;
@@ -19,7 +18,7 @@ public class AbstractLoader {
 
     private static final Logger log = LogManager.getLogger();
     
-    @Inject
+    @Autowired
     @Getter
     private final ReaderHelper readerHelper;
 

@@ -9,31 +9,31 @@ import org.springframework.stereotype.Component;
 import com.google.inject.Singleton;
 
 import lombok.Getter;
-import net.kiberion.assets.loaders.api.AssetLoader;
+import net.kiberion.assets.loaders.api.SyncAssetLoader;
 
 @Singleton
 @Component
 public class LoaderRegistry{
 
     @Getter
-	private Set <AssetLoader> registeredLoaders = new TreeSet<>();
+	private Set <SyncAssetLoader> registeredLoaders = new TreeSet<>();
 	
 	public void load() {
-		for (AssetLoader loader : registeredLoaders) {
+		for (SyncAssetLoader loader : registeredLoaders) {
 			loader.load();
 		}
 	}
 	
-	public void registerLoader (AssetLoader loader) {
+	public void registerLoader (SyncAssetLoader loader) {
 		registeredLoaders.add(loader);
 	}
 
-    public void registerLoaders(List<AssetLoader> loaders) {
+    public void registerLoaders(List<SyncAssetLoader> loaders) {
         if (loaders == null) {
             return;
         }
         
-        for (AssetLoader loader : loaders) {
+        for (SyncAssetLoader loader : loaders) {
             registerLoader(loader);
         }
     }

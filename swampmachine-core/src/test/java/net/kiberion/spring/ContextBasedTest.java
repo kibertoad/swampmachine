@@ -17,7 +17,7 @@ import net.kiberion.assets.loaders.util.AssetLoaderSpringExtractor;
 public abstract class ContextBasedTest implements ApplicationContextAware {
 
     protected ApplicationContext applicationContext;
-    
+
     protected void loadAssets() {
         List<AssetLoader> assetLoaders = AssetLoaderSpringExtractor
                 .extractSortedStartupAssetLoadersFromContext(applicationContext);
@@ -25,10 +25,10 @@ public abstract class ContextBasedTest implements ApplicationContextAware {
             loader.load();
         }
     }
-    
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
     }
-    
+
 }

@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
-import net.kiberion.assets.loaders.api.AssetLoader;
+import net.kiberion.assets.loaders.api.SyncAssetLoader;
 import net.kiberion.assets.registries.LoaderRegistry;
 import net.kiberion.blueprint.common.loaders.CommonModelInfoLoader;
 import net.kiberion.blueprint.common.loaders.CommonViewInfoLoader;
@@ -42,13 +42,13 @@ public class LoaderRegistryTest extends ContextBasedTest{
     @Test
     public void testRegistry () {
         @SuppressWarnings("rawtypes")
-		List <AssetLoader> loaders = new ArrayList<AssetLoader>((Collection) ctx.getBeansWithAnnotation(LoadOnStartup.class).values());
+		List <SyncAssetLoader> loaders = new ArrayList<SyncAssetLoader>((Collection) ctx.getBeansWithAnnotation(LoadOnStartup.class).values());
         assertEquals (2, loaders.size());
         
         loaderRegistry.registerLoaders(loaders);;
         
         int previousPriority = -1;
-        for (AssetLoader loader : loaderRegistry.getRegisteredLoaders()) {
+        for (SyncAssetLoader loader : loaderRegistry.getRegisteredLoaders()) {
             assertTrue (loader.getPriority() > previousPriority);
             previousPriority = loader.getPriority();
         }

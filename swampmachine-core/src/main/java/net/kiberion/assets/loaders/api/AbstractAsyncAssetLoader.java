@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import net.kiberion.assets.GameConfig;
 
-public abstract class AbstractAssetLoader implements AssetLoader{
+public abstract class AbstractAsyncAssetLoader implements AsyncAssetLoader{
 
     @Setter
     @Getter

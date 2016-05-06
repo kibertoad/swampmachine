@@ -1,5 +1,6 @@
 package net.kiberion.states;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import net.kiberion.assets.GameConfig;
 import net.kiberion.assets.UiManager;
 import net.kiberion.assets.loaders.api.AssetLoader;
+import net.kiberion.assets.loaders.api.AsyncAssetLoader;
+import net.kiberion.assets.loaders.api.SyncAssetLoader;
 import net.kiberion.assets.loaders.util.AssetLoaderSpringExtractor;
 import net.kiberion.entities.common.api.Invokable;
 import net.kiberion.entities.common.api.InvokableWithEntity;
@@ -48,7 +51,8 @@ public class CommonLoadingState extends GameState implements InitializingBean, A
 
     private ApplicationContext ctx;
 
-    List<AssetLoader> assetLoaders;
+    private final List<SyncAssetLoader> syncAssetLoaders = new ArrayList<>();
+    private final List<AsyncAssetLoader> asyncAssetLoaders = new ArrayList<>();
     protected Invokable gameInceptionProvider;
 
     public Invokable getGameInceptionProvider() {
@@ -75,6 +79,7 @@ public class CommonLoadingState extends GameState implements InitializingBean, A
         super(setID);
 
         label = new Label("Loading... Please wait.", UiManager.instance().skin());
+        label.setVisible(true);
 
         getStage().addActor(label);
         label.setPosition(100, 100);
@@ -99,22 +104,31 @@ public class CommonLoadingState extends GameState implements InitializingBean, A
         UiManager.instance().assets().load(path, TextureAtlas.class);
         // invokeOnAllStates ( (AbstractPyramideState pstate) ->
         // pstate.queueAssets());
-
-        for (AssetLoader loader : assetLoaders) {
-            loader.load();
-        }
     }
 
-    public void afterAssetsLoaded() {
-        // Stage 3 -> actual initialization state, using assets that were loaded
-        // invokeOnAllStates((GameState pstate) -> pstate.onAssetsLoaded());
-    }
+    /*
+     * public void afterAssetsLoaded() { // Stage 3 -> actual initialization
+     * state, using assets that were loaded // invokeOnAllStates((GameState
+     * pstate) -> pstate.onAssetsLoaded()); }
+     */
 
     @Override
     public void show() {
         super.show();
 
         initAllStates();
+
+        log.info("Start loading from Sync asset loaders.");
+        for (SyncAssetLoader loader : syncAssetLoaders) {
+            loader.load();
+        }
+        log.info("Done loading from Sync asset loaders.");
+
+        log.info("Start queueing loading from Async asset loaders.");
+        for (AsyncAssetLoader loader : asyncAssetLoaders) {
+            loader.startAsyncLoading();
+        }
+        log.info("Done queueing loading from Async asset loaders.");
     }
 
     @Override
@@ -136,8 +150,14 @@ public class CommonLoadingState extends GameState implements InitializingBean, A
 
             UiManager.instance().assets().update(100);
         } else {
+            
+            log.info("Start finishing loading from Async asset loaders.");
+            for (AsyncAssetLoader loader : asyncAssetLoaders) {
+                loader.finishAsyncLoading();
+            }
+            log.info("Done finishing loading from Async asset loaders.");
             // game.loadAllData();
-            afterAssetsLoaded();
+            // afterAssetsLoaded();
 
             stateManager.setState(stateRegistry.getStartingState());
         }
@@ -163,7 +183,17 @@ public class CommonLoadingState extends GameState implements InitializingBean, A
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        assetLoaders = AssetLoaderSpringExtractor.extractSortedStartupAssetLoadersFromContext(ctx);
+        List<AssetLoader> assetLoaders = AssetLoaderSpringExtractor.extractSortedStartupAssetLoadersFromContext(ctx);
+
+        for (AssetLoader assetLoader : assetLoaders) {
+            if (assetLoader instanceof AsyncAssetLoader) {
+                asyncAssetLoaders.add((AsyncAssetLoader) assetLoader);
+            }
+            if (assetLoader instanceof SyncAssetLoader) {
+                syncAssetLoaders.add((SyncAssetLoader) assetLoader);
+            }
+        }
+
     }
 
 }

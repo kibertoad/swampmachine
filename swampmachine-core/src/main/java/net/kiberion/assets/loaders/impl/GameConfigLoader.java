@@ -10,11 +10,11 @@ import org.apache.logging.log4j.Logger;
 import org.yaml.snakeyaml.Yaml;
 
 import net.kiberion.assets.GameConfig;
-import net.kiberion.assets.loaders.api.AssetLoader;
+import net.kiberion.assets.loaders.api.SyncAssetLoader;
 import net.kiberion.assets.loaders.util.FileReaderFactory;
 import net.kiberion.assets.readers.AbstractFileReader;
 
-public class GameConfigLoader implements AssetLoader {
+public class GameConfigLoader implements SyncAssetLoader {
 
     private static final Logger log = LogManager.getLogger();
 

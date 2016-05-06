@@ -3,6 +3,8 @@ package net.kiberion.mvc.spring;
 import java.util.Collection;
 
 import org.apache.commons.lang3.Validate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 
 import net.kiberion.states.GameState;
@@ -12,6 +14,8 @@ import net.kiberion.states.util.StateRegistry;
 
 public class StateSpringLoader {
 
+    private static final Logger log = LogManager.getLogger();
+    
     private StateSpringLoader () {}
     
     /**
@@ -19,7 +23,8 @@ public class StateSpringLoader {
      * @param context
      * @return Sorted TreeSet
      */
-    public static void loadStatesFromContext(ApplicationContext context, StateRegistry stateRegistry) {
+    public static void registerStatesFromContext(ApplicationContext context, StateRegistry stateRegistry) {
+        log.info("Start registering game states from Spring context.");
         Collection<GameState> stateBeans = context.getBeansOfType(GameState.class).values();
 
         for (GameState bean : stateBeans) {
@@ -35,6 +40,8 @@ public class StateSpringLoader {
         
         Validate.notNull(stateRegistry.getLoadingState(), "Loading state is null");
         Validate.notNull(stateRegistry.getStartingState(), "Starting state is null");
+        
+        log.info("Done registering game states from Spring context.");
     }
 
 }

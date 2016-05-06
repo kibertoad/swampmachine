@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import net.kiberion.assets.loaders.api.AssetLoader;
+import net.kiberion.assets.loaders.api.SyncAssetLoader;
 import net.kiberion.assets.loaders.api.POJOLoader;
 import net.kiberion.assets.util.LoadOnStartup;
 import net.kiberion.blueprint.common.registries.CommonModelInfoRegistry;
@@ -16,7 +16,7 @@ import net.kiberion.utils.MapUtils;
 
 @LoadOnStartup
 @Component
-public class CommonModelInfoLoader extends AbstractLoader implements AssetLoader {
+public class CommonModelInfoLoader extends AbstractLoader implements SyncAssetLoader {
 
     private static final Logger log = LogManager.getLogger();
 

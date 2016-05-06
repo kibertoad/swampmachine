@@ -8,9 +8,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.yaml.snakeyaml.Yaml;
 
 import com.badlogic.gdx.Game;
@@ -27,27 +27,36 @@ import net.kiberion.assets.UiManager;
  * @author kibertoad
  */
 public class GameApplication extends Game {
-	
-	private GameConfig config = new GameConfig();
-	
-	public String dataDirectory = "src/main/resources";
+
+    private static final Logger log = LogManager.getLogger();
+
+    private GameConfig config = new GameConfig();
+
+    private static final String PATH_TO_GAME_CONFIG = "data/config.yml";
+
+    public String dataDirectory = "src/main/resources";
 
     @SuppressWarnings("unchecked")
-	protected void loadConfig() {
+    protected void loadConfig() {
         config.setMusicEnabled(false);
 
         Yaml yaml = new Yaml();
         Map<String, Object> configMap;
-        if (Gdx.files.internal("data/config.yml").exists()) {
+        if (Gdx.files.internal(PATH_TO_GAME_CONFIG).exists()) {
+            log.info("Load game config from file: " + PATH_TO_GAME_CONFIG);
             try {
-                configMap = (Map<String, Object>) yaml.load(new String(Files.readAllBytes(Paths.get("data", "config.yml"))));
+                configMap = (Map<String, Object>) yaml
+                        .load(new String(Files.readAllBytes(Paths.get("data", "config.yml"))));
                 if (configMap.containsKey("music")) {
                     config.setMusicEnabled(((Boolean) configMap.get("music")));
                 }
             } catch (IOException ex) {
-                Logger.getLogger(GameApplication.class.getName()).log(Level.WARNING, null, ex);
+                log.error("IO exception: ", ex);
             }
+        } else {
+            log.info("Game config not found at " + PATH_TO_GAME_CONFIG + ", skip loading.");
         }
+
     }
 
     @Override
@@ -56,20 +65,18 @@ public class GameApplication extends Game {
         super.render();
     }
 
-    //ToDo find a proper non-coupling way
+    // ToDo find a proper non-coupling way
     /*
-    public void loadAllData() {
-        Music.instance().load();
-        Sound.instance().load();
-    }
-    */
+     * public void loadAllData() { Music.instance().load();
+     * Sound.instance().load(); }
+     */
 
     @Override
     public void create() {
-        TextureAtlas atlas = new TextureAtlas(dataDirectory+"/imgpacked/packed.atlas");
+        TextureAtlas atlas = new TextureAtlas(dataDirectory + "/imgpacked/packed.atlas");
 
-        UiManager.instance().loadSkin(Gdx.files.internal(dataDirectory+"/uiskin/uiskin.json"));
-        UiManager.instance().loadTransparentSkin(Gdx.files.internal(dataDirectory+"/uiskin/uiskin_transp.json"));
+        UiManager.instance().loadSkin(Gdx.files.internal(dataDirectory + "/uiskin/uiskin.json"));
+        UiManager.instance().loadTransparentSkin(Gdx.files.internal(dataDirectory + "/uiskin/uiskin_transp.json"));
         UiManager.instance().setAtlas(atlas);
     }
 

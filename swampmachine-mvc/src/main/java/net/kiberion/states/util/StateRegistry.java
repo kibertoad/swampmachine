@@ -3,6 +3,8 @@ package net.kiberion.states.util;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
@@ -12,6 +14,8 @@ import net.kiberion.states.GameState;
 @Component
 public class StateRegistry {
 
+    private static final Logger log = LogManager.getLogger();
+    
     @Getter
     private final Map<String, GameState> states = new HashMap<>();
 
@@ -25,6 +29,7 @@ public class StateRegistry {
     
     
     public void registerState (GameState state) {
+        log.info("Registering state: "+state.getKey());
     	states.put(state.getKey(), state);
     }
 	

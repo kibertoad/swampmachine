@@ -8,10 +8,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import net.kiberion.assets.loaders.api.AssetLoader;
+import net.kiberion.assets.loaders.api.SyncAssetLoader;
 import net.kiberion.assets.loaders.impl.EntityViewInfoLoader;
 import net.kiberion.assets.readers.ReaderHelper;
 import net.kiberion.assets.util.LoadOnStartup;
@@ -24,19 +23,16 @@ import net.kiberion.utils.MapUtils;
 @Singleton
 @Component
 @LoadOnStartup
-public class CommonViewInfoLoader implements AssetLoader{
+public class CommonViewInfoLoader implements SyncAssetLoader{
 
     private static final Logger log = LogManager.getLogger();
 
-    @Inject
     @Autowired
     private CommonViewInfoRegistry viewInfoRegistry;
     
-    @Inject
     @Autowired
     private CommonModelInfoRegistry modelInfoRegistry;
 
-    @Inject
     @Autowired
     private ReaderHelper readerHelper;
     

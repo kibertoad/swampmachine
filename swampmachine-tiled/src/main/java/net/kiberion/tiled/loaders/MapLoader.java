@@ -14,12 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.google.inject.Inject;
 
 import lombok.Getter;
 import lombok.Setter;
 import net.kiberion.assets.UiManager;
-import net.kiberion.assets.loaders.api.AbstractAssetLoader;
+import net.kiberion.assets.loaders.api.AbstractAsyncAssetLoader;
 import net.kiberion.assets.loaders.util.FileReaderFactory;
 import net.kiberion.assets.readers.AbstractFileReader;
 import net.kiberion.assets.util.LoadOnStartup;
@@ -27,10 +26,10 @@ import net.kiberion.tiled.MapRegistry;
 import net.kiberion.utils.SetUtils;
 
 @LoadOnStartup
-public class MapLoader extends AbstractAssetLoader {
+public class MapLoader extends AbstractAsyncAssetLoader {
 
     public static final String MAP_ID_PROPERTY = "id";
-    
+
     private static final Logger log = LogManager.getLogger();
     public static final String MAP_EXTENSION = "tmx";
     public static final String MAP_RESOURCES_DIRECTORY = "map-tiled";
@@ -38,14 +37,13 @@ public class MapLoader extends AbstractAssetLoader {
     @Getter
     private List<Path> queuedMaps = new ArrayList<>();
 
-    @Inject
     @Autowired
     private MapRegistry mapRegistry;
-    
+
     @Getter
     @Setter
     private boolean autoScan = true;
-    
+
     public void queueMapLoading(Path path) {
         log.info("Load map. Path: " + path);
         AssetManager assets = UiManager.instance().assets();
@@ -70,28 +68,39 @@ public class MapLoader extends AbstractAssetLoader {
     }
 
     @Override
-    public void load() {
+    public void startAsyncLoading() {
         if (autoScan) {
-            log.info("Autoscan for maps is enabled, checking for maps at "+getConfig().getPathToResources());
+            log.info("Autoscan for maps is enabled, checking for maps at " + getConfig().getPathToResources());
             Validate.notNull(getConfig(), "Config is null");
             AbstractFileReader reader = FileReaderFactory.buildFileReader(getConfig().getPathToResources());
             try {
-                queuedMaps = reader.getListOfRelativeFilesByWildcard(MAP_RESOURCES_DIRECTORY, SetUtils.buildSet(MAP_EXTENSION));
+                queuedMaps = reader.getListOfRelativeFilesByWildcard(MAP_RESOURCES_DIRECTORY,
+                        SetUtils.buildSet(MAP_EXTENSION));
             } catch (IOException e) {
-                throw new IllegalStateException (e);
+                throw new IllegalStateException(e);
             }
-        }
-        
-        for (Path path : queuedMaps) {
-            queueMapLoading(path);
         }
 
         for (Path path : queuedMaps) {
+            queueMapLoading(path);
+        }
+    }
+
+    @Override
+    public void finishAsyncLoading() {
+        for (Path path : queuedMaps) {
             TiledMap map = finishLoadingMap(path);
             String id = (String) map.getProperties().get(MAP_ID_PROPERTY);
-            Validate.notNull(id, "Map id was null for map "+path.toString()+". Please set it via Tiled custom map properties.");
+            Validate.notNull(id,
+                    "Map id was null for map " + path.toString() + ". Please set it via Tiled custom map properties.");
             mapRegistry.getRegisteredMaps().put(id, map);
         }
+    }
+
+    @Override
+    public void load() {
+        startAsyncLoading();
+        finishAsyncLoading();
     }
 
 }
