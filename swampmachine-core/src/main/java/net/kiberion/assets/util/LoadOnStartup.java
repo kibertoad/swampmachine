@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 
 /**
  * Apply this to classes, implementing AssetLoader, to be loaded in the beginning of game
+ * To be automatically loaded from @LoadingState classes
  * @author kibertoad
  *
  */

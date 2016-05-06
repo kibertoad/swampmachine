@@ -7,11 +7,24 @@ import org.springframework.context.annotation.Configuration;
 import lombok.Getter;
 import net.kiberion.mvc.spring.StateSpringLoader;
 
-public class SpringGameApplication extends GameApplication{
+public abstract class SpringGameApplication extends GameApplication{
 
     @Getter
     private StateRegistry stateRegistry;
     private StateManager stateManager;
+    
+    protected abstract Class<?> getConfigurationClass ();
+    
+    protected void initContext () {
+        initContext(getConfigurationClass());
+    }
+    
+    @Override
+    public void create() {
+        super.create();
+        loadConfig();
+        initContext();
+    }
     
     protected void initContext (Class<?> configurationClass) {
         if (configurationClass.getAnnotation(Configuration.class) == null) {
