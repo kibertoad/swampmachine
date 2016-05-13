@@ -6,9 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
-import net.kiberion.assets.UiManager;
-import net.kiberion.entities.common.api.Invokable;
-import net.kiberion.styling.StyleFactory;
+import net.kiberion.swampmachine.assets.UiManager;
+import net.kiberion.swampmachine.entities.common.api.Invokable;
+import net.kiberion.swampmachine.styling.StyleFactory;
 
 /**
  * Label using default skin

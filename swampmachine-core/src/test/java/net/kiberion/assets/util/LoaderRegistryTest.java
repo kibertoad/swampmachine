@@ -12,11 +12,12 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
-import net.kiberion.assets.loaders.api.SyncAssetLoader;
-import net.kiberion.assets.registries.LoaderRegistry;
-import net.kiberion.blueprint.common.loaders.CommonModelInfoLoader;
-import net.kiberion.blueprint.common.loaders.CommonViewInfoLoader;
 import net.kiberion.spring.ContextBasedTest;
+import net.kiberion.swampmachine.assets.loaders.api.SyncAssetLoader;
+import net.kiberion.swampmachine.assets.registries.LoaderRegistry;
+import net.kiberion.swampmachine.assets.util.LoadOnStartup;
+import net.kiberion.swampmachine.blueprint.common.loaders.CommonModelInfoLoader;
+import net.kiberion.swampmachine.blueprint.common.loaders.CommonViewInfoLoader;
 
 public class LoaderRegistryTest extends ContextBasedTest{
 

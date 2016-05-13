@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 
-import net.kiberion.entities.map.api.Position;
+import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
 
 public class TiledMapWallInfo {
 
@@ -137,7 +137,7 @@ public class TiledMapWallInfo {
         walls.get(y).set(x, true);
     }
     
-    public void addWall(Position position) {
+    public void addWall(PositionAspect position) {
         addWall (position.getIntX(), position.getIntY());
     }
     
@@ -146,7 +146,7 @@ public class TiledMapWallInfo {
         walls.get(y).set(x, false);
     }
     
-    public void removeWall(Position position) {
+    public void removeWall(PositionAspect position) {
         removeWall (position.getIntX(), position.getIntY());
     }
     

@@ -9,8 +9,8 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import net.kiberion.assets.loaders.api.AssetLoader;
-import net.kiberion.assets.loaders.util.AssetLoaderSpringExtractor;
+import net.kiberion.swampmachine.assets.loaders.api.AssetLoader;
+import net.kiberion.swampmachine.assets.loaders.util.AssetLoaderSpringExtractor;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfiguration.class)

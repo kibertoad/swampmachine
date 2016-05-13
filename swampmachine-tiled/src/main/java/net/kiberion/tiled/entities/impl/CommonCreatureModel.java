@@ -1,6 +1,6 @@
 package net.kiberion.tiled.entities.impl;
 
-import net.kiberion.entities.modelinfo.CreatureModelInfo;
+import net.kiberion.swampmachine.entities.modelinfo.CreatureModelInfo;
 import net.kiberion.tiled.aspects.api.CollidableAspect;
 import net.kiberion.tiled.aspects.api.FormAspect;
 import net.kiberion.tiled.aspects.holders.CommonMapMetadataHolderAspect;

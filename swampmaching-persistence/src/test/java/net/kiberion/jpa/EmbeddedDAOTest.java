@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import net.kiberion.hibernate.EmbeddedDAO;
 import net.kiberion.jpa.beans.Employee;
-import net.kiberion.utils.StopWatch;
+import net.kiberion.swampmachine.utils.StopWatch;
 
 public class EmbeddedDAOTest {
 

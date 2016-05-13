@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import net.kiberion.arcade.aspects.BulletHolderAspect;
 import net.kiberion.arcade.controller.api.CreatureMovementController;
 import net.kiberion.arcade.entities.Bullet;
-import net.kiberion.processors.TimedProcessor;
+import net.kiberion.swampmachine.processors.TimedProcessor;
 
 public class RealtimeBulletProcessor extends TimedProcessor {
 

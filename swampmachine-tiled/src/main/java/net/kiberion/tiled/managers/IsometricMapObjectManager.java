@@ -1,13 +1,13 @@
 package net.kiberion.tiled.managers;
 
-import net.kiberion.aspects.api.MetadataHolderAspect;
-import net.kiberion.entities.map.api.Position;
+import net.kiberion.swampmachine.aspects.api.MetadataHolderAspect;
+import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
 import net.kiberion.tiled.TiledIsometricCoordsUtils;
 
 public class IsometricMapObjectManager extends MapObjectManager{
 
     @Override
-    public Position getPositionForModelEntity (MetadataHolderAspect entityModel, Position position) {
+    public PositionAspect getPositionForModelEntity (MetadataHolderAspect entityModel, PositionAspect position) {
         return TiledIsometricCoordsUtils.getIsometricScreenCoords(position, getMapInfo());
     }
 

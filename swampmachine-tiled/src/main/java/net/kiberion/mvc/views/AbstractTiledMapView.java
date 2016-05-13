@@ -19,15 +19,15 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import net.kiberion.aspects.api.MetadataHolderAspect;
-import net.kiberion.aspects.api.PositionHolderAspect;
-import net.kiberion.assets.UiManager;
-import net.kiberion.assets.viewinfo.CreatureViewInfo;
-import net.kiberion.blueprint.common.registries.CommonViewInfoRegistry;
-import net.kiberion.entities.map.api.Position;
-import net.kiberion.entities.map.impl.PositionAspect;
-import net.kiberion.mvc.StateViewBase;
 import net.kiberion.mvc.model.AbstractTiledMapModel;
+import net.kiberion.swampmachine.aspects.api.MetadataHolderAspect;
+import net.kiberion.swampmachine.aspects.api.PositionHolderAspect;
+import net.kiberion.swampmachine.assets.UiManager;
+import net.kiberion.swampmachine.assets.viewinfo.CreatureViewInfo;
+import net.kiberion.swampmachine.blueprint.common.registries.CommonViewInfoRegistry;
+import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
+import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
+import net.kiberion.swampmachine.mvcips.view.StateViewBase;
 import net.kiberion.tiled.camera.TiledMapCamera;
 import net.kiberion.tiled.managers.MapObjectManager;
 import net.kiberion.tiled.model.TiledMapInfo;
@@ -115,7 +115,7 @@ public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> e
     }
 
     // Tiled "Object layer" named "objects" should be created for this to work
-    public void addMapObject(MetadataHolderAspect entityModel, PositionAspect position, String imageCode) {
+    public void addMapObject(MetadataHolderAspect entityModel, CommonPosition position, String imageCode) {
         TextureAtlas.AtlasRegion image = UiManager.instance().getImage(imageCode);
         Validate.notNull(image, "Unknown image: "+imageCode);
         addMapObject(entityModel, position, image);
@@ -132,12 +132,12 @@ public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> e
      * @param position Model position
      * @param image
      */
-    public TextureMapObject addMapObject(MetadataHolderAspect entityModel, PositionAspect position, TextureRegion image) {
+    public TextureMapObject addMapObject(MetadataHolderAspect entityModel, CommonPosition position, TextureRegion image) {
         Validate.notNull(image);
     	return mapObjectManager.addMapObject(entityModel, position, image);
     }
     
-    public Position getPositionForModelEntity (MetadataHolderAspect entityModel, PositionAspect position) {
+    public PositionAspect getPositionForModelEntity (MetadataHolderAspect entityModel, CommonPosition position) {
         return position;
     }
 
@@ -145,7 +145,7 @@ public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> e
     	updateTextureMapObjectPosition (entityModel, ((PositionHolderAspect)entityModel).getPositionAspect());
     }
     
-    public void updateTextureMapObjectPosition(MetadataHolderAspect entityModel, PositionAspect position) {
+    public void updateTextureMapObjectPosition(MetadataHolderAspect entityModel, CommonPosition position) {
     	mapObjectManager.updateTextureMapObjectPosition(entityModel, position);
         //log.debug(String.format("Camera position: %.2f/%.2f", getCamera().getOrthoCam().position.x, getCamera().getOrthoCam().position.y));
     }

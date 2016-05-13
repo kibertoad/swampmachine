@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 
 import net.kiberion.common.events.AfterSpawnEntityEvent;
 import net.kiberion.common.events.SpawnEntityEvent;
-import net.kiberion.factories.EntityFactory;
-import net.kiberion.factories.SpawnParams;
+import net.kiberion.swampmachine.factories.EntityFactory;
+import net.kiberion.swampmachine.factories.params.SpawnParams;
 
 @Component
 public class MetaFactory implements ApplicationEventPublisherAware,

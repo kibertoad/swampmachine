@@ -1,27 +1,39 @@
 package org.xguzm.pathfinding.test;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
+import org.apache.commons.lang3.Validate;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.xguzm.pathfinding.grid.GridCell;
 import org.xguzm.pathfinding.grid.NavigationGrid;
 import org.xguzm.pathfinding.grid.finders.GridFinderOptions;
 import org.xguzm.pathfinding.grid.finders.ThetaStarGridFinder;
 
-public class ThetaStarFinderTest {
+import net.kiberion.tiled.MapContextBasedTest;
+import net.kiberion.tiled.processors.CollisionInfoProvider;
+
+public class ThetaStarFinderTest extends MapContextBasedTest{
 
 	NavigationGrid<GridCell> grid;
 	ThetaStarGridFinder<GridCell> finder;
 	GridFinderOptions opt;
 	
+	@Autowired
+	private CollisionInfoProvider collisionInfoProvider;
+	
 	@Before
 	public void init(){
+	    Validate.notNull(collisionInfoProvider);
+	    
 		grid = NavGraphFactory.getGridCellMap();	
 		opt = new GridFinderOptions();
 		finder = new ThetaStarGridFinder<GridCell>(GridCell.class, opt);
+		
+		grid.setCollisionInfoProvider(collisionInfoProvider);
 	}
 	
 	@Test

@@ -25,7 +25,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 import lombok.Setter;
-import net.kiberion.entities.map.api.Position;
+import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
 
 public class OrthogonalTiledMapRendererWithObjects extends OrthogonalTiledMapRenderer{
 
@@ -61,7 +61,7 @@ public class OrthogonalTiledMapRendererWithObjects extends OrthogonalTiledMapRen
     private OrthographicCamera orthoCam;
     
     @Setter
-    private Position positionToCenter;
+    private PositionAspect positionToCenter;
     
     private static final boolean Y_DOWN = false;
     

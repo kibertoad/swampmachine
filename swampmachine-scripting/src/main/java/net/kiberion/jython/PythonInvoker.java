@@ -17,7 +17,7 @@ import org.python.core.PySystemState;
 import org.python.google.common.collect.ImmutableSet;
 import org.python.util.PythonInterpreter;
 
-import net.kiberion.utils.FilePathUtils;
+import net.kiberion.swampmachine.utils.FilePathUtils;
 
 public class PythonInvoker {
 

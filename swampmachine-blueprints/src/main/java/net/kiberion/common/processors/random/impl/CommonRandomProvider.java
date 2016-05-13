@@ -2,11 +2,8 @@ package net.kiberion.common.processors.random.impl;
 
 import java.util.Random;
 
-import com.google.inject.Singleton;
-
 import net.kiberion.common.processors.random.api.RandomProvider;
 
-@Singleton
 public class CommonRandomProvider implements RandomProvider{
 
     private final Random rng = new Random();

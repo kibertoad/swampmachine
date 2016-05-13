@@ -17,13 +17,13 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.kiberion.assets.UiManager;
-import net.kiberion.assets.loaders.api.AbstractAsyncAssetLoader;
-import net.kiberion.assets.loaders.util.FileReaderFactory;
-import net.kiberion.assets.readers.AbstractFileReader;
-import net.kiberion.assets.util.LoadOnStartup;
+import net.kiberion.swampmachine.assets.UiManager;
+import net.kiberion.swampmachine.assets.loaders.api.AbstractAsyncAssetLoader;
+import net.kiberion.swampmachine.assets.loaders.util.FileReaderFactory;
+import net.kiberion.swampmachine.assets.readers.AbstractFileReader;
+import net.kiberion.swampmachine.assets.util.LoadOnStartup;
+import net.kiberion.swampmachine.utils.SetUtils;
 import net.kiberion.tiled.MapRegistry;
-import net.kiberion.utils.SetUtils;
 
 @LoadOnStartup
 public class MapLoader extends AbstractAsyncAssetLoader {
@@ -46,7 +46,7 @@ public class MapLoader extends AbstractAsyncAssetLoader {
 
     public void queueMapLoading(Path path) {
         log.info("Load map. Path: " + path);
-        AssetManager assets = UiManager.instance().assets();
+        AssetManager assets = UiManager.instance().getAssetManager();
         Objects.requireNonNull(assets, "Asset manager should not be null");
 
         if (!Files.exists(path)) {
@@ -59,7 +59,7 @@ public class MapLoader extends AbstractAsyncAssetLoader {
 
     public TiledMap finishLoadingMap(Path path) {
         log.info("Finishing loading map. Path: " + path);
-        AssetManager assets = UiManager.instance().assets();
+        AssetManager assets = UiManager.instance().getAssetManager();
         assets.finishLoading();
 
         TiledMap map = assets.get(UiManager.instance().getPathForAssetManager(path), TiledMap.class);

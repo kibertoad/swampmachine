@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music.OnCompletionListener;
 
-import net.kiberion.assets.AssetProvider;
+import net.kiberion.swampmachine.assets.AssetProvider;
 
 /**
  * Class for playing Music files.

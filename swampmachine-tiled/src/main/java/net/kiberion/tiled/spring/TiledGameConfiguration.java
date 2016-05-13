@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
-import net.kiberion.assets.UiManager;
+import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.tiled.factories.impl.TextureMapObjectFactory;
 import net.kiberion.tiled.loaders.MapLoader;
 import net.kiberion.tiled.loaders.NavTmxMapLoader;
@@ -34,7 +34,7 @@ public class TiledGameConfiguration {
     
     
     public TiledGameConfiguration() {
-        AssetManager assetManager = UiManager.instance().assets();
+        AssetManager assetManager = UiManager.instance().getAssetManager();
         Validate.notNull(assetManager, "Asset manager is null. Probably GDX context not yet initialized.");
         assetManager.setLoader(TiledMap.class, new NavTmxMapLoader());
     }

@@ -1,9 +1,9 @@
 package net.kiberion.tiled.pathfinding;
 
-import net.kiberion.entities.map.api.Position;
 import net.kiberion.slick2d.util.pathfinding.AStarPathFinder;
 import net.kiberion.slick2d.util.pathfinding.Path;
 import net.kiberion.slick2d.util.pathfinding.TileBasedMap;
+import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
 
 /**
  * @author kibertoad
@@ -15,15 +15,15 @@ public class Pathfinder2 {
     private boolean allowDiagMovement;
     private boolean strictDiagMovement;
 
-    private Position hostPosition;
-    private Position targetPosition;
+    private PositionAspect hostPosition;
+    private PositionAspect targetPosition;
 
     //public int goalX;
     //public int goalY;
 
     public Path path;
 
-    public Pathfinder2(TileBasedMap setMap, int maxSearchDistance, boolean setAllowDiagMovement, Position setHostPosition, boolean strictDiagonalMovement) {
+    public Pathfinder2(TileBasedMap setMap, int maxSearchDistance, boolean setAllowDiagMovement, PositionAspect setHostPosition, boolean strictDiagonalMovement) {
         map = setMap;
         searchDistance = maxSearchDistance;
         allowDiagMovement = setAllowDiagMovement;
@@ -39,7 +39,7 @@ public class Pathfinder2 {
     }
     */
     
-    public void setTarget(Position position) {
+    public void setTarget(PositionAspect position) {
         //setTarget ((int)position.getX(), (int)position.getY());
         targetPosition = position;
     }

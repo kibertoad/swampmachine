@@ -1,14 +1,14 @@
 package net.kiberion.tiled.aspects.holders;
 
-import net.kiberion.aspects.impl.CommonMetadataHolderAspect;
-import net.kiberion.entities.map.impl.PositionAspect;
+import net.kiberion.swampmachine.aspects.impl.CommonMetadataHolderAspect;
+import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 
 public class CommonMapMetadataHolderAspect extends CommonMetadataHolderAspect implements MapMetadataHolderAspect{
     
-    private final PositionAspect position = new PositionAspect(0, 0);
+    private final CommonPosition position = new CommonPosition(0, 0);
 
     @Override
-    public PositionAspect getPositionAspect() {
+    public CommonPosition getPositionAspect() {
         return position;
     }
     

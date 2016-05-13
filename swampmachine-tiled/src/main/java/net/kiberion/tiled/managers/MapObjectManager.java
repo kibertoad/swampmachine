@@ -11,11 +11,11 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
-import net.kiberion.aspects.api.MetadataHolderAspect;
-import net.kiberion.aspects.api.PositionHolderAspect;
-import net.kiberion.assets.UiManager;
-import net.kiberion.entities.map.api.Position;
-import net.kiberion.entities.map.impl.PositionAspect;
+import net.kiberion.swampmachine.aspects.api.MetadataHolderAspect;
+import net.kiberion.swampmachine.aspects.api.PositionHolderAspect;
+import net.kiberion.swampmachine.assets.UiManager;
+import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
+import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 import net.kiberion.tiled.model.TiledMapInfo;
 
 public abstract class MapObjectManager {
@@ -41,7 +41,7 @@ public abstract class MapObjectManager {
 	
 	
 	// Tiled "Object layer" named "objects" should be created for this to work
-    public TextureMapObject addMapObject(MetadataHolderAspect entityModel, Position position, String imageCode) {
+    public TextureMapObject addMapObject(MetadataHolderAspect entityModel, PositionAspect position, String imageCode) {
         return addMapObject(entityModel, position, UiManager.instance().getImage(imageCode));
     }
     
@@ -59,11 +59,11 @@ public abstract class MapObjectManager {
      * @param position Model position
      * @param image
      */
-    public TextureMapObject addMapObject(MetadataHolderAspect entityModel, Position position, TextureRegion image) {
+    public TextureMapObject addMapObject(MetadataHolderAspect entityModel, PositionAspect position, TextureRegion image) {
         MapLayer objectLayer = getMap().getLayers().get(OBJECT_LAYER_NAME);
 
         TextureMapObject tmo = new TextureMapObject(image);
-        Position screenPosition = getPositionForModelEntity (entityModel, position);
+        PositionAspect screenPosition = getPositionForModelEntity (entityModel, position);
         tmo.setX(screenPosition.getX());
         tmo.setY(screenPosition.getY());
         objectLayer.getObjects().add(tmo);
@@ -72,7 +72,7 @@ public abstract class MapObjectManager {
         return tmo;
     }
     
-    public Position getPositionForModelEntity (MetadataHolderAspect entityModel, Position position) {
+    public PositionAspect getPositionForModelEntity (MetadataHolderAspect entityModel, PositionAspect position) {
         return position;
     }
 
@@ -80,9 +80,9 @@ public abstract class MapObjectManager {
     	updateTextureMapObjectPosition (entityModel, ((PositionHolderAspect)entityModel).getPositionAspect());
     }
     
-    public void updateTextureMapObjectPosition(MetadataHolderAspect entityModel, PositionAspect position) {
+    public void updateTextureMapObjectPosition(MetadataHolderAspect entityModel, CommonPosition position) {
     	TextureMapObject tmo = this.textureMapObjectsMap.get(entityModel);
-        Position screenPosition = getPositionForModelEntity (entityModel, position);
+        PositionAspect screenPosition = getPositionForModelEntity (entityModel, position);
         tmo.setX(screenPosition.getX());
         tmo.setY(screenPosition.getY());
         

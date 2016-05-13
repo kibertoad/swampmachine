@@ -3,12 +3,13 @@ package net.kiberion.tiled.renderers;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.google.inject.Singleton;
 
 import lombok.Getter;
 
-@Singleton
+@Component
 public class ShaderRegistry {
 	
 	static {

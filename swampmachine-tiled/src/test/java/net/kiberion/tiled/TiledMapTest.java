@@ -6,18 +6,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
-import net.kiberion.spring.ContextBasedTest;
 import net.kiberion.tiled.loaders.MapLoader;
 import net.kiberion.tiled.model.TiledMapInfo;
 import net.kiberion.tiled.model.TiledMapPathfindingInfo;
-import net.kiberion.tiled.spring.TiledTestConfiguration;
 
-@ContextConfiguration(classes = TiledTestConfiguration.class)
-public class TiledMapTest extends ContextBasedTest{
+
+public class TiledMapTest extends MapContextBasedTest{
     
     @Autowired
     private MapLoader mapLoader;

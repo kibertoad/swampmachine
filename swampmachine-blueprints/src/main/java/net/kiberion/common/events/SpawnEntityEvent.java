@@ -2,7 +2,7 @@ package net.kiberion.common.events;
 
 import org.springframework.context.ApplicationEvent;
 
-import net.kiberion.factories.SpawnParams;
+import net.kiberion.swampmachine.factories.params.SpawnParams;
 
 public class SpawnEntityEvent extends ApplicationEvent {
 

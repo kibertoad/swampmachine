@@ -1,9 +1,9 @@
 package net.kiberion.mvc.views;
 
-import net.kiberion.aspects.api.MetadataHolderAspect;
-import net.kiberion.entities.map.api.Position;
-import net.kiberion.entities.map.impl.PositionAspect;
 import net.kiberion.mvc.model.AbstractTiledMapModel;
+import net.kiberion.swampmachine.aspects.api.MetadataHolderAspect;
+import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
+import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 import net.kiberion.tiled.TiledOrthographicCoordsUtils;
 import net.kiberion.tiled.model.TiledMapInfo;
 import net.kiberion.tiled.renderers.OrthogonalTiledMapRendererWithObjects;
@@ -18,7 +18,7 @@ public class OrtographicTiledMapView<T extends AbstractTiledMapModel<?>> extends
     }
 
     @Override
-    public Position getPositionForModelEntity (MetadataHolderAspect entityModel, PositionAspect position) {
+    public PositionAspect getPositionForModelEntity (MetadataHolderAspect entityModel, CommonPosition position) {
         return TiledOrthographicCoordsUtils.getOrthographicScreenCoords(position, getMapInfo());
     }    
     

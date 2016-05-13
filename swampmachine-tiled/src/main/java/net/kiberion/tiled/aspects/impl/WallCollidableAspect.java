@@ -1,7 +1,7 @@
 package net.kiberion.tiled.aspects.impl;
 
-import net.kiberion.aspects.api.MetadataAspect;
-import net.kiberion.entities.map.impl.PositionAspect;
+import net.kiberion.swampmachine.aspects.api.MetadataAspect;
+import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 import net.kiberion.tiled.aspects.api.CollidableAspect;
 import net.kiberion.tiled.aspects.api.FormAspect;
 
@@ -23,7 +23,7 @@ public class WallCollidableAspect implements CollidableAspect{
     }
 
     @Override
-    public PositionAspect getPositionAspect() {
+    public CommonPosition getPositionAspect() {
         return null;
     }
 

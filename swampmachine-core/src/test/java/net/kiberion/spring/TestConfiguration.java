@@ -1,31 +1,27 @@
 package net.kiberion.spring;
 
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.backends.headless.HeadlessFiles;
 
-import net.kiberion.assets.GameConfig;
-import net.kiberion.assets.UiManager;
+import net.kiberion.swampmachine.assets.GameConfig;
+import net.kiberion.swampmachine.assets.UiManager;
+import net.kiberion.swampmachine.spring.CoreConfiguration;
 
 @Configuration
-@ComponentScan("net.kiberion")
-@Import(CoreConfiguration.class) 
-public class TestConfiguration {
-
-
+public class TestConfiguration extends CoreConfiguration {
 
     public TestConfiguration() {
         GameConfig.config.setPathToResourcesAsString("src/test/resources/");
-        
         Gdx.files = new HeadlessFiles();
         Gdx.gl = new HeadlessGl();
-        
-        AssetManager assetManager = new HeadlessAssetManager(); 
-        UiManager.instance().setAssets(assetManager);
     }
-    
+
+    @Override
+    protected void initAssetManager() {
+        AssetManager assetManager = new HeadlessAssetManager();
+        UiManager.instance().setAssetManager(assetManager);
+    }
 }

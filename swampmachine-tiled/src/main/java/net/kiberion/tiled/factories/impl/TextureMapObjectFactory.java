@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.badlogic.gdx.maps.objects.TextureMapObject;
 
-import net.kiberion.factories.EntityFactory;
+import net.kiberion.swampmachine.factories.EntityFactory;
+import net.kiberion.swampmachine.utils.InlineGList;
 import net.kiberion.tiled.factories.impl.params.TextureMapObjectSpawnParams;
 import net.kiberion.tiled.managers.MapObjectManager;
-import net.kiberion.utils.InlineGList;
 
 public class TextureMapObjectFactory implements EntityFactory<TextureMapObject, TextureMapObjectSpawnParams> {
 

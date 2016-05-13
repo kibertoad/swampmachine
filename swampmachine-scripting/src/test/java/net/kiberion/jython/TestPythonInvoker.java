@@ -11,8 +11,8 @@ import org.python.core.Py;
 import org.python.core.PyInteger;
 import org.python.core.PyStringMap;
 
-import net.kiberion.utils.FilePathUtils;
-import net.kiberion.utils.StopWatch;
+import net.kiberion.swampmachine.utils.FilePathUtils;
+import net.kiberion.swampmachine.utils.StopWatch;
 
 
 public class TestPythonInvoker {

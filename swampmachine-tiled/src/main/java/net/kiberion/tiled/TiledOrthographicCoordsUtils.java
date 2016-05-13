@@ -5,16 +5,16 @@ import org.apache.logging.log4j.Logger;
 
 import com.badlogic.gdx.Gdx;
 
-import net.kiberion.entities.map.api.Position;
-import net.kiberion.entities.map.impl.PositionAspect;
+import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
+import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 import net.kiberion.tiled.model.TiledMapInfo;
 
 public class TiledOrthographicCoordsUtils {
 
 	private static final Logger log = LogManager.getLogger();
 	
-	public static Position getOrthographicScreenCoords(Position position, TiledMapInfo mapInfo) {
-		PositionAspect result = new PositionAspect ();
+	public static PositionAspect getOrthographicScreenCoords(PositionAspect position, TiledMapInfo mapInfo) {
+		CommonPosition result = new CommonPosition ();
 
         float screenPositionX = (position.getX() * mapInfo.getTileWidth());
         float screenPositionY = ((position.getY()-1) * mapInfo.getTileHeight()); //-1 is a hack that shouldn't be needed, but the hell do I know 
@@ -27,9 +27,9 @@ public class TiledOrthographicCoordsUtils {
         return result;
 	}
 
-	public static Position getModelCoordsForScreenPosition(Position screenPosition, Position cameraPosition,
+	public static PositionAspect getModelCoordsForScreenPosition(PositionAspect screenPosition, PositionAspect cameraPosition,
 			TiledMapInfo mapInfo) {
-		PositionAspect result = new PositionAspect ();
+		CommonPosition result = new CommonPosition ();
 		
         float screenSizeX;
         float screenSizeY;		

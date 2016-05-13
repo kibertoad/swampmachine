@@ -4,7 +4,7 @@ import org.apache.commons.math3.util.Precision;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.kiberion.entities.map.api.Position;
+import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
 import net.kiberion.tiled.model.TiledMapInfo;
 import net.kiberion.tiled.pathfinding.Pathfinder2;
 
@@ -29,8 +29,8 @@ public class PathfindingAspect {
         return (int) (positionAspect.getY() + nextDeltaY);
     }
 
-    private final Position positionAspect;
-    private Position targetPosition;
+    private final PositionAspect positionAspect;
+    private PositionAspect targetPosition;
     private Pathfinder2 pathfinder;
 
     private int nextDeltaX;
@@ -48,7 +48,7 @@ public class PathfindingAspect {
     private int nextY;
     
     
-    public PathfindingAspect(Position positionAspect) {
+    public PathfindingAspect(PositionAspect positionAspect) {
         super();
         this.positionAspect = positionAspect;
     }
@@ -58,7 +58,7 @@ public class PathfindingAspect {
                 positionAspect, strictDiagonalMovement);
     }
 
-    public void setNewTargetPosition(Position targetPosition) {
+    public void setNewTargetPosition(PositionAspect targetPosition) {
         this.targetPosition = targetPosition;
         this.pathfinder.setTarget(targetPosition);
     }

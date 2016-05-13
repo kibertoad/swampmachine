@@ -1,7 +1,7 @@
 package net.kiberion.arcade.entities;
 
 import net.kiberion.common.aspects.api.KillableAspect;
-import net.kiberion.entities.map.impl.PositionAspect;
+import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 import net.kiberion.tiled.aspects.api.CollidableAspect;
 import net.kiberion.tiled.aspects.api.FormAspect;
 import net.kiberion.tiled.aspects.holders.CommonMapMetadataHolderAspect;
@@ -11,7 +11,7 @@ import net.kiberion.tiled.aspects.impl.WallCollidableAspect;
 
 public class Bullet extends CommonMapMetadataHolderAspect implements FormHolderAspect, CollidableAspect, KillableAspect{
 
-    private PositionAspect movementDelta = new PositionAspect (0, 0);
+    private CommonPosition movementDelta = new CommonPosition (0, 0);
     private GenericFormAspect formAspect = new GenericFormAspect(0.1f, 0.1f);
 
     private boolean isDestroyed;
@@ -29,7 +29,7 @@ public class Bullet extends CommonMapMetadataHolderAspect implements FormHolderA
         return true;
     }
     
-    public PositionAspect getMovementDelta() {
+    public CommonPosition getMovementDelta() {
         return movementDelta;
     }
 

@@ -1,6 +1,6 @@
 package net.kiberion.tiled.factories.api;
 
-import net.kiberion.aspects.api.MetadataHolderAspect;
+import net.kiberion.swampmachine.aspects.api.MetadataHolderAspect;
 
 public interface MapCreatureFactory <T extends MetadataHolderAspect> {
 

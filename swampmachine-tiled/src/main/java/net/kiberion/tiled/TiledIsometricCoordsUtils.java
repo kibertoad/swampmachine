@@ -2,14 +2,14 @@ package net.kiberion.tiled;
 
 import com.badlogic.gdx.Gdx;
 
-import net.kiberion.entities.map.api.Position;
-import net.kiberion.entities.map.impl.PositionAspect;
+import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
+import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 import net.kiberion.tiled.model.TiledMapInfo;
 
 public class TiledIsometricCoordsUtils {
 
-    public static Position getIsometricScreenCoords (Position modelCoords, TiledMapInfo mapInfo) {
-        PositionAspect result = new PositionAspect ();
+    public static PositionAspect getIsometricScreenCoords (PositionAspect modelCoords, TiledMapInfo mapInfo) {
+        CommonPosition result = new CommonPosition ();
         
         float projectionX = (modelCoords.getX() - modelCoords.getY()) * mapInfo.getTileHalfWidth();
         float projectionY = (modelCoords.getX() + modelCoords.getY()) * mapInfo.getTileHalfHeight(); 
@@ -22,8 +22,8 @@ public class TiledIsometricCoordsUtils {
         return result;
     }
     
-    public static Position getModelCoordsForTiledMapPosition (Position mapCoords, TiledMapInfo mapInfo, boolean invertY) {
-        Position result = new PositionAspect ();
+    public static PositionAspect getModelCoordsForTiledMapPosition (PositionAspect mapCoords, TiledMapInfo mapInfo, boolean invertY) {
+        PositionAspect result = new CommonPosition ();
 
         result.setX (mapCoords.getX() / mapInfo.getTileWidth());
         
@@ -38,9 +38,9 @@ public class TiledIsometricCoordsUtils {
     
 
     // ScreenCoords is actual mouse position in this case
-    public static Position getModelCoordsForScreenPosition(Position screenCoords, Position cameraCoords,
+    public static PositionAspect getModelCoordsForScreenPosition(PositionAspect screenCoords, PositionAspect cameraCoords,
             TiledMapInfo mapInfo) {
-        Position result = new PositionAspect();
+        PositionAspect result = new CommonPosition();
 
         float screenSizeX;
         float screenSizeY;
@@ -56,19 +56,19 @@ public class TiledIsometricCoordsUtils {
         float halfScreenSizeX = screenSizeX / 2;
         float halfScreenSizeY = screenSizeY / 2;
 
-        Position adjustedScreenCoords = new PositionAspect(cameraCoords.getX() + screenCoords.getX() - halfScreenSizeX
+        PositionAspect adjustedScreenCoords = new CommonPosition(cameraCoords.getX() + screenCoords.getX() - halfScreenSizeX
                 - mapInfo.getTileHalfWidth(), cameraCoords.getY() + screenCoords.getY() - halfScreenSizeY
                 - mapInfo.getTileHeight());
 
-        Position adjustedResult = getModelCoordsForScreenPosition(adjustedScreenCoords, mapInfo);
+        PositionAspect adjustedResult = getModelCoordsForScreenPosition(adjustedScreenCoords, mapInfo);
 
         result = adjustedResult;
         return result;
     }
 
     //ScreenCoords are an abstract concept in this case, whatever MapRenderer uses to calculate position to draw
-    public static Position getModelCoordsForScreenPosition (Position screenCoords, TiledMapInfo mapInfo) {
-        PositionAspect result = new PositionAspect ();
+    public static PositionAspect getModelCoordsForScreenPosition (PositionAspect screenCoords, TiledMapInfo mapInfo) {
+        CommonPosition result = new CommonPosition ();
 
         float mapScreenSizeX = (mapInfo.getMapWidth()-1) * mapInfo.getTileHalfWidth();
         float mapScreenSizeY = (mapInfo.getMapHeight()-1) * mapInfo.getTileHalfHeight();
