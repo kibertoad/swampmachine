@@ -6,12 +6,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import net.kiberion.swampmachine.assets.UiManager;
-import net.kiberion.swampmachine.entities.common.impl.DataNode;
+import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 
 /**
  * @author: kibertoad
  */
-public class ViewInfo extends DataNode {
+public class ViewInfo extends CommonModelEntityDescriptor {
 
     public TextureRegionDrawable drawableImage;
     public TextureRegion image;

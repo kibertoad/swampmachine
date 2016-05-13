@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import net.kiberion.swampmachine.assets.AssetProvider;
 import net.kiberion.swampmachine.assets.viewinfo.ViewInfo;
-import net.kiberion.swampmachine.entities.common.impl.DataNode;
+import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 
 /**
  * @author: kibertoad
@@ -18,12 +18,12 @@ import net.kiberion.swampmachine.entities.common.impl.DataNode;
 public class GameViewInfoLoader extends DataNodeLoader<ViewInfo>{
 
     public static String pathToImages = "img/";
-    public Map<String, ? extends DataNode> listOfModelInfo;
+    public Map<String, ? extends CommonModelEntityDescriptor> listOfModelInfo;
 
     public String imageName;
     public boolean imageIsMandatory;
 
-    public GameViewInfoLoader(String fromPath, Map<String, ? extends DataNode> setListofModelInfo, String... wildcards)
+    public GameViewInfoLoader(String fromPath, Map<String, ? extends CommonModelEntityDescriptor> setListofModelInfo, String... wildcards)
     {
         super(fromPath);
 
@@ -36,7 +36,7 @@ public class GameViewInfoLoader extends DataNodeLoader<ViewInfo>{
     }
 
     public GameViewInfoLoader(String fromPath, String... wildcards) {
-        this(fromPath, (Map<String, ? extends DataNode>)null, wildcards);
+        this(fromPath, (Map<String, ? extends CommonModelEntityDescriptor>)null, wildcards);
     }
 
 

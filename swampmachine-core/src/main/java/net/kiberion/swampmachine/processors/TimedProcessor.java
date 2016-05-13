@@ -1,9 +1,9 @@
 package net.kiberion.swampmachine.processors;
 
-import net.kiberion.swampmachine.entities.common.api.DeltaUpdatable;
+import net.kiberion.swampmachine.entities.common.api.RealtimeUpdatable;
 import net.kiberion.swampmachine.entities.common.api.Invokable;
 
-public abstract class TimedProcessor implements DeltaUpdatable, Invokable{
+public abstract class TimedProcessor implements RealtimeUpdatable, Invokable{
 
     private float delayBetweenActs = 0.04f;
     

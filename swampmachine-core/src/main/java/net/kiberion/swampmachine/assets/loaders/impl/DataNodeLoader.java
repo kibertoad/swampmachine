@@ -25,7 +25,7 @@ import net.kiberion.swampmachine.assets.loaders.util.YamlLoader;
 import net.kiberion.swampmachine.assets.readers.AbstractFileReader;
 import net.kiberion.swampmachine.assets.readers.GDXFileReader;
 import net.kiberion.swampmachine.assets.readers.SimpleFileReader;
-import net.kiberion.swampmachine.entities.common.impl.DataNode;
+import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 import net.kiberion.swampmachine.entities.modelinfo.GroupInfo;
 import net.kiberion.swampmachine.groovy.GroovyScript;
 import net.kiberion.swampmachine.utils.SetUtils;
@@ -33,7 +33,7 @@ import net.kiberion.swampmachine.utils.SetUtils;
 /**
  * @author kibertoad
  */
-public class DataNodeLoader<t extends DataNode> implements AbstractLoader<t> {
+public class DataNodeLoader<t extends CommonModelEntityDescriptor> implements AbstractLoader<t> {
 
 	private static final Logger log = LogManager.getLogger();
     protected GroovyTranslator translator;
@@ -84,7 +84,7 @@ public class DataNodeLoader<t extends DataNode> implements AbstractLoader<t> {
         this(Paths.get(fromPath.replace("*", "")));
     }
 
-    protected void setTags(DataNode node) {
+    protected void setTags(CommonModelEntityDescriptor node) {
         if (ya.hasKey("tags")) {
             ya.getList("tags");
 
@@ -155,7 +155,7 @@ public class DataNodeLoader<t extends DataNode> implements AbstractLoader<t> {
         }
     }
 
-    protected void parseCustomFields(Map<String, t> result, DataNode node) {
+    protected void parseCustomFields(Map<String, t> result, CommonModelEntityDescriptor node) {
 
     	//ToDo implement cleanly
     	/*
@@ -174,7 +174,7 @@ public class DataNodeLoader<t extends DataNode> implements AbstractLoader<t> {
         */
     }
 
-    protected void setGroup(DataNode node, Map<String, GroupInfo> groups) {
+    protected void setGroup(CommonModelEntityDescriptor node, Map<String, GroupInfo> groups) {
 
         if (ya.hasKey("globalgroup")) {
             globalGroup = ya.getString("globalgroup");
@@ -270,7 +270,7 @@ public class DataNodeLoader<t extends DataNode> implements AbstractLoader<t> {
         for (Object o : ya.dataYamls) {
             parseYaml(o);
 
-            DataNode node = new DataNode();
+            CommonModelEntityDescriptor node = new CommonModelEntityDescriptor();
             node.setName(entityName);
             node.setDescription (entityDescription);
             node.setId(entityCode);

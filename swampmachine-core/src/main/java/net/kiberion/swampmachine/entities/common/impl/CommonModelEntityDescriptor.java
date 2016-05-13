@@ -16,7 +16,7 @@ import net.kiberion.swampmachine.entities.common.api.Taggable;
 /**
  * @author kibertoad
  */
-public class DataNode extends EntityModel implements Taggable {
+public class CommonModelEntityDescriptor extends AbstractModelEntityDescriptor implements Taggable {
 
 	@Setter
 	@Getter
@@ -36,10 +36,10 @@ public class DataNode extends EntityModel implements Taggable {
 
 	
 
-    public DataNode() {
+    public CommonModelEntityDescriptor() {
     }
 
-    public DataNode(String setName, String setCode) {
+    public CommonModelEntityDescriptor(String setName, String setCode) {
         setName (setName);
         setId(setCode);
     }

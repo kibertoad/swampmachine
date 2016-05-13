@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
-import net.kiberion.swampmachine.entities.common.impl.DataNode;
+import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 import net.kiberion.swampmachine.entities.modelinfo.ActionInfo;
 import net.kiberion.swampmachine.entities.modelinfo.CreatureModelInfo;
 import net.kiberion.swampmachine.entities.modelinfo.GroupInfo;
@@ -33,7 +33,7 @@ public class CommonModelInfoRegistry{
     private Map<String, ItemInfo> items;
     //private Map<String, ListOfNodes> itemSets;
 
-    private Map<String, DataNode> resources;
+    private Map<String, CommonModelEntityDescriptor> resources;
     
     //private Map<String, EquipmentSlotInfo> equipmentSlots;    
     

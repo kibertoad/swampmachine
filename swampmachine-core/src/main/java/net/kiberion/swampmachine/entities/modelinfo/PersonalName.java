@@ -1,11 +1,11 @@
 package net.kiberion.swampmachine.entities.modelinfo;
 
-import net.kiberion.swampmachine.entities.common.impl.DataNode;
+import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 
 /**
  * @author kibertoad
  */
-public class PersonalName extends DataNode {
+public class PersonalName extends CommonModelEntityDescriptor {
 
     public static final String IS_FIRST_NAME = "isFirstName";
     public static final String IS_FAMILY_NAME = "isFamilyName";

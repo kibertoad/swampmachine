@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import net.kiberion.swampmachine.entities.common.impl.DataNode;
+import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 
 /**
  * User: kibertoad
  *
  * This class is used to describe template information for creature
  */
-public class CreatureModelInfo extends DataNode{
+public class CreatureModelInfo extends CommonModelEntityDescriptor{
 
     public int hp;
     public int sightRange;

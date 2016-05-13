@@ -7,7 +7,7 @@ package net.kiberion.swampmachine.entities.common.api;
  * Entity that is intended to be updated in realtime
  *
  */
-public interface DeltaUpdatable {
+public interface RealtimeUpdatable {
 
     /**
      * Amount of time passed since last update

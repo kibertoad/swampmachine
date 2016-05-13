@@ -1,9 +1,9 @@
 package net.kiberion.swampmachine.aspects.api;
 
-import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
+import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
 
 public interface PositionHolderAspect {
 
-    public CommonPosition getPositionAspect ();
+    public PositionAspect getPositionAspect ();
     
 }

@@ -7,13 +7,13 @@ package net.kiberion.swampmachine.entities.modelinfo;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.kiberion.swampmachine.entities.common.impl.DataNode;
+import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 
 /**
  *
  * @author kibertoad
  */
-public class GroupInfo extends DataNode {
+public class GroupInfo extends CommonModelEntityDescriptor {
 
     public Map<String, GroupInfo> subGroups = new HashMap<>();
    // public TextureRegion image;

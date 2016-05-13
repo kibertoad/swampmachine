@@ -16,7 +16,7 @@ public class CreatureInfoList extends HashMap<String, CreatureModelInfo> {
 	int indexValue;
 
     public CreatureModelInfo getRandom() {
-        indexValue = Dice.getRandomInt(0, this.size()).getIntValue();
+        indexValue = Dice.getRandomInt(0, this.size());
         return this.get(indexValue);
     }
 }

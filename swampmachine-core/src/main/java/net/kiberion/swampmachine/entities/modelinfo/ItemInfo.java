@@ -1,6 +1,6 @@
 package net.kiberion.swampmachine.entities.modelinfo;
 
-import net.kiberion.swampmachine.entities.common.impl.DataNode;
+import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 import net.kiberion.swampmachine.groovy.GroovyScript;
 
 
@@ -8,7 +8,7 @@ import net.kiberion.swampmachine.groovy.GroovyScript;
 /**
  * @author: kibertoad
  */
-public class ItemInfo extends DataNode {
+public class ItemInfo extends CommonModelEntityDescriptor {
 
 	/*
     public ValueSet<DataNode> values = new ValueSet<DataNode>(); //Item stats

@@ -14,7 +14,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import net.kiberion.swampmachine.assets.viewinfo.CreatureViewInfo;
-import net.kiberion.swampmachine.entities.common.impl.DataNode;
+import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 
 
 /**
@@ -24,10 +24,10 @@ public class EntityViewInfoLoader extends DataNodeLoader<CreatureViewInfo> {
 
     private static final Logger log = LogManager.getLogger();
     
-    public Map<String, ? extends DataNode> entities;
+    public Map<String, ? extends CommonModelEntityDescriptor> entities;
     public boolean imageIsMandatory = true;
 
-    public EntityViewInfoLoader(String fromPath, Map<String, ? extends DataNode> setCreatures, String wildcard) {
+    public EntityViewInfoLoader(String fromPath, Map<String, ? extends CommonModelEntityDescriptor> setCreatures, String wildcard) {
         super(fromPath);
 
         setWildcardFileExtension(wildcard);

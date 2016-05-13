@@ -6,13 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.kiberion.swampmachine.entities.common.impl.DataNode;
+import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 
 
 /**
  * @author kibertoad
  */
-public class ActionInfo extends DataNode {
+public class ActionInfo extends CommonModelEntityDescriptor {
 
     public enum TargetType {
         SELF,

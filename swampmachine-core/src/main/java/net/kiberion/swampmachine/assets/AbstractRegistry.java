@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import lombok.Getter;
-import net.kiberion.swampmachine.entities.common.impl.EntityModel;
+import net.kiberion.swampmachine.entities.common.impl.AbstractModelEntityDescriptor;
 
-public abstract class AbstractRegistry <T extends EntityModel> {
+public abstract class AbstractRegistry <T extends AbstractModelEntityDescriptor> {
 
     @Getter
     private List<T> entities = new ArrayList<>();

@@ -4,7 +4,7 @@ package net.kiberion.swampmachine.entities.common.api;
  * @author kibertoad
  * Generic model entity 
  */
-public interface NodeEntity {
+public interface ModelEntityDescriptor {
 
     public String getId();
     public void setId(String toCode);

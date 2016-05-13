@@ -7,12 +7,12 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import net.kiberion.swampmachine.assets.UiManager;
-import net.kiberion.swampmachine.entities.common.impl.DataNode;
+import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 
 /**
  * @author kibertoad
  */
-public class AnimationViewInfo extends DataNode {
+public class AnimationViewInfo extends CommonModelEntityDescriptor {
 
     public int columns; //how many columns are in file
     public int rows; //how many rows are in file

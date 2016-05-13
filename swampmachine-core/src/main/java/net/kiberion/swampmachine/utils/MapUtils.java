@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.kiberion.swampmachine.entities.common.api.NodeEntity;
+import net.kiberion.swampmachine.entities.common.api.ModelEntityDescriptor;
 
 /**
  * @author kibertoad
@@ -68,17 +68,17 @@ public class MapUtils {
     
     @SuppressWarnings("unchecked")
 	public <T> T getRandom (Map<?, ?> entityMap) {
-        int indexValue = Dice.getRandomInt(0, entityMap.size()).getIntValue();
+        int indexValue = Dice.getRandomInt(0, entityMap.size());
         return (T) entityMap.values().toArray()[indexValue];
     }
     
-    public static <T extends NodeEntity> void putAll(Map<String, T> targetMap, Collection<T> sourceCollection) {
+    public static <T extends ModelEntityDescriptor> void putAll(Map<String, T> targetMap, Collection<T> sourceCollection) {
     	for (T entity : sourceCollection) {
     		targetMap.put(entity.getId(), entity);
     	}
     }
 
-    public static <T extends NodeEntity> void putAll(Map<String, T> targetMap, Map <String, T> sourceMap) {
+    public static <T extends ModelEntityDescriptor> void putAll(Map<String, T> targetMap, Map <String, T> sourceMap) {
         for (Entry<String, T> entityEntry : sourceMap.entrySet()) {
             targetMap.put(entityEntry.getKey(), entityEntry.getValue());
         }

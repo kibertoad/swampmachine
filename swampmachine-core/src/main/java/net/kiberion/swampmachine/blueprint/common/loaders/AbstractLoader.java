@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import lombok.Getter;
 import net.kiberion.swampmachine.assets.loaders.api.POJOLoader;
 import net.kiberion.swampmachine.assets.readers.ReaderHelper;
-import net.kiberion.swampmachine.entities.common.impl.DataNode;
+import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 import net.kiberion.swampmachine.utils.MapUtils;
 
 public class AbstractLoader {
@@ -35,7 +35,7 @@ public class AbstractLoader {
     }
     
     
-    protected <T extends DataNode> void loadDataNodes (Map<String, T> targetMap, String loadDirectory, String loadExtension, Class<T> clazz) {
+    protected <T extends CommonModelEntityDescriptor> void loadDataNodes (Map<String, T> targetMap, String loadDirectory, String loadExtension, Class<T> clazz) {
         try {
             if (fileExists(loadDirectory)) {
                 log.info("Loading torsos from: " + getPathToAssets().resolve(loadDirectory).toString());

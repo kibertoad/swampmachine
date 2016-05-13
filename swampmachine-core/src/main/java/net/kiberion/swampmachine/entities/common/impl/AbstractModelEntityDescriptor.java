@@ -1,13 +1,13 @@
 package net.kiberion.swampmachine.entities.common.impl;
 
 import net.kiberion.swampmachine.aspects.impl.CommonMetadataHolderAspect;
-import net.kiberion.swampmachine.entities.common.api.NodeEntity;
+import net.kiberion.swampmachine.entities.common.api.ModelEntityDescriptor;
 
 
 /**
  * @author kibertoad
  */
-public abstract class EntityModel extends CommonMetadataHolderAspect implements NodeEntity {
+public abstract class AbstractModelEntityDescriptor extends CommonMetadataHolderAspect implements ModelEntityDescriptor {
 
     /*
      * E. g. for equipment slot return both slot and item name

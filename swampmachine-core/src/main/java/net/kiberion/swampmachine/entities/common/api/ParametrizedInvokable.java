@@ -5,6 +5,6 @@ package net.kiberion.swampmachine.entities.common.api;
  * Multipurpose interface for passing invokable pieces of code as parameters
  */
 @FunctionalInterface
-public interface InvokableWithEntity<T> {
-    public void invoke(T entity);
+public interface ParametrizedInvokable<T> {
+    public void invoke(T param);
 }

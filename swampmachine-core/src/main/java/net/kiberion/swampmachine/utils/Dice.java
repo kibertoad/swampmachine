@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import net.kiberion.swampmachine.entities.common.impl.Int;
 import net.kiberion.swampmachine.entities.common.impl.Interval;
 
 
@@ -60,7 +59,7 @@ public class Dice {
         rolledValue = rng.nextInt(maxValue);
     }
 
-    public static Int getRandomIntBestOfRolls(int min, int max, int dices) {
+    public static int getRandomIntBestOfRolls(int min, int max, int dices) {
         int value = 0;
         for (int x = 0; x < dices; x++) {
             int roll = getRandomValue(min, max);
@@ -69,10 +68,10 @@ public class Dice {
                 value = roll;
             }
         }
-        return new Int (value);
+        return value;
     }
 
-    public static Int getRandomIntWorstOfRolls(int min, int max, int dices) {
+    public static int getRandomIntWorstOfRolls(int min, int max, int dices) {
         int value = max;
         for (int x = 0; x < dices; x++) {
             int roll = getRandomValue(min, max);
@@ -81,7 +80,7 @@ public class Dice {
                 value = roll;
             }
         }
-        return new Int (value);
+        return value;
     }
     
     public static int getSumOfRolls (int amountOfDices, int amountOfSides) {
@@ -95,8 +94,8 @@ public class Dice {
     }
 
 
-    public static Int getRandomInt(int min, int max) {
-        return new Int(getRandomValue(min, max));
+    public static int getRandomInt(int min, int max) {
+        return getRandomValue(min, max);
     }
 
     public static int getRandomValue(int min, int max) {

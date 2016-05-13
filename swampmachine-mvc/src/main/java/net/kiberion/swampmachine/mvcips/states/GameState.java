@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.kiberion.swampmachine.entities.common.api.DeltaUpdatable;
+import net.kiberion.swampmachine.entities.common.api.RealtimeUpdatable;
 import net.kiberion.swampmachine.mvcips.view.StateView;
 import net.kiberion.swampmachine.processors.TimedProcessor;
 
@@ -49,7 +49,7 @@ public abstract class GameState implements Screen, InitializingBean {
 
     private InputMultiplexer inputMultiplexer = new InputMultiplexer(); //used for stacking multiple input adapters
 
-    public List<DeltaUpdatable> entitiesForUpdate = new ArrayList<>();
+    public List<RealtimeUpdatable> entitiesForUpdate = new ArrayList<>();
     private List<? extends StateView> subViews = new ArrayList<>();
 
     @Getter
@@ -93,7 +93,7 @@ public abstract class GameState implements Screen, InitializingBean {
 
     @Override
     public void render(float delta) {
-        for (DeltaUpdatable entity : entitiesForUpdate) {
+        for (RealtimeUpdatable entity : entitiesForUpdate) {
             entity.update(delta);
         }
         

@@ -2,9 +2,9 @@ package net.kiberion.swampmachine.mvcips.input;
 
 import com.badlogic.gdx.Input;
 
-import net.kiberion.swampmachine.entities.common.api.DeltaUpdatable;
+import net.kiberion.swampmachine.entities.common.api.RealtimeUpdatable;
 
-public class RepeatedInputAdapter extends GenericInputAdapter implements DeltaUpdatable{
+public class RepeatedInputAdapter extends GenericInputAdapter implements RealtimeUpdatable{
     
     public float repeatDelay = 0.1f;
     private float timeLeftTillRepeat;
