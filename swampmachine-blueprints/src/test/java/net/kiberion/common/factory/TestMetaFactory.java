@@ -14,9 +14,9 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
-import net.kiberion.common.events.SpawnEntityEvent;
 import net.kiberion.spring.ContextBasedTest;
 import net.kiberion.swampmachine.assets.UiManager;
+import net.kiberion.swampmachine.factories.events.SpawnEntityEvent;
 import net.kiberion.tiled.MapRegistry;
 import net.kiberion.tiled.factories.impl.params.TextureMapObjectSpawnParams;
 import net.kiberion.tiled.loaders.MapLoader;

@@ -2,9 +2,9 @@ package net.kiberion.swampmachine.entities.spatial.impl;
 
 import org.apache.commons.math3.util.Precision;
 
-import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
+import net.kiberion.swampmachine.entities.spatial.api.Position;
 
-public class CommonPosition implements PositionAspect {
+public class CommonPosition implements Position {
 
     private float x;
     private float y;
@@ -18,11 +18,11 @@ public class CommonPosition implements PositionAspect {
         this(0, 0);
     }
 
-    public CommonPosition(PositionAspect position) {
+    public CommonPosition(Position position) {
         copyFrom (position);
     }
     
-    public void copyFrom(PositionAspect position) {
+    public void copyFrom(Position position) {
         setX(position.getX());
         setY(position.getY());
     }
@@ -56,7 +56,7 @@ public class CommonPosition implements PositionAspect {
         this.y += y;
     }
     
-    public void applyDelta(PositionAspect position) {
+    public void applyDelta(Position position) {
         applyDelta (position.getX(), position.getY());
     }
     
@@ -67,7 +67,7 @@ public class CommonPosition implements PositionAspect {
     }
     
     @Override
-    public CommonPosition produceCloneWithAppliedDelta(PositionAspect delta) {
+    public CommonPosition produceCloneWithAppliedDelta(Position delta) {
         return new CommonPosition(this.getX() + delta.getX(), this.getY() + delta.getY());
     }
     
@@ -90,8 +90,8 @@ public class CommonPosition implements PositionAspect {
     @Override
     public boolean equals(Object obj) {
 
-        if (obj instanceof PositionAspect) {
-            PositionAspect objP = (PositionAspect) obj;
+        if (obj instanceof Position) {
+            Position objP = (Position) obj;
             return (Precision.equals(this.getX(), objP.getX(), 0.1f) && Precision.equals(this.getY(), objP.getY(), 0.1f));
         }
 
@@ -104,7 +104,7 @@ public class CommonPosition implements PositionAspect {
     }
 
     @Override
-    public float distanceTo (PositionAspect other) {
+    public float distanceTo (Position other) {
         float x1 = this.x;
         float y1 = this.y;
         float x2 = other.getX();
@@ -113,12 +113,12 @@ public class CommonPosition implements PositionAspect {
         return Math.round(Math.sqrt(Math.pow((x2 - x1), 2) +  Math.pow((y2 - y1), 2)));
     }
 
-    public PositionAspect produceCloneWithTrimmedValues() {
+    public Position produceCloneWithTrimmedValues() {
         return new CommonPosition (getIntX(), getIntY());
     }
 
     @Override
-    public PositionAspect invertY(int mapHeight) {
+    public Position invertY(int mapHeight) {
         return new CommonPosition (getX(), mapHeight - (int) getY());
     }
 }

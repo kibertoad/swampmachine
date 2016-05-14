@@ -1,10 +1,10 @@
 package net.kiberion.tiled.aspects.api;
 
-import net.kiberion.swampmachine.aspects.api.MetadataHolderAspect;
-import net.kiberion.swampmachine.aspects.api.PositionHolderAspect;
+import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
+import net.kiberion.swampmachine.entityblocks.api.PositionHolderBlock;
 import net.kiberion.tiled.aspects.impl.FormHolderAspect;
 
-public interface CollidableAspect extends FormHolderAspect, PositionHolderAspect, MetadataHolderAspect {
+public interface CollidableAspect extends FormHolderAspect, PositionHolderBlock, MetadataHolderBlock {
 
     public void processCollision(CollidableAspect collisionObject);
 

@@ -1,44 +1,42 @@
 package net.kiberion.swampmachine.factories.params;
 
-import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
+import lombok.Getter;
+import lombok.Setter;
+import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 
-public class CommonSpawnParams implements SpawnParams{
-    
+/**
+ * Simple implementation of {@link SpawnParams} interface that specifies what
+ * and where should be spawned.
+ * 
+ * @author kibertoad
+ *
+ */
+public class CommonSpawnParams implements SpawnParams {
+
+    @Setter
+    @Getter
     private String id;
+
+    @Setter
+    @Getter
     private int x;
+
+    @Setter
+    @Getter
     private int y;
-    
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
-    public int getX() {
-        return x;
-    }
-    public void setX(int x) {
-        this.x = x;
-    }
-    public int getY() {
-        return y;
-    }
-    public void setY(int y) {
-        this.y = y;
-    }
-    
-    public PositionAspect getPosition() {
-        return new CommonPosition (x, y);
-    }
-    
+
     public CommonSpawnParams() {
     }
-    
-    public CommonSpawnParams (String id, int x, int y) {
+
+    public CommonSpawnParams(String id, int x, int y) {
         this.id = id;
         this.x = x;
         this.y = y;
     }
     
+    public Position getPosition() {
+        return new CommonPosition(x, y);
+    }
+
 }

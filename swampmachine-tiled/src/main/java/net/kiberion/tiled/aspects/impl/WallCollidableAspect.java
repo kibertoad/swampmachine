@@ -1,7 +1,7 @@
 package net.kiberion.tiled.aspects.impl;
 
-import net.kiberion.swampmachine.aspects.api.MetadataAspect;
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
+import net.kiberion.swampmachine.entityblocks.api.EntityInstanceMetadataBlock;
 import net.kiberion.tiled.aspects.api.CollidableAspect;
 import net.kiberion.tiled.aspects.api.FormAspect;
 
@@ -28,12 +28,12 @@ public class WallCollidableAspect implements CollidableAspect{
     }
 
     @Override
-    public MetadataAspect getMetadata() {
+    public EntityInstanceMetadataBlock getMetadata() {
         return null;
     }
 
     @Override
-    public void setMetadata(MetadataAspect metadata) {
+    public void setMetadata(EntityInstanceMetadataBlock metadata) {
     }
 
     @Override

@@ -8,7 +8,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import net.kiberion.mvc.model.AbstractTiledMapModel;
-import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
+import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 import net.kiberion.tiled.TiledIsometricCoordsUtils;
 import net.kiberion.tiled.aspects.holders.CommonMapMetadataHolderAspect;
@@ -33,7 +33,7 @@ public class MapLayerObjectLoader <TModel extends AbstractTiledMapModel>{
                 float x = object.getProperties().get("x", Float.class).floatValue();
                 float y = object.getProperties().get("y", Float.class).floatValue();
 
-                PositionAspect modelPosition = TiledIsometricCoordsUtils.getModelCoordsForTiledMapPosition(new CommonPosition (x, y), mapInfo, true);
+                Position modelPosition = TiledIsometricCoordsUtils.getModelCoordsForTiledMapPosition(new CommonPosition (x, y), mapInfo, true);
                 int intX = (int) modelPosition.getX();
                 int intY = (int) modelPosition.getY();
                 

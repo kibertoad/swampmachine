@@ -1,6 +1,5 @@
-package net.kiberion.swampmachine.blueprint.common.loaders;
+package net.kiberion.swampmachine.loaders;
 
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +13,12 @@ import net.kiberion.swampmachine.assets.readers.ReaderHelper;
 import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 import net.kiberion.swampmachine.utils.MapUtils;
 
+/**
+ * 
+ * 
+ * @author kibertoad
+ *
+ */
 public class AbstractLoader {
 
     private static final Logger log = LogManager.getLogger();
@@ -26,10 +31,6 @@ public class AbstractLoader {
         readerHelper = new ReaderHelper();
     }
 
-    protected Path getPathToAssets() {
-        return readerHelper.getPathToAssets();
-    }
-
     protected boolean fileExists(String directoryName) {
         return readerHelper.fileExists(directoryName);
     }
@@ -38,7 +39,7 @@ public class AbstractLoader {
     protected <T extends CommonModelEntityDescriptor> void loadDataNodes (Map<String, T> targetMap, String loadDirectory, String loadExtension, Class<T> clazz) {
         try {
             if (fileExists(loadDirectory)) {
-                log.info("Loading torsos from: " + getPathToAssets().resolve(loadDirectory).toString());
+                log.info("Loading entities from: " + getPathToAssets().resolve(loadDirectory).toString());
 
                 POJOLoader<T> entityLoader = new POJOLoader<>(getPathToAssets().resolve(loadDirectory),
                         clazz, loadExtension);

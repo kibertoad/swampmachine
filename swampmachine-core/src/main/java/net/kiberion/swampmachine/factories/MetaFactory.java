@@ -1,8 +1,9 @@
-package net.kiberion.common.factory.impl;
+package net.kiberion.swampmachine.factories;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.Validate;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
@@ -12,17 +13,26 @@ import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
-import net.kiberion.common.events.AfterSpawnEntityEvent;
-import net.kiberion.common.events.SpawnEntityEvent;
-import net.kiberion.swampmachine.factories.EntityFactory;
+import net.kiberion.swampmachine.factories.events.AfterSpawnEntityEvent;
+import net.kiberion.swampmachine.factories.events.SpawnEntityEvent;
 import net.kiberion.swampmachine.factories.params.SpawnParams;
 
+/**
+ * 
+ * Higher-level factory that resolves exact factory to use for producing
+ * requested entity. Works by processing {@link SpawnEntityEvent} events that
+ * arrive via {@link ApplicationEventPublisher} Spring mechanism.
+ * <p>
+ * After entity is spawned, {@link AfterSpawnEntityEvent} event gets fired.
+ * 
+ * @author kibertoad
+ *
+ */
 @Component
-public class MetaFactory implements ApplicationEventPublisherAware,
-        ApplicationListener<SpawnEntityEvent>, ApplicationContextAware, InitializingBean {
+public class MetaFactory implements ApplicationEventPublisherAware, ApplicationListener<SpawnEntityEvent>,
+        ApplicationContextAware, InitializingBean {
 
-    @SuppressWarnings("rawtypes")
-    private Map<Class<?>, EntityFactory> factoryMap;
+    private Map<Class<?>, EntityFactory<?, SpawnParams>> factoryMap = new HashMap<>();
     private ApplicationEventPublisher eventPublisher;
     private ApplicationContext ctx;
 
@@ -32,13 +42,10 @@ public class MetaFactory implements ApplicationEventPublisherAware,
 
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void onApplicationEvent(SpawnEntityEvent event) {
-        EntityFactory<?, SpawnParams> factory = factoryMap.get(event.getClazz());
-        if (factory == null) {
-            throw new IllegalArgumentException ("No factory for "+event.getClazz());
-        }
+        EntityFactory<?, SpawnParams> factory = factoryMap.get(event.getEntityClass());
+        Validate.notNull(factory, "No factory for " + event.getEntityClass());
 
         Object entity = factory.spawnEntity(event.getSpawnParams());
         eventPublisher.publishEvent(new AfterSpawnEntityEvent(factory, entity));
@@ -47,14 +54,11 @@ public class MetaFactory implements ApplicationEventPublisherAware,
     @SuppressWarnings("unchecked")
     @Override
     public void afterPropertiesSet() throws Exception {
-        factoryMap = new HashMap<>();
-
         for (EntityFactory<?, SpawnParams> factory : ctx.getBeansOfType(EntityFactory.class).values()) {
             for (Class<?> clazz : factory.getSupportedClasses()) {
                 if (factoryMap.containsKey(clazz)) {
                     throw new IllegalStateException(
-                            "Ambiguous factory definition for class "
-                                    + clazz.getCanonicalName());
+                            "Ambiguous factory definition for class " + clazz.getCanonicalName());
                 }
                 factoryMap.put(clazz, factory);
             }

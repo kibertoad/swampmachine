@@ -11,11 +11,10 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
-import net.kiberion.swampmachine.aspects.api.MetadataHolderAspect;
-import net.kiberion.swampmachine.aspects.api.PositionHolderAspect;
 import net.kiberion.swampmachine.assets.UiManager;
-import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
-import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
+import net.kiberion.swampmachine.entities.spatial.api.Position;
+import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
+import net.kiberion.swampmachine.entityblocks.api.PositionHolderBlock;
 import net.kiberion.tiled.model.TiledMapInfo;
 
 public abstract class MapObjectManager {
@@ -23,7 +22,7 @@ public abstract class MapObjectManager {
     public static final String OBJECT_LAYER_NAME = "objects";
     
 	protected static final Logger log = LogManager.getLogger();
-    protected Map<MetadataHolderAspect, TextureMapObject> textureMapObjectsMap = new HashMap<>();
+    protected Map<MetadataHolderBlock, TextureMapObject> textureMapObjectsMap = new HashMap<>();
     private TiledMapInfo mapInfo;
     
 
@@ -41,11 +40,11 @@ public abstract class MapObjectManager {
 	
 	
 	// Tiled "Object layer" named "objects" should be created for this to work
-    public TextureMapObject addMapObject(MetadataHolderAspect entityModel, PositionAspect position, String imageCode) {
+    public TextureMapObject addMapObject(MetadataHolderBlock entityModel, Position position, String imageCode) {
         return addMapObject(entityModel, position, UiManager.instance().getImage(imageCode));
     }
     
-    public void removeMapObject (MetadataHolderAspect entityModel) {
+    public void removeMapObject (MetadataHolderBlock entityModel) {
         MapLayer objectLayer = getMap().getLayers().get(OBJECT_LAYER_NAME);
         TextureMapObject tmo = textureMapObjectsMap.get(entityModel);
         objectLayer.getObjects().remove(tmo);
@@ -59,11 +58,11 @@ public abstract class MapObjectManager {
      * @param position Model position
      * @param image
      */
-    public TextureMapObject addMapObject(MetadataHolderAspect entityModel, PositionAspect position, TextureRegion image) {
+    public TextureMapObject addMapObject(MetadataHolderBlock entityModel, Position position, TextureRegion image) {
         MapLayer objectLayer = getMap().getLayers().get(OBJECT_LAYER_NAME);
 
         TextureMapObject tmo = new TextureMapObject(image);
-        PositionAspect screenPosition = getPositionForModelEntity (entityModel, position);
+        Position screenPosition = getPositionForModelEntity (entityModel, position);
         tmo.setX(screenPosition.getX());
         tmo.setY(screenPosition.getY());
         objectLayer.getObjects().add(tmo);
@@ -72,17 +71,17 @@ public abstract class MapObjectManager {
         return tmo;
     }
     
-    public PositionAspect getPositionForModelEntity (MetadataHolderAspect entityModel, PositionAspect position) {
+    public Position getPositionForModelEntity (MetadataHolderBlock entityModel, Position position) {
         return position;
     }
 
-    public void updateTextureMapObjectPosition(MetadataHolderAspect entityModel) {
-    	updateTextureMapObjectPosition (entityModel, ((PositionHolderAspect)entityModel).getPositionAspect());
+    public void updateTextureMapObjectPosition(MetadataHolderBlock entityModel) {
+    	updateTextureMapObjectPosition (entityModel, ((PositionHolderBlock)entityModel).getPositionAspect());
     }
     
-    public void updateTextureMapObjectPosition(MetadataHolderAspect entityModel, CommonPosition position) {
+    public void updateTextureMapObjectPosition(MetadataHolderBlock entityModel, Position position) {
     	TextureMapObject tmo = this.textureMapObjectsMap.get(entityModel);
-        PositionAspect screenPosition = getPositionForModelEntity (entityModel, position);
+        Position screenPosition = getPositionForModelEntity (entityModel, position);
         tmo.setX(screenPosition.getX());
         tmo.setY(screenPosition.getY());
         

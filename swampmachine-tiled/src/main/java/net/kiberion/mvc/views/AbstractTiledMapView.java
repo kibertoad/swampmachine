@@ -20,14 +20,14 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import net.kiberion.mvc.model.AbstractTiledMapModel;
-import net.kiberion.swampmachine.aspects.api.MetadataHolderAspect;
-import net.kiberion.swampmachine.aspects.api.PositionHolderAspect;
 import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.swampmachine.assets.viewinfo.CreatureViewInfo;
-import net.kiberion.swampmachine.blueprint.common.registries.CommonViewInfoRegistry;
-import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
+import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
+import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
+import net.kiberion.swampmachine.entityblocks.api.PositionHolderBlock;
 import net.kiberion.swampmachine.mvcips.view.StateViewBase;
+import net.kiberion.swampmachine.registries.CommonViewInfoRegistry;
 import net.kiberion.tiled.camera.TiledMapCamera;
 import net.kiberion.tiled.managers.MapObjectManager;
 import net.kiberion.tiled.model.TiledMapInfo;
@@ -61,7 +61,7 @@ public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> e
     //should be included in injection binding class
     private MapObjectManager mapObjectManager;
     
-    protected Map<MetadataHolderAspect, TextureMapObject> textureMapObjectsMap = new HashMap<>();
+    protected Map<MetadataHolderBlock, TextureMapObject> textureMapObjectsMap = new HashMap<>();
     
     
     public AbstractTiledMapView() {
@@ -115,13 +115,13 @@ public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> e
     }
 
     // Tiled "Object layer" named "objects" should be created for this to work
-    public void addMapObject(MetadataHolderAspect entityModel, CommonPosition position, String imageCode) {
+    public void addMapObject(MetadataHolderBlock entityModel, CommonPosition position, String imageCode) {
         TextureAtlas.AtlasRegion image = UiManager.instance().getImage(imageCode);
         Validate.notNull(image, "Unknown image: "+imageCode);
         addMapObject(entityModel, position, image);
     }
     
-    public void removeMapObject (MetadataHolderAspect entityModel) {
+    public void removeMapObject (MetadataHolderBlock entityModel) {
     	mapObjectManager.removeMapObject(entityModel);
     }
 
@@ -132,20 +132,20 @@ public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> e
      * @param position Model position
      * @param image
      */
-    public TextureMapObject addMapObject(MetadataHolderAspect entityModel, CommonPosition position, TextureRegion image) {
+    public TextureMapObject addMapObject(MetadataHolderBlock entityModel, Position position, TextureRegion image) {
         Validate.notNull(image);
     	return mapObjectManager.addMapObject(entityModel, position, image);
     }
     
-    public PositionAspect getPositionForModelEntity (MetadataHolderAspect entityModel, CommonPosition position) {
+    public Position getPositionForModelEntity (MetadataHolderBlock entityModel, Position position) {
         return position;
     }
 
-    public void updateTextureMapObjectPosition(MetadataHolderAspect entityModel) {
-    	updateTextureMapObjectPosition (entityModel, ((PositionHolderAspect)entityModel).getPositionAspect());
+    public void updateTextureMapObjectPosition(MetadataHolderBlock entityModel) {
+    	updateTextureMapObjectPosition (entityModel, ((PositionHolderBlock)entityModel).getPositionAspect());
     }
     
-    public void updateTextureMapObjectPosition(MetadataHolderAspect entityModel, CommonPosition position) {
+    public void updateTextureMapObjectPosition(MetadataHolderBlock entityModel, Position position) {
     	mapObjectManager.updateTextureMapObjectPosition(entityModel, position);
         //log.debug(String.format("Camera position: %.2f/%.2f", getCamera().getOrthoCam().position.x, getCamera().getOrthoCam().position.y));
     }
@@ -155,12 +155,12 @@ public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> e
     }
 
     public void placeCreatures() {
-        for (MetadataHolderAspect entity : this.getModel().getCreatures()) {
+        for (MetadataHolderBlock entity : this.getModel().getCreatures()) {
             CreatureViewInfo viewInfo = viewInfoRegistry.getFullCreatureViewInfoList().get(entity.getMetadata().getId());
             Objects.requireNonNull(viewInfo);
             TextureMapObject tmo = this.addMapObject(
                     entity,
-                    ((PositionHolderAspect) entity).getPositionAspect(),
+                    ((PositionHolderBlock) entity).getPositionAspect(),
                     viewInfo.image);
         }
     }

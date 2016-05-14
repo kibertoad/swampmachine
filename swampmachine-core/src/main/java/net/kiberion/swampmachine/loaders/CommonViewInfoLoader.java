@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.blueprint.common.loaders;
+package net.kiberion.swampmachine.loaders;
 
 import java.util.Map;
 import java.util.Objects;
@@ -13,9 +13,9 @@ import net.kiberion.swampmachine.assets.loaders.impl.EntityViewInfoLoader;
 import net.kiberion.swampmachine.assets.readers.ReaderHelper;
 import net.kiberion.swampmachine.assets.util.LoadOnStartup;
 import net.kiberion.swampmachine.assets.viewinfo.CreatureViewInfo;
-import net.kiberion.swampmachine.blueprint.common.registries.CommonModelInfoRegistry;
-import net.kiberion.swampmachine.blueprint.common.registries.CommonViewInfoRegistry;
 import net.kiberion.swampmachine.entities.modelinfo.CreatureModelInfo;
+import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
+import net.kiberion.swampmachine.registries.CommonViewInfoRegistry;
 import net.kiberion.swampmachine.utils.MapUtils;
 
 @Component

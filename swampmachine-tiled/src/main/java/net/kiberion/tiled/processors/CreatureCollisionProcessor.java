@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import com.badlogic.gdx.math.Rectangle;
 
 import net.kiberion.mvc.model.AbstractTiledMapModel;
-import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
+import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.tiled.aspects.api.CollidableAspect;
 import net.kiberion.tiled.aspects.api.CollidableEntitiesSource;
 import net.kiberion.tiled.aspects.holders.MapMetadataHolderAspect;
@@ -46,7 +46,7 @@ public class CreatureCollisionProcessor<TModel extends AbstractTiledMapModel<? e
     }
 
     public CollidableAspect getCreatureForPosition(CollidableAspect agent,
-            PositionAspect position) {
+            Position position) {
         Rectangle rectangle = new Rectangle(position.getX(), position.getY(),
                 agent.getFormAspect().getWidthInTiles(),
                 agent.getFormAspect().getHeightInTiles());

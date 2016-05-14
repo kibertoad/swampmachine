@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.blueprint.common.registries;
+package net.kiberion.swampmachine.registries;
 
 import java.util.HashMap;
 import java.util.Map;

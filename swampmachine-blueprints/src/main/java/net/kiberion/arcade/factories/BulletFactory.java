@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import lombok.Setter;
 import net.kiberion.arcade.aspects.BulletHolderAspect;
 import net.kiberion.arcade.entities.Bullet;
-import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
+import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.tiled.aspects.api.CollidableAspect;
 
 public class BulletFactory {
@@ -14,7 +14,7 @@ public class BulletFactory {
     @Setter
     private BulletHolderAspect bulletHolder;
 
-    public Bullet produceBullet (PositionAspect startingPosition, PositionAspect targetPosition, float speed, CollidableAspect shooter) {
+    public Bullet produceBullet (Position startingPosition, Position targetPosition, float speed, CollidableAspect shooter) {
         Bullet bullet = new Bullet();
         bullet.getPositionAspect().copyFrom(startingPosition);
         

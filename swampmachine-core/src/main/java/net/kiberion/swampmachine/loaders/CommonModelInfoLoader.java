@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.blueprint.common.loaders;
+package net.kiberion.swampmachine.loaders;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import net.kiberion.swampmachine.assets.loaders.api.POJOLoader;
 import net.kiberion.swampmachine.assets.loaders.api.SyncAssetLoader;
 import net.kiberion.swampmachine.assets.util.LoadOnStartup;
-import net.kiberion.swampmachine.blueprint.common.registries.CommonModelInfoRegistry;
 import net.kiberion.swampmachine.entities.modelinfo.CreatureModelInfo;
+import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
 import net.kiberion.swampmachine.utils.MapUtils;
 
 @LoadOnStartup

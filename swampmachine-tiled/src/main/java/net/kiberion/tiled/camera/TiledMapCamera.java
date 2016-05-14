@@ -7,7 +7,7 @@ package net.kiberion.tiled.camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
-import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
+import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 import net.kiberion.tiled.TiledIsometricCoordsUtils;
 import net.kiberion.tiled.model.TiledMapInfo;
@@ -54,7 +54,7 @@ public class TiledMapCamera {
     }
     */
     
-    public void centerOn(CommonPosition position) {
+    public void centerOn(Position position) {
         float centerX = position.getX() * tileWidth + tileWidth / 2f;
         float centerY = position.getY() * tileHeight + tileHeight / 2f;
         orthoCamera.position.set(centerX, centerY, 0);
@@ -89,7 +89,7 @@ public class TiledMapCamera {
     
     //to be used in new isometrical renderer
     public void centerIsometrically(CommonPosition positionAspect, TiledMapInfo mapInfo) {
-        PositionAspect position = TiledIsometricCoordsUtils.getIsometricScreenCoords(positionAspect, mapInfo);
+        Position position = TiledIsometricCoordsUtils.getIsometricScreenCoords(positionAspect, mapInfo);
         orthoCamera.position.set(position.getX(), position.getY(), 0);
         orthoCamera.update();
     }
@@ -126,7 +126,7 @@ public class TiledMapCamera {
         //orthoCamera.apply(Gdx.graphics.getGL20());
     }
     
-    public PositionAspect getTileCoords(PositionAspect screenCoords){
+    public Position getTileCoords(Position screenCoords){
         return null;
     }
 
@@ -136,7 +136,7 @@ public class TiledMapCamera {
         this.orthoCamera.update();
     }
 
-    public PositionAspect getPosition() {
+    public Position getPosition() {
         return new CommonPosition (this.orthoCamera.position.x, this.orthoCamera.position.y);
     }
 

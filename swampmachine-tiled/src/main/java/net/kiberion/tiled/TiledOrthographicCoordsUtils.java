@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.badlogic.gdx.Gdx;
 
-import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
+import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 import net.kiberion.tiled.model.TiledMapInfo;
 
@@ -13,7 +13,7 @@ public class TiledOrthographicCoordsUtils {
 
 	private static final Logger log = LogManager.getLogger();
 	
-	public static PositionAspect getOrthographicScreenCoords(PositionAspect position, TiledMapInfo mapInfo) {
+	public static Position getOrthographicScreenCoords(Position position, TiledMapInfo mapInfo) {
 		CommonPosition result = new CommonPosition ();
 
         float screenPositionX = (position.getX() * mapInfo.getTileWidth());
@@ -27,7 +27,7 @@ public class TiledOrthographicCoordsUtils {
         return result;
 	}
 
-	public static PositionAspect getModelCoordsForScreenPosition(PositionAspect screenPosition, PositionAspect cameraPosition,
+	public static Position getModelCoordsForScreenPosition(Position screenPosition, Position cameraPosition,
 			TiledMapInfo mapInfo) {
 		CommonPosition result = new CommonPosition ();
 		

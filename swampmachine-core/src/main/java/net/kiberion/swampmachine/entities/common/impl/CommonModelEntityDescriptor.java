@@ -20,15 +20,15 @@ public class CommonModelEntityDescriptor extends AbstractModelEntityDescriptor i
 
 	@Setter
 	@Getter
-    public String group;
+    private String group;
 	
 	@Setter
 	@Getter
-    public String subGroup;
-    public Set<String> tags = new HashSet<>();
+	private String subGroup;
+	private Set<String> tags = new HashSet<>();
 
-    public String groupID;
-    public String subGroupID;
+    private String groupID;
+    private String subGroupID;
     
     @Getter
     @Setter
@@ -49,6 +49,7 @@ public class CommonModelEntityDescriptor extends AbstractModelEntityDescriptor i
         return tags.contains(theTag);
     }
 
+    @Override
     public void addTag(String tag) {
         if (!tags.contains(tag)) {
             tags.add(tag);

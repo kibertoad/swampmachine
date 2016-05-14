@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
-import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
+import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.tiled.aspects.api.FormAspect;
 import net.kiberion.tiled.model.TiledMapInfo;
 
@@ -29,11 +29,11 @@ public class WallObstacleProcessor {
         return mapInfo.getWallInfo().isWall(x, y);
     }
 
-    public boolean isTileBlocked (PositionAspect position) {
+    public boolean isTileBlocked (Position position) {
         //log.info("actual coords:"+position.toString());
         //log.info("Tested coords: "+(int) position.getX()+"/"+ (int) position.getY());
         
-        PositionAspect invertedPosition = position.invertY(mapInfo.getMapHeight());
+        Position invertedPosition = position.invertY(mapInfo.getMapHeight());
         boolean result =  isTileBlocked((int) invertedPosition.getX(), (int) invertedPosition.getY());
         
         if (result) {
@@ -44,7 +44,7 @@ public class WallObstacleProcessor {
     }
 
    
-    public boolean objectOverlapsObstacle (PositionAspect position, float objectWidth, float objectHeight) {
+    public boolean objectOverlapsObstacle (Position position, float objectWidth, float objectHeight) {
         //log.info("Entity model position after move: "+position.toString());
         
         if (isTileBlocked (position)) {
@@ -73,11 +73,11 @@ public class WallObstacleProcessor {
     }
     
     
-    public boolean objectOverlapsObstacle (PositionAspect position) {
+    public boolean objectOverlapsObstacle (Position position) {
         return objectOverlapsObstacle(position, 0.98f, 0.98f);
      }
     
-    public boolean objectOverlapsObstacle (PositionAspect position, FormAspect form) {
+    public boolean objectOverlapsObstacle (Position position, FormAspect form) {
         return objectOverlapsObstacle(position, form.getWidthInTiles(), form.getHeightInTiles());
     }    
     

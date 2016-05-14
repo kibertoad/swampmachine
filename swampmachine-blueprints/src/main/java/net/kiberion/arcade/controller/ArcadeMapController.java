@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import net.kiberion.arcade.controller.api.CreatureMovementController;
 import net.kiberion.mvc.model.AbstractTiledMapModel;
 import net.kiberion.mvc.views.AbstractTiledMapView;
-import net.kiberion.swampmachine.aspects.api.MetadataHolderAspect;
-import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
+import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
+import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
 import net.kiberion.tiled.aspects.api.CollidableAspect;
 import net.kiberion.tiled.aspects.api.CollidableEntitiesSource;
 import net.kiberion.tiled.aspects.api.FormAspect;
@@ -40,7 +40,7 @@ public class ArcadeMapController<TModel extends AbstractTiledMapModel<? extends 
         creatureCollisisionProcessor.setMapInfo(mapInfo);
     }
     
-    public boolean isCollided (CollidableAspect entity, PositionAspect position, FormAspect formAspect) {
+    public boolean isCollided (CollidableAspect entity, Position position, FormAspect formAspect) {
         if (wallObstacleProcessor.objectOverlapsObstacle(position, formAspect)) {
             entity.processCollision(wallCollision);
             log.info("Wall obstacle");
@@ -96,7 +96,7 @@ public class ArcadeMapController<TModel extends AbstractTiledMapModel<? extends 
 
     
     @Override
-    public void removeEntityFromView (MetadataHolderAspect entity) {
+    public void removeEntityFromView (MetadataHolderBlock entity) {
         view.removeMapObject(entity);
     }
 }

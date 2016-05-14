@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.blueprint.common.loaders;
+package net.kiberion.swampmachine.loaders;
 
 import java.io.IOException;
 import java.nio.file.Path;

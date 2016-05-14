@@ -16,8 +16,8 @@ import net.kiberion.spring.ContextBasedTest;
 import net.kiberion.swampmachine.assets.loaders.api.SyncAssetLoader;
 import net.kiberion.swampmachine.assets.registries.LoaderRegistry;
 import net.kiberion.swampmachine.assets.util.LoadOnStartup;
-import net.kiberion.swampmachine.blueprint.common.loaders.CommonModelInfoLoader;
-import net.kiberion.swampmachine.blueprint.common.loaders.CommonViewInfoLoader;
+import net.kiberion.swampmachine.loaders.CommonModelInfoLoader;
+import net.kiberion.swampmachine.loaders.CommonViewInfoLoader;
 
 public class LoaderRegistryTest extends ContextBasedTest{
 
@@ -43,11 +43,12 @@ public class LoaderRegistryTest extends ContextBasedTest{
     @Test
     public void testRegistry () {
         @SuppressWarnings("rawtypes")
-		List <SyncAssetLoader> loaders = new ArrayList<SyncAssetLoader>((Collection) ctx.getBeansWithAnnotation(LoadOnStartup.class).values());
+		List <SyncAssetLoader> loaders = new ArrayList<>((Collection) ctx.getBeansWithAnnotation(LoadOnStartup.class).values());
         assertEquals (2, loaders.size());
         
         loaderRegistry.registerLoaders(loaders);;
         
+        //Test loaders being properly sorted by loading priority
         int previousPriority = -1;
         for (SyncAssetLoader loader : loaderRegistry.getRegisteredLoaders()) {
             assertTrue (loader.getPriority() > previousPriority);

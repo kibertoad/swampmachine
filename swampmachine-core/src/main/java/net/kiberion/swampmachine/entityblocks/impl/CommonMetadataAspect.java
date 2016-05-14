@@ -1,12 +1,12 @@
-package net.kiberion.swampmachine.aspects.impl;
+package net.kiberion.swampmachine.entityblocks.impl;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import net.kiberion.swampmachine.aspects.api.MetadataAspect;
+import net.kiberion.swampmachine.entityblocks.api.EntityInstanceMetadataBlock;
 
 
-public class CommonMetadataAspect implements MetadataAspect {
+public class CommonMetadataAspect implements EntityInstanceMetadataBlock {
 
     public String containerID;
     public int UID = -1;

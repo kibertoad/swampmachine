@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 
 import lombok.Getter;
 import net.kiberion.swampmachine.assets.registries.LoaderRegistry;
-import net.kiberion.swampmachine.blueprint.common.loaders.CommonModelInfoLoader;
-import net.kiberion.swampmachine.blueprint.common.loaders.CommonViewInfoLoader;
-import net.kiberion.swampmachine.blueprint.common.registries.CommonModelInfoRegistry;
-import net.kiberion.swampmachine.blueprint.common.registries.CommonViewInfoRegistry;
+import net.kiberion.swampmachine.loaders.CommonModelInfoLoader;
+import net.kiberion.swampmachine.loaders.CommonViewInfoLoader;
+import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
+import net.kiberion.swampmachine.registries.CommonViewInfoRegistry;
 
 /**
  * Container class for game stats and global registries (for game assets, map, model info etc)

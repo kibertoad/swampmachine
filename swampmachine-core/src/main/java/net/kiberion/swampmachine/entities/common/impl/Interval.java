@@ -16,46 +16,46 @@ public class Interval {
     public int from;
     public int to;
     public int id;
-    public int count; //position in a list
+    public int count; // position in a list
 
-
-    public Interval (int setFrom, int setTo, int setID){
+    public Interval(int setFrom, int setTo, int setID) {
         from = setFrom;
-        to   = setTo;
-        id   = setID;
+        to = setTo;
+        id = setID;
     }
 
-    public Interval (int setFrom, int setTo){
+    public Interval(int setFrom, int setTo) {
         from = setFrom;
-        to   = setTo;
-        id   = -1;
+        to = setTo;
+        id = -1;
     }
 
-    public Interval (int setFrom, int setTo, int setID, int setCount){
+    public Interval(int setFrom, int setTo, int setID, int setCount) {
         from = setFrom;
-        to   = setTo;
-        id   = setID;
+        to = setTo;
+        id = setID;
         count = setCount;
     }
 
-
-    public boolean fits (int getID) {
-        return ((getID>=from) && (getID<=to));
+    public boolean fits(int getID) {
+        return ((getID >= from) && (getID <= to));
     }
 
-    public static Interval returnFittingInterval (List<Interval> fromList, int inValue) {
-            Interval nowInterval;
-            Interval result = null;
+    public static Interval returnFittingInterval(List<Interval> fromList, int inValue) {
+        Interval nowInterval;
+        Interval result = null;
 
-                Iterator<Interval> i = fromList.iterator();
+        Iterator<Interval> i = fromList.iterator();
 
-            while ((i.hasNext()) && (result == null)) {
-                nowInterval = i.next();
+        while ((i.hasNext()) && (result == null)) {
+            nowInterval = i.next();
 
-                if (nowInterval.fits(inValue)) {result = nowInterval;}
-    }
+            if (nowInterval.fits(inValue)) {
+                result = nowInterval;
+            }
+        }
 
-            return result;
+        return result;
     }
 
 }

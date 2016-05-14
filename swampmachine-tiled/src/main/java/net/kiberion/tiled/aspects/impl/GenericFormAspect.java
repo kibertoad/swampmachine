@@ -2,7 +2,7 @@ package net.kiberion.tiled.aspects.impl;
 
 import com.badlogic.gdx.math.Rectangle;
 
-import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
+import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.tiled.aspects.api.FormAspect;
 
 public class GenericFormAspect implements FormAspect{
@@ -37,12 +37,12 @@ public class GenericFormAspect implements FormAspect{
     }
     
     @Override
-    public void produceRectangle (PositionAspect position) {
+    public void produceRectangle (Position position) {
         rectangle = new Rectangle(position.getX(), position.getY(), widthInTiles, heightInTiles);
     }
     
     @Override
-    public void moveRectangle (PositionAspect position) {
+    public void moveRectangle (Position position) {
         rectangle.setPosition(position.getX(), position.getY());
     }
 
@@ -52,7 +52,7 @@ public class GenericFormAspect implements FormAspect{
     }
 
     @Override
-    public void produceRectangle(PositionAspect position, float widthInTiles, float heightInTiles) {
+    public void produceRectangle(Position position, float widthInTiles, float heightInTiles) {
         this.setWidthInTiles(widthInTiles);
         this.setHeightInTiles(heightInTiles);
         produceRectangle(position);

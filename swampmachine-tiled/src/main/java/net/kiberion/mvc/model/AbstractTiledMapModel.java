@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import net.kiberion.mvc.model.helpers.SpawningHelper;
-import net.kiberion.swampmachine.entities.spatial.api.PositionAspect;
+import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.tiled.aspects.holders.MapMetadataHolderAspect;
 import net.kiberion.tiled.model.TiledMapInfo;
 
@@ -32,7 +32,7 @@ public abstract class AbstractTiledMapModel<T extends MapMetadataHolderAspect>{
     private final List<T> aiCreatures = new ArrayList<>();
 
     private final List<MapMetadataHolderAspect> activeObjects = new ArrayList<>();
-    private final Map<PositionAspect, MapMetadataHolderAspect> activeObjectsMap = new HashMap<> ();
+    private final Map<Position, MapMetadataHolderAspect> activeObjectsMap = new HashMap<> ();
     
     public void spawnCreatures () {};
 
@@ -72,7 +72,7 @@ public abstract class AbstractTiledMapModel<T extends MapMetadataHolderAspect>{
         return activeObjects;
     }
 
-    public Map<PositionAspect, MapMetadataHolderAspect> getActiveObjectsMap() {
+    public Map<Position, MapMetadataHolderAspect> getActiveObjectsMap() {
         return activeObjectsMap;
     }
 
