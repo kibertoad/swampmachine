@@ -50,8 +50,8 @@ public class GameViewInfoLoader extends DataNodeLoader<ViewInfo>{
         //image.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         if (listOfModelInfo != null) {
-            viewInfo.tags.addAll(listOfModelInfo.get(entityCode).getTags());
-            viewInfo.group = listOfModelInfo.get(entityCode).getGroup();
+            viewInfo.getTags().addAll(listOfModelInfo.get(entityCode).getTags());
+            viewInfo.setGroup (listOfModelInfo.get(entityCode).getGroup());
 
             //Gdx.app.log("debug", "Bound "+entityCode+" to model "+listOfModelInfo.getByCode(entityCode).code);
             //Gdx.app.log("debug", "Bound ID "+viewInfo.ID+" to model ID "+listOfModelInfo.getByCode(entityCode).ID);

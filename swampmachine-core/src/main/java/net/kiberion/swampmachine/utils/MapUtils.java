@@ -72,13 +72,13 @@ public class MapUtils {
         return (T) entityMap.values().toArray()[indexValue];
     }
     
-    public static <T extends EntityModelDescriptor> void putAll(Map<String, T> targetMap, Collection<T> sourceCollection) {
+    public static <T extends EntityModelDescriptor> void putAllEntities(Map<String, T> targetMap, Collection<T> sourceCollection) {
     	for (T entity : sourceCollection) {
     		targetMap.put(entity.getId(), entity);
     	}
     }
 
-    public static <T extends EntityModelDescriptor> void putAll(Map<String, T> targetMap, Map <String, T> sourceMap) {
+    public static <T extends EntityModelDescriptor> void putAllEntities(Map<String, T> targetMap, Map <String, T> sourceMap) {
         for (Entry<String, T> entityEntry : sourceMap.entrySet()) {
             targetMap.put(entityEntry.getKey(), entityEntry.getValue());
         }

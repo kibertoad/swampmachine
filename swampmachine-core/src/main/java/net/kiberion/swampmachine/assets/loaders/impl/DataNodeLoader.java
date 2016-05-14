@@ -185,37 +185,37 @@ public class DataNodeLoader<t extends CommonModelEntityDescriptor> implements Ab
         }
 
         if (ya.hasKey("group")) {
-            node.group = ya.getString("group");
+            node.setGroup (ya.getString("group"));
 
-            if (groups.get(node.group) == null) {
-                log.error("Unknown group: " + node.group);
+            if (groups.get(node.getGroup()) == null) {
+                log.error("Unknown group: " + node.getGroup());
             }
 
-            node.groupID = groups.get(node.group).getId();
+            node.setGroupID (groups.get(node.getGroup()).getId());
         } else {
             if (globalGroup != null) {
-                node.group = globalGroup;
-                node.groupID = groups.get(node.group).getId();
+                node.setGroup (globalGroup);
+                node.setGroupID (groups.get(node.getGroup()).getId());
             }
         }
 
         if (ya.hasKey("subgroup")) {
-            node.subGroup = ya.getString("subgroup");
+            node.setSubGroup (ya.getString("subgroup"));
 
             // if (groups.getByCode(node.subGroupCode) == null) {
             // Log.error("Unknown subgroup: " + node.subGroupCode);
             // }
 
             Objects.requireNonNull(groups);
-            Objects.requireNonNull(groups.get(node.group));
-            Objects.requireNonNull(groups.get(node.group).subGroups);
-            Objects.requireNonNull(groups.get(node.group).subGroups.get(node.subGroup));
+            Objects.requireNonNull(groups.get(node.getGroup()));
+            Objects.requireNonNull(groups.get(node.getGroup()).subGroups);
+            Objects.requireNonNull(groups.get(node.getGroup()).subGroups.get(node.getSubGroup()));
 
-            node.subGroupID = groups.get(node.group).subGroups.get(node.subGroup).getId();
+            node.setSubGroupID (groups.get(node.getGroup()).subGroups.get(node.getSubGroup()).getId());
         } else {
             if (globalSubGroup != null) {
-                node.subGroup = globalSubGroup;
-                node.subGroupID = groups.get(node.group).subGroups.get(node.subGroup).getId();
+                node.setSubGroup (globalSubGroup);
+                node.setSubGroupID (groups.get(node.getGroup()).subGroups.get(node.getSubGroup()).getId());
             }
         }
     }

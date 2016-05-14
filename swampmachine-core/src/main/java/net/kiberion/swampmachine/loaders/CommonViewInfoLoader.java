@@ -1,5 +1,6 @@
 package net.kiberion.swampmachine.loaders;
 
+import java.nio.file.Path;
 import java.util.Map;
 import java.util.Objects;
 
@@ -8,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import net.kiberion.swampmachine.assets.GameConfig;
 import net.kiberion.swampmachine.assets.loaders.api.SyncAssetLoader;
 import net.kiberion.swampmachine.assets.loaders.impl.EntityViewInfoLoader;
 import net.kiberion.swampmachine.assets.readers.ReaderHelper;
@@ -33,6 +35,15 @@ public class CommonViewInfoLoader implements SyncAssetLoader{
     @Autowired
     private ReaderHelper readerHelper;
     
+    @Autowired
+    private GameConfig config;
+    
+    // convention over configuration in this case - if you are using
+    // Swampmachine asset management, you are expected to follow path convention
+    private static final String CREATURE_MODEL_DIRECTORY = "model-creature";
+    private static final String CREATURE_ENTITIES_FILE_EXTENSION = "creatures";
+    
+    
     @Override
     public int getPriority() {
         return 100;
@@ -40,12 +51,13 @@ public class CommonViewInfoLoader implements SyncAssetLoader{
     
     public void loadCreatureViewInfoFromModel(Map <String, CreatureModelInfo> fullCreatureList) {
         
-        if (readerHelper.fileExists("model-creature/")) {
+        if (readerHelper.fileExists(CREATURE_MODEL_DIRECTORY)) {
             Objects.requireNonNull(fullCreatureList, "Creatures are mandatory");
             log.info("debug", "Start loading creature images");
-            EntityViewInfoLoader loader = new EntityViewInfoLoader(readerHelper.getPathToAssets().resolve("model-creature/").toString()+"*", fullCreatureList, "creatures");
+            Path entityDirectory = config.getPathToResources().resolve(CREATURE_MODEL_DIRECTORY);
+            EntityViewInfoLoader loader = new EntityViewInfoLoader(entityDirectory.toString()+"*", fullCreatureList, CREATURE_ENTITIES_FILE_EXTENSION);
             Map<String, CreatureViewInfo> creatureViewInfo = loader.load();
-            MapUtils.putAll(viewInfoRegistry.getFullCreatureViewInfoList(), creatureViewInfo);
+            MapUtils.putAllEntities(viewInfoRegistry.getFullCreatureViewInfoList(), creatureViewInfo);
 
             /*
             try {

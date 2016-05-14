@@ -110,7 +110,7 @@ public class POJOLoader<T extends AbstractModelEntityDescriptor> implements Abst
 
             for (Path fileEntry : filesToLoad) {
                 List<T> loadedEntries = loadFile(fileEntry);
-                MapUtils.putAll(result, loadedEntries);
+                MapUtils.putAllEntities(result, loadedEntries);
             }
         }
         return result;
