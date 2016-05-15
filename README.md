@@ -3,7 +3,7 @@ Swampmachine is a high-level rapid game development framework, based on libGDX (
 It aims to provide a set of easily reusable and extendable functionality for games of different genres, covering state management,
 asset loading, entity management, loading and using Tiled (http://www.mapeditor.org/) maps, persistence and scripting (using Groovy or Jython).
 
-In order to understand the workflow and a lifecycle of a Swampmachine game (which does follow the basic structure of a libGDX application, but makes an extensive use of Spring and annotations to bind everything together), see this diagram: https://github.com/kibertoad/swampmachine/blob/master/doc/Game%20lifecycle.png
+In order to understand the workflow and a lifecycle of a Swampmachine game (which does follow the basic structure of a libGDX application, but makes an extensive use of Spring and annotations to bind everything together), see this diagram: https://raw.githubusercontent.com/kibertoad/swampmachine/master/doc/Game%20lifecycle.png
 
 At this point **swampmachine-core** and **swampmachine-mvc** are more or less fleshed out and ready for usage. Rest of the framework is still very much a work in progress.
 
