@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
-import net.kiberion.swampmachine.assets.registries.LoaderRegistry;
-import net.kiberion.swampmachine.loaders.CreatureLoader;
 import net.kiberion.swampmachine.loaders.CommonViewInfoLoader;
+import net.kiberion.swampmachine.loaders.CreatureLoader;
 import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
 import net.kiberion.swampmachine.registries.CommonViewInfoRegistry;
 
@@ -22,10 +21,6 @@ public class GameContainer {
     @Autowired
     @Getter
     private StateRegistry stateRegistry;
-    
-    @Autowired
-    @Getter
-    private LoaderRegistry loaderRegistry;
     
     @Autowired
     @Getter

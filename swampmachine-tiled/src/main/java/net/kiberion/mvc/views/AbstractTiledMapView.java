@@ -161,7 +161,7 @@ public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> e
             TextureMapObject tmo = this.addMapObject(
                     entity,
                     ((PositionHolderBlock) entity).getPositionAspect(),
-                    viewInfo.image);
+                    viewInfo.getImage());
         }
     }
     
