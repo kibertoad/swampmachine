@@ -7,6 +7,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 
+/**
+ * This class is used to sidestep GDX requirement for having OpenGL context
+ * while loading assets. Since unit tests typically don't have it, trying to
+ * load assets from tests fail with default GDX loader implementation.
+ * <p>
+ * This implementation doesn't load any actual textures (which aren't that
+ * useful for model unit tests anyway), but doesn't fail either
+ * 
+ * @author kibertoad
+ *
+ */
 public class HeadlessTextureLoader extends TextureLoader {
 
     public HeadlessTextureLoader(FileHandleResolver resolver) {

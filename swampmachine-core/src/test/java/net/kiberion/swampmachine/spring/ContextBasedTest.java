@@ -1,4 +1,4 @@
-package net.kiberion.spring;
+package net.kiberion.swampmachine.spring;
 
 import java.util.List;
 

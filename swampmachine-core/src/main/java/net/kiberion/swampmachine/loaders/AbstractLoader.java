@@ -21,7 +21,7 @@ import net.kiberion.swampmachine.utils.MapUtils;
  * @author kibertoad
  *
  */
-public class AbstractLoader {
+public abstract class AbstractLoader {
 
     private static final Logger log = LogManager.getLogger();
 
@@ -40,6 +40,15 @@ public class AbstractLoader {
         return readerHelper.fileExists(directoryName);
     }
 
+    public abstract <T extends CommonModelEntityDescriptor> Map<String, T> getTargetMap ();
+    public abstract String getLoadDirectory ();
+    public abstract String getLoadFileExtension ();
+    public abstract Class<? extends CommonModelEntityDescriptor> getEntityClass();
+    
+    public void load () {
+        loadDataNodes(getTargetMap(), getLoadDirectory(), getLoadFileExtension(), getEntityClass());
+    }
+    
     protected <T extends CommonModelEntityDescriptor> void loadDataNodes(Map<String, T> targetMap, String loadDirectory,
             String loadExtension, Class<T> clazz) {
         try {

@@ -2,7 +2,7 @@ package net.kiberion.tiled;
 
 import org.springframework.test.context.ContextConfiguration;
 
-import net.kiberion.spring.ContextBasedTest;
+import net.kiberion.swampmachine.spring.ContextBasedTest;
 import net.kiberion.tiled.spring.TiledTestConfiguration;
 
 @ContextConfiguration(classes = {TiledTestConfiguration.class})

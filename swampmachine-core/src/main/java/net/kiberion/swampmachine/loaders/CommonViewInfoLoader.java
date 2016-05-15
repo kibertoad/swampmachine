@@ -7,8 +7,8 @@ import java.util.Objects;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
+import lombok.Setter;
 import net.kiberion.swampmachine.assets.GameConfig;
 import net.kiberion.swampmachine.assets.loaders.api.SyncAssetLoader;
 import net.kiberion.swampmachine.assets.loaders.impl.EntityViewInfoLoader;
@@ -20,7 +20,6 @@ import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
 import net.kiberion.swampmachine.registries.CommonViewInfoRegistry;
 import net.kiberion.swampmachine.utils.MapUtils;
 
-@Component
 @LoadOnStartup
 public class CommonViewInfoLoader implements SyncAssetLoader{
 
@@ -37,6 +36,9 @@ public class CommonViewInfoLoader implements SyncAssetLoader{
     
     @Autowired
     private GameConfig config;
+    
+    @Setter
+    private boolean imagesAreMandatory = true;
     
     // convention over configuration in this case - if you are using
     // Swampmachine asset management, you are expected to follow path convention
@@ -56,6 +58,7 @@ public class CommonViewInfoLoader implements SyncAssetLoader{
             log.info("debug", "Start loading creature images");
             Path entityDirectory = config.getPathToResources().resolve(CREATURE_MODEL_DIRECTORY);
             EntityViewInfoLoader loader = new EntityViewInfoLoader(entityDirectory.toString()+"*", fullCreatureList, CREATURE_ENTITIES_FILE_EXTENSION);
+            loader.setImageIsMandatory(imagesAreMandatory);
             Map<String, CreatureViewInfo> creatureViewInfo = loader.load();
             MapUtils.putAllEntities(viewInfoRegistry.getFullCreatureViewInfoList(), creatureViewInfo);
 

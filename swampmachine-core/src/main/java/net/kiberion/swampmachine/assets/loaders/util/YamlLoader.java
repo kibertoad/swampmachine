@@ -84,14 +84,13 @@ public class YamlLoader {
     }
 
     public TextureAtlas.AtlasRegion getImage(String byKey) {
+        String imageName = getString(byKey);
 
-        String photoName = getString(byKey);
-
-        if (photoName != "BLANK") {
-            TextureAtlas.AtlasRegion region = UiManager.instance().atlas().findRegion(photoName);
+        if (imageName != null && imageName != "BLANK") {
+            TextureAtlas.AtlasRegion region = UiManager.instance().atlas().findRegion(imageName);
 
             if (region == null) {
-                log.warn("No image in atlas: " + photoName);
+                log.warn("No image in atlas: " + imageName);
             }
 
             return region;

@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+import lombok.Getter;
+import lombok.Setter;
 import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 
@@ -13,13 +15,17 @@ import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescripto
  */
 public class ViewInfo extends CommonModelEntityDescriptor {
 
-    public TextureRegionDrawable drawableImage;
-    public TextureRegion image;
-    public TextureRegion getImage() {
-		return image;
-	}
+    @Setter
+    @Getter
+    private TextureRegionDrawable drawableImage;
 
-	public Pixmap picture;
+    @Setter
+    @Getter
+    private TextureRegion image;
+
+    @Setter
+    @Getter
+    private Pixmap picture;
 
     public ViewInfo() {
     }

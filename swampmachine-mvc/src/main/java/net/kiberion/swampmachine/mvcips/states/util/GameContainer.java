@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import lombok.Getter;
 import net.kiberion.swampmachine.assets.registries.LoaderRegistry;
-import net.kiberion.swampmachine.loaders.CommonModelInfoLoader;
+import net.kiberion.swampmachine.loaders.CreatureLoader;
 import net.kiberion.swampmachine.loaders.CommonViewInfoLoader;
 import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
 import net.kiberion.swampmachine.registries.CommonViewInfoRegistry;
@@ -41,7 +41,7 @@ public class GameContainer {
     
     @Autowired
     @Getter
-    private CommonModelInfoLoader modelInfoLoader;
+    private CreatureLoader modelInfoLoader;
     
 
 }

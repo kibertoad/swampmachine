@@ -1,11 +1,15 @@
-package net.kiberion.spring;
+package com.badlogic.gdx.assets.loaders;
 
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.AssetLoader;
-import com.badlogic.gdx.assets.loaders.HeadlessTextureLoader;
-import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.graphics.Texture;
 
+/**
+ * Implementation of an AssetManager that uses dummy TextureLoader which works without OpenGL context.
+ * This implementation is intended for use in unit tests.
+ * 
+ * @author kibertoad
+ *
+ */
 public class HeadlessAssetManager extends AssetManager{
 
     private TextureLoader textureLoader; 
@@ -15,7 +19,8 @@ public class HeadlessAssetManager extends AssetManager{
         textureLoader = new HeadlessTextureLoader(getFileHandleResolver());;
     }
     
-    public <T> AssetLoader getLoader (final Class<T> type, final String fileName) {
+    @Override
+    public <T> AssetLoader<?, ?> getLoader (final Class<T> type, final String fileName) {
         if (type == Texture.class) {
             return textureLoader;
         }

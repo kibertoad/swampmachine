@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+import lombok.Setter;
 import net.kiberion.swampmachine.assets.viewinfo.CreatureViewInfo;
 import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 
@@ -20,28 +21,32 @@ import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescripto
 /**
  * @author kibertoad
  */
-public class EntityViewInfoLoader extends DataNodeLoader<CreatureViewInfo> {
+public class EntityViewInfoLoader extends CommonYamlLoader<CreatureViewInfo> {
 
     private static final Logger log = LogManager.getLogger();
     
     public Map<String, ? extends CommonModelEntityDescriptor> entities;
+    
+    @Setter
     public boolean imageIsMandatory = true;
 
     public EntityViewInfoLoader(String fromPath, Map<String, ? extends CommonModelEntityDescriptor> setCreatures, String wildcard) {
         super(fromPath);
 
         setWildcardFileExtension(wildcard);
-
         entities = setCreatures;
     }
 
     @Override
-    public void parseYaml(Object o) {
-        super.parseYaml(o);
+    protected CreatureViewInfo initNewEntity() {
+        return new CreatureViewInfo();
+    }
+    
+    @Override
+    protected void parseYaml(Object sourceYamlObject, CreatureViewInfo targetObject) {
+        super.parseYaml(sourceYamlObject, targetObject);
 
-        CreatureViewInfo creature = new CreatureViewInfo();
-
-        TextureRegion image = ya.getImage("image");
+        TextureRegion image = getYamlLoader().getImage("image");
 
         if ((entities == null) || (entities.isEmpty())) {
             log.error("No creatures received.");
@@ -50,20 +55,14 @@ public class EntityViewInfoLoader extends DataNodeLoader<CreatureViewInfo> {
         Objects.requireNonNull(entities);
 
         if ((image == null) && (imageIsMandatory)) {
-            Objects.requireNonNull(image, "Unknown image: " + ya.getString("image"));
+            Objects.requireNonNull(image, "Unknown image: " + getYamlLoader().getString("image"));
         }
-
-        creature.setId (entities.get(entityCode).getId());
 
         if (image != null) {
-            creature.drawableImage = new TextureRegionDrawable(image);
-            creature.image = image;
+            targetObject.setDrawableImage (new TextureRegionDrawable(image));
+            targetObject.setImage (image);
         }
 
-        //Objects.requireNonNull(creature.drawableImage);
-
-        //Log.info("Added image: " + ya.getString("image"));
-
-        results.put(creature.getId(), creature);
+        results.put(targetObject.getMetadata().getId(), targetObject);
     }
 }

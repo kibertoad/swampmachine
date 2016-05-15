@@ -6,7 +6,7 @@ import java.util.Set;
 import net.kiberion.swampmachine.entityblocks.api.EntityInstanceMetadataBlock;
 
 
-public class CommonMetadataAspect implements EntityInstanceMetadataBlock {
+public class CommonMetadataBlock implements EntityInstanceMetadataBlock {
 
     public String containerID;
     public int UID = -1;

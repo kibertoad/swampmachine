@@ -31,11 +31,17 @@ import net.kiberion.swampmachine.groovy.GroovyScript;
 import net.kiberion.swampmachine.utils.SetUtils;
 
 /**
+ * This loader is not thread-safe.
+ * Note that it exists mostly as a reference for few useful bits is still contains, this class is poorly designed and too monolothic to
+ * be considered a worthy part of the library
+ * 
  * @author kibertoad
  */
-public class DataNodeLoader<t extends CommonModelEntityDescriptor> implements AbstractLoader<t> {
 
-	private static final Logger log = LogManager.getLogger();
+@Deprecated
+public class DataNodeLoader<T extends CommonModelEntityDescriptor> implements AbstractLoader<T> {
+
+    private static final Logger log = LogManager.getLogger();
     protected GroovyTranslator translator;
 
     protected List<String> globalTags = new ArrayList<>();
@@ -60,8 +66,8 @@ public class DataNodeLoader<t extends CommonModelEntityDescriptor> implements Ab
                                                                     // with this
                                                                     // extension
 
-    protected Map<String, t> results = new HashMap<String, t>();
-    protected YamlLoader ya = new YamlLoader();
+    protected Map<String, T> results = new HashMap<>();
+    protected YamlLoader yamlLoader = new YamlLoader();
 
     private AbstractFileReader fileReader;
 
@@ -85,10 +91,10 @@ public class DataNodeLoader<t extends CommonModelEntityDescriptor> implements Ab
     }
 
     protected void setTags(CommonModelEntityDescriptor node) {
-        if (ya.hasKey("tags")) {
-            ya.getList("tags");
+        if (yamlLoader.hasKey("tags")) {
+            yamlLoader.getList("tags");
 
-            for (Object o : ya.list) {
+            for (Object o : yamlLoader.list) {
                 node.addTag((String) o);
                 // Gdx.app.log("debug", "added tag: "+(String)o);
             }
@@ -100,10 +106,10 @@ public class DataNodeLoader<t extends CommonModelEntityDescriptor> implements Ab
     }
 
     protected void fillGlobalReqs() {
-        if (ya.hasKey("globalreqs")) {
-            ya.getList("globalreqs");
+        if (yamlLoader.hasKey("globalreqs")) {
+            yamlLoader.getList("globalreqs");
 
-            for (Object o : ya.list) {
+            for (Object o : yamlLoader.list) {
                 // globalReqs.add(translator.convertString((String) o));
                 globalReqs.add(new GroovyScript((String) o));
             }
@@ -111,96 +117,88 @@ public class DataNodeLoader<t extends CommonModelEntityDescriptor> implements Ab
     }
 
     protected void fillGlobalEffects() {
-        if (ya.hasKey("globaleffects")) {
-            ya.getList("globaleffects");
+        if (yamlLoader.hasKey("globaleffects")) {
+            yamlLoader.getList("globaleffects");
 
-            for (Object o : ya.list) {
+            for (Object o : yamlLoader.list) {
                 globalEffects.add(new GroovyScript((String) o));
             }
         }
     }
 
     protected void fillGlobalTags() {
-        if (ya.hasKey("globaltags")) {
-            ya.getList("globaltags");
+        if (yamlLoader.hasKey("globaltags")) {
+            yamlLoader.getList("globaltags");
 
             globalTags.clear();
 
-            for (Object o : ya.list) {
+            for (Object o : yamlLoader.list) {
                 globalTags.add((String) o);
             }
         }
     }
 
-    protected void parseDefinitions(Map<String, t> result) {
-        if (ya.hasKey("define")) {
-            ya.getList("define");
+    protected void parseDefinitions(Map<String, T> result) {
+        if (yamlLoader.hasKey("define")) {
+            yamlLoader.getList("define");
 
-            for (Object o : ya.list) {
+            for (Object o : yamlLoader.list) {
                 String s1 = ((String) o).split(" ")[0];
                 String s2 = ((String) o).split(" ")[1];
 
-                //ToDo implement cleanly
+                // ToDo implement cleanly
                 /*
-                if (s1.equals("integer")) {
-                    result.addCustomValueInt(s2);
-                    Gdx.app.log("debug", "Defined new custom value: " + s2);
-                }
-
-                if (s1.equals("string")) {
-                    result.addCustomValueString(s2);
-                }
-                */
+                 * if (s1.equals("integer")) { result.addCustomValueInt(s2);
+                 * Gdx.app.log("debug", "Defined new custom value: " + s2); }
+                 * 
+                 * if (s1.equals("string")) { result.addCustomValueString(s2); }
+                 */
             }
         }
     }
 
-    protected void parseCustomFields(Map<String, t> result, CommonModelEntityDescriptor node) {
+    protected void parseCustomFields(Map<String, T> result, CommonModelEntityDescriptor node) {
 
-    	//ToDo implement cleanly
-    	/*
-        for (String s : result.customValuesInt) {
-            if (ya.hasKey(s)) {
-                node.setCustomValue(s, ya.getInteger(s));
-                // Gdx.app.log("debug", "Added new custom value: " + s);
-            }
-        }
+        // ToDo implement cleanly
+        /*
+         * for (String s : result.customValuesInt) { if (ya.hasKey(s)) {
+         * node.setCustomValue(s, ya.getInteger(s)); // Gdx.app.log("debug",
+         * "Added new custom value: " + s); } }
+         * 
+         * for (String s : result.customValuesString) { if (ya.hasKey(s)) {
+         * node.setCustomValue(s, ya.getString(s)); } }
+         */
+    }
 
-        for (String s : result.customValuesString) {
-            if (ya.hasKey(s)) {
-                node.setCustomValue(s, ya.getString(s));
-            }
+    private String getStringForKey(String key) {
+        if (yamlLoader.hasKey(key)) {
+            return yamlLoader.getString(key);
+        } else {
+            return null;
         }
-        */
     }
 
     protected void setGroup(CommonModelEntityDescriptor node, Map<String, GroupInfo> groups) {
+        globalGroup = getStringForKey("globalgroup");
+        globalSubGroup = getStringForKey("globalsubgroup");
 
-        if (ya.hasKey("globalgroup")) {
-            globalGroup = ya.getString("globalgroup");
-        }
-
-        if (ya.hasKey("globalsubgroup")) {
-            globalSubGroup = ya.getString("globalsubgroup");
-        }
-
-        if (ya.hasKey("group")) {
-            node.setGroup (ya.getString("group"));
+        if (yamlLoader.hasKey("group")) {
+            node.setGroup(yamlLoader.getString("group"));
 
             if (groups.get(node.getGroup()) == null) {
                 log.error("Unknown group: " + node.getGroup());
             }
 
-            node.setGroupID (groups.get(node.getGroup()).getId());
+            node.setGroupID(groups.get(node.getGroup()).getId());
         } else {
             if (globalGroup != null) {
-                node.setGroup (globalGroup);
-                node.setGroupID (groups.get(node.getGroup()).getId());
+                node.setGroup(globalGroup);
+                node.setGroupID(groups.get(node.getGroup()).getId());
             }
         }
 
-        if (ya.hasKey("subgroup")) {
-            node.setSubGroup (ya.getString("subgroup"));
+        if (yamlLoader.hasKey("subgroup")) {
+            node.setSubGroup(yamlLoader.getString("subgroup"));
 
             // if (groups.getByCode(node.subGroupCode) == null) {
             // Log.error("Unknown subgroup: " + node.subGroupCode);
@@ -211,11 +209,11 @@ public class DataNodeLoader<t extends CommonModelEntityDescriptor> implements Ab
             Objects.requireNonNull(groups.get(node.getGroup()).subGroups);
             Objects.requireNonNull(groups.get(node.getGroup()).subGroups.get(node.getSubGroup()));
 
-            node.setSubGroupID (groups.get(node.getGroup()).subGroups.get(node.getSubGroup()).getId());
+            node.setSubGroupID(groups.get(node.getGroup()).subGroups.get(node.getSubGroup()).getId());
         } else {
             if (globalSubGroup != null) {
-                node.setSubGroup (globalSubGroup);
-                node.setSubGroupID (groups.get(node.getGroup()).subGroups.get(node.getSubGroup()).getId());
+                node.setSubGroup(globalSubGroup);
+                node.setSubGroupID(groups.get(node.getGroup()).subGroups.get(node.getSubGroup()).getId());
             }
         }
     }
@@ -225,26 +223,26 @@ public class DataNodeLoader<t extends CommonModelEntityDescriptor> implements Ab
      * iteration loop
      */
     protected void parseYaml(Object o) {
-        ya.setNextYamlNode(o);
+        yamlLoader.setNextYamlNode(o);
 
-        entityName = ya.getString("name");
-        entityCode = ya.getString("id");
+        entityName = yamlLoader.getString("name");
+        entityCode = yamlLoader.getString("id");
 
-        if (ya.hasKey("rating")) {
-            entityRating = ya.getInteger("rating");
+        if (yamlLoader.hasKey("rating")) {
+            entityRating = yamlLoader.getInteger("rating");
         } else {
             entityRating = -1;
         }
 
-        if (ya.hasKey("desc")) {
-            entityDescription = ya.getString("desc");
+        if (yamlLoader.hasKey("desc")) {
+            entityDescription = yamlLoader.getString("desc");
         } else {
             entityDescription = "";
         }
     }
 
     public void loadAllEntities() {
-        for (Object o : ya.dataYamls) {
+        for (Object o : yamlLoader.dataYamls) {
             parseYaml(o);
         }
     }
@@ -255,11 +253,11 @@ public class DataNodeLoader<t extends CommonModelEntityDescriptor> implements Ab
      * 
      * @return
      */
-    public Map<String, t> loadAndInitialize() {
+    public Map<String, T> loadAndInitialize() {
         if (wildcardFileExtension.isEmpty())
         // Parse one file
         {
-            ya.openFile(path);
+            yamlLoader.openFile(path);
             loadAndInitializeAllEntities();
         }
 
@@ -267,14 +265,14 @@ public class DataNodeLoader<t extends CommonModelEntityDescriptor> implements Ab
     }
 
     private void loadAndInitializeAllEntities() {
-        for (Object o : ya.dataYamls) {
+        for (Object o : yamlLoader.dataYamls) {
             parseYaml(o);
 
             CommonModelEntityDescriptor node = new CommonModelEntityDescriptor();
             node.setName(entityName);
-            node.setDescription (entityDescription);
+            node.setDescription(entityDescription);
             node.setId(entityCode);
-            results.put(node.getId(), (t) node);
+            results.put(node.getId(), (T) node);
         }
     }
 
@@ -283,38 +281,17 @@ public class DataNodeLoader<t extends CommonModelEntityDescriptor> implements Ab
     }
 
     @Override
-    public Map<String, t> load() {
+    public Map<String, T> load() {
 
         if (loadSingle())
         // Parse one file
         {
-            ya.openFile(path);
+            yamlLoader.openFile(path);
             loadAllEntities();
         } else
 
         // Parse whole directory
         {
-            // path = path.replace("*", "");
-
-            // FileHandle dirHandle = Gdx.files.internal(path);
-            // ArrayList<FileHandle> list = new ArrayList<FileHandle>();
-
-            /*
-             * for (FileHandle entry : dirHandle.list()) {
-             * 
-             * //Load common file first if
-             * (entry.path().contains("common."+wildcardFileExtension.get(0))) {
-             * ya.openFile(entry); loadAllEntities(); } else {
-             * 
-             * if (wildcardFileExtension.contains(entry.extension())) {
-             * list.add(entry); } } }
-             */
-
-            // for (FileHandle entry : list) {
-            // ya.openFile(entry);
-            // loadAllEntities();
-            // }
-
             List<Path> filesToLoad = null;
             try {
                 filesToLoad = fileReader.getListOfFilesByWildcard(path, wildcardFileExtension);
@@ -323,7 +300,7 @@ public class DataNodeLoader<t extends CommonModelEntityDescriptor> implements Ab
             }
 
             for (Path entry : filesToLoad) {
-                ya.openFile(entry);
+                yamlLoader.openFile(entry);
                 loadAllEntities();
             }
             // }
@@ -333,14 +310,13 @@ public class DataNodeLoader<t extends CommonModelEntityDescriptor> implements Ab
     }
 
     @Override
-    public DataNodeLoader<t> setWildcardFileExtension(String... wildcards) {
+    public DataNodeLoader<T> setWildcardFileExtension(String... wildcards) {
         wildcardFileExtension = SetUtils.buildSet(wildcards);
         return this;
     }
 
     @Override
     public void setFileReader(AbstractFileReader fileReader) {
-        // TODO Auto-generated method stub
-
+        this.fileReader = fileReader;
     }
 }

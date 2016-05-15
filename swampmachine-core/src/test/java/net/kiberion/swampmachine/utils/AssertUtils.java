@@ -1,4 +1,4 @@
-package net.kiberion.assets.util;
+package net.kiberion.swampmachine.utils;
 
 public class AssertUtils {
 

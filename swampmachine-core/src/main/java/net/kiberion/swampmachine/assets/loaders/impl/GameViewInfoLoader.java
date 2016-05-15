@@ -2,6 +2,9 @@ package net.kiberion.swampmachine.assets.loaders.impl;
 
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -15,7 +18,9 @@ import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescripto
 /**
  * @author: kibertoad
  */
-public class GameViewInfoLoader extends DataNodeLoader<ViewInfo>{
+public class GameViewInfoLoader extends CommonYamlLoader<ViewInfo> {
+
+    private static final Logger log = LogManager.getLogger();
 
     public static String pathToImages = "img/";
     public Map<String, ? extends CommonModelEntityDescriptor> listOfModelInfo;
@@ -23,8 +28,8 @@ public class GameViewInfoLoader extends DataNodeLoader<ViewInfo>{
     public String imageName;
     public boolean imageIsMandatory;
 
-    public GameViewInfoLoader(String fromPath, Map<String, ? extends CommonModelEntityDescriptor> setListofModelInfo, String... wildcards)
-    {
+    public GameViewInfoLoader(String fromPath, Map<String, ? extends CommonModelEntityDescriptor> setListofModelInfo,
+            String... wildcards) {
         super(fromPath);
 
         if (wildcards.length > 0) {
@@ -36,51 +41,50 @@ public class GameViewInfoLoader extends DataNodeLoader<ViewInfo>{
     }
 
     public GameViewInfoLoader(String fromPath, String... wildcards) {
-        this(fromPath, (Map<String, ? extends CommonModelEntityDescriptor>)null, wildcards);
+        this(fromPath, (Map<String, ? extends CommonModelEntityDescriptor>) null, wildcards);
     }
 
+    @Override
+    protected ViewInfo initNewEntity() {
+        return new ViewInfo();
+    }
 
     @Override
-    public void parseYaml(Object o) {
-        super.parseYaml(o);
+    public void parseYaml(Object sourceYamlObject, ViewInfo targetObject) {
+        super.parseYaml(sourceYamlObject, targetObject);
 
-        ViewInfo viewInfo = new ViewInfo();
-
-        TextureRegion image = ya.getImage("image");
-        //image.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        TextureRegion image = getYamlLoader().getImage("image");
+        // image.getTexture().setFilter(Texture.TextureFilter.Linear,
+        // Texture.TextureFilter.Linear);
 
         if (listOfModelInfo != null) {
-            viewInfo.getTags().addAll(listOfModelInfo.get(entityCode).getTags());
-            viewInfo.setGroup (listOfModelInfo.get(entityCode).getGroup());
+            targetObject.getTags().addAll(listOfModelInfo.get(targetObject.getId()).getTags());
+            targetObject.setGroup(listOfModelInfo.get(targetObject.getId()).getGroup());
 
-            //Gdx.app.log("debug", "Bound "+entityCode+" to model "+listOfModelInfo.getByCode(entityCode).code);
-            //Gdx.app.log("debug", "Bound ID "+viewInfo.ID+" to model ID "+listOfModelInfo.getByCode(entityCode).ID);
+            // Gdx.app.log("debug", "Bound "+entityCode+" to model
+            // "+listOfModelInfo.getByCode(entityCode).code);
+            // Gdx.app.log("debug", "Bound ID "+viewInfo.ID+" to model ID
+            // "+listOfModelInfo.getByCode(entityCode).ID);
         }
 
-        viewInfo.setId (entityCode);
-
-        imageName = ya.getString("image");
+        imageName = getYamlLoader().getString("image");
 
         if ((imageName == null) || (!(imageName).equals("BLANK"))) {
 
-            //Gdx.app.log("debug", "Try to add image: " + imageName+ ", ID: "+viewInfo.ID);
-
-            viewInfo.image = image;
+            targetObject.setImage(image);
 
             if (image != null) {
-
-            viewInfo.drawableImage = new TextureRegionDrawable(image);
-            viewInfo.picture = new Pixmap(Gdx.files.getFileHandle(AssetProvider.getPathToAssets().resolve(pathToImages).resolve(imageName+".png").toString(), Files.FileType.Internal));
+                targetObject.setDrawableImage(new TextureRegionDrawable(image));
+                targetObject.setPicture(new Pixmap(Gdx.files.getFileHandle(
+                        AssetProvider.getPathToAssets().resolve(pathToImages).resolve(imageName + ".png").toString(),
+                        Files.FileType.Internal)));
             } else {
                 if (imageIsMandatory) {
-                    Gdx.app.error("error", "No image set for: "+entityCode);
+                    log.error("error", "No image set for: " + targetObject.getId());
                 }
             }
-
-           // Gdx.app.log("debug", "Added image: " + imageName+ ", ID: "+viewInfo.ID);
         }
 
-
-        results.put(viewInfo.getId(), viewInfo);
+        results.put(targetObject.getId(), targetObject);
     }
 }

@@ -13,7 +13,7 @@ public class CommonMetadataHolderAspect implements MetadataHolderBlock{
     }
 
     public CommonMetadataHolderAspect() {
-        metadata = new CommonMetadataAspect();
+        metadata = new CommonMetadataBlock();
     }
 
     @Override
