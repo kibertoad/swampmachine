@@ -3,7 +3,6 @@ package net.kiberion.tiled.processors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import com.badlogic.gdx.math.Rectangle;
 
@@ -14,7 +13,6 @@ import net.kiberion.tiled.aspects.api.CollidableEntitiesSource;
 import net.kiberion.tiled.aspects.holders.MapMetadataHolderAspect;
 import net.kiberion.tiled.model.TiledMapInfo;
 
-@Component
 public class CreatureCollisionProcessor<TModel extends AbstractTiledMapModel<? extends MapMetadataHolderAspect> & CollidableEntitiesSource>
         implements CollisionInfoProvider {
 

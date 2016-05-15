@@ -42,6 +42,5 @@ public class CommonLoaderConfiguration {
     public CommonViewInfoRegistry viewInfoRegistry() {
         return new CommonViewInfoRegistry();
     }
-    
-    
+
 }

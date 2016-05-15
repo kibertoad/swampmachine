@@ -19,7 +19,7 @@ public abstract class AbstractModelEntityDescriptor extends CommonMetadataHolder
 
     @Override
     public String getName() {
-        return this.getMetadata().getId();
+        return this.getMetadata().getName();
     }
 
     public void setName(String name) {

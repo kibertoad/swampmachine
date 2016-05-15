@@ -17,9 +17,10 @@ import net.kiberion.swampmachine.processors.TimedProcessor;
 public class StateSpringLoader {
 
     private static final Logger log = LogManager.getLogger();
-    
-    private StateSpringLoader () {}
-    
+
+    private StateSpringLoader() {
+    }
+
     /**
      * 
      * @param context
@@ -31,15 +32,23 @@ public class StateSpringLoader {
 
         for (GameState bean : stateBeans) {
             if (bean.getClass().isAnnotationPresent(LoadingState.class)) {
+                if (stateRegistry.getLoadingState() != null) {
+                    throw new IllegalStateException(
+                            "More than one loading state exist: " + stateRegistry.getLoadingState() + ", " + bean);
+                }
                 stateRegistry.setLoadingState(bean);
             }
             if (bean.getClass().isAnnotationPresent(StartingState.class)) {
+                if (stateRegistry.getStartingState() != null) {
+                    throw new IllegalStateException(
+                            "More than one starting state exist: " + stateRegistry.getStartingState() + ", " + bean);
+                }
                 stateRegistry.setStartingState(bean);
             }
 
             stateRegistry.registerState(bean);
-            
-            //Attach realtime processors
+
+            // Attach realtime processors
             RealtimeProcessors realtimeProcessors = bean.getClass().getAnnotation(RealtimeProcessors.class);
             if (realtimeProcessors != null) {
                 for (Class<? extends TimedProcessor> clazz : realtimeProcessors.beansOfClasses()) {
@@ -47,12 +56,12 @@ public class StateSpringLoader {
                     bean.getRealtimeProcessors().add(processor);
                 }
             }
-            
+
         }
-        
+
         Validate.notNull(stateRegistry.getLoadingState(), "Loading state is null");
         Validate.notNull(stateRegistry.getStartingState(), "Starting state is null");
-        
+
         log.info("Done registering game states from Spring context.");
     }
 

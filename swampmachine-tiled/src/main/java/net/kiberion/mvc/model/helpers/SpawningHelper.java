@@ -2,15 +2,12 @@ package net.kiberion.mvc.model.helpers;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
 import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 import net.kiberion.swampmachine.utils.Dice;
 import net.kiberion.tiled.aspects.api.CollidableAspect;
 import net.kiberion.tiled.model.TiledMapInfo;
 
-@Component
 public class SpawningHelper {
 
     /**

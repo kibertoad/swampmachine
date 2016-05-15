@@ -2,13 +2,11 @@ package net.kiberion.tiled.processors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.stereotype.Component;
 
 import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.tiled.aspects.api.FormAspect;
 import net.kiberion.tiled.model.TiledMapInfo;
 
-@Component
 public class WallObstacleProcessor {
 
     private static final Logger log = LogManager.getLogger();
