@@ -3,8 +3,6 @@ package net.kiberion.swampmachine.registries;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.stereotype.Component;
-
 import lombok.Getter;
 import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 import net.kiberion.swampmachine.entities.modelinfo.ActionInfo;
@@ -13,7 +11,6 @@ import net.kiberion.swampmachine.entities.modelinfo.GroupInfo;
 import net.kiberion.swampmachine.entities.modelinfo.ItemInfo;
 import net.kiberion.swampmachine.entities.modelinfo.PersonalName;
 
-@Component
 public class CommonModelInfoRegistry{
 
 	@Getter

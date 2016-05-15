@@ -3,6 +3,8 @@ package net.kiberion.swampmachine.utils;
 import java.util.HashSet;
 import java.util.Set;
 
+import net.kiberion.swampmachine.assets.loaders.api.Prioritizable;
+
 /**
  * @author kibertoad
  */
@@ -11,7 +13,17 @@ public class SetUtils {
     private SetUtils() {
     }
 
-    //if values have index meaning, they should be incremented for display purposes
+    public static <T extends Prioritizable> void validateNoDuplicatePriority(Set<? extends T> set, T prioritizable) {
+        for (T entity : set) {
+            if (entity.getPriority() == prioritizable.getPriority()) {
+                throw new IllegalArgumentException(
+                        "Two entities have duplicate priorities: " + entity + " and " + prioritizable);
+            }
+        }
+    }
+
+    // if values have index meaning, they should be incremented for display
+    // purposes
     public static String integerSetToString(Set<Integer> integerSet, boolean incrementValues) {
         StringBuilder builder = new StringBuilder();
         int counter = 0;
@@ -40,7 +52,7 @@ public class SetUtils {
         }
         return result;
     }
-    
+
     @SuppressWarnings("unchecked")
     public static <T> Set<T> buildSet(T... i) {
         Set<T> result = new HashSet<>();
@@ -49,5 +61,5 @@ public class SetUtils {
         }
         return result;
     }
-    
+
 }

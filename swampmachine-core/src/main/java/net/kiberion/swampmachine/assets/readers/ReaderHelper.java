@@ -3,7 +3,6 @@ package net.kiberion.swampmachine.assets.readers;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import com.badlogic.gdx.Gdx;
 
@@ -18,7 +17,6 @@ import net.kiberion.swampmachine.assets.GameConfig;
  *
  */
 
-@Component
 public class ReaderHelper {
 
     private static final Logger log = LogManager.getLogger();

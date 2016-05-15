@@ -15,7 +15,7 @@ import org.yaml.snakeyaml.constructor.Constructor;
 
 import net.kiberion.swampmachine.assets.loaders.util.FileReaderFactory;
 import net.kiberion.swampmachine.assets.readers.AbstractFileReader;
-import net.kiberion.swampmachine.entities.common.impl.AbstractModelEntityDescriptor;
+import net.kiberion.swampmachine.entities.common.api.EntityModelDescriptor;
 import net.kiberion.swampmachine.utils.MapUtils;
 import net.kiberion.swampmachine.utils.SetUtils;
 
@@ -23,7 +23,7 @@ import net.kiberion.swampmachine.utils.SetUtils;
  * @author kibertoad
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class POJOLoader<T extends AbstractModelEntityDescriptor> implements AbstractLoader<T> {
+public class POJOLoader<T extends EntityModelDescriptor> implements AbstractLoader<T> {
     
     private static final Logger log = LogManager.getLogger();
 

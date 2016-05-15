@@ -11,7 +11,6 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.context.ApplicationListener;
-import org.springframework.stereotype.Component;
 
 import net.kiberion.swampmachine.factories.events.AfterSpawnEntityEvent;
 import net.kiberion.swampmachine.factories.events.SpawnEntityEvent;
@@ -28,7 +27,6 @@ import net.kiberion.swampmachine.factories.params.SpawnParams;
  * @author kibertoad
  *
  */
-@Component
 public class MetaFactory implements ApplicationEventPublisherAware, ApplicationListener<SpawnEntityEvent>,
         ApplicationContextAware, InitializingBean {
 

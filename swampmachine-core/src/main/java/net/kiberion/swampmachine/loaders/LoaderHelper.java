@@ -6,32 +6,43 @@ import java.util.TreeSet;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
+import lombok.Setter;
 import net.kiberion.swampmachine.assets.loaders.api.AssetLoader;
 import net.kiberion.swampmachine.assets.loaders.api.AsyncAssetLoader;
 import net.kiberion.swampmachine.assets.loaders.api.SyncAssetLoader;
 import net.kiberion.swampmachine.assets.loaders.util.AssetLoaderSpringExtractor;
+import net.kiberion.swampmachine.utils.SetUtils;
 
-public class LoaderHelper {
+public class LoaderHelper implements InitializingBean, ApplicationContextAware {
 
     private static final Logger log = LogManager.getLogger();
 
     private final Set<SyncAssetLoader> syncAssetLoaders = new TreeSet<>();
     private final Set<AsyncAssetLoader> asyncAssetLoaders = new TreeSet<>();
 
-    public void init(ApplicationContext ctx) {
-        List<AssetLoader> assetLoaders = AssetLoaderSpringExtractor.extractSortedStartupAssetLoadersFromContext(ctx);
+    @Setter
+    private ApplicationContext applicationContext;
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        List<AssetLoader> assetLoaders = AssetLoaderSpringExtractor
+                .extractSortedStartupAssetLoadersFromContext(applicationContext);
         for (AssetLoader assetLoader : assetLoaders) {
             if (assetLoader instanceof AsyncAssetLoader) {
+                SetUtils.validateNoDuplicatePriority(asyncAssetLoaders, assetLoader);
                 asyncAssetLoaders.add((AsyncAssetLoader) assetLoader);
             }
             if (assetLoader instanceof SyncAssetLoader) {
+                SetUtils.validateNoDuplicatePriority(syncAssetLoaders, assetLoader);
                 syncAssetLoaders.add((SyncAssetLoader) assetLoader);
             }
         }
     }
-
+    
     public void startLoading() {
         log.info("Start loading from Sync asset loaders.");
         for (SyncAssetLoader loader : syncAssetLoaders) {
@@ -58,7 +69,7 @@ public class LoaderHelper {
     protected Set<AsyncAssetLoader> getAsyncAssetLoaders() {
         return asyncAssetLoaders;
     }
-    
+
     protected Set<SyncAssetLoader> getSyncAssetLoaders() {
         return syncAssetLoaders;
     }

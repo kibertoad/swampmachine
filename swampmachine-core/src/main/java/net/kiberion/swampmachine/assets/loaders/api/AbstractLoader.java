@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import net.kiberion.swampmachine.assets.readers.AbstractFileReader;
-import net.kiberion.swampmachine.entities.common.impl.AbstractModelEntityDescriptor;
+import net.kiberion.swampmachine.entities.common.api.EntityModelDescriptor;
 
 
 /**
  * @author kibertoad
  */
-public interface AbstractLoader<T extends AbstractModelEntityDescriptor> {
+public interface AbstractLoader<T extends EntityModelDescriptor> {
 
     public Map<String, T> load() throws IOException;
 

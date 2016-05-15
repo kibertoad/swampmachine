@@ -3,11 +3,7 @@ package net.kiberion.swampmachine.mvcips.states;
 import org.apache.commons.lang3.Validate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -28,7 +24,7 @@ import net.kiberion.swampmachine.mvcips.view.StateViewBase;
  * @author kibertoad
  */
 @LoadingState
-public class CommonLoadingState extends GameState implements InitializingBean, ApplicationContextAware {
+public class CommonLoadingState extends GameState {
 
     private static final Logger log = LogManager.getLogger();
 
@@ -45,8 +41,6 @@ public class CommonLoadingState extends GameState implements InitializingBean, A
 
     @Autowired
     private LoaderHelper loaderHelper;
-
-    private ApplicationContext ctx;
 
     protected Invokable gameInceptionProvider;
 
@@ -129,16 +123,6 @@ public class CommonLoadingState extends GameState implements InitializingBean, A
     @Override
     public StateView getView() {
         return view;
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext ctx) throws BeansException {
-        this.ctx = ctx;
-    }
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        loaderHelper.init(ctx);
     }
 
 }

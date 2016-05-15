@@ -3,14 +3,11 @@ package net.kiberion.swampmachine.registries;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.stereotype.Component;
-
 import lombok.Getter;
 import net.kiberion.swampmachine.assets.viewinfo.AnimationViewInfo;
 import net.kiberion.swampmachine.assets.viewinfo.CreatureViewInfo;
 import net.kiberion.swampmachine.assets.viewinfo.ViewInfo;
 
-@Component
 public class CommonViewInfoRegistry {
 
     @Getter

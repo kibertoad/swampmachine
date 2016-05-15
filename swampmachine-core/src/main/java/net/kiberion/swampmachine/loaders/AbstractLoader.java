@@ -12,7 +12,7 @@ import lombok.Getter;
 import net.kiberion.swampmachine.assets.GameConfig;
 import net.kiberion.swampmachine.assets.loaders.api.POJOLoader;
 import net.kiberion.swampmachine.assets.readers.ReaderHelper;
-import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
+import net.kiberion.swampmachine.entities.common.api.EntityModelDescriptor;
 import net.kiberion.swampmachine.utils.MapUtils;
 
 /**
@@ -40,16 +40,16 @@ public abstract class AbstractLoader {
         return readerHelper.fileExists(directoryName);
     }
 
-    public abstract <T extends CommonModelEntityDescriptor> Map<String, T> getTargetMap ();
+    public abstract <T extends EntityModelDescriptor> Map<String, T> getTargetMap ();
     public abstract String getLoadDirectory ();
     public abstract String getLoadFileExtension ();
-    public abstract Class<? extends CommonModelEntityDescriptor> getEntityClass();
+    public abstract Class<? extends EntityModelDescriptor> getEntityClass();
     
     public void load () {
         loadDataNodes(getTargetMap(), getLoadDirectory(), getLoadFileExtension(), getEntityClass());
     }
     
-    protected <T extends CommonModelEntityDescriptor> void loadDataNodes(Map<String, T> targetMap, String loadDirectory,
+    protected <T extends EntityModelDescriptor> void loadDataNodes(Map<String, T> targetMap, String loadDirectory,
             String loadExtension, Class<T> clazz) {
         try {
             if (fileExists(loadDirectory)) {

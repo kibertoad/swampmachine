@@ -4,13 +4,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import net.kiberion.swampmachine.assets.loaders.api.SyncAssetLoader;
-import net.kiberion.swampmachine.assets.util.LoadOnStartup;
 import net.kiberion.swampmachine.entities.modelinfo.CreatureModelInfo;
 import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
 
-@LoadOnStartup
-public class CreatureLoader extends CommonLoader implements SyncAssetLoader {
+public class CreatureLoader extends CommonSyncStartupLoader {
 
     @Autowired
     private CommonModelInfoRegistry modelInfoRegistry;

@@ -34,7 +34,6 @@ public class ModelDescriptorsLoadTest extends ContextBasedTest {
     @Test
     public void testLoadingCreatures() {
         assertEquals(0, modelInfoRegistry.getCreatures().size());
-        loaderHelper.init(ctx);
         loaderHelper.startLoading();
         loaderHelper.finishLoading();
         assertEquals(1, modelInfoRegistry.getCreatures().size());
@@ -42,8 +41,8 @@ public class ModelDescriptorsLoadTest extends ContextBasedTest {
         assertNotNull(creature);
     }
 
+    @Test
     public void testLoaderOrder() {
-        loaderHelper.init(ctx);
         assertEquals(0, loaderHelper.getAsyncAssetLoaders().size());
         assertEquals(2, loaderHelper.getSyncAssetLoaders().size());
 
