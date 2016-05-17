@@ -11,6 +11,9 @@ import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescripto
  *
  * This class is used to describe template information for creature
  */
+
+//ToDo Too much specific logic to belong in core library. Make it more generic and put specific implementation into Blueprints
+@Deprecated
 public class CreatureModelInfo extends CommonModelEntityDescriptor{
 
     public int hp;
@@ -21,8 +24,6 @@ public class CreatureModelInfo extends CommonModelEntityDescriptor{
     public Map<String, Integer> statList;
     public Map<String, Integer> skillList;
 
-    //public Inventory inventory;
-    //public Inventory equippedItems;
     public String templateID = null;
 
     public CreatureModelInfo() {
@@ -32,8 +33,6 @@ public class CreatureModelInfo extends CommonModelEntityDescriptor{
         super(setName, setCode);
 
         actions = new ArrayList<>();
-        //inventory = new Inventory(items);
-        //equippedItems = new Inventory(items);
     }
 
     public Map<String, Integer> getStatList() {
@@ -44,9 +43,4 @@ public class CreatureModelInfo extends CommonModelEntityDescriptor{
         return statList;
     }
 
-    /*
-    public Inventory getInventory() {
-        return inventory;  //To change body of created methods use File | Settings | File Templates.
-    }
-    */
 }

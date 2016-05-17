@@ -14,6 +14,9 @@ import net.kiberion.swampmachine.entities.common.impl.Interval;
 /**
  * @author kibertoad
  */
+
+//Use {@link RandomProvider} instead
+@Deprecated
 public class Dice {
 
     public List<Interval> rollOptions = new ArrayList<Interval>();

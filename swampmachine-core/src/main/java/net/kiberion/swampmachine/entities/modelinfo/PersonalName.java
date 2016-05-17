@@ -1,5 +1,7 @@
 package net.kiberion.swampmachine.entities.modelinfo;
 
+import lombok.Getter;
+import lombok.Setter;
 import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 
 /**
@@ -12,8 +14,13 @@ public class PersonalName extends CommonModelEntityDescriptor {
     public static final String IS_MALE_NAME = "isMaleName";
     public static final String IS_FEMALE_NAME = "isFemaleName";
     
-    public int nationID = -1;
-    public String name;
+    @Getter
+    @Setter
+    private int nationID = -1;
+    
+    @Getter
+    @Setter
+    private String name;
 
     public PersonalName() {
     }

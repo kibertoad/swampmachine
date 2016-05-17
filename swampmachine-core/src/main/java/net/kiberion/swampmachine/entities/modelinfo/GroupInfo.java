@@ -7,6 +7,8 @@ package net.kiberion.swampmachine.entities.modelinfo;
 import java.util.HashMap;
 import java.util.Map;
 
+import lombok.Getter;
+import lombok.Setter;
 import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 
 /**
@@ -15,10 +17,15 @@ import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescripto
  */
 public class GroupInfo extends CommonModelEntityDescriptor {
 
-    public Map<String, GroupInfo> subGroups = new HashMap<>();
-   // public TextureRegion image;
+    @Getter
+    private final Map<String, GroupInfo> subGroups = new HashMap<>();
 
-    public ActionInfo defaultAction;
-    public String defaultActionCode; //used to lazily load actions
+    @Getter
+    @Setter
+    private ActionInfo defaultAction;
+    
+    @Setter
+    @Getter
+    private String defaultActionCode; //used to lazily load actions
 
 }

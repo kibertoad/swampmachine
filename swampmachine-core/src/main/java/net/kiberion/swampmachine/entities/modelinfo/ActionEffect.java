@@ -2,14 +2,24 @@ package net.kiberion.swampmachine.entities.modelinfo;
 
 import java.util.Map;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @author kibertoad
  */
 public class ActionEffect {
 
-    public String effectCode;
-    public int value;
+    @Getter
+    @Setter
+    private String effectCode;
 
-    public Map<String, Object> properties;
+    @Getter
+    @Setter
+    private int value;
+
+    @Getter
+    @Setter
+    private Map<String, Object> properties;
 
 }

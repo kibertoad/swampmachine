@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.Color;
 /**
  * @author kibertoad
  */
+
+//ToDo probably would be better to put predefined colours into some external YAML rather than keep them in Java
+@Deprecated
 public class ColourGenerator {
 
     private static ColourGenerator _instance;
