@@ -34,7 +34,7 @@ public class StateManagerTest extends ContextBasedTest {
     @Autowired
     private ApplicationContext context;
 
-    private DummyGame game = new DummyGame();
+    private Game game = new DummyGame();
 
     @Test
     public void testStateTransition() {
