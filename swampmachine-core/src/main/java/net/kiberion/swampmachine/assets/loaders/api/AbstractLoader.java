@@ -14,13 +14,18 @@ import net.kiberion.swampmachine.entities.common.api.EntityModelDescriptor;
  */
 public interface AbstractLoader<T extends EntityModelDescriptor> {
 
-    public Map<String, T> load() throws IOException;
+    /**
+     * 
+     * @return Map of loaded entities, where key is id of an entity, and value is an entity
+     * @throws IOException
+     */
+    public Map<String, T> loadMap() throws IOException;
 
-    public AbstractLoader<T> setWildcardFileExtension(String... wildcards);
+    public AbstractLoader<T> setSupportedFileExtensions(String... extensions);
 
     public void setFileReader(AbstractFileReader fileReader);
 
     public default List<T> loadList() throws IOException {
-        return new ArrayList<T>(load().values());
+        return new ArrayList<T>(loadMap().values());
     }
 }

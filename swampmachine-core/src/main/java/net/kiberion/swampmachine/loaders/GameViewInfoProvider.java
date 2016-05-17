@@ -64,7 +64,7 @@ public class GameViewInfoProvider {
             AbstractLoader<AnimationViewInfo> loader = new POJOLoader<AnimationViewInfo>(getPathToAssets().resolve("animation/"), AnimationViewInfo.class, "view");
             
             try {
-                animationViewInfoList = loader.load();
+                animationViewInfoList = loader.loadMap();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -79,7 +79,7 @@ public class GameViewInfoProvider {
         if (fileReader.fileExists(getPathToAssets().resolve("view-game/"))) {
             log.info("Start loading gameimages from: "+getPathToAssets().resolve("view-game").toString());
             GameViewInfoLoader loader = new GameViewInfoLoader(getPathToAssets().resolve("view-game").toString()+"/*");
-            gameViewInfoList = loader.load();
+            gameViewInfoList = loader.loadMap();
         }
 
         log.info("Done loading gameimages");
@@ -89,7 +89,7 @@ public class GameViewInfoProvider {
         if (fileReader.fileExists(getPathToAssets().resolve("model-creature/"))) {
             log.info("debug", "Start loading creature images");
             EntityViewInfoLoader loader = new EntityViewInfoLoader(getPathToAssets().resolve("model-creature/").toString()+"*", fullCreatureList, "creatures");
-            this.fullCreatureViewInfoList = loader.load();
+            this.fullCreatureViewInfoList = loader.loadMap();
 
             /*
             try {

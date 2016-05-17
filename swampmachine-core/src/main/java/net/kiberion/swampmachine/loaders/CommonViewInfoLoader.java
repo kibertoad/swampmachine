@@ -59,7 +59,7 @@ public class CommonViewInfoLoader implements SyncAssetLoader{
             Path entityDirectory = config.getPathToResources().resolve(CREATURE_MODEL_DIRECTORY);
             EntityViewInfoLoader loader = new EntityViewInfoLoader(entityDirectory.toString()+"*", fullCreatureList, CREATURE_ENTITIES_FILE_EXTENSION);
             loader.setImageIsMandatory(imagesAreMandatory);
-            Map<String, EntityViewInfo> creatureViewInfo = loader.load();
+            Map<String, EntityViewInfo> creatureViewInfo = loader.loadMap();
             MapUtils.putAllEntities(viewInfoRegistry.getFullCreatureViewInfoList(), creatureViewInfo);
 
             /*

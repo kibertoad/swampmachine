@@ -33,7 +33,7 @@ public class EntityViewInfoLoader extends CommonYamlLoader<EntityViewInfo> {
     public EntityViewInfoLoader(String fromPath, Map<String, ? extends CommonModelEntityDescriptor> setCreatures, String wildcard) {
         super(fromPath);
 
-        setWildcardFileExtension(wildcard);
+        setSupportedFileExtensions(wildcard);
         entities = setCreatures;
     }
 

@@ -11,13 +11,10 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.badlogic.gdx.Gdx;
-
 import net.kiberion.swampmachine.assets.loaders.api.AbstractLoader;
+import net.kiberion.swampmachine.assets.loaders.util.FileReaderFactory;
 import net.kiberion.swampmachine.assets.loaders.util.YamlLoader;
 import net.kiberion.swampmachine.assets.readers.AbstractFileReader;
-import net.kiberion.swampmachine.assets.readers.GDXFileReader;
-import net.kiberion.swampmachine.assets.readers.SimpleFileReader;
 import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 import net.kiberion.swampmachine.utils.SetUtils;
 
@@ -43,12 +40,7 @@ public abstract class CommonYamlLoader<T extends CommonModelEntityDescriptor> im
 
     public CommonYamlLoader(Path fromPath) {
         path = fromPath;
-
-        if (Gdx.app != null) {
-            this.fileReader = new GDXFileReader(fromPath);
-        } else {
-            this.fileReader = new SimpleFileReader(fromPath);
-        }
+        this.fileReader = FileReaderFactory.buildFileReader(path);
     }
 
     public CommonYamlLoader(String fromPath) {
@@ -78,21 +70,21 @@ public abstract class CommonYamlLoader<T extends CommonModelEntityDescriptor> im
     protected abstract T initNewEntity();
 
     @Override
-    public Map<String, T> load() {
-        if (loadSingle())
+    public Map<String, T> loadMap() {
         // Parse one file
-        {
+        if (isLoadSingle()) {
             yamlLoader.openFile(path);
             loadAllEntities();
-        } else
+        }
+
         // Parse whole directory
-        {
+        else {
             List<Path> filesToLoad = null;
             try {
                 filesToLoad = fileReader.getListOfFilesByWildcard(path, wildcardFileExtension);
             } catch (IOException e) {
                 log.error("IO exception: ", e);
-                throw new IllegalStateException ("Failed to get list of files: ", e);
+                throw new IllegalStateException("Failed to get list of files: ", e);
             }
 
             for (Path entry : filesToLoad) {
@@ -105,7 +97,7 @@ public abstract class CommonYamlLoader<T extends CommonModelEntityDescriptor> im
     }
 
     @Override
-    public CommonYamlLoader<T> setWildcardFileExtension(String... wildcards) {
+    public CommonYamlLoader<T> setSupportedFileExtensions(String... wildcards) {
         wildcardFileExtension = SetUtils.buildSet(wildcards);
         return this;
     }
@@ -119,10 +111,8 @@ public abstract class CommonYamlLoader<T extends CommonModelEntityDescriptor> im
         return yamlLoader;
     }
 
-    private boolean loadSingle() {
+    private boolean isLoadSingle() {
         return (wildcardFileExtension.isEmpty());
     }
-
-
 
 }

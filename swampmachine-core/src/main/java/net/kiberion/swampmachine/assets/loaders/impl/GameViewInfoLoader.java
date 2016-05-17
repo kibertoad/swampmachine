@@ -33,9 +33,9 @@ public class GameViewInfoLoader extends CommonYamlLoader<ViewInfo> {
         super(fromPath);
 
         if (wildcards.length > 0) {
-            setWildcardFileExtension(wildcards);
+            setSupportedFileExtensions(wildcards);
         } else {
-            setWildcardFileExtension("view");
+            setSupportedFileExtensions("view");
         }
         listOfModelInfo = setListofModelInfo;
     }
@@ -61,16 +61,11 @@ public class GameViewInfoLoader extends CommonYamlLoader<ViewInfo> {
             targetObject.getTags().addAll(listOfModelInfo.get(targetObject.getId()).getTags());
             targetObject.setGroup(listOfModelInfo.get(targetObject.getId()).getGroup());
 
-            // Gdx.app.log("debug", "Bound "+entityCode+" to model
-            // "+listOfModelInfo.getByCode(entityCode).code);
-            // Gdx.app.log("debug", "Bound ID "+viewInfo.ID+" to model ID
-            // "+listOfModelInfo.getByCode(entityCode).ID);
         }
 
         imageName = getYamlLoader().getString("image");
 
         if ((imageName == null) || (!(imageName).equals("BLANK"))) {
-
             targetObject.setImage(image);
 
             if (image != null) {

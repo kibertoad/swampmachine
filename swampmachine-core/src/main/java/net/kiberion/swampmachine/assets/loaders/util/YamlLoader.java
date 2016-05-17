@@ -5,6 +5,7 @@
 package net.kiberion.swampmachine.assets.loaders.util;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -53,10 +54,10 @@ public class YamlLoader {
     }
 
     public void openFile(Path name) {
-        try {
-            dataYamls = yaml.loadAll(fileReader.getFileAsStream(name));
+        try (InputStream is = fileReader.getFileAsStream(name)){
+            dataYamls = yaml.loadAll(is);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("IO exception: ", e);
         }
     }
 
@@ -64,6 +65,9 @@ public class YamlLoader {
         return (Integer) asMap.get(byKey);
     }
 
+
+    //This entity is somewhat too specific to be loaded from a general purpose loader. Consider using some pluggable delegation classes instead
+    @Deprecated
     public Animation getAnimation(String image, int FRAME_COLS, int FRAME_ROWS, float frameDuration) {
         TextureAtlas.AtlasRegion atlasRegion = getImage("image");
 
@@ -83,6 +87,8 @@ public class YamlLoader {
         return walkAnimation;
     }
 
+    //This entity is somewhat too specific to be loaded from a general purpose loader. Consider using some pluggable delegation classes instead
+    @Deprecated
     public TextureAtlas.AtlasRegion getImage(String byKey) {
         String imageName = getString(byKey);
 

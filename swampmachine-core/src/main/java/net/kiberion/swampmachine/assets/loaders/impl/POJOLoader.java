@@ -1,9 +1,11 @@
 package net.kiberion.swampmachine.assets.loaders.impl;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,17 +19,18 @@ import net.kiberion.swampmachine.assets.loaders.api.AbstractLoader;
 import net.kiberion.swampmachine.assets.loaders.util.FileReaderFactory;
 import net.kiberion.swampmachine.assets.readers.AbstractFileReader;
 import net.kiberion.swampmachine.entities.common.api.EntityModelDescriptor;
-import net.kiberion.swampmachine.utils.MapUtils;
 import net.kiberion.swampmachine.utils.SetUtils;
 
 /**
+ * This loader is used for deserializing entities from YAML files directly into
+ * POJO entities. Note that structure of source YAML data and target class
+ * setters should match, otherwise exception will be thrown
+ * 
  * @author kibertoad
  */
-@SuppressWarnings({ "rawtypes", "unchecked" })
 public class POJOLoader<T extends EntityModelDescriptor> implements AbstractLoader<T> {
 
     private static final Logger log = LogManager.getLogger();
-
     private AbstractFileReader fileReader;
 
     @Override
@@ -35,36 +38,38 @@ public class POJOLoader<T extends EntityModelDescriptor> implements AbstractLoad
         this.fileReader = fileReader;
     }
 
-    public Set<String> wildcardFileExtension = SetUtils.buildSet(); // if empty, only load single file
+    // if empty, only load single file
+    public Set<String> wildcardFileExtension = new HashSet<>();
     public Path path;
-    public Class clazz;
+    public Class<?> entityClass;
 
-    public POJOLoader(Path path, Class clazz) {
+    public POJOLoader(Path path, Class<?> clazz) {
         this.path = path;
-        this.clazz = clazz;
+        this.entityClass = clazz;
         this.fileReader = FileReaderFactory.buildFileReader(path);
     }
 
-    public POJOLoader(Path path, Class clazz, String... wildcardFileExtension) {
+    public POJOLoader(Path path, Class<?> clazz, String... wildcardFileExtension) {
         this(path, clazz);
-        setWildcardFileExtension(wildcardFileExtension);
+        setSupportedFileExtensions(wildcardFileExtension);
     }
 
+    @SuppressWarnings("unchecked")
     private List<T> loadFile(Path path) throws IOException {
         log.info("Loading YAML file: " + path.toString());
-
         List<T> list = new ArrayList<>();
-        Yaml yaml = new Yaml(new Constructor(clazz));
+        Yaml yaml = new Yaml(new Constructor(entityClass));
 
-        for (Object asObj : yaml.loadAll(fileReader.getFileAsStream(path))) {
-            list.add((T) asObj);
+        try (InputStream is = fileReader.getFileAsStream(path)) {
+            for (Object asObj : yaml.loadAll(is)) {
+                list.add((T) asObj);
+            }
         }
         return list;
     }
 
     @Override
-    public Map<String, T> load() throws IOException {
-
+    public Map<String, T> loadMap() throws IOException {
         Map<String, T> results = new HashMap<>();
 
         // Parse one file
@@ -74,8 +79,8 @@ public class POJOLoader<T extends EntityModelDescriptor> implements AbstractLoad
                 results.put(loadedEntity.getId(), loadedEntity);
             }
 
-        } 
-        
+        }
+
         // Parse whole directory, filtered by extension
         else {
             List<Path> filesToLoad = fileReader.getListOfFilesByWildcard(path, wildcardFileExtension);
@@ -89,36 +94,8 @@ public class POJOLoader<T extends EntityModelDescriptor> implements AbstractLoad
         return results;
     }
 
-    public Map<String, T> loadToMap() throws IOException {
-        Map<String, T> result = new HashMap<>();
-
-        // Parse one file
-        if (wildcardFileExtension.isEmpty()) {
-            List<T> loadedEntries = loadFile(path);
-            for (T entry : loadedEntries) {
-                result.put(entry.getId(), entry);
-            }
-            
-        } 
-        
-        // Parse whole directory, filtered by extension
-        else {
-            List<Path> filesToLoad = fileReader.getListOfFilesByWildcard(path, wildcardFileExtension);
-            for (Path fileEntry : filesToLoad) {
-                List<T> loadedEntries = loadFile(fileEntry);
-                MapUtils.putAllEntities(result, loadedEntries);
-            }
-        }
-        return result;
-    }
-
     @Override
-    public List<T> loadList() throws IOException {
-        return new ArrayList<>(loadToMap().values());
-    }
-
-    @Override
-    public POJOLoader<T> setWildcardFileExtension(String... wildcards) {
+    public POJOLoader<T> setSupportedFileExtensions(String... wildcards) {
         wildcardFileExtension = SetUtils.buildSet(wildcards);
         return this;
     }
