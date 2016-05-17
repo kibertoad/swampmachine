@@ -42,10 +42,12 @@ public class MetaFactory implements ApplicationEventPublisherAware, ApplicationL
 
     @Override
     public void onApplicationEvent(SpawnEntityEvent event) {
+        Validate.notNull(event.getEntityClass(), "EntityClass should be specified for SpawnEntityEvent.");
         EntityFactory<?, SpawnParams> factory = factoryMap.get(event.getEntityClass());
         Validate.notNull(factory, "No factory for " + event.getEntityClass());
 
         Object entity = factory.spawnEntity(event.getSpawnParams());
+        Validate.notNull(entity, "Null was the result of entity spawn, which is not a valid outcome.");
         eventPublisher.publishEvent(new AfterSpawnEntityEvent(factory, entity));
     }
 

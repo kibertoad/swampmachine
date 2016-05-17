@@ -1,5 +1,6 @@
 package net.kiberion.swampmachine.spring;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -11,9 +12,11 @@ import com.badlogic.gdx.backends.headless.HeadlessFiles;
 
 import net.kiberion.swampmachine.assets.GameConfig;
 import net.kiberion.swampmachine.assets.UiManager;
+import net.kiberion.swampmachine.factories.entities.DummyAfterSpawnListener;
+import net.kiberion.swampmachine.factories.entities.DummyFactory;
 
 @Configuration
-@Import({ CommonLoaderConfiguration.class })
+@Import({ CommonLoaderConfiguration.class, SwampmachineExtrasConfiguration.class })
 public class TestConfiguration extends CoreConfiguration {
 
     public TestConfiguration() {
@@ -22,6 +25,19 @@ public class TestConfiguration extends CoreConfiguration {
         Gdx.gl = new HeadlessGl();
     }
 
+    
+    @Bean
+    public DummyFactory dummyFactory () {
+        return new DummyFactory();
+    }
+
+    @Bean
+    public DummyAfterSpawnListener dummyAfterSpawnListener () {
+        return new DummyAfterSpawnListener();
+    }
+    
+    
+    
     @Override
     protected void initAssetManager() {
         AssetManager assetManager = new HeadlessAssetManager();

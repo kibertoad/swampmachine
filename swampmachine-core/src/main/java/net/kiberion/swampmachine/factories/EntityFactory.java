@@ -26,4 +26,5 @@ public interface EntityFactory <T, P extends SpawnParams> {
      * @return spawned new instance of an object. Can never return {@code null}
      */
     public T spawnEntity (P params);
+    
 }
