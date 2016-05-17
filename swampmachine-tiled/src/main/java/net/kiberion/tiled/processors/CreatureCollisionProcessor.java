@@ -8,12 +8,12 @@ import com.badlogic.gdx.math.Rectangle;
 
 import net.kiberion.mvc.model.AbstractTiledMapModel;
 import net.kiberion.swampmachine.entities.spatial.api.Position;
-import net.kiberion.tiled.aspects.api.CollidableAspect;
-import net.kiberion.tiled.aspects.api.CollidableEntitiesSource;
-import net.kiberion.tiled.aspects.holders.MapMetadataHolderAspect;
+import net.kiberion.tiled.entityblocks.api.CollidableBlock;
+import net.kiberion.tiled.entityblocks.api.CollidableEntitiesSource;
+import net.kiberion.tiled.entityblocks.holders.MapMetadataHolderBlock;
 import net.kiberion.tiled.model.TiledMapInfo;
 
-public class CreatureCollisionProcessor<TModel extends AbstractTiledMapModel<? extends MapMetadataHolderAspect> & CollidableEntitiesSource>
+public class CreatureCollisionProcessor<TModel extends AbstractTiledMapModel<? extends MapMetadataHolderBlock> & CollidableEntitiesSource>
         implements CollisionInfoProvider {
 
     private static final Logger log = LogManager.getLogger();
@@ -39,17 +39,17 @@ public class CreatureCollisionProcessor<TModel extends AbstractTiledMapModel<? e
         this.mapInfo = mapInfo;
     }
 
-    public CollidableAspect getCreatureForPosition(CollidableAspect agent) {
+    public CollidableBlock getCreatureForPosition(CollidableBlock agent) {
         return getCreatureForPosition(agent, agent.getPositionAspect());
     }
 
-    public CollidableAspect getCreatureForPosition(CollidableAspect agent,
+    public CollidableBlock getCreatureForPosition(CollidableBlock agent,
             Position position) {
         Rectangle rectangle = new Rectangle(position.getX(), position.getY(),
                 agent.getFormAspect().getWidthInTiles(),
                 agent.getFormAspect().getHeightInTiles());
 
-        for (CollidableAspect creature : mapModel.getCollidableEntities()) {
+        for (CollidableBlock creature : mapModel.getCollidableEntities()) {
             if (creature.getFormAspect().getRectangle().overlaps(rectangle)
                     && agent.canCollide(creature) && creature.canCollide(agent)) {
                 return creature;
@@ -62,7 +62,7 @@ public class CreatureCollisionProcessor<TModel extends AbstractTiledMapModel<? e
     public boolean isOccupiedByCollidable(int x, int y) {
         Rectangle rectangle = new Rectangle(x, y, 1, 1);
 
-        for (CollidableAspect creature : mapModel.getCollidableEntities()) {
+        for (CollidableBlock creature : mapModel.getCollidableEntities()) {
             if (creature.getFormAspect().getRectangle().overlaps(rectangle)) {
                 return true;
             }

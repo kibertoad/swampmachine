@@ -1,12 +1,12 @@
-package net.kiberion.tiled.aspects.impl;
+package net.kiberion.tiled.entityblocks.impl;
 
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 import net.kiberion.swampmachine.entityblocks.api.EntityInstanceMetadataBlock;
-import net.kiberion.tiled.aspects.api.CollidableAspect;
-import net.kiberion.tiled.aspects.api.FormAspect;
+import net.kiberion.tiled.entityblocks.api.CollidableBlock;
+import net.kiberion.tiled.entityblocks.api.FormBlock;
 
 
-public class WallCollidableAspect implements CollidableAspect{
+public class WallCollidableBlock implements CollidableBlock{
 
     @Override
     public boolean removeOnCollision() {
@@ -14,11 +14,11 @@ public class WallCollidableAspect implements CollidableAspect{
     }
 
     @Override
-    public void processCollision(CollidableAspect collisionObject) {
+    public void processCollision(CollidableBlock collisionObject) {
     }
 
     @Override
-    public FormAspect getFormAspect() {
+    public FormBlock getFormAspect() {
         return null;
     }
 
@@ -37,7 +37,7 @@ public class WallCollidableAspect implements CollidableAspect{
     }
 
     @Override
-    public boolean canCollide(CollidableAspect collisionObject) {
+    public boolean canCollide(CollidableBlock collisionObject) {
         return true;
     }
 

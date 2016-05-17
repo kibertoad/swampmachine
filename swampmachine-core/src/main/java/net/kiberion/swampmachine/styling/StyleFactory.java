@@ -53,14 +53,14 @@ public class StyleFactory {
     }
 
     public void addLabelFontStyle(String styleName, String fontName, int size) {
-        Label.LabelStyle style = new Label.LabelStyle(UiManager.instance().skin().get("default", Label.LabelStyle.class));
+        Label.LabelStyle style = new Label.LabelStyle(UiManager.instance().getDefaultSkin().get("default", Label.LabelStyle.class));
         style.font = getFont(fontName, size);
 
         labelStyles.put (styleName, style);
     }
 
     public void addButtonFontStyle (String styleName, String fontName, int size) {
-        addButtonFontStyle (styleName, fontName, size, UiManager.instance().skin());
+        addButtonFontStyle (styleName, fontName, size, UiManager.instance().getDefaultSkin());
     }
     
     public void addButtonFontStyle (String styleName, String fontName, int size, Skin skin) {

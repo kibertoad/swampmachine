@@ -1,13 +1,13 @@
-package net.kiberion.tiled.aspects.impl;
+package net.kiberion.tiled.entityblocks.impl;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import lombok.Getter;
 import lombok.Setter;
 import net.kiberion.swampmachine.assets.UiManager;
-import net.kiberion.tiled.aspects.api.ViewAspect;
+import net.kiberion.tiled.entityblocks.api.ViewBlock;
 
-public class CommonViewAspect implements ViewAspect{
+public class CommonViewBlock implements ViewBlock{
 
     @Setter
     private TextureRegion image;

@@ -6,7 +6,7 @@ import lombok.Setter;
 import net.kiberion.blueprints.arcade.entities.Bullet;
 import net.kiberion.blueprints.arcade.entityblocks.BulletHolderBlock;
 import net.kiberion.swampmachine.entities.spatial.api.Position;
-import net.kiberion.tiled.aspects.api.CollidableAspect;
+import net.kiberion.tiled.entityblocks.api.CollidableBlock;
 
 public class BulletFactory {
 
@@ -14,7 +14,7 @@ public class BulletFactory {
     @Setter
     private BulletHolderBlock bulletHolder;
 
-    public Bullet produceBullet (Position startingPosition, Position targetPosition, float speed, CollidableAspect shooter) {
+    public Bullet produceBullet (Position startingPosition, Position targetPosition, float speed, CollidableBlock shooter) {
         Bullet bullet = new Bullet();
         bullet.getPositionAspect().copyFrom(startingPosition);
         

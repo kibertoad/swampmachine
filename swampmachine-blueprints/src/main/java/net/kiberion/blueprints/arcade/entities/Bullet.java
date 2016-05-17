@@ -2,26 +2,26 @@ package net.kiberion.blueprints.arcade.entities;
 
 import net.kiberion.blueprints.common.entityblocks.api.KillableBlock;
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
-import net.kiberion.tiled.aspects.api.CollidableAspect;
-import net.kiberion.tiled.aspects.api.FormAspect;
-import net.kiberion.tiled.aspects.holders.CommonMapMetadataHolderAspect;
-import net.kiberion.tiled.aspects.impl.FormHolderAspect;
-import net.kiberion.tiled.aspects.impl.GenericFormAspect;
-import net.kiberion.tiled.aspects.impl.WallCollidableAspect;
+import net.kiberion.tiled.entityblocks.api.CollidableBlock;
+import net.kiberion.tiled.entityblocks.api.FormBlock;
+import net.kiberion.tiled.entityblocks.holders.CommonMapMetadataHolderBlock;
+import net.kiberion.tiled.entityblocks.impl.FormHolderBlock;
+import net.kiberion.tiled.entityblocks.impl.GenericFormBlock;
+import net.kiberion.tiled.entityblocks.impl.WallCollidableBlock;
 
-public class Bullet extends CommonMapMetadataHolderAspect implements FormHolderAspect, CollidableAspect, KillableBlock{
+public class Bullet extends CommonMapMetadataHolderBlock implements FormHolderBlock, CollidableBlock, KillableBlock{
 
     private CommonPosition movementDelta = new CommonPosition (0, 0);
-    private GenericFormAspect formAspect = new GenericFormAspect(0.1f, 0.1f);
+    private GenericFormBlock formAspect = new GenericFormBlock(0.1f, 0.1f);
 
     private boolean isDestroyed;
-    private CollidableAspect shooter;
+    private CollidableBlock shooter;
     
-    public CollidableAspect getShooter() {
+    public CollidableBlock getShooter() {
         return shooter;
     }
 
-    public void setShooter(CollidableAspect shooter) {
+    public void setShooter(CollidableBlock shooter) {
         this.shooter = shooter;
     }
 
@@ -34,13 +34,13 @@ public class Bullet extends CommonMapMetadataHolderAspect implements FormHolderA
     }
 
     @Override
-    public FormAspect getFormAspect() {
+    public FormBlock getFormAspect() {
         return formAspect;
     }
     
     @Override
-    public void processCollision(CollidableAspect collisionObject) {
-        if (collisionObject instanceof WallCollidableAspect) {
+    public void processCollision(CollidableBlock collisionObject) {
+        if (collisionObject instanceof WallCollidableBlock) {
             this.kill();
         }
 
@@ -66,7 +66,7 @@ public class Bullet extends CommonMapMetadataHolderAspect implements FormHolderA
     }
 
     @Override
-    public boolean canCollide(CollidableAspect collisionObject) {
+    public boolean canCollide(CollidableBlock collisionObject) {
         return (collisionObject != this && (collisionObject != shooter || !ignoresShooter()));
     }
 

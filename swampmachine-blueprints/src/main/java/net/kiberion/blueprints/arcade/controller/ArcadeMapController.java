@@ -10,20 +10,20 @@ import net.kiberion.mvc.views.AbstractTiledMapView;
 import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
-import net.kiberion.tiled.aspects.api.CollidableAspect;
-import net.kiberion.tiled.aspects.api.CollidableEntitiesSource;
-import net.kiberion.tiled.aspects.api.FormAspect;
-import net.kiberion.tiled.aspects.holders.MapMetadataHolderAspect;
-import net.kiberion.tiled.aspects.impl.WallCollidableAspect;
 import net.kiberion.tiled.camera.TiledMapCamera;
+import net.kiberion.tiled.entityblocks.api.CollidableBlock;
+import net.kiberion.tiled.entityblocks.api.CollidableEntitiesSource;
+import net.kiberion.tiled.entityblocks.api.FormBlock;
+import net.kiberion.tiled.entityblocks.holders.MapMetadataHolderBlock;
+import net.kiberion.tiled.entityblocks.impl.WallCollidableBlock;
 import net.kiberion.tiled.model.TiledMapInfo;
 import net.kiberion.tiled.processors.CreatureCollisionProcessor;
 import net.kiberion.tiled.processors.WallObstacleProcessor;
 
-public class ArcadeMapController<TModel extends AbstractTiledMapModel<? extends MapMetadataHolderAspect> & CollidableEntitiesSource> implements CreatureMovementController{
+public class ArcadeMapController<TModel extends AbstractTiledMapModel<? extends MapMetadataHolderBlock> & CollidableEntitiesSource> implements CreatureMovementController{
 
     private static final Logger log = LogManager.getLogger();
-    private final CollidableAspect wallCollision = new WallCollidableAspect();
+    private final CollidableBlock wallCollision = new WallCollidableBlock();
     
     @Autowired
     protected WallObstacleProcessor wallObstacleProcessor;
@@ -40,7 +40,7 @@ public class ArcadeMapController<TModel extends AbstractTiledMapModel<? extends 
         creatureCollisisionProcessor.setMapInfo(mapInfo);
     }
     
-    public boolean isCollided (CollidableAspect entity, Position position, FormAspect formAspect) {
+    public boolean isCollided (CollidableBlock entity, Position position, FormBlock formAspect) {
         if (wallObstacleProcessor.objectOverlapsObstacle(position, formAspect)) {
             entity.processCollision(wallCollision);
             log.info("Wall obstacle");
@@ -48,7 +48,7 @@ public class ArcadeMapController<TModel extends AbstractTiledMapModel<? extends 
         } 
         
         
-        CollidableAspect collisionObject = creatureCollisisionProcessor.getCreatureForPosition(entity, position); 
+        CollidableBlock collisionObject = creatureCollisisionProcessor.getCreatureForPosition(entity, position); 
         if (collisionObject != null) {
             entity.processCollision(collisionObject);
             log.info("Object obstacle");
@@ -58,7 +58,7 @@ public class ArcadeMapController<TModel extends AbstractTiledMapModel<? extends 
         return false;
      }    
 
-    public boolean moveCreature(CollidableAspect entity, float deltaX, float deltaY) {
+    public boolean moveCreature(CollidableBlock entity, float deltaX, float deltaY) {
         //log.info("Trying to move creature from point: "+entity.getPositionAspect());
         //log.info("Delta: "+deltaX+"/"+deltaY);
         
@@ -73,7 +73,7 @@ public class ArcadeMapController<TModel extends AbstractTiledMapModel<? extends 
     
 
     @Override
-    public boolean moveCreature(CollidableAspect entity, CommonPosition delta) {
+    public boolean moveCreature(CollidableBlock entity, CommonPosition delta) {
         return moveCreature (entity, delta.getX(), delta.getY());
     }
     
@@ -87,7 +87,7 @@ public class ArcadeMapController<TModel extends AbstractTiledMapModel<? extends 
     }
 
     
-    private void performMove (CollidableAspect entity, float deltaX, float deltaY) {
+    private void performMove (CollidableBlock entity, float deltaX, float deltaY) {
         entity.getPositionAspect().applyDelta(deltaX, deltaY);
         entity.getFormAspect().moveRectangle(entity.getPositionAspect());
         view.updateTextureMapObjectPosition(entity, entity.getPositionAspect());

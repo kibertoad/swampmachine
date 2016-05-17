@@ -11,7 +11,7 @@ import net.kiberion.mvc.model.AbstractTiledMapModel;
 import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 import net.kiberion.tiled.TiledIsometricCoordsUtils;
-import net.kiberion.tiled.aspects.holders.CommonMapMetadataHolderAspect;
+import net.kiberion.tiled.entityblocks.holders.CommonMapMetadataHolderBlock;
 import net.kiberion.tiled.model.TiledMapInfo;
 
 public class MapLayerObjectLoader <TModel extends AbstractTiledMapModel>{
@@ -27,7 +27,7 @@ public class MapLayerObjectLoader <TModel extends AbstractTiledMapModel>{
         MapLayer activeObjectLayer = map.getLayers().get("activeobjects");
         if (activeObjectLayer != null) {
             for (MapObject object : activeObjectLayer.getObjects()) {
-                CommonMapMetadataHolderAspect activeObject = new CommonMapMetadataHolderAspect();
+                CommonMapMetadataHolderBlock activeObject = new CommonMapMetadataHolderBlock();
                 activeObject.getMetadata().setId(object.getProperties().get("id", String.class));
                 
                 float x = object.getProperties().get("x", Float.class).floatValue();

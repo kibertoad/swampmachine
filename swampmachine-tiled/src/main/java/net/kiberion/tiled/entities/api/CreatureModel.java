@@ -1,7 +1,7 @@
 package net.kiberion.tiled.entities.api;
 
-import net.kiberion.tiled.aspects.api.CollidableAspect;
+import net.kiberion.tiled.entityblocks.api.CollidableBlock;
 
-public interface CreatureModel extends CollidableAspect{
+public interface CreatureModel extends CollidableBlock{
 
 }

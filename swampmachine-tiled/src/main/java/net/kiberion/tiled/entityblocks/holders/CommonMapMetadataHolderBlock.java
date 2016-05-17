@@ -1,9 +1,9 @@
-package net.kiberion.tiled.aspects.holders;
+package net.kiberion.tiled.entityblocks.holders;
 
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
-import net.kiberion.swampmachine.entityblocks.impl.CommonMetadataHolderAspect;
+import net.kiberion.swampmachine.entityblocks.impl.CommonMetadataHolderBlock;
 
-public class CommonMapMetadataHolderAspect extends CommonMetadataHolderAspect implements MapMetadataHolderAspect{
+public class CommonMapMetadataHolderBlock extends CommonMetadataHolderBlock implements MapMetadataHolderBlock{
     
     private final CommonPosition position = new CommonPosition(0, 0);
 

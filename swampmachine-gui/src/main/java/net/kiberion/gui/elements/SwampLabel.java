@@ -26,11 +26,11 @@ public class SwampLabel extends Label {
     }
 
     public SwampLabel(CharSequence text) {
-        super(text, UiManager.instance().skin());
+        super(text, UiManager.instance().getDefaultSkin());
     }
 
     public SwampLabel(CharSequence text, float setX, float setY) {
-        super(text, UiManager.instance().skin());
+        super(text, UiManager.instance().getDefaultSkin());
 
         this.setPosition(setX, setY);
     }
@@ -44,7 +44,7 @@ public class SwampLabel extends Label {
     }
 
     public SwampLabel(int text) {
-        super(Integer.toString(text), UiManager.instance().skin());
+        super(Integer.toString(text), UiManager.instance().getDefaultSkin());
     }
 
     public void setText(int newText) {

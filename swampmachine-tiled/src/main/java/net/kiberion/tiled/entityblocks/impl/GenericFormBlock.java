@@ -1,22 +1,22 @@
-package net.kiberion.tiled.aspects.impl;
+package net.kiberion.tiled.entityblocks.impl;
 
 import com.badlogic.gdx.math.Rectangle;
 
 import net.kiberion.swampmachine.entities.spatial.api.Position;
-import net.kiberion.tiled.aspects.api.FormAspect;
+import net.kiberion.tiled.entityblocks.api.FormBlock;
 
-public class GenericFormAspect implements FormAspect{
+public class GenericFormBlock implements FormBlock{
 
     private float widthInTiles = 0.98f;
     private float heightInTiles = 0.98f;
     private Rectangle rectangle;
     
-    public GenericFormAspect(float width, float height) {
+    public GenericFormBlock(float width, float height) {
         this.widthInTiles = width;
         this.heightInTiles = height;
     }
     
-    public GenericFormAspect() {
+    public GenericFormBlock() {
     }
     
     @Override

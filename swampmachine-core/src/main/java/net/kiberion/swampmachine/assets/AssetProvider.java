@@ -5,21 +5,22 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 
-import com.badlogic.gdx.Gdx;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import net.kiberion.swampmachine.assets.readers.AbstractFileReader;
-import net.kiberion.swampmachine.assets.readers.GDXFileReader;
-import net.kiberion.swampmachine.assets.readers.SimpleFileReader;
 import net.kiberion.swampmachine.entities.modelinfo.CreatureModelInfo;
 
+//It's only used for storing path to assets now, replace with injected GameConfig usage and throw this class away
+@Deprecated
 public class AssetProvider {
 
+    private static final Logger log = LogManager.getLogger();
+    
 	private static AssetProvider _instance;	
     protected boolean isInitted;
     
 	private static String defaultPathToAssets = "src/main/resources/";
     private String pathToAssets;
-    private AbstractFileReader fileReader;
 	
     public static Path getPathToAssets () {
         if (_instance != null && _instance.isInitted) {
@@ -34,7 +35,7 @@ public class AssetProvider {
         try {
             return instance(defaultPathToAssets);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("IO exception: ", e);
         }
         
         return null;
@@ -62,12 +63,6 @@ public class AssetProvider {
     
     public AssetProvider(String pathToAssets) {
         this.pathToAssets = pathToAssets;
-        
-        if (Gdx.app != null) {
-            fileReader = new GDXFileReader(Paths.get(pathToAssets));
-        } else {
-            fileReader = new SimpleFileReader(Paths.get(pathToAssets));
-        }
     }
     
 

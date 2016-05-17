@@ -1,27 +1,27 @@
 package net.kiberion.tiled.entities.impl;
 
 import net.kiberion.swampmachine.entities.modelinfo.CreatureModelInfo;
-import net.kiberion.tiled.aspects.api.CollidableAspect;
-import net.kiberion.tiled.aspects.api.FormAspect;
-import net.kiberion.tiled.aspects.holders.CommonMapMetadataHolderAspect;
-import net.kiberion.tiled.aspects.impl.GenericFormAspect;
-import net.kiberion.tiled.aspects.impl.PathfindingAspect;
 import net.kiberion.tiled.entities.api.CreatureModel;
+import net.kiberion.tiled.entityblocks.api.CollidableBlock;
+import net.kiberion.tiled.entityblocks.api.FormBlock;
+import net.kiberion.tiled.entityblocks.holders.CommonMapMetadataHolderBlock;
+import net.kiberion.tiled.entityblocks.impl.GenericFormBlock;
+import net.kiberion.tiled.entityblocks.impl.PathfindingBlock;
 
-public class CommonCreatureModel extends CommonMapMetadataHolderAspect implements CreatureModel, CollidableAspect{
+public class CommonCreatureModel extends CommonMapMetadataHolderBlock implements CreatureModel, CollidableBlock{
 
     private final CreatureModelInfo info;
-    private final PathfindingAspect pathfinding;
-    private FormAspect form = new GenericFormAspect (0.98f, 0.98f);
+    private final PathfindingBlock pathfinding;
+    private FormBlock form = new GenericFormBlock (0.98f, 0.98f);
     
-    public PathfindingAspect getPathfindingAspect() {
+    public PathfindingBlock getPathfindingAspect() {
         return pathfinding;
     }
 
     public CommonCreatureModel(CreatureModelInfo info) {
         this.info = info;
         this.getMetadata().setId(info.getId());
-        this.pathfinding = new PathfindingAspect(this.getPositionAspect());
+        this.pathfinding = new PathfindingBlock(this.getPositionAspect());
     }
 
     //Used mostly for pseudo-creatures like cameras
@@ -31,16 +31,16 @@ public class CommonCreatureModel extends CommonMapMetadataHolderAspect implement
     }
 
     @Override
-    public FormAspect getFormAspect() {
+    public FormBlock getFormAspect() {
         return form;
     }
 
     @Override
-    public void processCollision(CollidableAspect collisionObject) {
+    public void processCollision(CollidableBlock collisionObject) {
     }
 
     @Override
-    public boolean canCollide(CollidableAspect collisionObject) {
+    public boolean canCollide(CollidableBlock collisionObject) {
         return collisionObject != this;
     }
 

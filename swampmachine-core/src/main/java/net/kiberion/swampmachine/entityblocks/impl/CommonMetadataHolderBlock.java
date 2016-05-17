@@ -3,7 +3,7 @@ package net.kiberion.swampmachine.entityblocks.impl;
 import net.kiberion.swampmachine.entityblocks.api.EntityInstanceMetadataBlock;
 import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
 
-public class CommonMetadataHolderAspect implements MetadataHolderBlock{
+public class CommonMetadataHolderBlock implements MetadataHolderBlock{
 
     private EntityInstanceMetadataBlock metadata;
 
@@ -12,7 +12,7 @@ public class CommonMetadataHolderAspect implements MetadataHolderBlock{
         return metadata;
     }
 
-    public CommonMetadataHolderAspect() {
+    public CommonMetadataHolderBlock() {
         metadata = new CommonMetadataBlock();
     }
 

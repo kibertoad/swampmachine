@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.kiberion.swampmachine.entities.spatial.api.Position;
-import net.kiberion.tiled.aspects.api.FormAspect;
+import net.kiberion.tiled.entityblocks.api.FormBlock;
 import net.kiberion.tiled.model.TiledMapInfo;
 
 public class WallObstacleProcessor {
@@ -75,7 +75,7 @@ public class WallObstacleProcessor {
         return objectOverlapsObstacle(position, 0.98f, 0.98f);
      }
     
-    public boolean objectOverlapsObstacle (Position position, FormAspect form) {
+    public boolean objectOverlapsObstacle (Position position, FormBlock form) {
         return objectOverlapsObstacle(position, form.getWidthInTiles(), form.getHeightInTiles());
     }    
     

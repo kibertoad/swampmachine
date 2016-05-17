@@ -67,7 +67,7 @@ public class CommonLoadingState extends GameState {
     public CommonLoadingState(String setID) {
         super(setID);
 
-        label = new Label("Loading... Please wait.", UiManager.instance().skin());
+        label = new Label("Loading... Please wait.", UiManager.instance().getDefaultSkin());
         label.setVisible(true);
         getStage().addActor(label);
         label.setPosition(100, 100);

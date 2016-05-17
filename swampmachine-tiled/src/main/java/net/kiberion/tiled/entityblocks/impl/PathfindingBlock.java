@@ -1,4 +1,4 @@
-package net.kiberion.tiled.aspects.impl;
+package net.kiberion.tiled.entityblocks.impl;
 
 import org.apache.commons.math3.util.Precision;
 import org.apache.logging.log4j.LogManager;
@@ -9,7 +9,7 @@ import net.kiberion.tiled.model.TiledMapInfo;
 import net.kiberion.tiled.pathfinding.Pathfinder2;
 
 
-public class PathfindingAspect {
+public class PathfindingBlock {
 
     private static final Logger log = LogManager.getLogger();
     
@@ -48,7 +48,7 @@ public class PathfindingAspect {
     private int nextY;
     
     
-    public PathfindingAspect(Position positionAspect) {
+    public PathfindingBlock(Position positionAspect) {
         super();
         this.positionAspect = positionAspect;
     }

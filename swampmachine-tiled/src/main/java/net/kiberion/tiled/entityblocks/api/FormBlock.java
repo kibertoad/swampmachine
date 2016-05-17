@@ -1,11 +1,11 @@
-package net.kiberion.tiled.aspects.api;
+package net.kiberion.tiled.entityblocks.api;
 
 
 import com.badlogic.gdx.math.Rectangle;
 
 import net.kiberion.swampmachine.entities.spatial.api.Position;
 
-public interface FormAspect {
+public interface FormBlock {
 
     public float getWidthInTiles ();
     public float getHeightInTiles ();

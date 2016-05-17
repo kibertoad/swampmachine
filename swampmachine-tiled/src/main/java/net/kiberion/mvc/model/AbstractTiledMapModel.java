@@ -13,11 +13,11 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import net.kiberion.mvc.model.helpers.SpawningHelper;
 import net.kiberion.swampmachine.entities.spatial.api.Position;
-import net.kiberion.tiled.aspects.holders.MapMetadataHolderAspect;
+import net.kiberion.tiled.entityblocks.holders.MapMetadataHolderBlock;
 import net.kiberion.tiled.model.TiledMapInfo;
 
 
-public abstract class AbstractTiledMapModel<T extends MapMetadataHolderAspect>{
+public abstract class AbstractTiledMapModel<T extends MapMetadataHolderBlock>{
 
 	protected static final Logger log = LogManager.getLogger();
 	
@@ -31,8 +31,8 @@ public abstract class AbstractTiledMapModel<T extends MapMetadataHolderAspect>{
     private final List<T> creatures = new ArrayList<>();
     private final List<T> aiCreatures = new ArrayList<>();
 
-    private final List<MapMetadataHolderAspect> activeObjects = new ArrayList<>();
-    private final Map<Position, MapMetadataHolderAspect> activeObjectsMap = new HashMap<> ();
+    private final List<MapMetadataHolderBlock> activeObjects = new ArrayList<>();
+    private final Map<Position, MapMetadataHolderBlock> activeObjectsMap = new HashMap<> ();
     
     public void spawnCreatures () {};
 
@@ -68,11 +68,11 @@ public abstract class AbstractTiledMapModel<T extends MapMetadataHolderAspect>{
         this.player = player;
     }
 
-    public List<MapMetadataHolderAspect> getActiveObjects() {
+    public List<MapMetadataHolderBlock> getActiveObjects() {
         return activeObjects;
     }
 
-    public Map<Position, MapMetadataHolderAspect> getActiveObjectsMap() {
+    public Map<Position, MapMetadataHolderBlock> getActiveObjectsMap() {
         return activeObjectsMap;
     }
 

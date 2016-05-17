@@ -1,8 +1,8 @@
-package net.kiberion.tiled.aspects.api;
+package net.kiberion.tiled.entityblocks.api;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public interface ViewAspect {
+public interface ViewBlock {
 
     public TextureRegion getImage();
     public void setImageID (String id);
