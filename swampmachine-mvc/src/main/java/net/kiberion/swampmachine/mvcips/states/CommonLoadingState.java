@@ -102,7 +102,6 @@ public class CommonLoadingState extends GameState {
 
     @Override
     public void render(float delta) {
-
         if (UiManager.instance().getAssetManager().getProgress() < 1f) {
 
             // Gdx.app.log("debug", "Loadingprogress: "+
