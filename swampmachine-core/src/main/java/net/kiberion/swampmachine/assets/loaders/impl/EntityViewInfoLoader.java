@@ -14,14 +14,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import lombok.Setter;
-import net.kiberion.swampmachine.assets.viewinfo.CreatureViewInfo;
+import net.kiberion.swampmachine.assets.viewinfo.EntityViewInfo;
 import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 
 
 /**
  * @author kibertoad
  */
-public class EntityViewInfoLoader extends CommonYamlLoader<CreatureViewInfo> {
+public class EntityViewInfoLoader extends CommonYamlLoader<EntityViewInfo> {
 
     private static final Logger log = LogManager.getLogger();
     
@@ -38,12 +38,12 @@ public class EntityViewInfoLoader extends CommonYamlLoader<CreatureViewInfo> {
     }
 
     @Override
-    protected CreatureViewInfo initNewEntity() {
-        return new CreatureViewInfo();
+    protected EntityViewInfo initNewEntity() {
+        return new EntityViewInfo();
     }
     
     @Override
-    protected void parseYaml(Object sourceYamlObject, CreatureViewInfo targetObject) {
+    protected void parseYaml(Object sourceYamlObject, EntityViewInfo targetObject) {
         super.parseYaml(sourceYamlObject, targetObject);
 
         TextureRegion image = getYamlLoader().getImage("image");

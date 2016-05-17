@@ -14,7 +14,7 @@ import net.kiberion.swampmachine.assets.loaders.api.SyncAssetLoader;
 import net.kiberion.swampmachine.assets.loaders.impl.EntityViewInfoLoader;
 import net.kiberion.swampmachine.assets.readers.ReaderHelper;
 import net.kiberion.swampmachine.assets.util.LoadOnStartup;
-import net.kiberion.swampmachine.assets.viewinfo.CreatureViewInfo;
+import net.kiberion.swampmachine.assets.viewinfo.EntityViewInfo;
 import net.kiberion.swampmachine.entities.modelinfo.CreatureModelInfo;
 import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
 import net.kiberion.swampmachine.registries.CommonViewInfoRegistry;
@@ -59,7 +59,7 @@ public class CommonViewInfoLoader implements SyncAssetLoader{
             Path entityDirectory = config.getPathToResources().resolve(CREATURE_MODEL_DIRECTORY);
             EntityViewInfoLoader loader = new EntityViewInfoLoader(entityDirectory.toString()+"*", fullCreatureList, CREATURE_ENTITIES_FILE_EXTENSION);
             loader.setImageIsMandatory(imagesAreMandatory);
-            Map<String, CreatureViewInfo> creatureViewInfo = loader.load();
+            Map<String, EntityViewInfo> creatureViewInfo = loader.load();
             MapUtils.putAllEntities(viewInfoRegistry.getFullCreatureViewInfoList(), creatureViewInfo);
 
             /*

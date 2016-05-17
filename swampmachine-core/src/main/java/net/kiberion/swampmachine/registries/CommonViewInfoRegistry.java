@@ -5,13 +5,13 @@ import java.util.Map;
 
 import lombok.Getter;
 import net.kiberion.swampmachine.assets.viewinfo.AnimationViewInfo;
-import net.kiberion.swampmachine.assets.viewinfo.CreatureViewInfo;
+import net.kiberion.swampmachine.assets.viewinfo.EntityViewInfo;
 import net.kiberion.swampmachine.assets.viewinfo.ViewInfo;
 
 public class CommonViewInfoRegistry {
 
     @Getter
-    private Map<String, CreatureViewInfo> fullCreatureViewInfoList = new HashMap<>();
+    private Map<String, EntityViewInfo> fullCreatureViewInfoList = new HashMap<>();
     
     @Getter
     private Map<String, ViewInfo> buildingViewInfoList = new HashMap<>();

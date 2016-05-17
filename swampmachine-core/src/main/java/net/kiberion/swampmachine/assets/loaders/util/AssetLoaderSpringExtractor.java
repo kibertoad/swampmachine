@@ -12,6 +12,14 @@ import net.kiberion.swampmachine.assets.loaders.api.AssetLoader;
 import net.kiberion.swampmachine.assets.util.LoadBeforeStartup;
 import net.kiberion.swampmachine.assets.util.LoadOnStartup;
 
+/**
+ * Class retrieves all beans that implement {@link AssetLoader} interface and have either {@link LoadOnStartup} or {@link LoadBeforeStartup} annotation
+ * and returns them as a list, sorted by loader priority (lower priority loaders go first).
+ * Methods throw {@link IllegalStateException} if there is a bean with specified annotation that is not an {@link AssetLoader}
+ * 
+ * @author kibertoad
+ *
+ */
 public class AssetLoaderSpringExtractor {
 
     private AssetLoaderSpringExtractor() {

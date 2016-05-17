@@ -14,24 +14,22 @@ import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescripto
  */
 public class AnimationViewInfo extends CommonModelEntityDescriptor {
 
-    public int columns; //how many columns are in file
-    public int rows; //how many rows are in file
+    public int columns; // how many columns are in file
+    public int rows; // how many rows are in file
     public float frameDuration;
     public Animation animation;
-    
-    
+
     @Override
-    public void setImage (String id) {
-        animation = getAnimation (id, columns, rows, frameDuration);
+    public void setImage(String id) {
+        animation = getAnimation(id, columns, rows, frameDuration);
     }
-    
+
     public Animation getAnimation(String image, int imageColumns, int imageRows, float frameDuration) {
         TextureAtlas.AtlasRegion atlasRegion = UiManager.instance().getImage(image);
         Objects.requireNonNull(atlasRegion);
 
-        TextureRegion[][] tmp = atlasRegion.split(atlasRegion.getRegionWidth() /
-                imageColumns, atlasRegion.getRegionHeight() / imageRows);
-
+        TextureRegion[][] tmp = atlasRegion.split(atlasRegion.getRegionWidth() / imageColumns,
+                atlasRegion.getRegionHeight() / imageRows);
 
         TextureRegion[] walkFrames = new TextureRegion[imageColumns * imageRows];
         int index = 0;
@@ -43,6 +41,6 @@ public class AnimationViewInfo extends CommonModelEntityDescriptor {
 
         Animation animation = new Animation(frameDuration, walkFrames);
         return animation;
-    }    
-    
+    }
+
 }

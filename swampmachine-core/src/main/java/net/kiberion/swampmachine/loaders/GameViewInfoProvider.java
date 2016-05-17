@@ -11,14 +11,14 @@ import com.badlogic.gdx.Gdx;
 
 import net.kiberion.swampmachine.assets.AssetProvider;
 import net.kiberion.swampmachine.assets.loaders.api.AbstractLoader;
-import net.kiberion.swampmachine.assets.loaders.api.POJOLoader;
 import net.kiberion.swampmachine.assets.loaders.impl.EntityViewInfoLoader;
 import net.kiberion.swampmachine.assets.loaders.impl.GameViewInfoLoader;
+import net.kiberion.swampmachine.assets.loaders.impl.POJOLoader;
 import net.kiberion.swampmachine.assets.readers.AbstractFileReader;
 import net.kiberion.swampmachine.assets.readers.GDXFileReader;
 import net.kiberion.swampmachine.assets.readers.SimpleFileReader;
 import net.kiberion.swampmachine.assets.viewinfo.AnimationViewInfo;
-import net.kiberion.swampmachine.assets.viewinfo.CreatureViewInfo;
+import net.kiberion.swampmachine.assets.viewinfo.EntityViewInfo;
 import net.kiberion.swampmachine.assets.viewinfo.ViewInfo;
 import net.kiberion.swampmachine.entities.modelinfo.CreatureModelInfo;
 
@@ -34,7 +34,7 @@ public class GameViewInfoProvider {
 
     public GameViewInfoLoader customItemViewLoader;
 
-    public Map<String, CreatureViewInfo> fullCreatureViewInfoList;
+    public Map<String, EntityViewInfo> fullCreatureViewInfoList;
     public Map<String, ViewInfo> buildingViewInfoList;
     public Map<String, ViewInfo> gameViewInfoList;
     public Map<String, AnimationViewInfo> animationViewInfoList;

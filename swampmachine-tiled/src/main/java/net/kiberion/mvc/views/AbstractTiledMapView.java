@@ -21,7 +21,7 @@ import lombok.NonNull;
 import lombok.Setter;
 import net.kiberion.mvc.model.AbstractTiledMapModel;
 import net.kiberion.swampmachine.assets.UiManager;
-import net.kiberion.swampmachine.assets.viewinfo.CreatureViewInfo;
+import net.kiberion.swampmachine.assets.viewinfo.EntityViewInfo;
 import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
@@ -156,7 +156,7 @@ public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> e
 
     public void placeCreatures() {
         for (MetadataHolderBlock entity : this.getModel().getCreatures()) {
-            CreatureViewInfo viewInfo = viewInfoRegistry.getFullCreatureViewInfoList().get(entity.getMetadata().getId());
+            EntityViewInfo viewInfo = viewInfoRegistry.getFullCreatureViewInfoList().get(entity.getMetadata().getId());
             Objects.requireNonNull(viewInfo);
             TextureMapObject tmo = this.addMapObject(
                     entity,

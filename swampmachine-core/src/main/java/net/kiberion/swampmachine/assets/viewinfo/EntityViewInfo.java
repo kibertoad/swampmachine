@@ -14,11 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
  *
  * @author kibertoad
  */
-public class CreatureViewInfo extends ViewInfo{
+public class EntityViewInfo extends ViewInfo{
     
     //ID is the ID for creature it is linked to
         
-    public Map <String, TextureRegionDrawable> customImages = new HashMap <String, TextureRegionDrawable>();
+    public Map <String, TextureRegionDrawable> customImages = new HashMap <String, TextureRegionDrawable>(); //additional images, bound by keys, related to this entity
     
     
 }

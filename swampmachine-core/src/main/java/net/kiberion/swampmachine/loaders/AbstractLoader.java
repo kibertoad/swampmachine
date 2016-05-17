@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.Getter;
 import net.kiberion.swampmachine.assets.GameConfig;
-import net.kiberion.swampmachine.assets.loaders.api.POJOLoader;
+import net.kiberion.swampmachine.assets.loaders.impl.POJOLoader;
 import net.kiberion.swampmachine.assets.readers.ReaderHelper;
 import net.kiberion.swampmachine.entities.common.api.EntityModelDescriptor;
 import net.kiberion.swampmachine.utils.MapUtils;

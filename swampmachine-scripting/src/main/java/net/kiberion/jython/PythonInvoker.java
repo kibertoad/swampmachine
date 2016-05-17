@@ -58,7 +58,7 @@ public class PythonInvoker {
 
     public void scanPathForScript(Path directory, String extension) {
         try {
-            scripts = FilePathUtils.getListOfFilesByWildcard(directory, ImmutableSet.of(extension));
+            scripts = FilePathUtils.getListOfFilesByExtension(directory, ImmutableSet.of(extension));
         } catch (IOException e) {
         }
     }
