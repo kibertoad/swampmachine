@@ -46,7 +46,6 @@ public class Sound {
         if (fileList == null) {
             log.warn("Sound directory does not exist!");
         } else {
-
             for (String fileEntry : fileList) {
                 if ((fileEntry.endsWith(".wav") || fileEntry.endsWith(".ogg"))) {
                     soundEffects.put(fileEntry.replace(".ogg", ""), new SoundObject(dirPath + fileEntry));
