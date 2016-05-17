@@ -19,6 +19,8 @@ import net.kiberion.swampmachine.styling.StyleFactory;
  * 
  * @author caryoscelus
  */
+
+//ToDo Very old code that should definitely be reviewed and rewritten
 public class UiManager {
 
     public static final String BLANK_IMAGE = "BLANK";
@@ -87,14 +89,7 @@ public class UiManager {
 
     public TextureAtlas.AtlasRegion getImage(String id) {
         if (!id.equals(BLANK_IMAGE)) {
-
-            TextureAtlas.AtlasRegion region = atlas().findRegion(id);
-
-            if (region == null) {
-                // Log.warn("No image in atlas: " + id);
-            }
-
-            return region;
+            return atlas().findRegion(id);
         } else {
             return null;
         }
