@@ -23,9 +23,7 @@
         <module>../swampmachine-multimedia</module>
         <module>../swampmachine-blueprints</module>
         <module>../swampmachine-scripting</module>
-
-        <!-- <module>../swampmachine-persistence</module> -->
-
+        <module>../swampmachine-persistence</module>
         <module>../swampmachine-utils</module>
     </modules>
 
