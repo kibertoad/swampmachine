@@ -12,6 +12,9 @@ import org.apache.logging.log4j.Logger;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @author kibertoad
  */
@@ -19,9 +22,17 @@ public class SoundObject {
 
 	private static final Logger log = LogManager.getLogger();
 	
-    public String code;
-    public Sound track;
-    public float volume = (float) 0.08;
+	@Getter
+	@Setter
+    private String code;
+
+    @Getter
+    @Setter
+	private Sound track;
+
+    @Getter
+    @Setter
+    private float volume = (float) 0.08;
 
     public SoundObject(String path) {
     	log.info("Sound: Looking for " + path);

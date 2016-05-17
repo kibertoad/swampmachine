@@ -8,6 +8,9 @@ import org.apache.logging.log4j.Logger;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  *
  * @author kibertoad
@@ -16,8 +19,12 @@ public class MusicObject {
 
 	private static final Logger log = LogManager.getLogger();
 
-	public final Music track;
-    public boolean isLooping = true;
+	@Getter
+	private final Music track;
+	
+	@Setter
+	@Getter
+    private boolean isLooping = true;
 
     MusicObject(String path) {
     	log.info("Music: Loading file " + path);

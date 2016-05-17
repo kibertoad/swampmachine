@@ -13,9 +13,10 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music.OnCompletionListener;
 
+import lombok.Getter;
+import lombok.Setter;
 import net.kiberion.swampmachine.assets.AssetProvider;
 
 /**
@@ -24,16 +25,23 @@ import net.kiberion.swampmachine.assets.AssetProvider;
  * @author Cameron Seebach
  */
 public class Music {
-	
-	private static final Logger log = LogManager.getLogger();
+
+    private static final Logger log = LogManager.getLogger();
 
     private static Music _instance;
 
+    @Getter
     private boolean isEnabled = true;
 
-    public float volume = 0.75f;
-    public Map<String, MusicObject> musicTracks = new HashMap<String, MusicObject>();
-    public MusicObject currentTrack;
+    @Getter
+    @Setter
+    private float volume = 0.75f;
+
+    @Getter
+    private Map<String, MusicObject> musicTracks = new HashMap<String, MusicObject>();
+
+    @Getter
+    private MusicObject currentTrack;
     private MusicObject nextTrack;
     private MusicObject lastPlayedTrack;
 
@@ -43,21 +51,17 @@ public class Music {
      * Load all the music files.
      */
     public void load() {
-
         String dirPath = getPathToMusic();
 
         File dir = new File(dirPath);
         String[] fileList = dir.list();
 
         if (fileList == null) {
-        	log.warn("Music directory does not exist!");
+            log.warn("Music directory does not exist!");
         } else {
-
-            for (int x = 0; x < fileList.length; x++) {
-
-                if (fileList[x].endsWith(".ogg")) {
-                    musicTracks.put(fileList[x].replace(".ogg", ""), new MusicObject(dirPath + fileList[x]));
-
+            for (String fileEntry : fileList) {
+                if (fileEntry.endsWith(".ogg")) {
+                    musicTracks.put(fileEntry.replace(".ogg", ""), new MusicObject(dirPath + fileEntry));
                 }
             }
         }
@@ -65,7 +69,7 @@ public class Music {
 
     private void play(String trackName, float setVolume, OnCompletionListener onCompletion) {
         if (isEnabled) {
-            Gdx.app.log("debug", "play track");
+            log.debug("play track");
             nextTrack = musicTracks.get(trackName);
 
             play(nextTrack, setVolume, onCompletion);
@@ -79,7 +83,7 @@ public class Music {
      */
     public void play(String trackName, OnCompletionListener onCompletion) {
         if (isEnabled) {
-            Gdx.app.log("debug", "play track: " + trackName);
+            log.debug("play track: " + trackName);
             nextTrack = musicTracks.get(trackName);
             play(nextTrack, volume, onCompletion);
         }
@@ -91,20 +95,18 @@ public class Music {
      * @param track
      */
     public void play(MusicObject track, float localVolume, OnCompletionListener onCompletion) {
-
         if (currentTrack != track) {
-
             if (currentTrack != null) {
-                currentTrack.track.stop();
+                currentTrack.getTrack().stop();
             }
 
             currentTrack = track;
-            currentTrack.track.setVolume(localVolume);
+            currentTrack.getTrack().setVolume(localVolume);
             lastPlayedTrack = currentTrack;
-            currentTrack.track.play();
-            
+            currentTrack.getTrack().play();
+
             if (onCompletion != null) {
-            currentTrack.track.setOnCompletionListener(onCompletion);
+                currentTrack.getTrack().setOnCompletionListener(onCompletion);
             }
         }
 
@@ -115,32 +117,14 @@ public class Music {
      */
     public void stop() {
         if (currentTrack != null) {
-            currentTrack.track.stop();
+            currentTrack.getTrack().stop();
         }
 
         while (!(allPlayingTracks.isEmpty())) {
             MusicObject track = allPlayingTracks.get(0);
-            track.track.stop();
+            track.getTrack().stop();
             allPlayingTracks.remove(track);
         }
-    }
-
-    /**
-     * Set the volume of music.
-     *
-     * @param setVolume
-     */
-    public void setVolume(float setVolume) {
-        volume = setVolume;
-    }
-
-    /**
-     * Get the volume of music.
-     *
-     * @return
-     */
-    public float getVolume() {
-        return volume;
     }
 
     /**
@@ -155,16 +139,14 @@ public class Music {
 
     public void outputValues() {
         for (MusicObject m : musicTracks.values()) {
-            Gdx.app.log("debug", m.toString());
-
+            log.debug(m.toString());
         }
     }
 
-    
     public void playOnce(String trackName, OnCompletionListener onCompletion) {
         playOnce(trackName, volume, onCompletion);
     }
-    
+
     public void playOnce(String trackName, float setVolume, OnCompletionListener onCompletion) {
         nextTrack = musicTracks.get(trackName);
 
@@ -173,9 +155,8 @@ public class Music {
     }
 
     public void playAsync(String trackName, boolean setLooping) {
-        // currentTrack.track.play();
         musicTracks.get(trackName).setLooping(setLooping);
-        musicTracks.get(trackName).track.play();
+        musicTracks.get(trackName).getTrack().play();
         allPlayingTracks.add(musicTracks.get(trackName));
     }
 
@@ -187,12 +168,7 @@ public class Music {
     }
 
     public String getPathToMusic() {
-        return AssetProvider.getPathToAssets().toString()+"/music/";
-    }
-
-    
-    public boolean isEnabled() {
-        return isEnabled;
+        return AssetProvider.getPathToAssets().toString() + "/music/";
     }
 
     public void setEnabled(boolean isEnabled) {
@@ -201,9 +177,9 @@ public class Music {
             stop();
         } else {
             if (currentTrack != null) {
-            currentTrack.track.play();
+                currentTrack.getTrack().play();
             }
         }
     }
-    
+
 }
