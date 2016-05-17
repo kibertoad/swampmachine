@@ -61,6 +61,12 @@ public abstract class GameState implements Screen, InitializingBean {
         this.stage = new Stage();
 
     }
+    
+    protected GameState(String key, Stage stage) {
+        super();
+        this.key = key;
+        this.stage = stage;
+    }
 
     public void addSubView(StateView view) {
         view.setStage(stage);

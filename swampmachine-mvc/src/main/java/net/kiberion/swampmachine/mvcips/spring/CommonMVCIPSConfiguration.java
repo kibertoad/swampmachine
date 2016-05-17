@@ -7,7 +7,7 @@ import net.kiberion.swampmachine.mvcips.states.util.StateManager;
 import net.kiberion.swampmachine.mvcips.states.util.StateRegistry;
 
 @Configuration
-public class CommonMVCIPSsConfiguration {
+public class CommonMVCIPSConfiguration {
 
     @Bean
     public StateRegistry stateRegistry() {

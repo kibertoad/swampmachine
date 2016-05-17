@@ -25,7 +25,7 @@ import net.kiberion.tiled.model.TiledMapInfo;
 import net.kiberion.tiled.spring.TiledTestConfiguration;
 
 @ContextConfiguration(classes = TiledTestConfiguration.class)
-public class TestMetaFactory extends ContextBasedTest implements ApplicationEventPublisherAware{
+public class TextureMapObjectFactoryTest extends ContextBasedTest implements ApplicationEventPublisherAware{
 
     private ApplicationEventPublisher eventPublisher;
     

@@ -5,13 +5,11 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.stereotype.Component;
 
 import lombok.Getter;
 import lombok.Setter;
 import net.kiberion.swampmachine.mvcips.states.GameState;
 
-@Component
 public class StateRegistry {
 
     private static final Logger log = LogManager.getLogger();
