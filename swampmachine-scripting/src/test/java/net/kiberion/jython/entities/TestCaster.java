@@ -1,4 +1,4 @@
-package net.kiberion.jython;
+package net.kiberion.jython.entities;
 
 import org.apache.commons.lang3.mutable.MutableInt;
 

@@ -1,7 +1,6 @@
 package net.kiberion.jython;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +10,7 @@ import org.python.core.Py;
 import org.python.core.PyInteger;
 import org.python.core.PyStringMap;
 
+import net.kiberion.jython.entities.TestCaster;
 import net.kiberion.swampmachine.utils.FilePathUtils;
 import net.kiberion.swampmachine.utils.StopWatch;
 
@@ -20,10 +20,10 @@ public class TestPythonInvoker {
     
     @Test
     public void testInvoker () {
-        
         PythonInvoker invoker = new PythonInvoker();
         
         invoker.scanPathForScript(FilePathUtils.getResourceRootPath(TestPythonInvoker.class, "test.py"), "py");
+        assertEquals (1, invoker.getScripts().size());
         invoker.init();
         
         TestCaster caster = new TestCaster();
@@ -37,10 +37,7 @@ public class TestPythonInvoker {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         PyMapWrapper result = invoker.invoke(params);
-        stopWatch.endAndLog("Python");
-        
-        
-        assertEquals (1, invoker.getScripts().size());
+        stopWatch.endAndLog("Python"); //Measure script execution time
         
         PyStringMap localVars = invoker.getActiveScript().getLocalVars();
         assertNotNull (localVars);

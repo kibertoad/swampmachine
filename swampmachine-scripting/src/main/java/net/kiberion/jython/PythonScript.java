@@ -8,16 +8,20 @@ import org.python.core.PyCode;
 import org.python.core.PyStringMap;
 import org.python.util.PythonInterpreter;
 
+import lombok.Getter;
+
 public class PythonScript {
 
     private PyCode compiledScript;
+
+    @Getter
     private PyStringMap localVars;
 
     public PythonScript() {
     }
 
     public PythonScript(String string) {
-        this (PythonScriptParser.parseString(string));
+        this(PythonScriptParser.parseString(string));
     }
 
     public PythonScript(PyCode activeScript) {
@@ -29,19 +33,14 @@ public class PythonScript {
 
         try (PythonInterpreter interpreter = new PythonInterpreter()) {
             for (Entry<String, Object> entry : params.entrySet()) {
-
                 interpreter.set(entry.getKey(), entry.getValue());
             }
 
             this.localVars = (PyStringMap) interpreter.getLocals();
             Py.runCode(compiledScript, getLocalVars(), interpreter.getLocals());
-            
-            return new PyMapWrapper (localVars);
-        }
-    }
 
-    public PyStringMap getLocalVars() {
-        return localVars;
+            return new PyMapWrapper(localVars);
+        }
     }
 
 }
