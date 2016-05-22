@@ -4,10 +4,7 @@
  */
 package net.kiberion.swampmachine.assets.loaders.util;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
@@ -15,16 +12,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.yaml.snakeyaml.Yaml;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import net.kiberion.swampmachine.assets.AssetProvider;
 import net.kiberion.swampmachine.assets.UiManager;
-import net.kiberion.swampmachine.assets.readers.AbstractFileReader;
-import net.kiberion.swampmachine.assets.readers.GDXFileReader;
-import net.kiberion.swampmachine.assets.readers.SimpleFileReader;
 import net.kiberion.swampmachine.utils.MapUtils;
 
 /**
@@ -34,33 +26,19 @@ public class YamlLoader {
 
     private static final Logger log = LogManager.getLogger();
 
-    public Yaml yaml = new Yaml();
-    public Iterable<Object> dataYamls;
-    public Map<String, Object> asMap;
-    public List<Object> list;
+    private Yaml yaml = new Yaml();
+    private Map<String, Object> asMap;
+    private List<Object> list;
 
-    private AbstractFileReader fileReader;
-
-    public YamlLoader() {
-        if (Gdx.app != null) {
-            fileReader = new GDXFileReader(AssetProvider.getPathToAssets());
-        } else {
-            fileReader = new SimpleFileReader(AssetProvider.getPathToAssets());
-        }
+    /**
+     * 
+     * @param is source inputstream. Does not get automatically closed
+     * @return
+     */
+    public Iterable<Object> loadYamlObjects (InputStream is) {
+        return yaml.loadAll(is);
     }
-
-    public void openFile(String name) {
-        openFile(Paths.get(name));
-    }
-
-    public void openFile(Path name) {
-        try (InputStream is = fileReader.getFileAsStream(name)){
-            dataYamls = yaml.loadAll(is);
-        } catch (IOException e) {
-            log.error("IO exception: ", e);
-        }
-    }
-
+    
     public Integer getInteger(String byKey) {
         return (Integer) asMap.get(byKey);
     }

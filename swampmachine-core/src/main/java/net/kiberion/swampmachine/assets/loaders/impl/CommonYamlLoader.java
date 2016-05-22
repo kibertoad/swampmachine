@@ -1,6 +1,7 @@
 package net.kiberion.swampmachine.assets.loaders.impl;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -61,9 +62,12 @@ public abstract class CommonYamlLoader<T extends CommonModelEntityDescriptor> im
                 yamlLoader.hasKey(DESCRIPTION_ATTRIBUTE) ? yamlLoader.getString(DESCRIPTION_ATTRIBUTE) : "");
     }
 
-    public void loadAllEntities() {
-        for (Object o : yamlLoader.dataYamls) {
-            parseYaml(o, initNewEntity());
+    public void loadAllEntities(Path name) throws IOException {
+        try (InputStream is = fileReader.getFileAsStream(name)) {
+            Iterable<Object> dataYamls = yamlLoader.loadYamlObjects(is);
+            for (Object o : dataYamls) {
+                parseYaml(o, initNewEntity());
+            }
         }
     }
 
@@ -71,29 +75,35 @@ public abstract class CommonYamlLoader<T extends CommonModelEntityDescriptor> im
 
     @Override
     public Map<String, T> loadMap() {
-        // Parse one file
-        if (isLoadSingle()) {
-            yamlLoader.openFile(path);
-            loadAllEntities();
+        try {
+            // Parse one file
+            if (isLoadSingle()) {
+                loadAllEntities(path);
+            }
+
+            // Parse whole directory
+            else {
+                List<Path> filesToLoad = null;
+                try {
+                    filesToLoad = fileReader.getListOfFilesByWildcard(path, wildcardFileExtension);
+                } catch (IOException e) {
+                    log.error("IO exception: ", e);
+                    throw new IllegalStateException("Failed to get list of files: ", e);
+                }
+
+                for (Path entry : filesToLoad) {
+                    loadAllEntities(entry);
+                }
+            }
         }
 
-        // Parse whole directory
-        else {
-            List<Path> filesToLoad = null;
-            try {
-                filesToLoad = fileReader.getListOfFilesByWildcard(path, wildcardFileExtension);
-            } catch (IOException e) {
-                log.error("IO exception: ", e);
-                throw new IllegalStateException("Failed to get list of files: ", e);
-            }
-
-            for (Path entry : filesToLoad) {
-                yamlLoader.openFile(entry);
-                loadAllEntities();
-            }
+        catch (IOException e) {
+            log.error("IO exception", e);
+            throw new IllegalStateException(e);
         }
 
         return results;
+
     }
 
     @Override
