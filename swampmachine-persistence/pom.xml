@@ -12,11 +12,11 @@
         <artifactId>swampmachine-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    
+
     <properties>
         <hibernate.version>5.1.0.Final</hibernate.version>
     </properties>
-    
+
 
     <dependencies>
 
@@ -24,13 +24,11 @@
             <groupId>net.kiberion</groupId>
             <artifactId>swampmachine-core</artifactId>
         </dependency>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -45,6 +43,11 @@
             <groupId>org.hibernate.common</groupId>
             <artifactId>hibernate-commons-annotations</artifactId>
             <version>5.0.1.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>1.0.0.Final</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -69,24 +72,20 @@
             <version>${hibernate.version}</version>
         </dependency>
 
-        <!--HikariCP is obviously better when maintaining valid connections is important, but since we are going to be using in-memory databases, raw
-            speed is more important -->
-        <dependency>
-            <groupId>com.mchange</groupId>
-            <artifactId>c3p0</artifactId>
-            <version>0.9.5.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
-            <version>2.10.1</version>
-        </dependency>
-
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
             <version>2.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
         </dependency>
 
 
@@ -98,6 +97,10 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.uuid</groupId>
+            <artifactId>java-uuid-generator</artifactId>
         </dependency>
 
 
