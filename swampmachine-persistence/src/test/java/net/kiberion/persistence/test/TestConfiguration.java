@@ -7,7 +7,7 @@ import net.kiberion.swampmachine.spring.CoreConfiguration;
 
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)
-@EnableJpaRepositories("some.root.package")
+//@EnableJpaRepositories("some.root.package")
 public class TestConfiguration extends CoreConfiguration {
 
 }
