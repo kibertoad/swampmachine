@@ -35,10 +35,12 @@ public class LoaderHelper implements InitializingBean, ApplicationContextAware {
             if (assetLoader instanceof AsyncAssetLoader) {
                 SetUtils.validateNoDuplicatePriority(asyncAssetLoaders, assetLoader);
                 asyncAssetLoaders.add((AsyncAssetLoader) assetLoader);
-            }
+            } else
             if (assetLoader instanceof SyncAssetLoader) {
                 SetUtils.validateNoDuplicatePriority(syncAssetLoaders, assetLoader);
                 syncAssetLoaders.add((SyncAssetLoader) assetLoader);
+            } else {
+                throw new IllegalStateException ("Unsupported subclass of an AssetLoader: "+assetLoader.getClass());
             }
         }
     }
