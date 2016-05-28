@@ -13,8 +13,7 @@ public class PyMapWrapper implements SwampScriptInvokationResult {
     private final PyStringMap map;
 
     public PyMapWrapper(PyStringMap map) {
-        super();
-        this.map = map;
+        this.map = map.copy();
     }
 
     @SuppressWarnings("unchecked")

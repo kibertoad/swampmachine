@@ -7,20 +7,13 @@ import org.python.core.PyCode;
 import org.python.core.PyStringMap;
 import org.python.util.PythonInterpreter;
 
-import lombok.Getter;
 import net.kiberion.swampmachine.scripting.SwampBinding;
 import net.kiberion.swampmachine.scripting.SwampScript;
 import net.kiberion.swampmachine.scripting.SwampScriptInvokationResult;
 
 public class PythonScript implements SwampScript {
 
-    private PyCode compiledScript;
-
-    @Getter
-    private PyStringMap localVars;
-
-    public PythonScript() {
-    }
+    private final PyCode compiledScript;
 
     public PythonScript(String scriptBody) {
         try (PythonInterpreter interp = new PythonInterpreter()) {
@@ -34,15 +27,13 @@ public class PythonScript implements SwampScript {
 
     @Override
     public SwampScriptInvokationResult invoke(SwampBinding params) {
-        localVars = Py.newStringMap();
-
         try (PythonInterpreter interpreter = new PythonInterpreter()) {
             for (Entry<String, Object> entry : params.getVariableEntries()) {
                 interpreter.set(entry.getKey(), entry.getValue());
             }
 
-            this.localVars = (PyStringMap) interpreter.getLocals();
-            Py.runCode(compiledScript, getLocalVars(), interpreter.getLocals());
+            final PyStringMap localVars = (PyStringMap) interpreter.getLocals();
+            Py.runCode(compiledScript, localVars, interpreter.getLocals());
 
             return new PyMapWrapper(localVars);
         }
