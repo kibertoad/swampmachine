@@ -1,6 +1,5 @@
-package net.kiberion.jython;
+package net.kiberion.swampmachine.jython;
 
-import java.util.Map;
 import java.util.Map.Entry;
 
 import org.python.core.Py;
@@ -9,8 +8,9 @@ import org.python.core.PyStringMap;
 import org.python.util.PythonInterpreter;
 
 import lombok.Getter;
+import net.kiberion.swampmachine.scripting.SwampScript;
 
-public class PythonScript {
+public class PythonScript implements SwampScript<PythonBinding, PyMapWrapper>{
 
     private PyCode compiledScript;
 
@@ -28,7 +28,8 @@ public class PythonScript {
         this.compiledScript = activeScript;
     }
 
-    public PyMapWrapper invoke(Map<String, Object> params) {
+    @Override
+    public PyMapWrapper invoke(PythonBinding params) {
         localVars = Py.newStringMap();
 
         try (PythonInterpreter interpreter = new PythonInterpreter()) {

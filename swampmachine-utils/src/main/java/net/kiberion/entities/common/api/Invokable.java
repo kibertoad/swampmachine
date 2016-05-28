@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.entities.common.api;
+package net.kiberion.entities.common.api;
 
 /**
  * @author caryoscelus

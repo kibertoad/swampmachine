@@ -188,6 +188,11 @@
             </dependency>
             <dependency>
                 <groupId>net.kiberion</groupId>
+                <artifactId>swampmachine-utils</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.kiberion</groupId>
                 <artifactId>swampmachine-core</artifactId>
                 <version>${project.version}</version>
                 <type>test-jar</type>
@@ -219,6 +224,16 @@
             <dependency>
                 <groupId>net.kiberion</groupId>
                 <artifactId>swampmachine-blueprints</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.kiberion</groupId>
+                <artifactId>swampmachine-utils</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.kiberion</groupId>
+                <artifactId>swampmachine-scripting</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -291,6 +306,11 @@
                 <version>1.8.0</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>19.0</version>
+            </dependency>
             <dependency>
                 <groupId>org.codehaus.groovy</groupId>
                 <artifactId>groovy</artifactId>

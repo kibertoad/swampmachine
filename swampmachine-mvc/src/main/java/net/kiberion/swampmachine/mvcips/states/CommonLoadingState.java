@@ -10,9 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
+import net.kiberion.entities.common.api.Invokable;
 import net.kiberion.swampmachine.assets.GameConfig;
 import net.kiberion.swampmachine.assets.UiManager;
-import net.kiberion.swampmachine.entities.common.api.Invokable;
 import net.kiberion.swampmachine.loaders.LoaderHelper;
 import net.kiberion.swampmachine.mvcips.states.annotations.LoadingState;
 import net.kiberion.swampmachine.mvcips.states.util.StateManager;

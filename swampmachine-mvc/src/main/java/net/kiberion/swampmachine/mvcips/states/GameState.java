@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.kiberion.swampmachine.entities.common.api.RealtimeUpdatable;
+import net.kiberion.entities.common.api.RealtimeUpdatable;
 import net.kiberion.swampmachine.mvcips.view.StateView;
 import net.kiberion.swampmachine.processors.TimedProcessor;
 

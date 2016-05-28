@@ -1,11 +1,13 @@
-package net.kiberion.jython;
+package net.kiberion.swampmachine.jython;
 
 import org.python.core.Py;
 import org.python.core.PyBoolean;
 import org.python.core.PyInteger;
 import org.python.core.PyStringMap;
 
-public class PyMapWrapper {
+import net.kiberion.swampmachine.scripting.SwampScriptInvokationResult;
+
+public class PyMapWrapper implements SwampScriptInvokationResult{
 
     private final PyStringMap map;
 
@@ -21,6 +23,11 @@ public class PyMapWrapper {
     public boolean getBoolean (String key) {
         return ((PyBoolean)map.get(Py.newString(key))).getBooleanValue();
     }
-    
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> T getVariableValue(String key) {
+        return (T)(map.get(Py.newString(key)));
+    }
     
 }

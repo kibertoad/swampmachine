@@ -58,16 +58,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>net.kiberion</groupId>
-            <artifactId>swampmachine-core</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx</artifactId>

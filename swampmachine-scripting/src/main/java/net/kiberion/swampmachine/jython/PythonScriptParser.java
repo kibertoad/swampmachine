@@ -1,4 +1,4 @@
-package net.kiberion.jython;
+package net.kiberion.swampmachine.jython;
 
 import java.nio.file.Path;
 
