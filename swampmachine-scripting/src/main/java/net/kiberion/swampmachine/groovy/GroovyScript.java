@@ -13,12 +13,14 @@ import com.google.common.io.CharStreams;
 
 import groovy.lang.GroovyShell;
 import groovy.lang.Script;
+import net.kiberion.swampmachine.scripting.SwampBinding;
 import net.kiberion.swampmachine.scripting.SwampScript;
+import net.kiberion.swampmachine.scripting.SwampScriptInvokationResult;
 
 /**
  * @author kibertoad
  */
-public class GroovyScript implements SwampScript<GroovyBinding, GroovyInvokationResult> {
+public class GroovyScript implements SwampScript {
 
     private static final int POOL_SIZE = 5;
 
@@ -48,7 +50,7 @@ public class GroovyScript implements SwampScript<GroovyBinding, GroovyInvokation
 
     @SuppressWarnings("unchecked")
     @Override
-    public GroovyInvokationResult invoke(GroovyBinding binding) {
+    public SwampScriptInvokationResult invoke(SwampBinding binding) {
         GroovyInvokationResult result = new GroovyInvokationResult();
         Validate.notNull(binding, "Binding cannot be null.");
         Script script;
@@ -58,9 +60,9 @@ public class GroovyScript implements SwampScript<GroovyBinding, GroovyInvokation
             throw new IllegalStateException(e);
         }
         try {
-            script.setBinding(binding);
+            script.setBinding((GroovyBinding)binding);
             script.run();
-            result.setVariables(new HashMap<String, Object>(binding.getVariables()));
+            result.setVariables(new HashMap<>(binding.getVariableMap()));
         } finally {
             instancePool.push(script);
         }

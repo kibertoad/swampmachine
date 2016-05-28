@@ -15,18 +15,18 @@ import org.apache.logging.log4j.Logger;
 
 import net.kiberion.utils.FilePathUtils;
 
-public abstract class AbstractScriptParser<T extends SwampScript<? extends SwampBinding, ? extends SwampScriptInvokationResult>> {
+public abstract class AbstractScriptParser {
 
     private static final Logger log = LogManager.getLogger();
 
     protected abstract Set<String> getScriptExtensions();
 
-    protected abstract T parseScript(String script);
+    protected abstract SwampScript parseScript(String script);
 
-    protected abstract T parseScript(Reader script);
+    protected abstract SwampScript parseScript(Reader script);
 
-    public List<T> parseScriptsFromPath(Path directory) {
-        List<T> compiledScrips = new ArrayList<>();
+    public List<SwampScript> parseScriptsFromPath(Path directory) {
+        List<SwampScript> compiledScrips = new ArrayList<>();
 
         try {
             List<Path> scriptPaths = FilePathUtils.getListOfFilesByExtension(directory, getScriptExtensions());

@@ -1,25 +1,69 @@
 package net.kiberion.swampmachine.jython;
 
+import java.io.Reader;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import org.python.core.PyCode;
+import org.python.google.common.collect.ImmutableSet;
 import org.python.util.PythonInterpreter;
 
-public class PythonScriptParser {
+import lombok.Getter;
+import net.kiberion.swampmachine.scripting.AbstractScriptParser;
+import net.kiberion.swampmachine.scripting.SwampScript;
 
-    private PythonScriptParser() {
+/**
+ * 
+ * @author kibertoad
+ *
+ */
+public class PythonScriptParser extends AbstractScriptParser {
+
+    private boolean isInitted;
+
+    private Set<String> extensions = ImmutableSet.of("py");
+
+    @Getter
+    private List<PythonScript> compiledScripts = new ArrayList<>();
+
+    @Override
+    protected PythonScript parseScript(Reader reader) {
+        try (PythonInterpreter interp = new PythonInterpreter()) {
+            PyCode compiledCode = interp.compile(reader);
+            PythonScript activeScript = new PythonScript(compiledCode);
+            compiledScripts.add(activeScript);
+            return activeScript;
+        }
     }
 
-    public static PyCode parsePath(Path scriptPath) {
-        //implement later
-        throw new UnsupportedOperationException();
+    @Override
+    protected SwampScript parseScript(String script) {
+        try (PythonInterpreter interp = new PythonInterpreter()) {
+            PyCode compiledCode = interp.compile(script);
+            PythonScript activeScript = new PythonScript(compiledCode);
+            compiledScripts.add(activeScript);
+            return activeScript;
+        }
+    }
+
+    public void init() {
+        PythonInitter.init();
+        isInitted = true;
     }
     
-    public static PyCode parseString(String scriptBody) {
-        try (PythonInterpreter interp = new PythonInterpreter()) {
-            PyCode compiledCode = interp.compile(scriptBody);
-            return compiledCode;
+    @Override
+    public List<SwampScript> parseScriptsFromPath(Path directory) {
+        if (!isInitted) {
+            init();
         }
+        return super.parseScriptsFromPath(directory);
+    }
+
+    @Override
+    protected Set<String> getScriptExtensions() {
+        return extensions;
     }
 
 }
