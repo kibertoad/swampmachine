@@ -2,7 +2,6 @@ package net.kiberion.swampmachine.jython;
 
 import java.io.Reader;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -10,7 +9,6 @@ import org.python.core.PyCode;
 import org.python.google.common.collect.ImmutableSet;
 import org.python.util.PythonInterpreter;
 
-import lombok.Getter;
 import net.kiberion.swampmachine.scripting.AbstractScriptParser;
 import net.kiberion.swampmachine.scripting.SwampScript;
 
@@ -25,25 +23,20 @@ public class PythonScriptParser extends AbstractScriptParser {
 
     private Set<String> extensions = ImmutableSet.of("py");
 
-    @Getter
-    private List<PythonScript> compiledScripts = new ArrayList<>();
-
     @Override
     protected PythonScript parseScript(Reader reader) {
         try (PythonInterpreter interp = new PythonInterpreter()) {
             PyCode compiledCode = interp.compile(reader);
             PythonScript activeScript = new PythonScript(compiledCode);
-            compiledScripts.add(activeScript);
             return activeScript;
         }
     }
 
     @Override
-    protected SwampScript parseScript(String script) {
+    protected PythonScript parseScript(String script) {
         try (PythonInterpreter interp = new PythonInterpreter()) {
             PyCode compiledCode = interp.compile(script);
             PythonScript activeScript = new PythonScript(compiledCode);
-            compiledScripts.add(activeScript);
             return activeScript;
         }
     }

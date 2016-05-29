@@ -19,5 +19,11 @@ public class GroovyBinding extends Binding implements SwampBinding{
     public Map<String, Object> getVariableMap() {
         return this.getVariables();
     }
+    
+    @Override
+    public <T> T getVariableValue(String name) {
+        return (T) getVariable(name);
+    }
+    
 
 }

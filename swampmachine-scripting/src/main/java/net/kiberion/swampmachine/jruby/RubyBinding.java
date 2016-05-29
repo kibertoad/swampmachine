@@ -1,17 +1,13 @@
-package net.kiberion.swampmachine.jython;
+package net.kiberion.swampmachine.jruby;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
+
+import javax.script.SimpleBindings;
 
 import net.kiberion.swampmachine.scripting.SwampBinding;
 
-public class PythonBinding extends HashMap<String, Object> implements SwampBinding{
-
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -4611782909570888304L;
+public class RubyBinding extends SimpleBindings implements SwampBinding{
 
     @SuppressWarnings("unchecked")
     @Override

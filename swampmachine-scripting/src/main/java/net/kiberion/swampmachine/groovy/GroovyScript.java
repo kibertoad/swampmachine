@@ -48,7 +48,6 @@ public class GroovyScript implements SwampScript {
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public SwampScriptInvokationResult invoke(SwampBinding binding) {
         GroovyInvokationResult result = new GroovyInvokationResult();

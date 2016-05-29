@@ -20,7 +20,7 @@ public class SwampPriceScript{
     
     public Map<String, Integer> evaluate (SwampBinding binding) {
         getScript().invoke(binding);
-        Map<String, Integer> result = binding.getVariable(RESULT_VAR);
+        Map<String, Integer> result = binding.getVariableValue(RESULT_VAR);
         Validate.notNull(result, "Result was not set for this script");
         return result;
     }

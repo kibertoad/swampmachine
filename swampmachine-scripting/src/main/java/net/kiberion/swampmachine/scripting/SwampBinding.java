@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 
 public interface SwampBinding {
 
-    public <T> T getVariable(String name);
+    public <T> T getVariableValue(String name);
     public void setVariable(String name, Object value);
     public Collection<Entry<String, Object>> getVariableEntries();
     public Map<String, Object> getVariableMap();

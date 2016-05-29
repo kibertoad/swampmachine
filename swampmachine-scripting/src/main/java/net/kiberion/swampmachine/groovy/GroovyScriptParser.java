@@ -6,7 +6,6 @@ import java.util.Set;
 import org.python.google.common.collect.ImmutableSet;
 
 import net.kiberion.swampmachine.scripting.AbstractScriptParser;
-import net.kiberion.swampmachine.scripting.SwampScript;
 
 public class GroovyScriptParser extends AbstractScriptParser {
 
@@ -18,12 +17,12 @@ public class GroovyScriptParser extends AbstractScriptParser {
     }
 
     @Override
-    protected SwampScript parseScript(String script) {
+    protected GroovyScript parseScript(String script) {
         return new GroovyScript (script);
     }
 
     @Override
-    protected SwampScript parseScript(Reader script) {
+    protected GroovyScript parseScript(Reader script) {
         return new GroovyScript (script);
     }
 
