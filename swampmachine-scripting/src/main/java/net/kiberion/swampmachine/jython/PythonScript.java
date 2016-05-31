@@ -11,6 +11,11 @@ import net.kiberion.swampmachine.scripting.SwampBinding;
 import net.kiberion.swampmachine.scripting.SwampScript;
 import net.kiberion.swampmachine.scripting.SwampScriptInvokationResult;
 
+/**
+ * This class is thread-safe
+ * @author kibertoad
+ *
+ */
 public class PythonScript implements SwampScript {
 
     private final PyCode compiledScript;
