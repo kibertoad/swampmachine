@@ -21,6 +21,7 @@ import net.kiberion.swampmachine.styling.StyleFactory;
  */
 
 //ToDo Very old code that should definitely be reviewed and rewritten
+@Deprecated
 public class UiManager {
 
     public static final String BLANK_IMAGE = "BLANK";
