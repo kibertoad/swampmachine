@@ -18,18 +18,23 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle;
 
 import lombok.Getter;
-import net.kiberion.swampmachine.assets.AssetProvider;
+import lombok.Setter;
+import net.kiberion.swampmachine.assets.GameConfig;
 import net.kiberion.swampmachine.assets.UiManager;
 
 /**
  * @author kibertoad
  */
 
-//ToDo Very old code, probably should be rewritten
+//ToDo Very old code, probably should be rewritten and made non-static
+@Deprecated
 public class StyleFactory {
 
     private static final Logger log = LogManager.getLogger();
     private static StyleFactory _instance;
+    
+    @Setter
+    private static GameConfig gameConfig;
 
     public static StyleFactory instance() {
         if (_instance == null) {
@@ -48,7 +53,7 @@ public class StyleFactory {
 
     private BitmapFont produceFont(String fontName, int size) {
         FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files
-                .getFileHandle(AssetProvider.getPathToAssets() + "/fonts/" + fontName + ".ttf", FileType.Internal));
+                .getFileHandle(gameConfig.getPathToResourcesAsString() + "/fonts/" + fontName + ".ttf", FileType.Internal));
         FreeTypeFontGenerator.FreeTypeFontParameter params = new FreeTypeFontGenerator.FreeTypeFontParameter();
         params.size = size;
 
@@ -86,7 +91,7 @@ public class StyleFactory {
         Map<Integer, BitmapFont> fontList;
 
         if (!fonts.containsKey(fontName)) {
-            fontList = new HashMap<Integer, BitmapFont>();
+            fontList = new HashMap<>();
             fonts.put(fontName, fontList);
         } else {
             fontList = fonts.get(fontName);
@@ -132,6 +137,11 @@ public class StyleFactory {
 
     public WindowStyle getWindowStyle(String style) {
         return windowStyles.get(style);
+    }
+
+    public static StyleFactory instance(GameConfig gameConfig) {
+        setGameConfig(gameConfig);
+        return instance();
     }
 
 }

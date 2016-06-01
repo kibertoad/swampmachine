@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.entities.modelinfo;
+package net.kiberion.blueprints.common.entities.impl;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +10,7 @@ import net.kiberion.swampmachine.scripting.SwampScript;
 /**
  * @author: kibertoad
  */
-public class ItemInfo extends CommonModelEntityDescriptor {
+public class ItemDescriptor extends CommonModelEntityDescriptor {
 
     @Setter
     @Getter

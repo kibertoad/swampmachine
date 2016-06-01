@@ -8,12 +8,12 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.kiberion.swampmachine.assets.loaders.api.SyncAssetLoader;
+import net.kiberion.swampmachine.assets.loaders.api.SyncLoader;
 import net.kiberion.swampmachine.assets.util.LoadOnStartup;
 import net.kiberion.swampmachine.entities.common.api.EntityModelDescriptor;
 
 @LoadOnStartup
-public class CommonSyncStartupLoader extends AbstractLoader implements SyncAssetLoader {
+public class CommonSyncStartupLoader extends AbstractLoader implements SyncLoader {
 
     @Setter
     @Getter

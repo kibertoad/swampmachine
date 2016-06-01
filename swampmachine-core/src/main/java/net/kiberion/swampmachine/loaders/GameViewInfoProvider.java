@@ -6,21 +6,21 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.badlogic.gdx.Gdx;
 
-import net.kiberion.swampmachine.assets.AssetProvider;
-import net.kiberion.swampmachine.assets.loaders.api.AbstractLoader;
-import net.kiberion.swampmachine.assets.loaders.impl.EntityViewInfoLoader;
+import lombok.Setter;
+import net.kiberion.swampmachine.assets.GameConfig;
+import net.kiberion.swampmachine.assets.loaders.api.EntityYamlLoader;
 import net.kiberion.swampmachine.assets.loaders.impl.GameViewInfoLoader;
-import net.kiberion.swampmachine.assets.loaders.impl.POJOLoader;
+import net.kiberion.swampmachine.assets.loaders.impl.POJOYamlLoader;
 import net.kiberion.swampmachine.assets.readers.AbstractFileReader;
 import net.kiberion.swampmachine.assets.readers.GDXFileReader;
 import net.kiberion.swampmachine.assets.readers.SimpleFileReader;
 import net.kiberion.swampmachine.assets.viewinfo.AnimationViewInfo;
 import net.kiberion.swampmachine.assets.viewinfo.EntityViewInfo;
 import net.kiberion.swampmachine.assets.viewinfo.ViewInfo;
-import net.kiberion.swampmachine.entities.modelinfo.CreatureModelInfo;
 
 /**
  * @author kibertoad
@@ -44,9 +44,12 @@ public class GameViewInfoProvider {
     
     private AbstractFileReader fileReader;
 
+    @Setter
+    @Autowired
+    private GameConfig gameConfig;
     
     public Path getPathToAssets (){
-        return AssetProvider.getPathToAssets();        
+        return gameConfig.getPathToResources();        
     }
     
     public GameViewInfoProvider() {
@@ -61,7 +64,7 @@ public class GameViewInfoProvider {
         //if (Gdx.files.internal(GameModelDataProvider.getPathToAssets()+"animation/").exists()) {
         if (fileReader.fileExists(getPathToAssets().resolve("animation"))) {
             log.info("Start loading animation");
-            AbstractLoader<AnimationViewInfo> loader = new POJOLoader<AnimationViewInfo>(getPathToAssets().resolve("animation/"), AnimationViewInfo.class, "view");
+            EntityYamlLoader<AnimationViewInfo> loader = new POJOYamlLoader<>(getPathToAssets().resolve("animation/"), AnimationViewInfo.class, "view");
             
             try {
                 animationViewInfoList = loader.loadMap();
@@ -85,23 +88,25 @@ public class GameViewInfoProvider {
         log.info("Done loading gameimages");
     }
 
+    /*
     public void loadCreatureViewInfoFromModel(Map<String, CreatureModelInfo> fullCreatureList) {
         if (fileReader.fileExists(getPathToAssets().resolve("model-creature/"))) {
             log.info("debug", "Start loading creature images");
             EntityViewInfoLoader loader = new EntityViewInfoLoader(getPathToAssets().resolve("model-creature/").toString()+"*", fullCreatureList, "creatures");
             this.fullCreatureViewInfoList = loader.loadMap();
 
-            /*
-            try {
-                this.creatureMovementAnimation = new POJOLoader<DirectionalAnimationList>(getPathToAssets().resolve("view-creature/"), DirectionalAnimationList.class, "view").setWildcardFileExtension("creatures").loadToMap();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            */
+            
+           //try {
+          ////      this.creatureMovementAnimation = new POJOLoader<DirectionalAnimationList>(getPathToAssets().resolve("view-creature/"), DirectionalAnimationList.class, "view").setWildcardFileExtension("creatures").loadToMap();
+         //   } catch (IOException e) {
+         //       e.printStackTrace();
+        //    }
+            
             
             log.info("Done loading creature images");
         }
     }
+    */
     
     /*
     public void loadBuildingViewInfoFromModel(Map<String, BuildingModelInfo> buildingList) throws IOException {
@@ -141,7 +146,7 @@ public class GameViewInfoProvider {
     public void init () throws IOException{
         loadGameViewInfo();
         loadAnimationViewInfo();
-        loadCreatureViewInfoFromModel(AssetProvider.instance().getCreatures());
+        //loadCreatureViewInfoFromModel(AssetProvider.instance().getCreatures());
         //loadBuildingViewInfoFromModel(AssetProvider.instance().getBuildings());
         //loadItemViewInfoFromModel(AssetProvider.instance().getItems(), false);
         isInitted = true;

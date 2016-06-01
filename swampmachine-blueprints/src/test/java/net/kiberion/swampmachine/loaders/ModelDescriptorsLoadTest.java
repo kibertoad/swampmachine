@@ -1,16 +1,20 @@
 package net.kiberion.swampmachine.loaders;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
-import net.kiberion.swampmachine.assets.loaders.api.SyncAssetLoader;
-import net.kiberion.swampmachine.entities.modelinfo.CreatureModelInfo;
+import net.kiberion.blueprints.common.entities.impl.CreatureModelInfo;
+import net.kiberion.blueprints.common.loaders.CommonViewInfoLoader;
+import net.kiberion.blueprints.common.loaders.CreatureRegistry;
+import net.kiberion.swampmachine.assets.loaders.api.SyncLoader;
+import net.kiberion.swampmachine.blueprints.spring.ContextBasedTest;
 import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
-import net.kiberion.swampmachine.spring.ContextBasedTest;
 
 public class ModelDescriptorsLoadTest extends ContextBasedTest {
 
@@ -22,6 +26,9 @@ public class ModelDescriptorsLoadTest extends ContextBasedTest {
 
     @Autowired
     private CommonModelInfoRegistry modelInfoRegistry;
+    
+    @Autowired
+    private CreatureRegistry creatureRegistry;
 
     @Autowired
     private ApplicationContext ctx;
@@ -33,11 +40,11 @@ public class ModelDescriptorsLoadTest extends ContextBasedTest {
 
     @Test
     public void testLoadingCreatures() {
-        assertEquals(0, modelInfoRegistry.getCreatures().size());
+        assertEquals(0, creatureRegistry.getCreatures().size());
         loaderHelper.startLoading();
         loaderHelper.finishLoading();
-        assertEquals(1, modelInfoRegistry.getCreatures().size());
-        CreatureModelInfo creature = modelInfoRegistry.getCreatures().get("dummycreature");
+        assertEquals(1, creatureRegistry.getCreatures().size());
+        CreatureModelInfo creature = creatureRegistry.getCreatures().get("dummycreature");
         assertNotNull(creature);
     }
 
@@ -48,7 +55,7 @@ public class ModelDescriptorsLoadTest extends ContextBasedTest {
 
         // Test loaders being properly sorted by loading priority
         int previousPriority = -1;
-        for (SyncAssetLoader loader : loaderHelper.getSyncAssetLoaders()) {
+        for (SyncLoader loader : loaderHelper.getSyncAssetLoaders()) {
             assertTrue(loader.getPriority() > previousPriority);
             previousPriority = loader.getPriority();
         }

@@ -12,14 +12,14 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.kiberion.swampmachine.assets.loaders.api.AbstractLoader;
+import net.kiberion.swampmachine.assets.loaders.api.EntityYamlLoader;
 import net.kiberion.swampmachine.assets.loaders.util.FileReaderFactory;
 import net.kiberion.swampmachine.assets.loaders.util.YamlLoader;
 import net.kiberion.swampmachine.assets.readers.AbstractFileReader;
 import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 import net.kiberion.swampmachine.utils.SetUtils;
 
-public abstract class CommonYamlLoader<T extends CommonModelEntityDescriptor> implements AbstractLoader<T> {
+public abstract class CommonYamlLoader<T extends CommonModelEntityDescriptor> implements EntityYamlLoader<T> {
 
     private static final Logger log = LogManager.getLogger();
 

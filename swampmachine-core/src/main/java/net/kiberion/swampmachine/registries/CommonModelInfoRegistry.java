@@ -2,30 +2,36 @@ package net.kiberion.swampmachine.registries;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+
+import com.google.common.collect.ImmutableSet;
 
 import lombok.Getter;
-import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
-import net.kiberion.swampmachine.entities.modelinfo.ActionInfo;
-import net.kiberion.swampmachine.entities.modelinfo.CreatureModelInfo;
-import net.kiberion.swampmachine.entities.modelinfo.GroupInfo;
-import net.kiberion.swampmachine.entities.modelinfo.ItemInfo;
+import net.kiberion.swampmachine.entities.common.impl.resources.ResourceDescriptor;
+import net.kiberion.swampmachine.entities.common.impl.resources.ResourcesDelta;
+import net.kiberion.swampmachine.entities.modelinfo.ActionDescriptor;
+import net.kiberion.swampmachine.entities.modelinfo.GroupDescriptor;
 
 public class CommonModelInfoRegistry{
 
 	@Getter
-    private Map<String, CreatureModelInfo> creatures = new HashMap<>();
-
-	@Getter
-    private Map<String, ItemInfo> items;
-
-	@Getter
-    private Map<String, CommonModelEntityDescriptor> resources;
+    private final Map<String, ResourceDescriptor> resources = new HashMap<>();
     
 	@Getter
-    private Map<String, GroupInfo> actionGroups;
+	private Set<String> existingResources;
+
+    public void setExistingResources(Set<String> existingResources) {
+        this.existingResources = ImmutableSet.copyOf(existingResources);
+    }
+	
+	public ResourcesDelta getNewResourcesDeltaInstance () {
+	    return new ResourcesDelta(existingResources);
+	}
 	
 	@Getter
-    private Map<String, ActionInfo> actions;
-
+    private Map<String, GroupDescriptor> actionGroups;
+	
+	@Getter
+    private Map<String, ActionDescriptor> actions;
 	
 }

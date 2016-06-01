@@ -5,5 +5,9 @@ public interface MetadataHolderBlock {
 
     public EntityInstanceMetadataBlock getMetadata();
     public void setMetadata(EntityInstanceMetadataBlock metadata);
+    
+    public default String getId () {
+        return getMetadata().getId();
+    }
 
 }

@@ -4,15 +4,14 @@ import java.util.Map;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.kiberion.swampmachine.entities.common.impl.AbstractModelEntityDescriptor;
 
 /**
+ * E. g. "Set status to POISONED and inflict 5 points of damage"
+ * 
  * @author kibertoad
  */
-public class ActionEffect {
-
-    @Getter
-    @Setter
-    private String effectCode;
+public class EffectDescriptor extends AbstractModelEntityDescriptor{
 
     @Getter
     @Setter

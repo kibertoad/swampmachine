@@ -4,9 +4,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import net.kiberion.swampmachine.assets.readers.ReaderHelper;
-import net.kiberion.swampmachine.loaders.CommonViewInfoLoader;
-import net.kiberion.swampmachine.loaders.CreatureLoader;
+import net.kiberion.swampmachine.loaders.AbstractLoader;
 import net.kiberion.swampmachine.loaders.LoaderHelper;
+import net.kiberion.swampmachine.loaders.ResourcesLoader;
 import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
 import net.kiberion.swampmachine.registries.CommonViewInfoRegistry;
 
@@ -14,23 +14,19 @@ import net.kiberion.swampmachine.registries.CommonViewInfoRegistry;
 public class CommonLoaderConfiguration {
 
     @Bean
-    public CreatureLoader creatureLoader() {
-        return new CreatureLoader();
-    }
-
-    @Bean
     public LoaderHelper loaderHelper() {
         return new LoaderHelper();
     }
+    
+    @Bean
+    public AbstractLoader resourcesLoader() {
+        return new ResourcesLoader();
+    }
+    
 
     @Bean
     public ReaderHelper readerHelper() {
         return new ReaderHelper();
-    }
-    
-    @Bean
-    public CommonViewInfoLoader viewInfoLoader() {
-        return new CommonViewInfoLoader();
     }
     
     @Bean

@@ -1,6 +1,6 @@
 package net.kiberion.persistence;
 
-import net.kiberion.swampmachine.assets.loaders.api.SyncAssetLoader;
+import net.kiberion.swampmachine.assets.loaders.api.SyncLoader;
 import net.kiberion.swampmachine.assets.util.LoadOnStartup;
 
 /**
@@ -9,7 +9,7 @@ import net.kiberion.swampmachine.assets.util.LoadOnStartup;
  * @author kibertoad
  *
  */
-public interface Persistor extends SyncAssetLoader{
+public interface Persistor extends SyncLoader{
 
     public void persistEntities();
     

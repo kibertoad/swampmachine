@@ -7,7 +7,7 @@ import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescripto
 /**
  * @author kibertoad
  */
-public class PersonalName extends CommonModelEntityDescriptor {
+public class PersonalNameDescriptor extends CommonModelEntityDescriptor {
 
     public static final String IS_FIRST_NAME = "isFirstName";
     public static final String IS_FAMILY_NAME = "isFamilyName";
@@ -21,9 +21,6 @@ public class PersonalName extends CommonModelEntityDescriptor {
     @Getter
     @Setter
     private String name;
-
-    public PersonalName() {
-    }
 
     public boolean isFirstName() {
         return hasTag(IS_FIRST_NAME);

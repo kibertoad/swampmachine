@@ -12,12 +12,13 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.badlogic.gdx.audio.Music.OnCompletionListener;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.kiberion.swampmachine.assets.AssetProvider;
+import net.kiberion.swampmachine.assets.GameConfig;
 
 /**
  * Class for playing Music files.
@@ -26,6 +27,10 @@ import net.kiberion.swampmachine.assets.AssetProvider;
  */
 public class Music {
 
+    @Autowired
+    @Setter
+    private GameConfig gameConfig;
+    
     private static final Logger log = LogManager.getLogger();
 
     private static Music _instance;
@@ -38,14 +43,14 @@ public class Music {
     private float volume = 0.75f;
 
     @Getter
-    private Map<String, MusicObject> musicTracks = new HashMap<String, MusicObject>();
+    private Map<String, MusicObject> musicTracks = new HashMap<>();
 
     @Getter
     private MusicObject currentTrack;
     private MusicObject nextTrack;
     private MusicObject lastPlayedTrack;
 
-    public List<MusicObject> allPlayingTracks = new ArrayList<MusicObject>();
+    public List<MusicObject> allPlayingTracks = new ArrayList<>();
 
     /**
      * Load all the music files.
@@ -168,7 +173,7 @@ public class Music {
     }
 
     public String getPathToMusic() {
-        return AssetProvider.getPathToAssets().toString() + "/music/";
+        return gameConfig.getPathToResources().resolve("music").toString();
     }
 
     public void setEnabled(boolean isEnabled) {

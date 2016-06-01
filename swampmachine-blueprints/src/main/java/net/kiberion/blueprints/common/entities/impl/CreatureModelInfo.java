@@ -1,10 +1,11 @@
-package net.kiberion.swampmachine.entities.modelinfo;
+package net.kiberion.blueprints.common.entities.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
+import net.kiberion.swampmachine.entities.modelinfo.ActionDescriptor;
 
 /**
  * User: kibertoad
@@ -20,7 +21,7 @@ public class CreatureModelInfo extends CommonModelEntityDescriptor{
     public int sightRange;
     public int speed;
 
-    public List<ActionInfo> actions;
+    public List<ActionDescriptor> actions;
     public Map<String, Integer> statList;
     public Map<String, Integer> skillList;
 
@@ -29,9 +30,8 @@ public class CreatureModelInfo extends CommonModelEntityDescriptor{
     public CreatureModelInfo() {
     }
     
-    public CreatureModelInfo(String setName, String setCode, Map<String, ItemInfo> items) {
+    public CreatureModelInfo(String setName, String setCode) {
         super(setName, setCode);
-
         actions = new ArrayList<>();
     }
 

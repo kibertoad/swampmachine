@@ -18,7 +18,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import lombok.Getter;
 import lombok.Setter;
 import net.kiberion.swampmachine.assets.UiManager;
-import net.kiberion.swampmachine.assets.loaders.api.AbstractAsyncAssetLoader;
+import net.kiberion.swampmachine.assets.loaders.api.AbstractAsyncLoader;
 import net.kiberion.swampmachine.assets.loaders.util.FileReaderFactory;
 import net.kiberion.swampmachine.assets.readers.AbstractFileReader;
 import net.kiberion.swampmachine.assets.util.LoadOnStartup;
@@ -26,7 +26,7 @@ import net.kiberion.swampmachine.utils.SetUtils;
 import net.kiberion.tiled.MapRegistry;
 
 @LoadOnStartup
-public class MapLoader extends AbstractAsyncAssetLoader {
+public class MapLoader extends AbstractAsyncLoader {
 
     public static final String MAP_ID_PROPERTY = "id";
 

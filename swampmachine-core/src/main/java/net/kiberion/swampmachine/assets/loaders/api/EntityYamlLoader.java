@@ -12,7 +12,7 @@ import net.kiberion.swampmachine.entities.common.api.EntityModelDescriptor;
 /**
  * @author kibertoad
  */
-public interface AbstractLoader<T extends EntityModelDescriptor> {
+public interface EntityYamlLoader<T extends EntityModelDescriptor> {
 
     /**
      * 
@@ -21,7 +21,7 @@ public interface AbstractLoader<T extends EntityModelDescriptor> {
      */
     public Map<String, T> loadMap() throws IOException;
 
-    public AbstractLoader<T> setSupportedFileExtensions(String... extensions);
+    public EntityYamlLoader<T> setSupportedFileExtensions(String... extensions);
 
     public void setFileReader(AbstractFileReader fileReader);
 

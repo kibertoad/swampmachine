@@ -9,8 +9,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Configuration;
 
 import lombok.Getter;
-import net.kiberion.swampmachine.assets.loaders.api.AssetLoader;
-import net.kiberion.swampmachine.assets.loaders.util.AssetLoaderSpringExtractor;
+import net.kiberion.swampmachine.assets.loaders.api.Loader;
+import net.kiberion.swampmachine.assets.loaders.util.LoaderSpringExtractor;
 import net.kiberion.swampmachine.mvcips.utils.StateSpringLoader;
 
 public abstract class SpringGameApplication extends GameApplication{
@@ -49,8 +49,8 @@ public abstract class SpringGameApplication extends GameApplication{
         stateManager = ctx.getBean(StateManager.class);
         stateManager.setGame(this);
         
-        List<AssetLoader> preStartupLoaders = AssetLoaderSpringExtractor.extractSortedPreStartupAssetLoadersFromContext(ctx);
-        for (AssetLoader loader : preStartupLoaders) {
+        List<Loader> preStartupLoaders = LoaderSpringExtractor.extractSortedPreStartupAssetLoadersFromContext(ctx);
+        for (Loader loader : preStartupLoaders) {
             loader.load();
         }        
         

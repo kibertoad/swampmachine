@@ -13,10 +13,10 @@ import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescripto
 /**
  * @author kibertoad
  */
-public class ActionInfo extends CommonModelEntityDescriptor {
+public class ActionDescriptor extends CommonModelEntityDescriptor {
 
     public enum TargetType {
-        SELF, SINGLE_OPPONENT, ALL_OPPONENT, DECK_SINGLE_OPPONENT, SINGLE_ALLIED, ALL_ALLIED, DECK_SINGLE_ALLIED
+        SELF, SINGLE_OPPONENT, ALL_OPPONENT, SINGLE_ALLIED, ALL_ALLIED
     };
 
     @Getter
@@ -24,7 +24,7 @@ public class ActionInfo extends CommonModelEntityDescriptor {
     private TargetType targetType;
 
     @Getter
-    private final List<ActionEffect> actionEffects = new ArrayList<>();
+    private final List<EffectDescriptor> actionEffects = new ArrayList<>();
 
     @Getter
     private final Map<String, Integer> resourcesUsed = new HashMap<>();

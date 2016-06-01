@@ -15,7 +15,7 @@ import org.apache.logging.log4j.Logger;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
-import net.kiberion.swampmachine.assets.loaders.api.AbstractLoader;
+import net.kiberion.swampmachine.assets.loaders.api.EntityYamlLoader;
 import net.kiberion.swampmachine.assets.loaders.util.FileReaderFactory;
 import net.kiberion.swampmachine.assets.readers.AbstractFileReader;
 import net.kiberion.swampmachine.entities.common.api.EntityModelDescriptor;
@@ -28,7 +28,7 @@ import net.kiberion.swampmachine.utils.SetUtils;
  * 
  * @author kibertoad
  */
-public class POJOLoader<T extends EntityModelDescriptor> implements AbstractLoader<T> {
+public class POJOYamlLoader<T extends EntityModelDescriptor> implements EntityYamlLoader<T> {
 
     private static final Logger log = LogManager.getLogger();
     private AbstractFileReader fileReader;
@@ -43,13 +43,13 @@ public class POJOLoader<T extends EntityModelDescriptor> implements AbstractLoad
     public Path path;
     public Class<?> entityClass;
 
-    public POJOLoader(Path path, Class<?> clazz) {
+    public POJOYamlLoader(Path path, Class<?> clazz) {
         this.path = path;
         this.entityClass = clazz;
         this.fileReader = FileReaderFactory.buildFileReader(path);
     }
 
-    public POJOLoader(Path path, Class<?> clazz, String... wildcardFileExtension) {
+    public POJOYamlLoader(Path path, Class<?> clazz, String... wildcardFileExtension) {
         this(path, clazz);
         setSupportedFileExtensions(wildcardFileExtension);
     }
@@ -95,7 +95,7 @@ public class POJOLoader<T extends EntityModelDescriptor> implements AbstractLoad
     }
 
     @Override
-    public POJOLoader<T> setSupportedFileExtensions(String... wildcards) {
+    public POJOYamlLoader<T> setSupportedFileExtensions(String... wildcards) {
         wildcardFileExtension = SetUtils.buildSet(wildcards);
         return this;
     }

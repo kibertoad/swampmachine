@@ -9,8 +9,8 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import net.kiberion.swampmachine.assets.loaders.api.AssetLoader;
-import net.kiberion.swampmachine.assets.loaders.util.AssetLoaderSpringExtractor;
+import net.kiberion.swampmachine.assets.loaders.api.Loader;
+import net.kiberion.swampmachine.assets.loaders.util.LoaderSpringExtractor;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfiguration.class)
@@ -19,9 +19,9 @@ public abstract class ContextBasedTest implements ApplicationContextAware {
     protected ApplicationContext applicationContext;
 
     protected void loadAssets() {
-        List<AssetLoader> assetLoaders = AssetLoaderSpringExtractor
+        List<Loader> assetLoaders = LoaderSpringExtractor
                 .extractSortedStartupAssetLoadersFromContext(applicationContext);
-        for (AssetLoader loader : assetLoaders) {
+        for (Loader loader : assetLoaders) {
             loader.load();
         }
     }

@@ -10,7 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.Getter;
 import net.kiberion.swampmachine.assets.GameConfig;
-import net.kiberion.swampmachine.assets.loaders.impl.POJOLoader;
+import net.kiberion.swampmachine.assets.loaders.api.SyncLoader;
+import net.kiberion.swampmachine.assets.loaders.impl.POJOYamlLoader;
 import net.kiberion.swampmachine.assets.readers.ReaderHelper;
 import net.kiberion.swampmachine.entities.common.api.EntityModelDescriptor;
 import net.kiberion.swampmachine.utils.MapUtils;
@@ -21,7 +22,7 @@ import net.kiberion.swampmachine.utils.MapUtils;
  * @author kibertoad
  *
  */
-public abstract class AbstractLoader {
+public abstract class AbstractLoader implements SyncLoader{
 
     private static final Logger log = LogManager.getLogger();
 
@@ -45,6 +46,7 @@ public abstract class AbstractLoader {
     public abstract String getLoadFileExtension ();
     public abstract Class<? extends EntityModelDescriptor> getEntityClass();
     
+    @Override
     public void load () {
         loadDataNodes(getTargetMap(), getLoadDirectory(), getLoadFileExtension(), getEntityClass());
     }
@@ -56,7 +58,7 @@ public abstract class AbstractLoader {
                 Path entityDirectory = config.getPathToResources().resolve(loadDirectory);
                 log.info("Loading entities from: " + entityDirectory.toString());
 
-                POJOLoader<T> entityLoader = new POJOLoader<>(entityDirectory, clazz, loadExtension);
+                POJOYamlLoader<T> entityLoader = new POJOYamlLoader<>(entityDirectory, clazz, loadExtension);
                 List<T> entities = entityLoader.loadList();
 
                 MapUtils.putAllEntities(targetMap, entities);

@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.loaders;
+package net.kiberion.blueprints.common.loaders;
 
 import java.nio.file.Path;
 import java.util.Map;
@@ -9,19 +9,19 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.Setter;
+import net.kiberion.blueprints.common.entities.impl.CreatureModelInfo;
 import net.kiberion.swampmachine.assets.GameConfig;
-import net.kiberion.swampmachine.assets.loaders.api.SyncAssetLoader;
+import net.kiberion.swampmachine.assets.loaders.api.SyncLoader;
 import net.kiberion.swampmachine.assets.loaders.impl.EntityViewInfoLoader;
 import net.kiberion.swampmachine.assets.readers.ReaderHelper;
 import net.kiberion.swampmachine.assets.util.LoadOnStartup;
 import net.kiberion.swampmachine.assets.viewinfo.EntityViewInfo;
-import net.kiberion.swampmachine.entities.modelinfo.CreatureModelInfo;
 import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
 import net.kiberion.swampmachine.registries.CommonViewInfoRegistry;
 import net.kiberion.swampmachine.utils.MapUtils;
 
 @LoadOnStartup
-public class CommonViewInfoLoader implements SyncAssetLoader{
+public class CommonViewInfoLoader implements SyncLoader{
 
     private static final Logger log = LogManager.getLogger();
 
@@ -36,6 +36,9 @@ public class CommonViewInfoLoader implements SyncAssetLoader{
     
     @Autowired
     private GameConfig config;
+    
+    @Autowired
+    private CreatureRegistry creatureRegistry;
     
     @Setter
     private boolean imagesAreMandatory = true;
@@ -76,7 +79,7 @@ public class CommonViewInfoLoader implements SyncAssetLoader{
 
     @Override
     public void load() {
-        loadCreatureViewInfoFromModel(modelInfoRegistry.getCreatures());
+        loadCreatureViewInfoFromModel(creatureRegistry.getCreatures());
     }
     
 }

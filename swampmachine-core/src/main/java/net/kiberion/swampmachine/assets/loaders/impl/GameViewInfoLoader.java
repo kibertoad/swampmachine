@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
@@ -11,7 +12,8 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-import net.kiberion.swampmachine.assets.AssetProvider;
+import lombok.Setter;
+import net.kiberion.swampmachine.assets.GameConfig;
 import net.kiberion.swampmachine.assets.viewinfo.ViewInfo;
 import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
 
@@ -22,6 +24,10 @@ public class GameViewInfoLoader extends CommonYamlLoader<ViewInfo> {
 
     private static final Logger log = LogManager.getLogger();
 
+    @Autowired
+    @Setter
+    private GameConfig gameConfig;
+    
     public static String pathToImages = "img/";
     public Map<String, ? extends CommonModelEntityDescriptor> listOfModelInfo;
 
@@ -71,7 +77,7 @@ public class GameViewInfoLoader extends CommonYamlLoader<ViewInfo> {
             if (image != null) {
                 targetObject.setDrawableImage(new TextureRegionDrawable(image));
                 targetObject.setPicture(new Pixmap(Gdx.files.getFileHandle(
-                        AssetProvider.getPathToAssets().resolve(pathToImages).resolve(imageName + ".png").toString(),
+                        gameConfig.getPathToResources().resolve(pathToImages).resolve(imageName + ".png").toString(),
                         Files.FileType.Internal)));
             } else {
                 if (imageIsMandatory) {

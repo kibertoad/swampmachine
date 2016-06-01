@@ -1,6 +1,6 @@
 package net.kiberion.common.factory;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,8 +15,8 @@ import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import net.kiberion.swampmachine.assets.UiManager;
+import net.kiberion.swampmachine.blueprints.spring.ContextBasedTest;
 import net.kiberion.swampmachine.factories.events.SpawnEntityEvent;
-import net.kiberion.swampmachine.spring.ContextBasedTest;
 import net.kiberion.tiled.MapRegistry;
 import net.kiberion.tiled.factories.impl.params.TextureMapObjectSpawnParams;
 import net.kiberion.tiled.loaders.MapLoader;
@@ -42,7 +42,6 @@ public class TextureMapObjectFactoryTest extends ContextBasedTest implements App
     @Before
     public void setup () {
         Assert.assertNotNull(mapLoader);
-        
         loadAssets();
         Assert.assertEquals (1, mapRegistry.getRegisteredMaps().size());
     }    

@@ -1,12 +1,12 @@
 package net.kiberion.swampmachine.assets.loaders.api;
 
-public interface AsyncAssetLoader extends AssetLoader{
+public interface AsyncLoader extends Loader{
 
     public void startAsyncLoading();
     public void finishAsyncLoading();
 
     @Override
-    default void load() {
+    public default void load() {
         startAsyncLoading();
         finishAsyncLoading();
     }

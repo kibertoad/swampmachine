@@ -1,16 +1,16 @@
-package net.kiberion.swampmachine.loaders;
+package net.kiberion.blueprints.common.loaders;
 
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import net.kiberion.swampmachine.entities.modelinfo.CreatureModelInfo;
-import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
+import net.kiberion.blueprints.common.entities.impl.CreatureModelInfo;
+import net.kiberion.swampmachine.loaders.CommonSyncStartupLoader;
 
 public class CreatureLoader extends CommonSyncStartupLoader {
 
     @Autowired
-    private CommonModelInfoRegistry modelInfoRegistry;
+    private CreatureRegistry creatureRegistry;
 
     // convention over configuration in this case - if you are using
     // Swampmachine asset management, you are expected to follow path convention
@@ -35,7 +35,7 @@ public class CreatureLoader extends CommonSyncStartupLoader {
     @SuppressWarnings("unchecked")
     @Override
     public Map<String, CreatureModelInfo> getTargetMap() {
-        return modelInfoRegistry.getCreatures();
+        return creatureRegistry.getCreatures();
     }
     
     @Override

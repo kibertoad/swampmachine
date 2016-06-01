@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import net.kiberion.swampmachine.assets.GameConfig;
 
-public abstract class AbstractAsyncAssetLoader implements AsyncAssetLoader{
+public abstract class AbstractSyncLoader implements SyncLoader{
 
     @Setter
     @Getter
