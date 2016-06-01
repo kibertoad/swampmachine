@@ -1,28 +1,33 @@
 package net.kiberion.swampmachine.scripting;
 
-import java.util.Map;
-
-import org.apache.commons.lang3.Validate;
-
 import lombok.Getter;
+import net.kiberion.swampmachine.entities.common.impl.resources.ResourcesDelta;
+import net.kiberion.swampmachine.entities.common.impl.resources.ResourcesStorage;
 
 public class SwampPriceScript{
 
     @Getter
     private final SwampScript script;
     
-    private static final String RESULT_VAR = "result";
+    private static final String AVAILABLE_VAR = "availableResources";
+    private static final String PRICE_VAR = "calculatedPrice";
 
-    
     public SwampPriceScript(SwampScript script) {
         this.script = script;
     }
     
-    public Map<String, Integer> evaluate (SwampBinding binding) {
+    /**
+     * @param binding
+     * @param availableResources - used for comparison agains calculatedPriceTarget
+     * @param calculatedPriceTarget - gets modified by script
+     * @return
+     */
+    public boolean evaluateCanAfford (SwampBinding binding, ResourcesStorage availableResources, ResourcesDelta calculatedPriceTarget) {
+        binding.setVariable(PRICE_VAR, calculatedPriceTarget);
+        binding.setVariable(AVAILABLE_VAR, calculatedPriceTarget);
         getScript().invoke(binding);
-        Map<String, Integer> result = binding.getVariableValue(RESULT_VAR);
-        Validate.notNull(result, "Result was not set for this script");
-        return result;
+        
+        return availableResources.canAfford(calculatedPriceTarget);
     }
 
 }

@@ -15,10 +15,20 @@ public class ResourcesStorage extends HashMap<String, Resource> {
         Validate.notNull(delta);
 
         for (java.util.Map.Entry<String, MutableLong> entry : delta.entrySet()) {
-            Resource resource = get (entry.getKey());
+            Resource resource = get(entry.getKey());
             resource.getValue().add(entry.getValue().longValue());
         }
-        
+
+    }
+
+    public boolean canAfford(ResourcesDelta delta) {
+        for (java.util.Map.Entry<String, MutableLong> entry : delta.entrySet()) {
+            if (get(entry.getKey()).getValue().longValue() < entry.getValue().longValue()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }
