@@ -1,34 +1,43 @@
 package net.kiberion.swampmachine.entities.common.impl.resources;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.mutable.MutableLong;
 
-import net.kiberion.swampmachine.entities.common.api.resources.Resource;
+public class ResourcesStorage {
 
-public class ResourcesStorage extends HashMap<String, Resource> {
+    private final Map<String, MutableLong> backingMap;
 
-    private static final long serialVersionUID = -7620447256916861506L;
+    public ResourcesStorage(Collection<String> supportedResources) {
+        backingMap = new HashMap<>(supportedResources.size());
+        for (String resourceId : supportedResources) {
+            backingMap.put(resourceId, new MutableLong());
+        }
+    }
 
     public void applyDelta(ResourcesDelta delta) {
         Validate.notNull(delta);
 
         for (java.util.Map.Entry<String, MutableLong> entry : delta.entrySet()) {
-            Resource resource = get(entry.getKey());
-            resource.getValue().add(entry.getValue().longValue());
+            MutableLong resource = backingMap.get(entry.getKey());
+            resource.add(entry.getValue().longValue());
         }
-
     }
 
     public boolean canAfford(ResourcesDelta delta) {
         for (java.util.Map.Entry<String, MutableLong> entry : delta.entrySet()) {
-            if (get(entry.getKey()).getValue().longValue() < entry.getValue().longValue()) {
+            if (backingMap.get(entry.getKey()).getValue().longValue() < entry.getValue().longValue()) {
                 return false;
             }
         }
-
         return true;
+    }
+
+    public long getValue(String resourceId) {
+        return backingMap.get(resourceId).longValue();
     }
 
 }
