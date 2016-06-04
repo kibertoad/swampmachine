@@ -13,6 +13,7 @@ import com.badlogic.gdx.Screen;
 
 import net.kiberion.mvcips.spring.TestMVCIPSConfiguration;
 import net.kiberion.swampmachine.mvcips.states.GameState;
+import net.kiberion.swampmachine.mvcips.states.annotations.State;
 import net.kiberion.swampmachine.mvcips.states.events.ChangeStateEvent;
 import net.kiberion.swampmachine.mvcips.states.util.StateManager;
 import net.kiberion.swampmachine.mvcips.states.util.StateRegistry;
@@ -71,7 +72,7 @@ public class StateManagerTest extends ContextBasedTest {
         if (expectedId == null) {
             assertEquals(null, game.getScreen());
         } else {
-            assertEquals(expectedId, ((GameState) game.getScreen()).getKey());
+            assertEquals(expectedId, ((GameState) game.getScreen()).getClass().getAnnotation(State.class).id());
         }
     }
 }

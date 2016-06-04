@@ -33,9 +33,6 @@ import net.kiberion.swampmachine.processors.TimedProcessor;
 public abstract class GameState implements Screen, InitializingBean {
 
     @Getter
-    private final String key;
-
-    @Getter
     @Setter
     private Stage stage;
 
@@ -55,16 +52,14 @@ public abstract class GameState implements Screen, InitializingBean {
     @Getter
     private final List<TimedProcessor> realtimeProcessors = new ArrayList<>();  
 
-    public GameState(String key) {
+    public GameState() {
         super();
-        this.key = key;
         this.stage = new Stage();
 
     }
     
-    protected GameState(String key, Stage stage) {
+    protected GameState(Stage stage) {
         super();
-        this.key = key;
         this.stage = stage;
     }
 

@@ -15,6 +15,7 @@ import net.kiberion.swampmachine.assets.GameConfig;
 import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.swampmachine.loaders.LoaderHelper;
 import net.kiberion.swampmachine.mvcips.states.annotations.LoadingState;
+import net.kiberion.swampmachine.mvcips.states.annotations.State;
 import net.kiberion.swampmachine.mvcips.states.util.StateManager;
 import net.kiberion.swampmachine.mvcips.states.util.StateRegistry;
 import net.kiberion.swampmachine.mvcips.view.StateView;
@@ -24,6 +25,7 @@ import net.kiberion.swampmachine.mvcips.view.StateViewBase;
  * @author kibertoad
  */
 @LoadingState
+@State (id = "loading")
 public class CommonLoadingState extends GameState {
 
     private static final Logger log = LogManager.getLogger();
@@ -61,12 +63,6 @@ public class CommonLoadingState extends GameState {
     public Label label;
 
     public CommonLoadingState() {
-        this("loading");
-    }
-
-    public CommonLoadingState(String setID) {
-        super(setID);
-
         label = new Label("Loading... Please wait.", UiManager.instance().getDefaultSkin());
         label.setVisible(true);
         getStage().addActor(label);

@@ -8,6 +8,7 @@ import net.kiberion.swampmachine.mvcips.spring.CommonMVCIPSConfiguration;
 import net.kiberion.swampmachine.mvcips.states.GameState;
 import net.kiberion.swampmachine.mvcips.states.annotations.LoadingState;
 import net.kiberion.swampmachine.mvcips.states.annotations.StartingState;
+import net.kiberion.swampmachine.mvcips.states.annotations.State;
 import net.kiberion.swampmachine.mvcips.view.StateView;
 
 @Configuration
@@ -30,20 +31,33 @@ public class TestMVCIPSConfiguration {
 
     @Bean
     public GameState state3() {
-        return new GameState(THIRD_STATE_ID, null) {
+        return new ThirdState();
+    }
 
-            @Override
-            public StateView getView() {
-                return null;
-            }
-        };
+    ///////////////
+    // Test states//
+    ///////////////
+
+    @State(id = THIRD_STATE_ID)
+    public static class ThirdState extends GameState {
+
+        public ThirdState() {
+            super (null);
+        }
+        
+        @Override
+        public StateView getView() {
+            return null;
+        }
+
     }
 
     @LoadingState
+    @State(id = LOADING_STATE_ID)
     public static class TestLoadingState extends GameState {
 
         public TestLoadingState() {
-            super(LOADING_STATE_ID, null);
+            super (null);
         }
 
         @Override
@@ -54,12 +68,13 @@ public class TestMVCIPSConfiguration {
     }
 
     @StartingState
+    @State(id = STARTING_STATE_ID)
     public static class TestStartingState extends GameState {
 
         public TestStartingState() {
-            super(STARTING_STATE_ID, null);
+            super (null);
         }
-
+        
         @Override
         public StateView getView() {
             return null;
