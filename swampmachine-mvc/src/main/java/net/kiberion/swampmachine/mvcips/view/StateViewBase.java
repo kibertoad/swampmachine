@@ -19,8 +19,12 @@ public class StateViewBase<T> extends Container<Actor> implements StateView, Ini
 
     @Getter
     @Setter
-    @Autowired
     private T model;
+
+    @Autowired
+    public void setModel (T model) {
+        this.model = model;
+    }
     
     @Override
     public void show() {

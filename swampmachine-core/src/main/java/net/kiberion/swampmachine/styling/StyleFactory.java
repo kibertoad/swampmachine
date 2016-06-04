@@ -5,9 +5,11 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
@@ -18,7 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle;
 
 import lombok.Getter;
-import lombok.Setter;
 import net.kiberion.swampmachine.assets.GameConfig;
 import net.kiberion.swampmachine.assets.UiManager;
 
@@ -31,18 +32,9 @@ import net.kiberion.swampmachine.assets.UiManager;
 public class StyleFactory {
 
     private static final Logger log = LogManager.getLogger();
-    private static StyleFactory _instance;
     
-    @Setter
-    private static GameConfig gameConfig;
-
-    public static StyleFactory instance() {
-        if (_instance == null) {
-            _instance = new StyleFactory();
-        }
-
-        return _instance;
-    }
+    @Autowired
+    private GameConfig gameConfig;
 
     private final Map<String, Label.LabelStyle> labelStyles = new HashMap<>();
     private final Map<String, TextButton.TextButtonStyle> buttonStyles = new HashMap<>();
@@ -52,8 +44,12 @@ public class StyleFactory {
     private final Map<String, Map<Integer, BitmapFont>> fonts = new HashMap<>();
 
     private BitmapFont produceFont(String fontName, int size) {
-        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files
-                .getFileHandle(gameConfig.getPathToResourcesAsString() + "/fonts/" + fontName + ".ttf", FileType.Internal));
+        String path = gameConfig.getPathToResourcesAsString() + "/fonts/" + fontName + ".ttf";
+        log.info ("Path to fonts: "+path);
+        FileHandle fontHandle = Gdx.files.getFileHandle(path, FileType.Internal);
+
+        
+        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(fontHandle);
         FreeTypeFontGenerator.FreeTypeFontParameter params = new FreeTypeFontGenerator.FreeTypeFontParameter();
         params.size = size;
 
@@ -137,11 +133,6 @@ public class StyleFactory {
 
     public WindowStyle getWindowStyle(String style) {
         return windowStyles.get(style);
-    }
-
-    public static StyleFactory instance(GameConfig gameConfig) {
-        setGameConfig(gameConfig);
-        return instance();
     }
 
 }

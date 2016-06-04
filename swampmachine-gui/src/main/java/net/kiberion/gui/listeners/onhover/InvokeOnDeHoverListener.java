@@ -1,0 +1,30 @@
+package net.kiberion.gui.listeners.onhover;
+
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+
+import net.kiberion.entities.common.api.Invokable;
+
+
+/**
+ * @author kibertoad
+ */
+public class InvokeOnDeHoverListener extends InputListener {
+
+    private final Invokable model;
+
+    public InvokeOnDeHoverListener(Invokable model) {
+        this.model = model;
+    }
+
+    @Override
+    public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+        //model.invoke();
+    }
+
+    @Override
+    public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+        model.invoke();
+    }
+}

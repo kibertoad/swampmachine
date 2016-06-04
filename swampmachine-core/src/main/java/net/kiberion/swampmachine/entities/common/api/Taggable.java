@@ -7,13 +7,15 @@ import java.util.Set;
  */
 public interface Taggable {
 
-    public boolean hasTag(String theTag);
+    default public boolean hasTag(String theTag) {
+        return getTags().contains(theTag);
+    }
 
-    default public void addTag (String theTag) {
+    default public void addTag(String theTag) {
         if (!hasTag(theTag)) {
             getTags().add(theTag);
         }
     }
-    
-    public Set<String> getTags(); 
+
+    public Set<String> getTags();
 }
