@@ -8,6 +8,7 @@ import net.kiberion.swampmachine.assets.util.LoadOnStartup;
 import net.kiberion.swampmachine.entities.common.api.EntityModelDescriptor;
 import net.kiberion.swampmachine.entities.common.impl.resources.ResourceDescriptor;
 import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
+import net.kiberion.swampmachine.registries.StaticModelInfoRegistry;
 
 @LoadOnStartup
 public class ResourcesLoader extends AbstractLoader{
@@ -20,7 +21,7 @@ public class ResourcesLoader extends AbstractLoader{
     public Map<String, ResourceDescriptor> getTargetMap() {
         return modelRegistry.getResources();
     }
-
+    
     @Override
     public String getLoadDirectory() {
         return "model-resources";
@@ -41,6 +42,7 @@ public class ResourcesLoader extends AbstractLoader{
     public void load() {
         super.load();
         modelRegistry.setExistingResources(modelRegistry.getResources().keySet());
+        StaticModelInfoRegistry.setExistingResources(modelRegistry.getResources().keySet());
     }
     
 }

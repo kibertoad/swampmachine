@@ -17,10 +17,6 @@ public class CommonSyncStartupLoader extends AbstractLoader implements SyncLoade
 
     @Setter
     @Getter
-    private int priority;
-
-    @Setter
-    @Getter
     private String loadDirectory;
 
     @Setter

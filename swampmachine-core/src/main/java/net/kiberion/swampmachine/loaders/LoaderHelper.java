@@ -11,8 +11,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 import lombok.Setter;
-import net.kiberion.swampmachine.assets.loaders.api.Loader;
 import net.kiberion.swampmachine.assets.loaders.api.AsyncLoader;
+import net.kiberion.swampmachine.assets.loaders.api.Loader;
 import net.kiberion.swampmachine.assets.loaders.api.SyncLoader;
 import net.kiberion.swampmachine.assets.loaders.util.LoaderSpringExtractor;
 import net.kiberion.swampmachine.utils.SetUtils;
@@ -47,6 +47,11 @@ public class LoaderHelper implements InitializingBean, ApplicationContextAware {
     
     public void startLoading() {
         log.info("Start loading from Sync asset loaders.");
+        log.info("List of sync loaders:.");
+        for (SyncLoader loader : syncAssetLoaders) {
+            log.info("  "+loader.toString());
+        }
+        
         for (SyncLoader loader : syncAssetLoaders) {
             loader.load();
         }

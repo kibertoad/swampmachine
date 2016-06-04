@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.Getter;
+import lombok.Setter;
 import net.kiberion.swampmachine.assets.GameConfig;
 import net.kiberion.swampmachine.assets.loaders.api.SyncLoader;
 import net.kiberion.swampmachine.assets.loaders.impl.POJOYamlLoader;
@@ -26,6 +27,10 @@ public abstract class AbstractLoader implements SyncLoader{
 
     private static final Logger log = LogManager.getLogger();
 
+    @Setter
+    @Getter
+    private int priority = 100;
+
     @Autowired
     @Getter
     private final ReaderHelper readerHelper;
@@ -42,6 +47,7 @@ public abstract class AbstractLoader implements SyncLoader{
     }
 
     public abstract <T extends EntityModelDescriptor> Map<String, T> getTargetMap ();
+    
     public abstract String getLoadDirectory ();
     public abstract String getLoadFileExtension ();
     public abstract Class<? extends EntityModelDescriptor> getEntityClass();
@@ -62,7 +68,7 @@ public abstract class AbstractLoader implements SyncLoader{
                 List<T> entities = entityLoader.loadList();
 
                 MapUtils.putAllEntities(targetMap, entities);
-                log.info("Done loading entities.");
+                log.info("Loaded "+entities.size()+" "+getEntityClass().getSimpleName()+" entities.");
             }
         } catch (Exception e) {
             throw new IllegalStateException("Error while loading: ", e);

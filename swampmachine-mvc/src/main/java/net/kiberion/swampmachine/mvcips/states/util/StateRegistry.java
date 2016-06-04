@@ -30,7 +30,7 @@ public class StateRegistry {
     public void registerState(GameState state) {
         State stateAnnotation = state.getClass().getAnnotation(State.class);
         Validate.notNull(stateAnnotation,
-                "@State annotation is not provide for state class " + state.getClass().getCanonicalName());
+                "@State annotation is not provided for state class " + state.getClass().getCanonicalName());
         log.info("Registering state: " + stateAnnotation.id());
         states.put(stateAnnotation.id(), state);
     }

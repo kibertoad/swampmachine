@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import net.kiberion.swampmachine.assets.readers.ReaderHelper;
-import net.kiberion.swampmachine.loaders.AbstractLoader;
 import net.kiberion.swampmachine.loaders.LoaderHelper;
 import net.kiberion.swampmachine.loaders.ResourcesLoader;
 import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
@@ -19,8 +18,10 @@ public class CommonLoaderConfiguration {
     }
     
     @Bean
-    public AbstractLoader resourcesLoader() {
-        return new ResourcesLoader();
+    public ResourcesLoader resourcesLoader() {
+        ResourcesLoader loader = new ResourcesLoader();
+        loader.setPriority(20); //should be loaded fairly early, because many entities depend on it
+        return loader;
     }
     
 
