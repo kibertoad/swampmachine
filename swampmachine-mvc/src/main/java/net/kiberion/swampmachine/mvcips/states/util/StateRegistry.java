@@ -12,6 +12,11 @@ import lombok.Setter;
 import net.kiberion.swampmachine.mvcips.states.GameState;
 import net.kiberion.swampmachine.mvcips.states.annotations.State;
 
+/**
+ * See {@link StateManager} for switching between states
+ * @author kibertoad
+ *
+ */
 public class StateRegistry {
 
     private static final Logger log = LogManager.getLogger();
@@ -26,6 +31,10 @@ public class StateRegistry {
     @Getter
     @Setter
     private GameState startingState; // called after loading phase
+    
+    @Getter
+    @Setter
+    private GameState newGameState; //called when starting a new game
 
     public void registerState(GameState state) {
         State stateAnnotation = state.getClass().getAnnotation(State.class);

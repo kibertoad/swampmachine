@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 
 import net.kiberion.swampmachine.mvcips.states.GameState;
 import net.kiberion.swampmachine.mvcips.states.annotations.LoadingState;
+import net.kiberion.swampmachine.mvcips.states.annotations.NewGameState;
 import net.kiberion.swampmachine.mvcips.states.annotations.RealtimeProcessors;
 import net.kiberion.swampmachine.mvcips.states.annotations.StartingState;
 import net.kiberion.swampmachine.mvcips.states.util.StateRegistry;
@@ -45,7 +46,15 @@ public class StateSpringLoader {
                 }
                 stateRegistry.setStartingState(bean);
             }
+            if (bean.getClass().isAnnotationPresent(NewGameState.class)) {
+                if (stateRegistry.getNewGameState() != null) {
+                    throw new IllegalStateException(
+                            "More than one new game state exist: " + stateRegistry.getNewGameState() + ", " + bean);
+                }
+                stateRegistry.setNewGameState(bean);
+            }
 
+            
             stateRegistry.registerState(bean);
 
             // Attach realtime processors
@@ -61,6 +70,7 @@ public class StateSpringLoader {
 
         Validate.notNull(stateRegistry.getLoadingState(), "Loading state is null");
         Validate.notNull(stateRegistry.getStartingState(), "Starting state is null");
+        Validate.notNull(stateRegistry.getNewGameState(), "Starting state is null");
 
         log.info("Done registering game states from Spring context.");
     }

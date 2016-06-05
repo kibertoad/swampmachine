@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Container;
 
 import lombok.Getter;
 import net.kiberion.gui.managers.GuiManager;
+import net.kiberion.swampmachine.factories.InvokablesFactory;
 
 public class StateViewBase<T> extends Container<Actor> implements StateView, InitializingBean{
 
@@ -21,6 +22,10 @@ public class StateViewBase<T> extends Container<Actor> implements StateView, Ini
 
     @Autowired
     private GuiManager guiManager;
+    
+    @Autowired
+    @Getter
+    private InvokablesFactory invokablesFactory;
     
     @Autowired
     public void setModel (T model) {
@@ -62,7 +67,7 @@ public class StateViewBase<T> extends Container<Actor> implements StateView, Ini
     @Override
     public void initGUIElements () {
         Validate.notNull(getStage(), "Stage is null.");
-        Validate.notNull(getGuiManager(), "GUIManagaer is null.");
+        Validate.notNull(getGuiManager(), "GUIManager is null.");
     }
     
     @Override

@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.mvcips.states.events;
+package net.kiberion.swampmachine.events;
 
 import org.springframework.context.ApplicationEvent;
 

@@ -12,9 +12,9 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 
 import net.kiberion.mvcips.spring.TestMVCIPSConfiguration;
+import net.kiberion.swampmachine.events.ChangeStateEvent;
 import net.kiberion.swampmachine.mvcips.states.GameState;
 import net.kiberion.swampmachine.mvcips.states.annotations.State;
-import net.kiberion.swampmachine.mvcips.states.events.ChangeStateEvent;
 import net.kiberion.swampmachine.mvcips.states.util.StateManager;
 import net.kiberion.swampmachine.mvcips.states.util.StateRegistry;
 import net.kiberion.swampmachine.mvcips.utils.StateSpringLoader;
@@ -42,7 +42,10 @@ public class StateManagerTest extends ContextBasedTest {
         stateManager.setGame(game);
         assertStateId(null);
         StateSpringLoader.registerStatesFromContext(context, stateRegistry);
-        assertEquals(3, stateRegistry.getStates().size());
+        assertEquals(4, stateRegistry.getStates().size());
+        assertNotNull (stateRegistry.getLoadingState());
+        assertNotNull (stateRegistry.getNewGameState());
+        assertNotNull (stateRegistry.getStartingState());
 
         eventPublisher.publishEvent(new ChangeStateEvent(this, TestMVCIPSConfiguration.STARTING_STATE_ID));
         assertStateId(TestMVCIPSConfiguration.STARTING_STATE_ID);

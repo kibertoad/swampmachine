@@ -3,6 +3,7 @@ package net.kiberion.swampmachine.mvcips.states;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.InitializingBean;
 
 import com.badlogic.gdx.Gdx;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import net.kiberion.entities.common.api.RealtimeUpdatable;
+import net.kiberion.swampmachine.mvcips.states.annotations.State;
 import net.kiberion.swampmachine.mvcips.view.StateView;
 import net.kiberion.swampmachine.processors.TimedProcessor;
 
@@ -45,6 +47,8 @@ public abstract class GameState implements Screen, InitializingBean {
     private InputAdapter input;
 
     private InputMultiplexer inputMultiplexer = new InputMultiplexer(); //used for stacking multiple input adapters
+    
+    private boolean guiInitted;
 
     public List<RealtimeUpdatable> entitiesForUpdate = new ArrayList<>();
     private List<? extends StateView> subViews = new ArrayList<>();
@@ -71,7 +75,6 @@ public abstract class GameState implements Screen, InitializingBean {
     public void afterPropertiesSet() throws Exception {
         if (getView() != null) {
             getView().setStage(stage);
-            getView().initGUIElements();
         }
     }
 
@@ -90,6 +93,12 @@ public abstract class GameState implements Screen, InitializingBean {
         if (input != null) {
             inputMultiplexer.addProcessor(input);
         }
+    }
+    
+    public void initGUIElements () {
+        Validate.isTrue(!guiInitted);
+        getView().initGUIElements();
+        guiInitted = true;
     }
 
     @Override
@@ -147,6 +156,10 @@ public abstract class GameState implements Screen, InitializingBean {
 
     @Override
     public void dispose() {
+    }
+    
+    public String getId() {
+        return getClass().getAnnotation(State.class).id();
     }
     
     public abstract StateView getView(); //don't forget to set View stage from gamestate stage
