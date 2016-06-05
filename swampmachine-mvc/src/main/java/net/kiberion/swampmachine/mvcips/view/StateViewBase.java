@@ -9,18 +9,19 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 
 import lombok.Getter;
-import lombok.Setter;
+import net.kiberion.gui.managers.GuiManager;
 
 public class StateViewBase<T> extends Container<Actor> implements StateView, InitializingBean{
 
     @Getter
-    @Setter
     private Stage stage;
 
     @Getter
-    @Setter
     private T model;
 
+    @Autowired
+    private GuiManager guiManager;
+    
     @Autowired
     public void setModel (T model) {
         this.model = model;
@@ -61,12 +62,25 @@ public class StateViewBase<T> extends Container<Actor> implements StateView, Ini
     @Override
     public void initGUIElements () {
         Validate.notNull(getStage(), "Stage is null.");
+        Validate.notNull(getGuiManager(), "GUIManagaer is null.");
     }
     
     @Override
     public void afterPropertiesSet() throws Exception {
     }
 
+    protected GuiManager getGuiManager() {
+        return guiManager;
+    }
+    
+    @Override
+    public void setStage(Stage stage) {
+        Validate.notNull(getGuiManager(), "GUIMAnager is null.");
+        super.setStage(stage);
+        this.stage = stage;
+        getGuiManager().setStage(stage);
+    }
+    
     /*
     public void addAnimation(PyramideAnimation animation) {
         animationList.add(animation);

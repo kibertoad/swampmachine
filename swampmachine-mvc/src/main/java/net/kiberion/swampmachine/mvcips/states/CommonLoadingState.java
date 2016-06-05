@@ -6,8 +6,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 import net.kiberion.entities.common.api.Invokable;
@@ -19,7 +17,6 @@ import net.kiberion.swampmachine.mvcips.states.annotations.State;
 import net.kiberion.swampmachine.mvcips.states.util.StateManager;
 import net.kiberion.swampmachine.mvcips.states.util.StateRegistry;
 import net.kiberion.swampmachine.mvcips.view.StateView;
-import net.kiberion.swampmachine.mvcips.view.StateViewBase;
 
 /**
  * @author kibertoad
@@ -30,7 +27,8 @@ public class CommonLoadingState extends GameState {
 
     private static final Logger log = LogManager.getLogger();
 
-    private StateView view = new StateViewBase<Container<Actor>>();
+    @Autowired
+    private CommonLoadingView view;
 
     @Autowired
     private GameConfig gameConfig;
