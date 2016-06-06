@@ -1,42 +1,60 @@
 package net.kiberion.swampmachine.utils;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
+import net.kiberion.utils.StopWatch;
+import net.kiberion.utils.compression.api.Codec;
 import net.kiberion.utils.compression.api.Compressor;
 import net.kiberion.utils.compression.api.Decompressor;
-import net.kiberion.utils.compression.impl.SnappyCodec;
 
-public class CompressorTest {
+public abstract class AbstractCompressorTest {
 
+    private static final Logger log = LogManager.getLogger();
+    
     private Resource testFile = new ClassPathResource("buildings.yml");
 
+    protected abstract Codec getCodec();
+    
+    protected abstract int expectedCompressedSize();
+    
     @Test
     public void codecTest() throws Exception {
+        log.info("Codec: "+getCodec().toString());
+        
         assertEquals(2927, testFile.contentLength());
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
-        Compressor compressor = new SnappyCodec();
-        
+        StopWatch compressionStopWatch = new StopWatch();
+        compressionStopWatch.start();
+        Compressor compressor = getCodec();
         try (InputStream is = testFile.getInputStream()) {
             compressor.compress(is, bos);
         }
+        compressionStopWatch.endAndLog("Compression");
 
         byte[] compressedData = bos.toByteArray();
-        assertEquals(827, compressedData.length);
+        assertEquals(expectedCompressedSize(), compressedData.length);
 
         InputStream bis = new ByteArrayInputStream(compressedData);
         ByteArrayOutputStream bos2 = new ByteArrayOutputStream();
-        Decompressor decompressor = new SnappyCodec();
+
+        StopWatch decompressionStopWatch = new StopWatch();
+        decompressionStopWatch.start();
+        Decompressor decompressor = getCodec();
         decompressor.decompress(bis, bos2);
+        decompressionStopWatch.endAndLog("Decompression");
         
         byte[] decompressedData = bos2.toByteArray();
         assertEquals(2927, decompressedData.length);
@@ -45,4 +63,5 @@ public class CompressorTest {
             assertTrue(IOUtils.contentEquals(is, new ByteArrayInputStream(bos2.toByteArray())));
         }
     }
+    
 }
