@@ -13,7 +13,8 @@ import java.nio.file.Files;
 import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
 import org.apache.commons.compress.archivers.sevenz.SevenZFile;
 import org.apache.commons.compress.archivers.sevenz.SevenZOutputFile;
-import org.apache.commons.compress.utils.IOUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 
 import net.kiberion.utils.compression.api.Codec;
 
@@ -21,9 +22,11 @@ public class SevenZCodec implements Codec {
 
     @Override
     public void compress(InputStream source, OutputStream target) {
+        File sourceFile = null;
+        File targetFile = null;
         try {
-            File targetFile = File.createTempFile("7ztrgt", "tmp");
-            File sourceFile = File.createTempFile("7zsrc", "tmp");
+            targetFile = File.createTempFile("7ztrgt", "tmp");
+            sourceFile = File.createTempFile("7zsrc", "tmp");
 
             try (FileOutputStream fos = new FileOutputStream(sourceFile);
                     BufferedOutputStream bos = new BufferedOutputStream(fos)) {
@@ -45,6 +48,8 @@ public class SevenZCodec implements Codec {
         } catch (IOException e) {
             throw new IllegalStateException(e);
         } finally {
+            FileUtils.deleteQuietly(sourceFile);
+            FileUtils.deleteQuietly(targetFile);
             IOUtils.closeQuietly(source);
         }
 
@@ -52,8 +57,9 @@ public class SevenZCodec implements Codec {
 
     @Override
     public void decompress(InputStream source, OutputStream target) {
+        File sourceFile = null;
         try {
-            File sourceFile = File.createTempFile("7zsrc", "tmp");
+            sourceFile = File.createTempFile("7zsrc", "tmp");
 
             try (FileOutputStream fos = new FileOutputStream(sourceFile);
                     BufferedOutputStream bos = new BufferedOutputStream(fos)) {
@@ -81,6 +87,7 @@ public class SevenZCodec implements Codec {
         } finally {
             IOUtils.closeQuietly(source);
             IOUtils.closeQuietly(target);
+            FileUtils.deleteQuietly(sourceFile);
         }
     }
 

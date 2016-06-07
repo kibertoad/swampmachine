@@ -1,0 +1,256 @@
+---
+
+id: windturbine
+name: Wind turbine
+hp: 100
+image: wind-turbine-1x1
+
+actions:
+ - id: produceEnergy
+   name: Produce energy
+   tags:
+    - default
+   
+   setupScript: >
+     
+   conditionScript: >
+
+   invokeScript: >
+
+   resourceCost:
+    energy: -1
+
+   cooldown: 10
+
+
+constructionInfo:
+ resourceCost:
+  ore: 30
+  energy: 20
+
+
+
+
+
+---
+
+id: habitat
+name: Habitat
+hp: 100
+image: habitat-2x2
+
+actions:
+ - id: nothing
+   name: Do nothing
+   tags:
+    - default
+   
+   setupScript: >
+     
+   conditionScript: >
+
+   invokeScript: >
+
+   resourceCost:
+    energy: 2
+
+   cooldown: 10
+
+
+constructionInfo:
+ resourceCost:
+  ore: 10
+  energy: 10
+
+
+
+---
+
+id: hydroponics
+name: Hydroponics
+hp: 100
+image: hydroponics-2x2
+
+actions:
+ - id: growfood
+   name: Grow food
+   tags:
+    - default
+   
+   setupScript: >
+     
+   conditionScript: >
+
+   invokeScript: >
+
+   resourceCost:
+    food: -5
+    energy: 5
+
+   cooldown: 10
+
+
+constructionInfo:
+ resourceCost:
+  ore: 10
+  energy: 10
+
+
+---
+
+id: laboratory
+name: Laboratory
+hp: 100
+image: laboratory-2x2
+
+actions:
+ - id: research
+   name: Research
+   tags:
+    - default
+   
+   setupScript: >
+     
+   conditionScript: >
+
+   invokeScript: >
+
+   resourceCost:
+    ore: 10
+    energy: 10
+
+   cooldown: 10
+
+
+constructionInfo:
+ resourceCost:
+  ore: 20
+  energy: 20
+
+---
+
+id: factory
+name: Factory
+hp: 100
+image: factory-2x2
+
+actions:
+ - id: produce_robots
+   name: Produce robots
+   tags:
+    - default
+   
+   setupScript: >
+     
+   conditionScript: >
+
+   invokeScript: >
+
+   resourceCost:
+    ore: 10
+    energy: 10
+    robots: -1
+
+   cooldown: 30   
+   
+constructionInfo:
+ resourceCost:
+  ore: 10
+  energy: 10   
+   
+---
+
+id: powerplant
+name: Power plant
+hp: 100
+image: power-plant-2x2
+
+actions:
+ - id: produce_energy
+   name: Produce energy
+   tags:
+    - default
+   
+   setupScript: >
+     
+   conditionScript: >
+
+   invokeScript: >
+
+   resourceCost:
+    ore: 2
+    energy: -10
+
+   cooldown: 8
+   
+
+constructionInfo:
+ resourceCost:
+  ore: 10
+  energy: 10
+  
+  
+---
+id: solarpanel
+name: Solar panel
+hp: 100
+image: solar-2x2
+
+actions:
+ - id: produce_energy
+   name: Produce energy
+   tags:
+    - default
+   
+   setupScript: >
+     
+   conditionScript: >
+
+   invokeScript: >
+
+   resourceCost:
+    energy: -4
+
+   cooldown: 20
+   
+
+constructionInfo:
+ resourceCost:
+  ore: 20
+  energy: 20
+  
+technologiesNeeded:
+ - solarpanel  
+ 
+ 
+---
+id: mine
+name: Mine
+hp: 100
+image: mine-3x3
+
+actions:
+ - id: mine
+   name: gather resources
+   tags:
+    - default
+   
+   setupScript: >
+     
+   conditionScript: >
+
+   invokeScript: >
+
+   resourceCost:
+    ore: -8
+    energy: 2
+
+   cooldown: 10
+
+
+constructionInfo:
+ resourceCost:
+  ore: 10
+  energy: 10
+   
+ 
