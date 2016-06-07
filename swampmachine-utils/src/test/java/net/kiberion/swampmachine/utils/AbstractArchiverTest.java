@@ -40,26 +40,27 @@ public abstract class AbstractArchiverTest {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
         StopWatch compressionStopWatch = new StopWatch();
+        compressionStopWatch.start();
         Archiver arc = getArchiver();
         arc.archive(testDirPath.toFile(), bos);
-        compressionStopWatch.start();
-
         compressionStopWatch.endAndLog("Compression");
 
         byte[] compressedData = bos.toByteArray();
         assertEquals(expectedArchivedSize(), compressedData.length);
 
         InputStream bis = new ByteArrayInputStream(compressedData);
-
         File target = Files.createTempDirectory("arc").toFile();
-        StopWatch decompressionStopWatch = new StopWatch();
-        arc.unarchive(bis, target);
-        decompressionStopWatch.endAndLog("Decompression");
+        try {
+            StopWatch decompressionStopWatch = new StopWatch();
+            arc.unarchive(bis, target);
+            decompressionStopWatch.endAndLog("Decompression");
 
-        //one more than in the beginning, because there is also temp directory itself which hold original root as child directory
-        assertEquals(5, Files.walk(target.toPath()).collect(Collectors.counting()).longValue());
-        FileUtils.deleteQuietly(target);
-
+            // one more than in the beginning, because there is also temp
+            // directory itself which holds original root as child directory
+            assertEquals(5, Files.walk(target.toPath()).collect(Collectors.counting()).longValue());
+        } finally {
+            FileUtils.deleteQuietly(target);
+        }
     }
 
 }
