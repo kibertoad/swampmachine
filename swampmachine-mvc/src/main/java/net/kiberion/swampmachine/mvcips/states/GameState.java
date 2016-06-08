@@ -56,9 +56,9 @@ public abstract class GameState implements Screen, InitializingBean {
         Gdx.input.setInputProcessor(inputMultiplexer);
         inputMultiplexer.clear();
 
-        inputMultiplexer.addProcessor(getView().getStage());
+        inputMultiplexer.addProcessor(getView().getMainStage());
         for (StateView subView : getView().getSubViews()) {
-            inputMultiplexer.addProcessor(subView.getStage());
+            inputMultiplexer.addProcessor(subView.getMainStage());
         }
 
         if (input != null) {

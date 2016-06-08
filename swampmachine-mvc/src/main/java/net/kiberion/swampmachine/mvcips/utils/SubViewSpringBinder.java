@@ -6,6 +6,8 @@ import java.util.Map.Entry;
 import org.apache.commons.lang3.Validate;
 import org.springframework.context.ApplicationContext;
 
+import com.badlogic.gdx.scenes.scene2d.Stage;
+
 import net.kiberion.swampmachine.gui.view.StateView;
 import net.kiberion.swampmachine.mvcips.states.annotations.SubView;
 
@@ -21,7 +23,17 @@ public class SubViewSpringBinder {
             SubView subViewAnnotation = entry.getValue().getClass().getAnnotation(SubView.class);
 
             StateView parentView = context.getBean(subViewAnnotation.parentView());
-            parentView.addSubView((StateView) entry.getValue());
+            StateView childView = (StateView) entry.getValue();
+            parentView.addSubView(childView);
+
+            if (subViewAnnotation.usesOverlayStage()) {
+                if (parentView.getOverlayStage() == null) {
+                    parentView.setOverlayStage(new Stage());
+                }
+                childView.setMainStage(parentView.getOverlayStage());
+            } else {
+                childView.setMainStage(parentView.getMainStage());
+            }
         }
     }
 }

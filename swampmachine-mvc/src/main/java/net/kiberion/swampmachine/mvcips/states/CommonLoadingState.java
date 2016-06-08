@@ -61,8 +61,8 @@ public class CommonLoadingState extends GameState {
     public void resize(int width, int height) {
         // super.resize(width, height);
         // stage.setViewport(width, height, true);
-        getView().getStage().getViewport().setWorldWidth(width);
-        getView().getStage().getViewport().setWorldHeight(height);
+        getView().getMainStage().getViewport().setWorldWidth(width);
+        getView().getMainStage().getViewport().setWorldHeight(height);
     }
 
     // phase 2
@@ -81,10 +81,6 @@ public class CommonLoadingState extends GameState {
     }
 
     @Override
-    public void hide() {
-    }
-
-    @Override
     public void render(float delta) {
         if (UiManager.instance().getAssetManager().getProgress() < 1f) {
 
@@ -93,8 +89,8 @@ public class CommonLoadingState extends GameState {
 
             // label.setText(Float.toString(assetManager.getProgress() *
             // 100)+"%");
-            getView().getStage().act(delta);
-            getView().getStage().draw();
+            getView().act(delta);
+            getView().render();
 
             UiManager.instance().getAssetManager().update(100);
         } else {

@@ -16,7 +16,7 @@ public class CommonLoadingView extends AbstractStateView<CommonLoadingModel> {
         
         label = new Label("Loading... Please wait.", UiManager.instance().getDefaultSkin());
         label.setVisible(true);
-        getStage().addActor(label);
+        getMainStage().addActor(label);
         label.setPosition(100, 100);
     }
 }

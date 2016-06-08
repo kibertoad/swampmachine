@@ -31,10 +31,6 @@ public class GuiManager {
     @Getter
     private Stage stage;
 
-    @Getter
-    private Stage overlayStage;
-    
-    
     public Table addTable (PositionCode positionCode) {
         Validate.notNull(positionCode);
         Position position = positionMap.get(positionCode);
@@ -49,11 +45,6 @@ public class GuiManager {
     public void setStage(Stage stage) {
         Validate.isTrue(this.stage == null, "Stage was already set.");
         this.stage = stage;
-    }
-    
-    public void setOverlayStage(Stage stage) {
-        Validate.isTrue(this.overlayStage == null, "Stage was already set.");
-        this.overlayStage = stage;
     }
     
 }

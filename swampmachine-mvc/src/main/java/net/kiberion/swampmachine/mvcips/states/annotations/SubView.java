@@ -19,5 +19,6 @@ import net.kiberion.swampmachine.gui.view.StateView;
 public @interface SubView {
     
     Class<? extends StateView> parentView();
+    boolean usesOverlayStage() default true;
     
 }

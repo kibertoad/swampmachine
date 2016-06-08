@@ -22,8 +22,11 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
     private static final Logger log = LogManager.getLogger();
 
     @Getter
-    private final Stage stage;
+    protected Stage mainStage; //Current level stage, used for elements in this view
 
+    @Getter
+    protected Stage overlayStage; //Lower level, used for elements in all SubViews (which will consider it their mainStage, and if they have their own children - can also have their own overlayStage)
+    
     @Getter
     private T model;
 
@@ -46,14 +49,20 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
     }
 
     public AbstractStateView() {
-        stage = new Stage();
+        initStage();
+    }
+    
+    protected void initStage () {
+        mainStage = new Stage();
     }
     
     @Autowired
     public void setGuiManager(GuiManager guiManager) {
         this.guiManager = guiManager;
-        Validate.notNull(getStage());
-        this.guiManager.setStage(getStage());
+        
+        if (mainStage != null) {
+            this.guiManager.setStage(mainStage);
+        }
     }
 
     @Autowired
@@ -74,7 +83,7 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
     @Override
     public void render() {
         if (isEnabled) {
-            stage.draw();
+            mainStage.draw();
 
             for (StateView subView : subViews) {
                 subView.render();
@@ -108,7 +117,7 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
 
     @Override
     public void initGUIElements() {
-        Validate.notNull(getStage(), "Stage is null.");
+        Validate.notNull(mainStage, "Stage is null.");
         Validate.notNull(getGuiManager(), "GUIManager is null.");
         
         for (StateView subView : subViews) {
@@ -126,8 +135,8 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
 
     public void debugToLog() {
         log.info("View: " + toString());
-        log.info("View Stage: " + getStage().toString());
-        for (Actor actor : getStage().getActors()) {
+        log.info("View Stage: " + mainStage.toString());
+        for (Actor actor : mainStage.getActors()) {
             log.info(actor.toString() + ": " + actor.isVisible());
         }
         
@@ -135,6 +144,22 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
             ((AbstractStateView<T>) subView).debugToLog();
         }
 
+    }
+    
+    @Override
+    public void setMainStage(Stage stage) {
+        Validate.isTrue(this.mainStage == null);
+        this.mainStage = stage;
+        
+        if (getGuiManager() != null) {
+            getGuiManager().setStage(stage);
+        }
+    }
+    
+    @Override
+    public void setOverlayStage(Stage stage) {
+        Validate.isTrue(this.overlayStage == null);
+        this.overlayStage = stage;
     }
 
     @Override

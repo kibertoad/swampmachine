@@ -6,7 +6,15 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public interface StateView {
 
-    public Stage getStage();
+    public Stage getMainStage();
+    public void setMainStage(Stage stage);
+    
+    /**
+     * Is only supposed to be used to set main stage for subviews of this view
+     * @return
+     */
+    public Stage getOverlayStage();
+    public void setOverlayStage(Stage stage);
 
     public void render();
     public void act(float delta);
@@ -22,5 +30,6 @@ public interface StateView {
 
     public void addSubView(StateView subView);
     public List<StateView> getSubViews();
+    
 
 }
