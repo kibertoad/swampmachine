@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import net.kiberion.swampmachine.entities.common.api.EntityModelDescriptor;
+import net.kiberion.swampmachine.entityblocks.api.IdHolderBlock;
 
 /**
  * @author kibertoad
@@ -79,11 +80,16 @@ public class MapUtils {
     	}
     }
 
-    public static <T extends EntityModelDescriptor> void putAllEntities(Map<String, T> targetMap, Map <String, T> sourceMap) {
+    public static <T extends IdHolderBlock> void putAllEntities(Map<String, T> targetMap, Map <String, T> sourceMap) {
         for (Entry<String, T> entityEntry : sourceMap.entrySet()) {
             targetMap.put(entityEntry.getKey(), entityEntry.getValue());
         }
     }
     
+    public static <T extends IdHolderBlock> void removeAll(Map<String, T> mapToModify, Collection<T> objectsToRemove) {
+        for (IdHolderBlock idHolder : objectsToRemove) {
+            mapToModify.remove(idHolder.getId());
+        }
+    }    
     
 }
