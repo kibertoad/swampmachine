@@ -13,19 +13,8 @@ public class CommonMetadataBlock implements EntityInstanceMetadataBlock {
 
     private String id;
     private String name; // used for display to user
-    private String description;
     
     private Set<String> tags = new HashSet<>();
-
-    @Override
-	public String getDescription() {
-		return description;
-	}
-
-	@Override
-	public void setDescription(String description) {
-		this.description = description;
-	}
 
     @Override
     public boolean hasTag(String tag) {

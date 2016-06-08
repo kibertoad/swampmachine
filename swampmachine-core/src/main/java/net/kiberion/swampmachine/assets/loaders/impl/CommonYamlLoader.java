@@ -58,7 +58,7 @@ public abstract class CommonYamlLoader<T extends CommonModelEntityDescriptor> im
         targetObject.getMetadata().setName(yamlLoader.getString(NAME_ATTRIBUTE));
         targetObject.getMetadata().setId(yamlLoader.getString(ID_ATTRIBUTE));
 
-        targetObject.getMetadata().setDescription(
+        targetObject.setDescription(
                 yamlLoader.hasKey(DESCRIPTION_ATTRIBUTE) ? yamlLoader.getString(DESCRIPTION_ATTRIBUTE) : "");
     }
 
