@@ -1,6 +1,8 @@
 package net.kiberion.swampmachine.mvcips.view;
 
 import org.apache.commons.lang3.Validate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,6 +16,8 @@ import net.kiberion.swampmachine.factories.InvokablesFactory;
 
 public class StateViewBase<T> extends Container<Actor> implements StateView, InitializingBean{
 
+    private static final Logger log = LogManager.getLogger();
+    
     @Getter
     private Stage stage;
 
@@ -81,9 +85,18 @@ public class StateViewBase<T> extends Container<Actor> implements StateView, Ini
     @Override
     public void setStage(Stage stage) {
         Validate.notNull(getGuiManager(), "GUIMAnager is null.");
+        Validate.isTrue(getStage() == null, "Stage was already set.");
         super.setStage(stage);
         this.stage = stage;
         getGuiManager().setStage(stage);
+    }
+    
+    public void debugToLog () {
+        log.info("View Stage: "+getStage().toString());
+        for (Actor actor: getStage().getActors()) {
+            log.info(actor.toString()+ ": "+actor.isVisible());
+        }
+        
     }
     
     /*
