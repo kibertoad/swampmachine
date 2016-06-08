@@ -48,10 +48,6 @@ public class TestMVCIPSConfiguration {
     @State(id = FOURTH_STATE_ID)
     public static class ThirdState extends GameState {
 
-        public ThirdState() {
-            super (null);
-        }
-        
         @Override
         public StateView getView() {
             return null;
@@ -62,10 +58,6 @@ public class TestMVCIPSConfiguration {
     @LoadingState
     @State(id = LOADING_STATE_ID)
     public static class TestLoadingState extends GameState {
-
-        public TestLoadingState() {
-            super (null);
-        }
 
         @Override
         public StateView getView() {
@@ -78,10 +70,6 @@ public class TestMVCIPSConfiguration {
     @State(id = STARTING_STATE_ID)
     public static class TestStartingState extends GameState {
 
-        public TestStartingState() {
-            super (null);
-        }
-        
         @Override
         public StateView getView() {
             return null;
@@ -93,10 +81,6 @@ public class TestMVCIPSConfiguration {
     @State(id = NEWGAME_STATE_ID)
     public static class TestNewGameState extends GameState {
 
-        public TestNewGameState() {
-            super (null);
-        }
-        
         @Override
         public StateView getView() {
             return null;

@@ -30,6 +30,9 @@ public class GuiManager {
     
     @Getter
     private Stage stage;
+
+    @Getter
+    private Stage overlayStage;
     
     
     public Table addTable (PositionCode positionCode) {
@@ -48,5 +51,9 @@ public class GuiManager {
         this.stage = stage;
     }
     
+    public void setOverlayStage(Stage stage) {
+        Validate.isTrue(this.overlayStage == null, "Stage was already set.");
+        this.overlayStage = stage;
+    }
     
 }

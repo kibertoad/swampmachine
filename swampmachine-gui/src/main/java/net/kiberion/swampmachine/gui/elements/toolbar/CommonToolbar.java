@@ -5,7 +5,8 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
@@ -18,14 +19,22 @@ import net.kiberion.swampmachine.utils.MapUtils;
 public class CommonToolbar<T extends MetadataHolderBlock, M extends EntityProvider<T>> extends AbstractStateView<M>
         implements ParametrizedRecalculable<T> {
 
-    @Autowired
-    private M model;
+    private static final Logger log = LogManager.getLogger();
 
     private final Map<String, CommonToolbarCell<T>> cellMap = new LinkedHashMap<>();
-    private final Table cellTable = new Table();
+    private Table cellTable;
+
+    @Override
+    public void initGUIElements() {
+        super.initGUIElements();
+        cellTable = new Table();
+        getStage().addActor(cellTable);
+    }
 
     protected CommonToolbarCell<T> initCell(T entity) {
-        return new CommonToolbarCell<>(entity);
+        CommonToolbarCell<T> cell = new CommonToolbarCell<>(entity);
+        getStage().addActor(cell);
+        return cell;
     }
 
     protected void addEntity(T entity) {
@@ -38,7 +47,7 @@ public class CommonToolbar<T extends MetadataHolderBlock, M extends EntityProvid
     }
 
     protected void initialFill() {
-        for (T entity : model.getAllEntities()) {
+        for (T entity : getModel().getAllEntities()) {
             addEntity(entity);
         }
     }
@@ -46,7 +55,7 @@ public class CommonToolbar<T extends MetadataHolderBlock, M extends EntityProvid
     @Override
     public void update() {
         Collection<CommonToolbarCell<T>> removedCells = new ArrayList<>(cellMap.values());
-        for (T entity : model.getAllEntities()) {
+        for (T entity : getModel().getAllEntities()) {
             CommonToolbarCell<T> cell = cellMap.get(entity.getId());
             if (internalUpdate(entity)) {
                 removedCells.remove(cell);
@@ -58,7 +67,7 @@ public class CommonToolbar<T extends MetadataHolderBlock, M extends EntityProvid
 
     @Override
     public void update(T updatedEntity) {
-        internalUpdate(null);
+        internalUpdate(updatedEntity);
     }
 
     // returns true if entity existed
@@ -71,6 +80,11 @@ public class CommonToolbar<T extends MetadataHolderBlock, M extends EntityProvid
             addEntity(updatedEntity);
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Elements: " + cellMap;
     }
 
 }

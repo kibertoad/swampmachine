@@ -13,6 +13,7 @@ import net.kiberion.swampmachine.assets.loaders.api.Loader;
 import net.kiberion.swampmachine.assets.loaders.util.LoaderSpringExtractor;
 import net.kiberion.swampmachine.mvcips.states.GameState;
 import net.kiberion.swampmachine.mvcips.utils.StateSpringLoader;
+import net.kiberion.swampmachine.mvcips.utils.SubViewSpringBinder;
 
 public abstract class SpringGameApplication extends GameApplication{
 
@@ -46,6 +47,7 @@ public abstract class SpringGameApplication extends GameApplication{
 
         stateRegistry = ctx.getBean(StateRegistry.class);
         StateSpringLoader.registerStatesFromContext(ctx, stateRegistry);
+        SubViewSpringBinder.bindSubViewsFromContext(ctx);
         
         stateManager = ctx.getBean(StateManager.class);
         stateManager.setGame(this);

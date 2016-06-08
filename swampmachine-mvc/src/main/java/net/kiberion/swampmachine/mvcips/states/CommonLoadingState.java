@@ -6,7 +6,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 import net.kiberion.entities.common.api.Invokable;
 import net.kiberion.swampmachine.assets.GameConfig;
@@ -58,21 +57,12 @@ public class CommonLoadingState extends GameState {
         }
     }
 
-    public Label label;
-
-    public CommonLoadingState() {
-        label = new Label("Loading... Please wait.", UiManager.instance().getDefaultSkin());
-        label.setVisible(true);
-        getStage().addActor(label);
-        label.setPosition(100, 100);
-    }
-
     @Override
     public void resize(int width, int height) {
         // super.resize(width, height);
         // stage.setViewport(width, height, true);
-        getStage().getViewport().setWorldWidth(width);
-        getStage().getViewport().setWorldHeight(height);
+        getView().getStage().getViewport().setWorldWidth(width);
+        getView().getStage().getViewport().setWorldHeight(height);
     }
 
     // phase 2
@@ -103,8 +93,8 @@ public class CommonLoadingState extends GameState {
 
             // label.setText(Float.toString(assetManager.getProgress() *
             // 100)+"%");
-            getStage().act(delta);
-            getStage().draw();
+            getView().getStage().act(delta);
+            getView().getStage().draw();
 
             UiManager.instance().getAssetManager().update(100);
         } else {

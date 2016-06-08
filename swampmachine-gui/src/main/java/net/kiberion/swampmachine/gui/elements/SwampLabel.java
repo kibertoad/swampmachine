@@ -77,4 +77,9 @@ public class SwampLabel extends Label {
             this.setTouchable(Touchable.disabled);
         }
     }
+    
+    @Override
+    public String toString() {
+        return super.toString()+" x:"+getX()+" y:"+getY();
+    }
 }

@@ -10,13 +10,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import lombok.Getter;
 import lombok.Setter;
 import net.kiberion.entities.common.api.RealtimeUpdatable;
-import net.kiberion.swampmachine.gui.view.StateView;
 import net.kiberion.swampmachine.gui.view.AbstractStateView;
+import net.kiberion.swampmachine.gui.view.StateView;
 import net.kiberion.swampmachine.mvcips.states.annotations.State;
 import net.kiberion.swampmachine.processors.TimedProcessor;
 
@@ -37,14 +36,6 @@ public abstract class GameState implements Screen, InitializingBean {
 
     @Getter
     @Setter
-    private Stage stage;
-
-    @Getter
-    @Setter
-    private Stage overlayStage; //stage that is rendered on top of main stage, typically used for displaying auxiliary UI elements on top of main view
-
-    @Getter
-    @Setter
     private InputAdapter input;
 
     private InputMultiplexer inputMultiplexer = new InputMultiplexer(); //used for stacking multiple input adapters
@@ -52,30 +43,26 @@ public abstract class GameState implements Screen, InitializingBean {
     private boolean guiInitted;
 
     public List<RealtimeUpdatable> entitiesForUpdate = new ArrayList<>();
-    private List<? extends StateView> subViews = new ArrayList<>();
-
+    
     @Getter
     private final List<TimedProcessor> realtimeProcessors = new ArrayList<>();  
 
-    public GameState() {
-        super();
-        this.stage = new Stage();
-
-    }
-    
-    protected GameState(Stage stage) {
-        super();
-        this.stage = stage;
-    }
-
-    public void addSubView(StateView view) {
-        view.setStage(stage);
-    }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        if (getView() != null) {
-            getView().setStage(stage);
+    }
+    
+    protected void addProcessorsForAllViews() {
+        Gdx.input.setInputProcessor(inputMultiplexer);
+        inputMultiplexer.clear();
+
+        inputMultiplexer.addProcessor(getView().getStage());
+        for (StateView subView : getView().getSubViews()) {
+            inputMultiplexer.addProcessor(subView.getStage());
+        }
+
+        if (input != null) {
+            inputMultiplexer.addProcessor(input);
         }
     }
 
@@ -83,19 +70,7 @@ public abstract class GameState implements Screen, InitializingBean {
     @Override
     public void show() {
         getView().show();
-
-        Gdx.input.setInputProcessor(inputMultiplexer);
-        inputMultiplexer.clear();
-
-        inputMultiplexer.addProcessor(getStage());
-        if (getOverlayStage() != null) {
-            inputMultiplexer.addProcessor(getOverlayStage());
-        }
-
-        if (input != null) {
-            inputMultiplexer.addProcessor(input);
-        }
-        
+        addProcessorsForAllViews();
         ((AbstractStateView) getView()).debugToLog();
     }
     
@@ -114,21 +89,9 @@ public abstract class GameState implements Screen, InitializingBean {
         for (TimedProcessor processor : realtimeProcessors) {
             processor.update(delta);
         }
-        
 
-        if (getStage() != null) {
-            getStage().act(delta);
-            getStage().draw();
-        }
-
-        if (getOverlayStage() != null) {
-            getOverlayStage().act(delta);
-            getOverlayStage().draw();
-        }
-
-        for (StateView view : subViews) {
-            view.act(delta);
-        }
+        getView().act(delta);
+        getView().render();
     }
 
     @Override
@@ -152,10 +115,6 @@ public abstract class GameState implements Screen, InitializingBean {
     @Override
     public void hide() {
         getView().hide();
-
-        for (StateView subView : subViews) {
-            subView.hide();
-        }
     }
 
     @Override

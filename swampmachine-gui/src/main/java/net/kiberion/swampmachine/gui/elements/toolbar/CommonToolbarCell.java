@@ -1,5 +1,6 @@
 package net.kiberion.swampmachine.gui.elements.toolbar;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
 import lombok.Getter;
@@ -20,14 +21,18 @@ public class CommonToolbarCell<T extends MetadataHolderBlock> extends Group impl
     
  
     public CommonToolbarCell (T entity) {
-        this (entity.getId(), null);
+        this (entity.getId(), UiManager.instance().getImage(entity.getId()), entity.getMetadata().getName());
     }
     
-    public CommonToolbarCell (String resourceID, String text) {
-        entityIcon = new SwampImage (UiManager.instance().getImage(resourceID));
+    public CommonToolbarCell (String entityID, TextureRegion image, String text) {
+        if (image != null) {
+            entityIcon = new SwampImage(image);
+            this.addActor(entityIcon);
+        } else {
+            entityIcon = null;
+        }
         entityText = new SwampLabel (text);
-        entityKey = resourceID;
-        this.addActor(entityIcon);
+        entityKey = entityID;
         this.addActor(entityText);
     }
     
@@ -48,5 +53,10 @@ public class CommonToolbarCell<T extends MetadataHolderBlock> extends Group impl
     @Override
     public String getId() {
         return entityKey;
+    }
+    
+    @Override
+    public String toString() {
+        return super.toString()+"; cell coords x:"+getX()+" y:"+getY();
     }
 }
