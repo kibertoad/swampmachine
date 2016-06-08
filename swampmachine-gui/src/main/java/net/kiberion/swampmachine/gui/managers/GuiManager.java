@@ -1,4 +1,4 @@
-package net.kiberion.gui.managers;
+package net.kiberion.swampmachine.gui.managers;
 
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package net.kiberion.gui.listeners.onclick;
+package net.kiberion.swampmachine.gui.listeners.onclick;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;

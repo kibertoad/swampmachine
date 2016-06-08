@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.mvcips.view;
+package net.kiberion.swampmachine.gui.view;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 

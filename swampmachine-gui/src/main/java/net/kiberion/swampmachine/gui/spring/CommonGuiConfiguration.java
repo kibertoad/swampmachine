@@ -1,11 +1,11 @@
-package net.kiberion.gui.spring;
+package net.kiberion.swampmachine.gui.spring;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
-import net.kiberion.gui.managers.GuiManager;
 import net.kiberion.swampmachine.factories.InvokablesFactory;
+import net.kiberion.swampmachine.gui.managers.GuiManager;
 
 @Configuration
 public class CommonGuiConfiguration {

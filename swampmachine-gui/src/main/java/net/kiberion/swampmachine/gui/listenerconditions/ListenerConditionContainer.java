@@ -1,4 +1,4 @@
-package net.kiberion.gui.listenerconditions;
+package net.kiberion.swampmachine.gui.listenerconditions;
 
 import java.util.ArrayList;
 

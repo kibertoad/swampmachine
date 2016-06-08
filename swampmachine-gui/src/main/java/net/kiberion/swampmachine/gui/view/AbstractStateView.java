@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.mvcips.view;
+package net.kiberion.swampmachine.gui.view;
 
 import org.apache.commons.lang3.Validate;
 import org.apache.logging.log4j.LogManager;
@@ -11,10 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 
 import lombok.Getter;
-import net.kiberion.gui.managers.GuiManager;
+import net.kiberion.entities.common.api.Recalculable;
 import net.kiberion.swampmachine.factories.InvokablesFactory;
+import net.kiberion.swampmachine.gui.managers.GuiManager;
 
-public class StateViewBase<T> extends Container<Actor> implements StateView, InitializingBean{
+public abstract class AbstractStateView<T> extends Container<Actor> implements StateView, Recalculable, InitializingBean{
 
     private static final Logger log = LogManager.getLogger();
     
@@ -97,6 +98,10 @@ public class StateViewBase<T> extends Container<Actor> implements StateView, Ini
             log.info(actor.toString()+ ": "+actor.isVisible());
         }
         
+    }
+    
+    @Override
+    public void update() {
     }
     
     /*

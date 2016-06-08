@@ -1,30 +1,27 @@
-package net.kiberion.gui.listeners.onhover;
+package net.kiberion.swampmachine.gui.listeners.onhover;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
-import net.kiberion.entities.common.api.Invokable;
-
-
 /**
  * @author kibertoad
  */
-public class InvokeOnDeHoverListener extends InputListener {
+public class DisplayActorOnHoverListener extends InputListener {
 
-    private final Invokable model;
+    private final Actor image;
 
-    public InvokeOnDeHoverListener(Invokable model) {
-        this.model = model;
+    public DisplayActorOnHoverListener(Actor image) {
+        this.image = image;
     }
 
     @Override
     public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-        //model.invoke();
+        image.setVisible(true);
     }
 
     @Override
     public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-        model.invoke();
+        image.setVisible(false);
     }
 }

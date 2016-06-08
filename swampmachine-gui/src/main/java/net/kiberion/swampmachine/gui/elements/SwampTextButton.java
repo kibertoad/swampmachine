@@ -1,4 +1,4 @@
-package net.kiberion.gui.elements;
+package net.kiberion.swampmachine.gui.elements;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +14,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import net.kiberion.entities.common.api.Invokable;
 import net.kiberion.entities.common.api.Toggleable;
-import net.kiberion.gui.listenerconditions.ListenerCondition;
-import net.kiberion.gui.listenerconditions.ListenerConditionContainer;
 import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
+import net.kiberion.swampmachine.gui.listenerconditions.ListenerCondition;
+import net.kiberion.swampmachine.gui.listenerconditions.ListenerConditionContainer;
 
 public class SwampTextButton <t extends MetadataHolderBlock> extends TextButton implements Toggleable {
 

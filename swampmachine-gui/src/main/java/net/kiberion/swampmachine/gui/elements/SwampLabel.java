@@ -1,4 +1,4 @@
-package net.kiberion.gui.elements;
+package net.kiberion.swampmachine.gui.elements;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;

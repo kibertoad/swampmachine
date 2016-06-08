@@ -1,4 +1,4 @@
-package net.kiberion.gui.listeners.onhover;
+package net.kiberion.swampmachine.gui.listeners.onhover;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
