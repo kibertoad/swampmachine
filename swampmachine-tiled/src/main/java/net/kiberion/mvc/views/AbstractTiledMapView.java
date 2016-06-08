@@ -26,7 +26,7 @@ import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
 import net.kiberion.swampmachine.entityblocks.api.PositionHolderBlock;
-import net.kiberion.swampmachine.mvcips.view.StateViewBase;
+import net.kiberion.swampmachine.gui.view.AbstractStateView;
 import net.kiberion.swampmachine.registries.CommonViewInfoRegistry;
 import net.kiberion.tiled.camera.TiledMapCamera;
 import net.kiberion.tiled.managers.MapObjectManager;
@@ -34,7 +34,7 @@ import net.kiberion.tiled.model.TiledMapInfo;
 import net.kiberion.tiled.overlays.TiledMapOverlay;
 import net.kiberion.tiled.renderers.OrthogonalTiledMapRendererWithObjects;
 
-public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> extends StateViewBase<T>{
+public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> extends AbstractStateView<T>{
     
     private static final Logger log = LogManager.getLogger();
 

@@ -1,7 +1,7 @@
 package net.kiberion.swampmachine.mvcips.states;
 
-import net.kiberion.swampmachine.mvcips.view.StateViewBase;
+import net.kiberion.swampmachine.gui.view.AbstractStateView;
 
-public class CommonLoadingView extends StateViewBase<CommonLoadingModel> {
+public class CommonLoadingView extends AbstractStateView<CommonLoadingModel> {
 
 }

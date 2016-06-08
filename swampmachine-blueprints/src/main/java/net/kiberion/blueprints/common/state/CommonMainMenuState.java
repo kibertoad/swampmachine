@@ -2,10 +2,10 @@ package net.kiberion.blueprints.common.state;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import net.kiberion.swampmachine.gui.view.StateView;
 import net.kiberion.swampmachine.mvcips.input.GenericInputAdapter;
 import net.kiberion.swampmachine.mvcips.states.GameState;
 import net.kiberion.swampmachine.mvcips.states.annotations.State;
-import net.kiberion.swampmachine.mvcips.view.StateView;
 
 @State (id = CommonMainMenuState.MAIN_MENU_STATE_ID)
 public class CommonMainMenuState extends GameState{

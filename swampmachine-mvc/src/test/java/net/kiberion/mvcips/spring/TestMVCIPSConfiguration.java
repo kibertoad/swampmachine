@@ -4,13 +4,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import net.kiberion.swampmachine.gui.view.StateView;
 import net.kiberion.swampmachine.mvcips.spring.CommonMVCIPSConfiguration;
 import net.kiberion.swampmachine.mvcips.states.GameState;
 import net.kiberion.swampmachine.mvcips.states.annotations.LoadingState;
 import net.kiberion.swampmachine.mvcips.states.annotations.NewGameState;
 import net.kiberion.swampmachine.mvcips.states.annotations.StartingState;
 import net.kiberion.swampmachine.mvcips.states.annotations.State;
-import net.kiberion.swampmachine.mvcips.view.StateView;
 
 @Configuration
 @Import({ CommonMVCIPSConfiguration.class })

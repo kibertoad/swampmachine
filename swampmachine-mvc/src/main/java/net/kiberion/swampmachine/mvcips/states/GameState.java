@@ -15,8 +15,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import net.kiberion.entities.common.api.RealtimeUpdatable;
+import net.kiberion.swampmachine.gui.view.StateView;
+import net.kiberion.swampmachine.gui.view.AbstractStateView;
 import net.kiberion.swampmachine.mvcips.states.annotations.State;
-import net.kiberion.swampmachine.mvcips.view.StateView;
 import net.kiberion.swampmachine.processors.TimedProcessor;
 
 /**
@@ -78,6 +79,7 @@ public abstract class GameState implements Screen, InitializingBean {
         }
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     public void show() {
         getView().show();
@@ -93,6 +95,8 @@ public abstract class GameState implements Screen, InitializingBean {
         if (input != null) {
             inputMultiplexer.addProcessor(input);
         }
+        
+        ((AbstractStateView) getView()).debugToLog();
     }
     
     public void initGUIElements () {

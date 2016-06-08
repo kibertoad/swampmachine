@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
-import net.kiberion.gui.elements.SwampTextButton;
-import net.kiberion.gui.managers.GuiManager.PositionCode;
 import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
+import net.kiberion.swampmachine.gui.elements.SwampTextButton;
+import net.kiberion.swampmachine.gui.managers.GuiManager.PositionCode;
+import net.kiberion.swampmachine.gui.view.AbstractStateView;
 import net.kiberion.swampmachine.mvcips.states.util.StateRegistry;
-import net.kiberion.swampmachine.mvcips.view.StateViewBase;
 
-public class CommonMainMenuView extends StateViewBase<Object> {
+public class CommonMainMenuView extends AbstractStateView<Object> {
 
     @Autowired
     private StateRegistry stateRegistry;
