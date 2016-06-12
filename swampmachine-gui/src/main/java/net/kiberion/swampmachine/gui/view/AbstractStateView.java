@@ -2,6 +2,7 @@ package net.kiberion.swampmachine.gui.view;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
 import org.apache.logging.log4j.LogManager;
@@ -98,7 +99,7 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
                 subView.act(delta);
             }
         }
-
+        
         /*
          * for (PyramideAnimation animation : animationList) {
          * animation.act(delta);
@@ -164,6 +165,14 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
 
     @Override
     public void update() {
+    }
+    
+    @Override
+    public void collectAllStages(Set<Stage> result) {
+        result.add(getMainStage());
+        for (StateView subView : getSubViews()) {
+            subView.collectAllStages(result);
+        }
     }
 
     /*

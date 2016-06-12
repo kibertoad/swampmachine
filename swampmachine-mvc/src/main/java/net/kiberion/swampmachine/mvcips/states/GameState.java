@@ -1,7 +1,9 @@
 package net.kiberion.swampmachine.mvcips.states;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.InitializingBean;
@@ -10,6 +12,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +20,7 @@ import net.kiberion.entities.common.api.RealtimeUpdatable;
 import net.kiberion.swampmachine.gui.view.AbstractStateView;
 import net.kiberion.swampmachine.gui.view.StateView;
 import net.kiberion.swampmachine.mvcips.states.annotations.State;
+import net.kiberion.swampmachine.mvcips.utils.UpdatableStageWrapper;
 import net.kiberion.swampmachine.processors.TimedProcessor;
 
 /**
@@ -56,11 +60,10 @@ public abstract class GameState implements Screen, InitializingBean {
         Gdx.input.setInputProcessor(inputMultiplexer);
         inputMultiplexer.clear();
 
-        inputMultiplexer.addProcessor(getView().getMainStage());
-        for (StateView subView : getView().getSubViews()) {
-            inputMultiplexer.addProcessor(subView.getMainStage());
+        for (Stage stage : getAllStages()) {
+            inputMultiplexer.addProcessor(stage);
         }
-
+        
         if (input != null) {
             inputMultiplexer.addProcessor(input);
         }
@@ -78,6 +81,16 @@ public abstract class GameState implements Screen, InitializingBean {
         Validate.isTrue(!guiInitted);
         getView().initGUIElements();
         guiInitted = true;
+        Set<Stage> stages = getAllStages();
+        for (Stage stage : stages) {
+            entitiesForUpdate.add(new UpdatableStageWrapper(stage));
+        }
+    }
+    
+    protected Set<Stage> getAllStages () {
+        Set<Stage> result = new HashSet<>();
+        getView().collectAllStages (result);
+        return result;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package net.kiberion.swampmachine.gui.view;
 
 import java.util.List;
+import java.util.Set;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
@@ -30,6 +31,12 @@ public interface StateView {
 
     public void addSubView(StateView subView);
     public List<StateView> getSubViews();
+    
+    /**
+     * Recursively extracts all stages from view and its subviews
+     * @param targetSet
+     */
+    public void collectAllStages(Set<Stage> targetSet);
     
 
 }

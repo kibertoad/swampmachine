@@ -5,9 +5,6 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 import net.kiberion.entities.common.api.ParametrizedRecalculable;
@@ -18,8 +15,6 @@ import net.kiberion.swampmachine.utils.MapUtils;
 
 public class CommonToolbar<T extends MetadataHolderBlock, M extends EntityProvider<T>> extends AbstractStateSubView<M>
         implements ParametrizedRecalculable<T> {
-
-    private static final Logger log = LogManager.getLogger();
 
     private final Map<String, CommonToolbarCell<T>> cellMap = new LinkedHashMap<>();
     private Table cellTable;
