@@ -2,17 +2,20 @@ package net.kiberion.swampmachine.resources;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
 import java.util.Set;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
 import net.kiberion.swampmachine.entities.common.impl.resources.ResourcesDelta;
 import net.kiberion.swampmachine.entities.common.impl.resources.ResourcesStorage;
 import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
 import net.kiberion.swampmachine.spring.ContextBasedTest;
+import net.kiberion.swampmachine.utils.ImmutableRegistryPreparer;
 
 public class TestResources extends ContextBasedTest {
 
@@ -34,24 +37,35 @@ public class TestResources extends ContextBasedTest {
         }
 
         delta.add("dummyresource", 1);
-        assertEquals (1, delta.getMutableValue("dummyresource").longValue());
+        assertEquals(1, delta.getMutableValue("dummyresource").longValue());
     }
-    
+
+    @Test
     public void testDelta() {
-        Set<String> supportedResources = ImmutableSet.of ("dummy", "dummy2");
+        Set<String> supportedResources = ImmutableSet.of("dummy", "dummy2");
         ResourcesStorage resources = new ResourcesStorage(supportedResources);
-        
-        assertEquals (0, resources.getValue("dummy"));
-        assertEquals (0, resources.getValue("dummy2"));
-        
+
+        assertEquals(0, resources.getValue("dummy"));
+        assertEquals(0, resources.getValue("dummy2"));
+
         ResourcesDelta delta = new ResourcesDelta(supportedResources);
         delta.add("dummy", 1);
         delta.add("dummy2", -1);
-        
+
         resources.applyDelta(delta);
 
-        assertEquals (1, resources.getValue("dummy"));
-        assertEquals (-1, resources.getValue("dummy2"));
+        assertEquals(1, resources.getValue("dummy"));
+        assertEquals(-1, resources.getValue("dummy2"));
+    }
+
+    @Test
+    public void testImmutableMapPreparer() {
+        loadAssets();
+
+        assertEquals(HashMap.class, modelRegistry.getResources().getClass());
+        assertEquals(1, modelRegistry.getResources().size());
+        ImmutableRegistryPreparer.invoke(applicationContext);
+        assertTrue(modelRegistry.getResources() instanceof ImmutableMap);
+        assertEquals(1, modelRegistry.getResources().size());
     }
 }
-
