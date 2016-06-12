@@ -109,7 +109,6 @@ public class SwampImage extends Image {
     }
 
     public void init() {
-        //To change body of created methods use File | Settings | File Templates.
     }
 
     public void move (float deltaX, float deltaY) {

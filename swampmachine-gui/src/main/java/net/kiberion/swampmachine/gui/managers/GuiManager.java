@@ -23,6 +23,9 @@ public class GuiManager {
 
     @SuppressWarnings("unused")
     private static final Logger log = LogManager.getLogger();
+
+    @Getter
+    private Stage stage;
     
     @Autowired
     private CommonViewInfoRegistry viewInfoRegistry;
@@ -39,8 +42,6 @@ public class GuiManager {
             .put(PositionCode.CENTER, new CommonPosition(600, 500))
             .build();
     
-    @Getter
-    private Stage stage;
 
     public Table addTable (PositionCode positionCode) {
         Validate.notNull(positionCode);

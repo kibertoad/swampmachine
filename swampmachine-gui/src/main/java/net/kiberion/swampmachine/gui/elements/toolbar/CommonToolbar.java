@@ -47,10 +47,14 @@ public class CommonToolbar<T extends MetadataHolderBlock, M extends EntityProvid
         }
     }
 
+    protected Collection<T> getAllEntities () {
+        return getModel().getAllEntities();        
+    }
+    
     @Override
     public void update() {
         Collection<CommonToolbarCell<T>> removedCells = new ArrayList<>(cellMap.values());
-        for (T entity : getModel().getAllEntities()) {
+        for (T entity : getAllEntities()) {
             CommonToolbarCell<T> cell = cellMap.get(entity.getId());
             if (internalUpdate(entity)) {
                 removedCells.remove(cell);
