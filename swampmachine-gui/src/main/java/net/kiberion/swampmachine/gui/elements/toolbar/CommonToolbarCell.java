@@ -2,8 +2,6 @@ package net.kiberion.swampmachine.gui.elements.toolbar;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 
 import lombok.Getter;
 import net.kiberion.entities.common.api.ParametrizedRecalculable;
@@ -58,12 +56,7 @@ public class CommonToolbarCell<T extends MetadataHolderBlock> extends Group
     }
 
     public void makeDraggable() {
-        entityIcon.addListener(new DragListener() {
-            @Override
-            public void drag(InputEvent event, float x, float y, int pointer) {
-                entityIcon.moveBy(x - entityIcon.getWidth() / 2, y - entityIcon.getHeight() / 2);
-            }
-        });
+        entityIcon.makeDraggable();
     }
     
     protected SwampImage getEntityIcon() {

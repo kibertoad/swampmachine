@@ -5,14 +5,19 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class SwampImage extends Image {
 
     public TextureRegion originalImage;
     public Pixmap picture;
+    
+    private float preDragX;
+    private float preDragY;
 
     public float getTopY (){
         return getImageY()+ getHeight();
@@ -119,6 +124,28 @@ public class SwampImage extends Image {
         setColor(c);
     }
 
-
+    public void makeDraggable() {
+        addListener(new DragListener() {
+            
+            @Override
+            public void dragStart(InputEvent event, float x, float y, int pointer) {
+                super.dragStart(event, x, y, pointer);
+                preDragX = SwampImage.this.getX();
+                preDragY = SwampImage.this.getY();
+            }
+            
+            @Override
+            public void dragStop(InputEvent event, float x, float y, int pointer) {
+                super.dragStop(event, x, y, pointer);
+                SwampImage.this.setX(preDragX);
+                SwampImage.this.setY(preDragY);
+            }
+            
+            @Override
+            public void drag(InputEvent event, float x, float y, int pointer) {
+                moveBy(x - getWidth() / 2, y - getHeight() / 2);
+            }
+        });
+    }
 
 }
