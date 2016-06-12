@@ -26,6 +26,6 @@ public interface EntityYamlLoader<T extends EntityModelDescriptor> {
     public void setFileReader(AbstractFileReader fileReader);
 
     public default List<T> loadList() throws IOException {
-        return new ArrayList<T>(loadMap().values());
+        return new ArrayList<>(loadMap().values());
     }
 }

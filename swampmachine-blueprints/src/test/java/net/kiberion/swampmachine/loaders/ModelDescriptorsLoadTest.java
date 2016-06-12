@@ -1,8 +1,6 @@
 package net.kiberion.swampmachine.loaders;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,7 +49,7 @@ public class ModelDescriptorsLoadTest extends ContextBasedTest {
     @Test
     public void testLoaderOrder() {
         assertEquals(0, loaderHelper.getAsyncAssetLoaders().size());
-        assertEquals(2, loaderHelper.getSyncAssetLoaders().size());
+        assertEquals(3, loaderHelper.getSyncAssetLoaders().size());
 
         // Test loaders being properly sorted by loading priority
         int previousPriority = -1;

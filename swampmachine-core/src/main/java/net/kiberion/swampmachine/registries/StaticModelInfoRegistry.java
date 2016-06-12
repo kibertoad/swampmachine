@@ -18,6 +18,8 @@ import net.kiberion.swampmachine.loaders.ResourcesLoader;
  */
 public class StaticModelInfoRegistry {
 
+    private StaticModelInfoRegistry () {}
+    
     private static Set<String> existingResources;
 
     public static Set<String> getExistingResources() {

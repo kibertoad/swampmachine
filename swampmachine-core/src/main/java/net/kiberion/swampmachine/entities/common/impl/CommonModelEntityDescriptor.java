@@ -35,12 +35,6 @@ public class CommonModelEntityDescriptor extends AbstractModelEntityDescriptor i
     @Setter
     private String subGroupID;
     
-    @Getter
-    @Setter
-    private String description; 
-
-	
-
     public CommonModelEntityDescriptor() {
     }
 

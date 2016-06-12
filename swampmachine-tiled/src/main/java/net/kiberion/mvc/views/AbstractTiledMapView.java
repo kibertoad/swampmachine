@@ -21,13 +21,14 @@ import lombok.NonNull;
 import lombok.Setter;
 import net.kiberion.mvc.model.AbstractTiledMapModel;
 import net.kiberion.swampmachine.assets.UiManager;
-import net.kiberion.swampmachine.assets.viewinfo.EntityViewInfo;
+import net.kiberion.swampmachine.assets.viewinfo.ViewInfo;
 import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
 import net.kiberion.swampmachine.entityblocks.api.PositionHolderBlock;
 import net.kiberion.swampmachine.gui.view.AbstractStateView;
 import net.kiberion.swampmachine.registries.CommonViewInfoRegistry;
+import net.kiberion.swampmachine.registries.ImageRegistry;
 import net.kiberion.tiled.camera.TiledMapCamera;
 import net.kiberion.tiled.managers.MapObjectManager;
 import net.kiberion.tiled.model.TiledMapInfo;
@@ -40,6 +41,9 @@ public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> e
 
     @Autowired
     private CommonViewInfoRegistry viewInfoRegistry;
+    
+    @Autowired
+    private ImageRegistry imageRegistry;
     
 	//@Autowired
 	//private ShaderRegistry shaderRegistry;
@@ -156,7 +160,7 @@ public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> e
 
     public void placeCreatures() {
         for (MetadataHolderBlock entity : this.getModel().getCreatures()) {
-            EntityViewInfo viewInfo = viewInfoRegistry.getFullCreatureViewInfoList().get(entity.getMetadata().getId());
+            ViewInfo viewInfo = imageRegistry.getImages().get(viewInfoRegistry.getImageIdForEntity(entity.getMetadata().getId()));
             Objects.requireNonNull(viewInfo);
             TextureMapObject tmo = this.addMapObject(
                     entity,

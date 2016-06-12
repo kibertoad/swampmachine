@@ -16,10 +16,10 @@ import net.kiberion.swampmachine.assets.loaders.api.EntityYamlLoader;
 import net.kiberion.swampmachine.assets.loaders.util.FileReaderFactory;
 import net.kiberion.swampmachine.assets.loaders.util.YamlLoader;
 import net.kiberion.swampmachine.assets.readers.AbstractFileReader;
-import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
+import net.kiberion.swampmachine.entities.common.impl.AbstractModelEntityDescriptor;
 import net.kiberion.swampmachine.utils.SetUtils;
 
-public abstract class CommonYamlLoader<T extends CommonModelEntityDescriptor> implements EntityYamlLoader<T> {
+public abstract class CommonYamlLoader<T extends AbstractModelEntityDescriptor> implements EntityYamlLoader<T> {
 
     private static final Logger log = LogManager.getLogger();
 
@@ -55,8 +55,8 @@ public abstract class CommonYamlLoader<T extends CommonModelEntityDescriptor> im
     protected void parseYaml(Object sourceYamlObject, T targetObject) {
         yamlLoader.setNextYamlNode(sourceYamlObject);
 
-        targetObject.getMetadata().setName(yamlLoader.getString(NAME_ATTRIBUTE));
-        targetObject.getMetadata().setId(yamlLoader.getString(ID_ATTRIBUTE));
+        targetObject.setName(yamlLoader.getString(NAME_ATTRIBUTE));
+        targetObject.setId(yamlLoader.getString(ID_ATTRIBUTE));
 
         targetObject.setDescription(
                 yamlLoader.hasKey(DESCRIPTION_ATTRIBUTE) ? yamlLoader.getString(DESCRIPTION_ATTRIBUTE) : "");

@@ -1,5 +1,7 @@
 package net.kiberion.swampmachine.entities.common.impl;
 
+import lombok.Getter;
+import lombok.Setter;
 import net.kiberion.swampmachine.entities.common.api.EntityModelDescriptor;
 import net.kiberion.swampmachine.entityblocks.impl.CommonMetadataHolderBlock;
 
@@ -8,6 +10,10 @@ import net.kiberion.swampmachine.entityblocks.impl.CommonMetadataHolderBlock;
  * @author kibertoad
  */
 public abstract class AbstractModelEntityDescriptor extends CommonMetadataHolderBlock implements EntityModelDescriptor {
+
+    @Getter
+    @Setter
+    private String description; 
 
     /*
      * E. g. for equipment slot return both slot and item name
@@ -21,7 +27,8 @@ public abstract class AbstractModelEntityDescriptor extends CommonMetadataHolder
     public String getName() {
         return this.getMetadata().getName();
     }
-
+ 
+    @Override
     public void setName(String name) {
         this.getMetadata().setName(name);
     }
@@ -54,4 +61,5 @@ public abstract class AbstractModelEntityDescriptor extends CommonMetadataHolder
     public String toString() {
         return this.getMetadata().toString();
     }
+    
 }

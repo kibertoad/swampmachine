@@ -4,65 +4,52 @@
  */
 package net.kiberion.swampmachine.assets.loaders.impl;
 
-import java.util.Map;
-import java.util.Objects;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-
+import lombok.Getter;
 import lombok.Setter;
-import net.kiberion.swampmachine.assets.viewinfo.EntityViewInfo;
-import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
+import net.kiberion.swampmachine.assets.loaders.impl.EntityViewInfoLoader.ImageModelEntityDescriptor;
+import net.kiberion.swampmachine.entities.common.impl.AbstractModelEntityDescriptor;
 
 
 /**
  * @author kibertoad
  */
-public class EntityViewInfoLoader extends CommonYamlLoader<EntityViewInfo> {
+public class EntityViewInfoLoader extends CommonYamlLoader<ImageModelEntityDescriptor> {
 
-    private static final Logger log = LogManager.getLogger();
-    
-    public Map<String, ? extends CommonModelEntityDescriptor> entities;
+    private static final String IMAGE_ATTRIBUTE = "image";
     
     @Setter
     public boolean imageIsMandatory = true;
 
-    public EntityViewInfoLoader(String fromPath, Map<String, ? extends CommonModelEntityDescriptor> setCreatures, String wildcard) {
+    public EntityViewInfoLoader(String fromPath, String wildcard) {
         super(fromPath);
 
         setSupportedFileExtensions(wildcard);
-        entities = setCreatures;
     }
 
     @Override
-    protected EntityViewInfo initNewEntity() {
-        return new EntityViewInfo();
+    protected ImageModelEntityDescriptor initNewEntity() {
+        return new ImageModelEntityDescriptor();
     }
     
     @Override
-    protected void parseYaml(Object sourceYamlObject, EntityViewInfo targetObject) {
+    protected void parseYaml(Object sourceYamlObject, ImageModelEntityDescriptor targetObject) {
         super.parseYaml(sourceYamlObject, targetObject);
 
-        TextureRegion image = getYamlLoader().getImage("image");
-
-        if ((entities == null) || (entities.isEmpty())) {
-            log.error("No creatures received.");
+        String imageId = getYamlLoader().getString(IMAGE_ATTRIBUTE);
+        if ((imageId == null) && (imageIsMandatory)) {
+            throw new IllegalArgumentException ("Image not set for entity: "+targetObject.getId());
         }
-
-        Objects.requireNonNull(entities);
-
-        if ((image == null) && (imageIsMandatory)) {
-            Objects.requireNonNull(image, "Unknown image: " + getYamlLoader().getString("image"));
-        }
-
-        if (image != null) {
-            targetObject.setDrawableImage (new TextureRegionDrawable(image));
-            targetObject.setImage (image);
-        }
+        targetObject.setImageId(imageId);
 
         results.put(targetObject.getMetadata().getId(), targetObject);
+    }
+    
+    
+    
+    public static class ImageModelEntityDescriptor extends AbstractModelEntityDescriptor {
+        @Getter
+        @Setter
+        private String imageId;
+        
     }
 }

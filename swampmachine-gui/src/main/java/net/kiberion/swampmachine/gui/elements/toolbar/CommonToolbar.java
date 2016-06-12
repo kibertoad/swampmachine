@@ -32,7 +32,7 @@ public class CommonToolbar<T extends MetadataHolderBlock, M extends EntityProvid
     }
 
     protected CommonToolbarCell<T> initCell(T entity) {
-        CommonToolbarCell<T> cell = new CommonToolbarCell<>(entity);
+        CommonToolbarCell<T> cell = new CommonToolbarCell<>(entity.getId(), getGuiManager().getImageForEntity(entity.getId()), entity.getMetadata().getName());
         getMainStage().addActor(cell);
         return cell;
     }

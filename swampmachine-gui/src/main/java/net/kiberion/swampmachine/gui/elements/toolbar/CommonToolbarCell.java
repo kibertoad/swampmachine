@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 
 import lombok.Getter;
 import net.kiberion.entities.common.api.ParametrizedRecalculable;
-import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.swampmachine.entityblocks.api.EntityInstanceMetadataBlock;
 import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
 import net.kiberion.swampmachine.gui.elements.SwampImage;
@@ -20,10 +19,6 @@ public class CommonToolbarCell<T extends MetadataHolderBlock> extends Group impl
     private final String entityKey;
     
  
-    public CommonToolbarCell (T entity) {
-        this (entity.getId(), UiManager.instance().getImage(entity.getId()), entity.getMetadata().getName());
-    }
-    
     public CommonToolbarCell (String entityID, TextureRegion image, String text) {
         if (image != null) {
             entityIcon = new SwampImage(image);

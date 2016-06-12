@@ -13,12 +13,11 @@ import net.kiberion.blueprints.common.entities.impl.CreatureModelInfo;
 import net.kiberion.swampmachine.assets.GameConfig;
 import net.kiberion.swampmachine.assets.loaders.api.SyncLoader;
 import net.kiberion.swampmachine.assets.loaders.impl.EntityViewInfoLoader;
+import net.kiberion.swampmachine.assets.loaders.impl.EntityViewInfoLoader.ImageModelEntityDescriptor;
 import net.kiberion.swampmachine.assets.readers.ReaderHelper;
 import net.kiberion.swampmachine.assets.util.LoadOnStartup;
-import net.kiberion.swampmachine.assets.viewinfo.EntityViewInfo;
 import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
 import net.kiberion.swampmachine.registries.CommonViewInfoRegistry;
-import net.kiberion.swampmachine.utils.MapUtils;
 
 @LoadOnStartup
 public class CommonViewInfoLoader implements SyncLoader{
@@ -41,7 +40,7 @@ public class CommonViewInfoLoader implements SyncLoader{
     private CreatureRegistry creatureRegistry;
     
     @Setter
-    private boolean imagesAreMandatory = true;
+    private boolean imagesAreMandatory = false;
     
     // convention over configuration in this case - if you are using
     // Swampmachine asset management, you are expected to follow path convention
@@ -60,10 +59,14 @@ public class CommonViewInfoLoader implements SyncLoader{
             Objects.requireNonNull(fullCreatureList, "Creatures are mandatory");
             log.info("debug", "Start loading creature images");
             Path entityDirectory = config.getPathToResources().resolve(CREATURE_MODEL_DIRECTORY);
-            EntityViewInfoLoader loader = new EntityViewInfoLoader(entityDirectory.toString()+"*", fullCreatureList, CREATURE_ENTITIES_FILE_EXTENSION);
+            EntityViewInfoLoader loader = new EntityViewInfoLoader(entityDirectory.toString()+"*", CREATURE_ENTITIES_FILE_EXTENSION);
             loader.setImageIsMandatory(imagesAreMandatory);
-            Map<String, EntityViewInfo> creatureViewInfo = loader.loadMap();
-            MapUtils.putAllEntities(viewInfoRegistry.getFullCreatureViewInfoList(), creatureViewInfo);
+            Map<String, EntityViewInfoLoader.ImageModelEntityDescriptor> creatureViewInfo = loader.loadMap();
+            
+            for (ImageModelEntityDescriptor entry : creatureViewInfo.values()) {
+                viewInfoRegistry.getEntityViewMap().put(entry.getId(), entry.getImageId());
+            }
+            
 
             /*
             try {
