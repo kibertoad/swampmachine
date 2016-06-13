@@ -14,7 +14,6 @@ import net.kiberion.swampmachine.assets.loaders.util.LoaderSpringExtractor;
 import net.kiberion.swampmachine.mvcips.states.GameState;
 import net.kiberion.swampmachine.mvcips.utils.StateSpringLoader;
 import net.kiberion.swampmachine.mvcips.utils.SubViewSpringBinder;
-import net.kiberion.swampmachine.utils.ImmutableRegistryPreparer;
 
 public abstract class SpringGameApplication extends GameApplication{
 
@@ -57,8 +56,6 @@ public abstract class SpringGameApplication extends GameApplication{
         for (Loader loader : preStartupLoaders) {
             loader.load();
         }
-        
-        ImmutableRegistryPreparer.invoke(ctx);
         
         for (GameState state: stateRegistry.getStates().values()) {
             state.initGUIElements();

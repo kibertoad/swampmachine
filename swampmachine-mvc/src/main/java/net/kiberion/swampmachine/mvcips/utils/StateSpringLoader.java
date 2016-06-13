@@ -70,7 +70,7 @@ public class StateSpringLoader {
 
         Validate.notNull(stateRegistry.getLoadingState(), "Loading state is null");
         Validate.notNull(stateRegistry.getStartingState(), "Starting state is null");
-        Validate.notNull(stateRegistry.getNewGameState(), "Starting state is null");
+        Validate.notNull(stateRegistry.getNewGameState(), "New game state is null");
 
         log.info("Done registering game states from Spring context.");
     }

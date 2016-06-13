@@ -15,6 +15,7 @@ import net.kiberion.swampmachine.assets.loaders.api.AsyncLoader;
 import net.kiberion.swampmachine.assets.loaders.api.Loader;
 import net.kiberion.swampmachine.assets.loaders.api.SyncLoader;
 import net.kiberion.swampmachine.assets.loaders.util.LoaderSpringExtractor;
+import net.kiberion.swampmachine.utils.ImmutableRegistryPreparer;
 import net.kiberion.swampmachine.utils.SetUtils;
 
 public class LoaderHelper implements InitializingBean, ApplicationContextAware {
@@ -71,6 +72,8 @@ public class LoaderHelper implements InitializingBean, ApplicationContextAware {
             loader.finishAsyncLoading();
         }
         log.info("Done finishing loading from Async asset loaders.");
+        
+        ImmutableRegistryPreparer.invoke(applicationContext);
     }
 
     protected Set<AsyncLoader> getAsyncAssetLoaders() {
