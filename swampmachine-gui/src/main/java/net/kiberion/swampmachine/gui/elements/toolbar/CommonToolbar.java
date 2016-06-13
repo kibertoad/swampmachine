@@ -8,6 +8,7 @@ import java.util.Map;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 import net.kiberion.entities.common.api.ParametrizedRecalculable;
+import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entityblocks.api.EntityProvider;
 import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
 import net.kiberion.swampmachine.gui.view.AbstractStateSubView;
@@ -18,7 +19,19 @@ public class CommonToolbar<T extends MetadataHolderBlock, M extends EntityProvid
 
     private final Map<String, CommonToolbarCell<T>> cellMap = new LinkedHashMap<>();
     private Table cellTable;
+    
+    protected int distanceBetweenCells = 100;
 
+    public void setPosition (float x, float y) {
+        cellTable.setX(x);
+        cellTable.setY(y);
+        
+    }
+    
+    public void setPosition (Position position) {
+        setPosition (position.getX(), position.getY());
+    }
+    
     @Override
     public void initGUIElements() {
         super.initGUIElements();
@@ -37,8 +50,8 @@ public class CommonToolbar<T extends MetadataHolderBlock, M extends EntityProvid
         cellMap.put(entity.getId(), cell);
         cellTable.addActor(cell);
 
-        cell.setX(300 + (100 * cellMap.size()));
-        cell.setY(10);
+        cell.setX(0 + (distanceBetweenCells * cellMap.size()));
+        cell.setY(0);
     }
 
     protected void initialFill() {
