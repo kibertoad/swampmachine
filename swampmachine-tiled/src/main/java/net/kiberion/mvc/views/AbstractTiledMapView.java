@@ -108,11 +108,10 @@ public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> e
         overlays.clear();
     }
 
-    public void draw() {
-        
+    public void renderMap() {
         //log.info("Camera coords: "+ camera.getOrthoCam().position.x+"/"+ camera.getOrthoCam().position.y);
         
-        renderer.setView(camera.getOrthoCam());        
+        renderer.setView(camera.getOrthoCam()); //TODO probably this shouldn't be done on every frame        
         renderer.render();
 
         // render overlays
@@ -120,6 +119,13 @@ public abstract class AbstractTiledMapView<T extends AbstractTiledMapModel<?>> e
             overlay.draw(camera.getOrthoCam());
         }
     }
+    
+    @Override
+    public void render() {
+        super.render();
+        renderMap();
+    }    
+    
 
     // Tiled "Object layer" named "objects" should be created for this to work
     public void addMapObject(MetadataHolderBlock entityModel, CommonPosition position, String imageCode) {
