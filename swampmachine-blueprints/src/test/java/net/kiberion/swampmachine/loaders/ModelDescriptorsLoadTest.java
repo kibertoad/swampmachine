@@ -7,10 +7,10 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
-import net.kiberion.blueprints.common.entities.impl.CreatureModelInfo;
-import net.kiberion.blueprints.common.loaders.CommonViewInfoLoader;
-import net.kiberion.blueprints.common.loaders.CreatureRegistry;
 import net.kiberion.swampmachine.assets.loaders.api.SyncLoader;
+import net.kiberion.swampmachine.blueprints.common.entities.impl.CreatureModelInfo;
+import net.kiberion.swampmachine.blueprints.common.loaders.CommonViewInfoLoader;
+import net.kiberion.swampmachine.blueprints.common.loaders.CreatureRegistry;
 import net.kiberion.swampmachine.blueprints.spring.ContextBasedTest;
 import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
 

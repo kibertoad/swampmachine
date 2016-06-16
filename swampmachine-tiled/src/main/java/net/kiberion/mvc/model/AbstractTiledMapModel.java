@@ -21,7 +21,6 @@ public abstract class AbstractTiledMapModel<T extends MapMetadataHolderBlock>{
 
 	protected static final Logger log = LogManager.getLogger();
 	
-	@Autowired
 	protected SpawningHelper spawningHelper;
 	
     private TiledMap map;
@@ -43,7 +42,11 @@ public abstract class AbstractTiledMapModel<T extends MapMetadataHolderBlock>{
     public List<T> getAiCreatures() {
         return aiCreatures;
     }
-    
+
+    @Autowired
+    public void setSpawningHelper(SpawningHelper spawningHelper) {
+        this.spawningHelper = spawningHelper;
+    }
 
     protected abstract void placeCreatures ();
 
