@@ -1,25 +1,24 @@
 package net.kiberion.swampmachine.loaders;
 
+import java.util.Collection;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import net.kiberion.swampmachine.assets.util.LoadOnStartup;
 import net.kiberion.swampmachine.entities.common.api.EntityModelDescriptor;
 import net.kiberion.swampmachine.entities.common.impl.resources.ResourceDescriptor;
-import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
+import net.kiberion.swampmachine.registries.ResourceRegistry;
 import net.kiberion.swampmachine.registries.StaticModelInfoRegistry;
 
-@LoadOnStartup
 public class ResourcesLoader extends AbstractLoader{
 
     @Autowired
-    private CommonModelInfoRegistry modelRegistry;
+    private ResourceRegistry resourcesRegistry;
     
     @SuppressWarnings("unchecked")
     @Override
     public Map<String, ResourceDescriptor> getTargetMap() {
-        return modelRegistry.getResources();
+        return resourcesRegistry.getResources();
     }
     
     @Override
@@ -37,12 +36,16 @@ public class ResourcesLoader extends AbstractLoader{
         return ResourceDescriptor.class;
     }
 
+    public Collection<String> loadAndGetResourceIDs () {
+        load();
+        return resourcesRegistry.getResources().keySet();
+    }
     
     @Override
     public void load() {
         super.load();
-        modelRegistry.setExistingResources(modelRegistry.getResources().keySet());
-        StaticModelInfoRegistry.setExistingResources(modelRegistry.getResources().keySet());
+        resourcesRegistry.setExistingResources(resourcesRegistry.getResources().keySet());
+        StaticModelInfoRegistry.setExistingResources(resourcesRegistry.getResources().keySet());
     }
     
 }

@@ -5,13 +5,12 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 
 import lombok.Getter;
 import net.kiberion.entities.common.api.ParametrizedRecalculable;
-import net.kiberion.swampmachine.entityblocks.api.EntityInstanceMetadataBlock;
-import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
+import net.kiberion.swampmachine.entityblocks.api.IdHolderBlock;
 import net.kiberion.swampmachine.gui.elements.SwampImage;
 import net.kiberion.swampmachine.gui.elements.SwampLabel;
 
-public class CommonToolbarCell<T extends MetadataHolderBlock> extends Group
-        implements ParametrizedRecalculable<T>, MetadataHolderBlock {
+public class CommonToolbarCell<T extends IdHolderBlock> extends Group
+        implements ParametrizedRecalculable<T>, IdHolderBlock {
 
     private final SwampImage entityIcon;
     private final SwampLabel entityText;
@@ -33,16 +32,6 @@ public class CommonToolbarCell<T extends MetadataHolderBlock> extends Group
 
     @Override
     public void update(T updatedEntity) {
-    }
-
-    @Override
-    public EntityInstanceMetadataBlock getMetadata() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void setMetadata(EntityInstanceMetadataBlock metadata) {
-        throw new UnsupportedOperationException();
     }
 
     @Override

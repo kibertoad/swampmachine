@@ -10,6 +10,7 @@ import net.kiberion.swampmachine.loaders.ResourcesLoader;
 import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
 import net.kiberion.swampmachine.registries.CommonViewInfoRegistry;
 import net.kiberion.swampmachine.registries.ImageRegistry;
+import net.kiberion.swampmachine.registries.ResourceRegistry;
 
 @Configuration
 public class CommonLoaderConfiguration {
@@ -21,8 +22,7 @@ public class CommonLoaderConfiguration {
     
     @Bean
     public ResourcesLoader resourcesLoader() {
-        ResourcesLoader loader = new ResourcesLoader();
-        loader.setPriority(20); //should be loaded fairly early, because many entities depend on it
+        ResourcesLoader loader = new ResourcesLoader(); //resources loader is not launched automatically, hence doesn't need priority
         return loader;
     }
     
@@ -35,6 +35,11 @@ public class CommonLoaderConfiguration {
     @Bean
     public CommonModelInfoRegistry modelInfoRegistry() {
         return new CommonModelInfoRegistry();
+    }
+
+    @Bean
+    public ResourceRegistry resourceRegistry() {
+        return new ResourceRegistry();
     }
     
     @Bean

@@ -13,22 +13,22 @@ import com.google.common.collect.ImmutableSet;
 
 import net.kiberion.swampmachine.entities.common.impl.resources.ResourcesDelta;
 import net.kiberion.swampmachine.entities.common.impl.resources.ResourcesStorage;
-import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
+import net.kiberion.swampmachine.registries.ResourceRegistry;
 import net.kiberion.swampmachine.spring.ContextBasedTest;
 import net.kiberion.swampmachine.utils.ImmutableRegistryPreparer;
 
 public class TestResources extends ContextBasedTest {
 
     @Autowired
-    private CommonModelInfoRegistry modelRegistry;
-
+    private ResourceRegistry resourceRegistry;
+    
     @Test
     public void testResources() {
-        assertEquals(0, modelRegistry.getResources().size());
+        assertEquals(0, resourceRegistry.getResources().size());
         loadAssets();
-        assertEquals(1, modelRegistry.getResources().size());
+        assertEquals(1, resourceRegistry.getResources().size());
 
-        ResourcesDelta delta = modelRegistry.getNewResourcesDeltaInstance();
+        ResourcesDelta delta = resourceRegistry.getNewResourcesDeltaInstance();
 
         try {
             delta.add("fake", 1);
@@ -62,10 +62,10 @@ public class TestResources extends ContextBasedTest {
     public void testImmutableMapPreparer() {
         loadAssets();
 
-        assertEquals(HashMap.class, modelRegistry.getResources().getClass());
-        assertEquals(1, modelRegistry.getResources().size());
+        assertEquals(HashMap.class, resourceRegistry.getResources().getClass());
+        assertEquals(1, resourceRegistry.getResources().size());
         ImmutableRegistryPreparer.invoke(applicationContext);
-        assertTrue(modelRegistry.getResources() instanceof ImmutableMap);
-        assertEquals(1, modelRegistry.getResources().size());
+        assertTrue(resourceRegistry.getResources() instanceof ImmutableMap);
+        assertEquals(1, resourceRegistry.getResources().size());
     }
 }

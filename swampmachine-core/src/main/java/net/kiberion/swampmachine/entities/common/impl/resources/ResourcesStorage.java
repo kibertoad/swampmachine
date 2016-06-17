@@ -7,14 +7,17 @@ import java.util.Map;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.mutable.MutableLong;
 
-public class ResourcesStorage {
+import net.kiberion.swampmachine.entityblocks.api.EntityProvider;
+import net.kiberion.swampmachine.utils.MutableLongWithID;
 
-    private final Map<String, MutableLong> backingMap;
+public class ResourcesStorage implements EntityProvider<MutableLongWithID>{
+
+    private final Map<String, MutableLongWithID> backingMap;
 
     public ResourcesStorage(Collection<String> supportedResources) {
         backingMap = new HashMap<>(supportedResources.size());
         for (String resourceId : supportedResources) {
-            backingMap.put(resourceId, new MutableLong());
+            backingMap.put(resourceId, new MutableLongWithID(resourceId));
         }
     }
 
@@ -39,5 +42,15 @@ public class ResourcesStorage {
     public long getValue(String resourceId) {
         return backingMap.get(resourceId).longValue();
     }
-
+    
+    @Override
+    public Collection<MutableLongWithID> getAllEntities() {
+        return backingMap.values();
+    }
+    
+    @Override
+    public MutableLongWithID getEntity(String id) {
+        return backingMap.get(id);
+    }
+    
 }

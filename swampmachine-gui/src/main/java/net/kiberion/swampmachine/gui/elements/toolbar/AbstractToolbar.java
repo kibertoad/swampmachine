@@ -10,11 +10,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import net.kiberion.entities.common.api.ParametrizedRecalculable;
 import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entityblocks.api.EntityProvider;
-import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
+import net.kiberion.swampmachine.entityblocks.api.IdHolderBlock;
 import net.kiberion.swampmachine.gui.view.AbstractStateSubView;
 import net.kiberion.swampmachine.utils.MapUtils;
 
-public class CommonToolbar<T extends MetadataHolderBlock, M extends EntityProvider<T>> extends AbstractStateSubView<M>
+public abstract class AbstractToolbar<T extends IdHolderBlock, M extends EntityProvider<T>> extends AbstractStateSubView<M>
         implements ParametrizedRecalculable<T> {
 
     private final Map<String, CommonToolbarCell<T>> cellMap = new LinkedHashMap<>();
@@ -39,8 +39,10 @@ public class CommonToolbar<T extends MetadataHolderBlock, M extends EntityProvid
         getMainStage().addActor(cellTable);
     }
 
+    protected abstract String getEntityName (T entity);
+    
     protected CommonToolbarCell<T> initCell(T entity) {
-        CommonToolbarCell<T> cell = new CommonToolbarCell<>(entity.getId(), getGuiManager().getImageForEntity(entity.getId()), entity.getMetadata().getName());
+        CommonToolbarCell<T> cell = new CommonToolbarCell<>(entity.getId(), getGuiManager().getImageForEntity(entity.getId()), getEntityName(entity));
         getMainStage().addActor(cell);
         return cell;
     }
