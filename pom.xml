@@ -11,6 +11,15 @@
 
     <modules>
         <module>swampmachine-parent</module>
+        <module>swampmachine-core</module>
+        <module>swampmachine-mvc</module>
+        <module>swampmachine-tiled</module>
+        <module>swampmachine-gui</module>
+        <module>swampmachine-multimedia</module>
+        <module>swampmachine-blueprints</module>
+        <module>swampmachine-scripting</module>
+        <module>swampmachine-persistence</module>
+        <module>swampmachine-utils</module>
     </modules>
 
     <repositories>

@@ -15,18 +15,6 @@
         <spring.version>4.3.0.RELEASE</spring.version>
     </properties>
 
-    <modules>
-        <module>../swampmachine-core</module>
-        <module>../swampmachine-mvc</module>
-        <module>../swampmachine-tiled</module>
-        <module>../swampmachine-gui</module>
-        <module>../swampmachine-multimedia</module>
-        <module>../swampmachine-blueprints</module>
-        <module>../swampmachine-scripting</module>
-        <module>../swampmachine-persistence</module>
-        <module>../swampmachine-utils</module>
-    </modules>
-
     <repositories>
         <repository>
             <id>sonatypeSS</id>
@@ -229,11 +217,6 @@
             <dependency>
                 <groupId>net.kiberion</groupId>
                 <artifactId>swampmachine-blueprints</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>net.kiberion</groupId>
-                <artifactId>swampmachine-utils</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
