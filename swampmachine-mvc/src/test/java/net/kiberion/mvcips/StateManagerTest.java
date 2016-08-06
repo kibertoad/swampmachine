@@ -18,10 +18,10 @@ import net.kiberion.swampmachine.mvcips.states.annotations.State;
 import net.kiberion.swampmachine.mvcips.states.util.StateManager;
 import net.kiberion.swampmachine.mvcips.states.util.StateRegistry;
 import net.kiberion.swampmachine.mvcips.utils.StateSpringLoader;
-import net.kiberion.swampmachine.spring.ContextBasedTest;
+import net.kiberion.swampmachine.spring.CoreContextBasedTest;
 
 @ContextConfiguration(classes = TestMVCIPSConfiguration.class)
-public class StateManagerTest extends ContextBasedTest {
+public class StateManagerTest extends CoreContextBasedTest {
 
     @Autowired
     private StateManager stateManager;

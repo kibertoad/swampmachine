@@ -11,7 +11,7 @@ import net.kiberion.persistence.spring.AbstractInMemoryDBConfiguration;
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)
 @ComponentScan("net.kiberion.persistence.test")
-@Import({net.kiberion.swampmachine.spring.TestConfiguration.class}) 
+@Import({net.kiberion.swampmachine.spring.TestCoreConfiguration.class}) 
 public class TestConfiguration extends AbstractInMemoryDBConfiguration {
 
     @Override

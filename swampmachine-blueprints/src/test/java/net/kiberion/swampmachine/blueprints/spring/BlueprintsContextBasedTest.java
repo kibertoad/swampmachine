@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.spring;
+package net.kiberion.swampmachine.blueprints.spring;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ import net.kiberion.swampmachine.assets.loaders.api.Loader;
 import net.kiberion.swampmachine.assets.loaders.util.LoaderSpringExtractor;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = TestConfiguration.class)
-public abstract class ContextBasedTest implements ApplicationContextAware {
+@ContextConfiguration(classes = TestBlueprintsConfiguration.class)
+public abstract class BlueprintsContextBasedTest implements ApplicationContextAware {
 
     protected ApplicationContext applicationContext;
 

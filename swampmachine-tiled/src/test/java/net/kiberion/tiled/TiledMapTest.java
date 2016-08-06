@@ -3,10 +3,9 @@ package net.kiberion.tiled;
 import static org.junit.Assert.*;
 
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
@@ -15,8 +14,6 @@ import net.kiberion.tiled.model.TiledMapInfo;
 import net.kiberion.tiled.model.TiledMapPathfindingInfo;
 
 
-//ToDo fix tests
-@Ignore
 public class TiledMapTest extends MapContextBasedTest{
     
     @Autowired
@@ -25,16 +22,18 @@ public class TiledMapTest extends MapContextBasedTest{
     @Autowired
     private MapRegistry mapRegistry;
     
-    @Before
+    //Shouldn't be @Before statement, because otherwise assets will fail due to map already being loaded before the context will reload
     public void setup () {
-        Assert.assertNotNull(mapLoader);
-        
+        Assert.assertEquals (0, mapRegistry.getRegisteredMaps().size());
         loadAssets();
+        Assert.assertNotNull(mapLoader);
         Assert.assertEquals (1, mapRegistry.getRegisteredMaps().size());
     }
-    
+
+    @DirtiesContext
     @Test
     public void testLoadTiledMap () {
+        setup();
         TiledMap map = mapRegistry.getRegisteredMaps().get("testMap");
         Assert.assertNotNull (map);
 
@@ -48,8 +47,10 @@ public class TiledMapTest extends MapContextBasedTest{
         assertEquals (map, info.getMap());
     }
     
+    @DirtiesContext
     @Test
     public void testPathfinding () {
+        setup();
         TiledMap map = mapRegistry.getRegisteredMaps().get("testMap");
         Assert.assertNotNull (map);
         TiledMapInfo info = new TiledMapInfo (map);

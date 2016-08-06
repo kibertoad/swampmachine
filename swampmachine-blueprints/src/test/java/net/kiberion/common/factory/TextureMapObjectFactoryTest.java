@@ -1,6 +1,6 @@
 package net.kiberion.common.factory;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,7 +15,7 @@ import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import net.kiberion.swampmachine.assets.UiManager;
-import net.kiberion.swampmachine.blueprints.spring.ContextBasedTest;
+import net.kiberion.swampmachine.blueprints.spring.BlueprintsContextBasedTest;
 import net.kiberion.swampmachine.factories.events.SpawnEntityEvent;
 import net.kiberion.tiled.MapRegistry;
 import net.kiberion.tiled.factories.impl.params.TextureMapObjectSpawnParams;
@@ -25,7 +25,7 @@ import net.kiberion.tiled.model.TiledMapInfo;
 import net.kiberion.tiled.spring.TiledTestConfiguration;
 
 @ContextConfiguration(classes = TiledTestConfiguration.class)
-public class TextureMapObjectFactoryTest extends ContextBasedTest implements ApplicationEventPublisherAware{
+public class TextureMapObjectFactoryTest extends BlueprintsContextBasedTest implements ApplicationEventPublisherAware{
 
     private ApplicationEventPublisher eventPublisher;
     

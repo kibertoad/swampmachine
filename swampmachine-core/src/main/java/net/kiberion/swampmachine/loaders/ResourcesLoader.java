@@ -1,7 +1,8 @@
 package net.kiberion.swampmachine.loaders;
 
-import java.util.Collection;
 import java.util.Map;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,6 +11,11 @@ import net.kiberion.swampmachine.entities.common.impl.resources.ResourceDescript
 import net.kiberion.swampmachine.registries.ResourceRegistry;
 import net.kiberion.swampmachine.registries.StaticModelInfoRegistry;
 
+/**
+ * This loader automatically loads all the resources at the init
+ * @author kibertoad
+ *
+ */
 public class ResourcesLoader extends AbstractLoader{
 
     @Autowired
@@ -36,11 +42,7 @@ public class ResourcesLoader extends AbstractLoader{
         return ResourceDescriptor.class;
     }
 
-    public Collection<String> loadAndGetResourceIDs () {
-        load();
-        return resourcesRegistry.getResources().keySet();
-    }
-    
+    @PostConstruct
     @Override
     public void load() {
         super.load();

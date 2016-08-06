@@ -64,6 +64,10 @@ public class CommonViewInfoLoader implements SyncLoader{
             Map<String, EntityViewInfoLoader.ImageModelEntityDescriptor> creatureViewInfo = loader.loadMap();
             
             for (ImageModelEntityDescriptor entry : creatureViewInfo.values()) {
+                //if (entry.getImageId() == null) {
+                //    entry.setImageId(UiManager.BLANK_IMAGE);
+                //}
+                
                 viewInfoRegistry.getEntityViewMap().put(entry.getId(), entry.getImageId());
             }
             

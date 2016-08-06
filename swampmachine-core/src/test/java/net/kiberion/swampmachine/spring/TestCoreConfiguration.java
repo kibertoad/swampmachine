@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.blueprints.spring;
+package net.kiberion.swampmachine.spring;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,19 +12,14 @@ import com.badlogic.gdx.backends.headless.HeadlessFiles;
 
 import net.kiberion.swampmachine.assets.GameConfig;
 import net.kiberion.swampmachine.assets.UiManager;
-import net.kiberion.swampmachine.blueprints.common.spring.CommonBlueprintsLoaderConfiguration;
 import net.kiberion.swampmachine.factories.entities.DummyAfterSpawnListener;
 import net.kiberion.swampmachine.factories.entities.DummyFactory;
-import net.kiberion.swampmachine.spring.CommonLoaderConfiguration;
-import net.kiberion.swampmachine.spring.CoreConfiguration;
-import net.kiberion.swampmachine.spring.SwampmachineExtrasConfiguration;
 
 @Configuration
-@Import({ CommonLoaderConfiguration.class, SwampmachineExtrasConfiguration.class,
-        CommonBlueprintsLoaderConfiguration.class })
-public class TestConfiguration extends CoreConfiguration {
+@Import({ CommonLoaderConfiguration.class, SwampmachineExtrasConfiguration.class })
+public class TestCoreConfiguration extends CoreConfiguration {
 
-    public TestConfiguration() {
+    public TestCoreConfiguration() {
         GameConfig.config.setPathToResourcesAsString("src/test/resources/");
         Gdx.files = new HeadlessFiles();
         Gdx.gl = new HeadlessGl();

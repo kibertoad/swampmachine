@@ -11,10 +11,10 @@ import net.kiberion.swampmachine.assets.loaders.api.SyncLoader;
 import net.kiberion.swampmachine.blueprints.common.entities.impl.CreatureModelInfo;
 import net.kiberion.swampmachine.blueprints.common.loaders.CommonViewInfoLoader;
 import net.kiberion.swampmachine.blueprints.common.loaders.CreatureRegistry;
-import net.kiberion.swampmachine.blueprints.spring.ContextBasedTest;
+import net.kiberion.swampmachine.blueprints.spring.BlueprintsContextBasedTest;
 import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
 
-public class ModelDescriptorsLoadTest extends ContextBasedTest {
+public class ModelDescriptorsLoadTest extends BlueprintsContextBasedTest {
 
     @Autowired
     private CommonViewInfoLoader viewLoader;
@@ -36,6 +36,8 @@ public class ModelDescriptorsLoadTest extends ContextBasedTest {
         viewLoader.setImagesAreMandatory(false);
     }
 
+    
+    //Fails due to CommonViewInfoLoader not setting the imageID
     @Test
     public void testLoadingCreatures() {
         assertEquals(0, creatureRegistry.getCreatures().size());
@@ -49,7 +51,7 @@ public class ModelDescriptorsLoadTest extends ContextBasedTest {
     @Test
     public void testLoaderOrder() {
         assertEquals(0, loaderHelper.getAsyncAssetLoaders().size());
-        assertEquals(3, loaderHelper.getSyncAssetLoaders().size());
+        assertEquals(2, loaderHelper.getSyncAssetLoaders().size());
 
         // Test loaders being properly sorted by loading priority
         int previousPriority = -1;

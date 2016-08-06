@@ -19,19 +19,18 @@ public class CommonLoaderConfiguration {
     public LoaderHelper loaderHelper() {
         return new LoaderHelper();
     }
-    
+
     @Bean
     public ResourcesLoader resourcesLoader() {
-        ResourcesLoader loader = new ResourcesLoader(); //resources loader is not launched automatically, hence doesn't need priority
-        return loader;
+        // resources loader is not launched automatically, hence doesn't need priority
+        return new ResourcesLoader();
     }
-    
 
     @Bean
     public ReaderHelper readerHelper() {
         return new ReaderHelper();
     }
-    
+
     @Bean
     public CommonModelInfoRegistry modelInfoRegistry() {
         return new CommonModelInfoRegistry();
@@ -41,7 +40,7 @@ public class CommonLoaderConfiguration {
     public ResourceRegistry resourceRegistry() {
         return new ResourceRegistry();
     }
-    
+
     @Bean
     public CommonViewInfoRegistry viewInfoRegistry() {
         return new CommonViewInfoRegistry();
@@ -56,5 +55,5 @@ public class CommonLoaderConfiguration {
     public ImageLoader imageLoader() {
         return new ImageLoader();
     }
-    
+
 }

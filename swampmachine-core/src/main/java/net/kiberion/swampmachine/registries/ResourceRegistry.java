@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import com.google.common.collect.ImmutableSet;
 
 import lombok.Getter;
@@ -15,8 +13,14 @@ import net.kiberion.swampmachine.entities.common.impl.resources.ResourceDescript
 import net.kiberion.swampmachine.entities.common.impl.resources.ResourcesDelta;
 import net.kiberion.swampmachine.entityblocks.api.EntityMetadataProvider;
 
+/**
+ * Registry for game resources.
+ * @author kibertoad
+ *
+ */
+
 @ImmutableRegistry
-public class ResourceRegistry implements EntityMetadataProvider<ResourceDescriptor>{
+public class ResourceRegistry implements EntityMetadataProvider<ResourceDescriptor> {
 
     @Getter
     private final Map<String, ResourceDescriptor> resources = new HashMap<>();
@@ -24,7 +28,8 @@ public class ResourceRegistry implements EntityMetadataProvider<ResourceDescript
     @Getter
     private Set<String> existingResources;
 
-    @Value("#{resourcesLoader.loadAndGetResourceIDs()}")    
+    //this injection would create a circular dependency, so is a no-no
+    //@Value("#{resourcesLoader.loadAndGetResourceIDs()}")
     public void setExistingResources(Collection<String> existingResources) {
         this.existingResources = ImmutableSet.copyOf(existingResources);
     }
@@ -37,5 +42,5 @@ public class ResourceRegistry implements EntityMetadataProvider<ResourceDescript
     public ResourceDescriptor getMetadataForEntity(String entityId) {
         return resources.get(entityId);
     }
-    
+
 }

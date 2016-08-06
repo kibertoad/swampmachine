@@ -14,18 +14,16 @@ import com.google.common.collect.ImmutableSet;
 import net.kiberion.swampmachine.entities.common.impl.resources.ResourcesDelta;
 import net.kiberion.swampmachine.entities.common.impl.resources.ResourcesStorage;
 import net.kiberion.swampmachine.registries.ResourceRegistry;
-import net.kiberion.swampmachine.spring.ContextBasedTest;
+import net.kiberion.swampmachine.spring.CoreContextBasedTest;
 import net.kiberion.swampmachine.utils.ImmutableRegistryPreparer;
 
-public class TestResources extends ContextBasedTest {
+public class TestResources extends CoreContextBasedTest {
 
     @Autowired
     private ResourceRegistry resourceRegistry;
-    
+
     @Test
     public void testResources() {
-        assertEquals(0, resourceRegistry.getResources().size());
-        loadAssets();
         assertEquals(1, resourceRegistry.getResources().size());
 
         ResourcesDelta delta = resourceRegistry.getNewResourcesDeltaInstance();
@@ -34,8 +32,10 @@ public class TestResources extends ContextBasedTest {
             delta.add("fake", 1);
             fail();
         } catch (IllegalArgumentException e) {
+            //expected
         }
 
+        assertNull(delta.getMutableValue("dummyresource"));
         delta.add("dummyresource", 1);
         assertEquals(1, delta.getMutableValue("dummyresource").longValue());
     }
@@ -53,15 +53,12 @@ public class TestResources extends ContextBasedTest {
         delta.add("dummy2", -1);
 
         resources.applyDelta(delta);
-
         assertEquals(1, resources.getValue("dummy"));
         assertEquals(-1, resources.getValue("dummy2"));
     }
 
     @Test
     public void testImmutableMapPreparer() {
-        loadAssets();
-
         assertEquals(HashMap.class, resourceRegistry.getResources().getClass());
         assertEquals(1, resourceRegistry.getResources().size());
         ImmutableRegistryPreparer.invoke(applicationContext);
