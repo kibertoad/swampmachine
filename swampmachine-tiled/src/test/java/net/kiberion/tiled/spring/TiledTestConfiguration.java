@@ -8,7 +8,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import net.kiberion.mvc.model.AbstractTiledMapModel;
 import net.kiberion.mvc.model.helpers.SpawningHelper;
-import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.tiled.MapRegistry;
 import net.kiberion.tiled.entityblocks.holders.MapMetadataHolderBlock;
 import net.kiberion.tiled.factories.impl.TextureMapObjectFactory;
@@ -64,9 +63,11 @@ public class TiledTestConfiguration {
         return new SimpleCollisionInfoProvider ();        
     }
     
-    public TiledTestConfiguration() {
-        AssetManager assetManager = UiManager.instance().getAssetManager();
-        assetManager.setLoader(TiledMap.class, new NavTmxMapLoader());
+    @Bean
+    public NavTmxMapLoader navTmxMapLoader (AssetManager assetManager) {
+        NavTmxMapLoader loader = new NavTmxMapLoader();
+        assetManager.setLoader(TiledMap.class, loader);
+        return loader;
     }
     
 }

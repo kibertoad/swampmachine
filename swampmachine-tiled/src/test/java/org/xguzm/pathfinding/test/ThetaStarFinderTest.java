@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.Validate;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.xguzm.pathfinding.grid.GridCell;
@@ -17,8 +16,6 @@ import org.xguzm.pathfinding.grid.finders.ThetaStarGridFinder;
 import net.kiberion.tiled.MapContextBasedTest;
 import net.kiberion.tiled.processors.CollisionInfoProvider;
 
-//ToDo fix tests
-@Ignore
 public class ThetaStarFinderTest extends MapContextBasedTest{
 
 	NavigationGrid<GridCell> grid;
@@ -34,7 +31,7 @@ public class ThetaStarFinderTest extends MapContextBasedTest{
 	    
 		grid = NavGraphFactory.getGridCellMap();	
 		opt = new GridFinderOptions();
-		finder = new ThetaStarGridFinder<GridCell>(GridCell.class, opt);
+		finder = new ThetaStarGridFinder<>(GridCell.class, opt);
 		
 		grid.setCollisionInfoProvider(collisionInfoProvider);
 	}

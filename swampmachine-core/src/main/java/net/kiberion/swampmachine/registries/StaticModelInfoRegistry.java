@@ -3,6 +3,8 @@ package net.kiberion.swampmachine.registries;
 import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.google.common.collect.ImmutableSet;
 
@@ -18,6 +20,7 @@ import net.kiberion.swampmachine.loaders.ResourcesLoader;
  */
 public class StaticModelInfoRegistry {
 
+    private static final Logger log = LogManager.getLogger();
     private StaticModelInfoRegistry () {}
     
     private static Set<String> existingResources;
@@ -29,7 +32,8 @@ public class StaticModelInfoRegistry {
     
     public static void setExistingResources(Set<String> existingResources) {
         if (StaticModelInfoRegistry.existingResources != null) {
-            throw new IllegalStateException ("Existing resources can be only set once.");
+            //throw new IllegalStateException ("Existing resources can be only set once.");
+            log.warn("Existing resources should only be set once.");
         }
         StaticModelInfoRegistry.existingResources = ImmutableSet.copyOf(existingResources);
     }

@@ -25,7 +25,7 @@ public class CommonLoaderConfiguration {
         // resources loader is not launched automatically, hence doesn't need priority
         return new ResourcesLoader();
     }
-
+    
     @Bean
     public ReaderHelper readerHelper() {
         return new ReaderHelper();

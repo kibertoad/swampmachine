@@ -1,8 +1,5 @@
 package net.kiberion.swampmachine.assets;
 
-import java.nio.file.Path;
-
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -46,9 +43,6 @@ public class UiManager {
 
     protected TextureAtlas defaultAtlas;
 
-    @Getter
-    protected AssetManager assetManager;
-
     /**
      * Load skin from json file.
      * 
@@ -81,13 +75,6 @@ public class UiManager {
         return defaultAtlas;
     }
 
-    public void setAssetManager(AssetManager assets) {
-        if (assetManager != null) {
-            throw new IllegalStateException("Asset manager was already set.");
-        }
-        this.assetManager = assets;
-    }
-
     public TextureAtlas.AtlasRegion getImage(String id) {
         if (!id.equals(BLANK_IMAGE)) {
             return atlas().findRegion(id);
@@ -98,10 +85,6 @@ public class UiManager {
 
     public static void reset() {
         _instance = null;
-    }
-
-    public String getPathForAssetManager(Path path) {
-        return path.toString().replace("\\", "/");
     }
 
 }

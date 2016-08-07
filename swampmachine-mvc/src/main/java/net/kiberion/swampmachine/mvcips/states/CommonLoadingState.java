@@ -5,11 +5,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 import net.kiberion.entities.common.api.Invokable;
 import net.kiberion.swampmachine.assets.GameConfig;
-import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.swampmachine.gui.view.StateView;
 import net.kiberion.swampmachine.loaders.LoaderHelper;
 import net.kiberion.swampmachine.mvcips.states.annotations.LoadingState;
@@ -40,6 +40,9 @@ public class CommonLoadingState extends GameState {
 
     @Autowired
     private LoaderHelper loaderHelper;
+    
+    @Autowired
+    private AssetManager assetManager;
 
     protected Invokable gameInceptionProvider;
 
@@ -70,7 +73,7 @@ public class CommonLoadingState extends GameState {
         Validate.notNull(gameConfig, "Config is null.");
         String path = gameConfig.getPathToResources().resolve("imgpacked/packed.atlas").toString();
         log.info("searching for atlas: " + path);
-        UiManager.instance().getAssetManager().load(path, TextureAtlas.class);
+        assetManager.load(path, TextureAtlas.class);
     }
 
     @Override
@@ -82,7 +85,7 @@ public class CommonLoadingState extends GameState {
 
     @Override
     public void render(float delta) {
-        if (UiManager.instance().getAssetManager().getProgress() < 1f) {
+        if (assetManager.getProgress() < 1f) {
 
             // Gdx.app.log("debug", "Loadingprogress: "+
             // Float.toString(assetManager.getProgress() * 100));
@@ -92,7 +95,7 @@ public class CommonLoadingState extends GameState {
             getView().act(delta);
             getView().render();
 
-            UiManager.instance().getAssetManager().update(100);
+            assetManager.update(100);
         } else {
             loaderHelper.finishLoading();
             stateManager.setState(stateRegistry.getStartingState());

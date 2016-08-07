@@ -1,6 +1,7 @@
 package net.kiberion.tiled.spring;
 
 import org.apache.commons.lang3.Validate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,7 +9,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import net.kiberion.mvc.model.helpers.SpawningHelper;
-import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.tiled.MapRegistry;
 import net.kiberion.tiled.factories.impl.TextureMapObjectFactory;
 import net.kiberion.tiled.loaders.MapLoader;
@@ -58,9 +58,8 @@ public class TiledGameConfiguration {
     }
     
     
-    
-    public TiledGameConfiguration() {
-        AssetManager assetManager = UiManager.instance().getAssetManager();
+    @Autowired
+    public TiledGameConfiguration(AssetManager assetManager) {
         Validate.notNull(assetManager, "Asset manager is null. Probably GDX context not yet initialized.");
         assetManager.setLoader(TiledMap.class, new NavTmxMapLoader());
     }

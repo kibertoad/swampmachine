@@ -59,4 +59,7 @@ public class FilePathUtils {
         }
     }
 
+    public static String getPathForAssetManager(Path path) {
+        return path.toString().replace("\\", "/");
+    }    
 }

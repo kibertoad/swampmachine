@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 import com.badlogic.gdx.assets.AssetManager;
 
 import net.kiberion.swampmachine.assets.GameConfig;
-import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.swampmachine.assets.loaders.impl.GameConfigLoader;
 import net.kiberion.swampmachine.assets.loaders.util.FileReaderFactory;
 
@@ -27,9 +26,13 @@ public class CoreConfiguration {
         initAssetManager();
     }
     
-    protected void initAssetManager () {
-        AssetManager assetManager = new AssetManager();
-        UiManager.instance().setAssetManager(assetManager);
+    @Bean
+    public AssetManager assetManager() {
+        return initAssetManager();
+    }
+    
+    protected AssetManager initAssetManager () {
+        return new AssetManager();
     }
 
 }
