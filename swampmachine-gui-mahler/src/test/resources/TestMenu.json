@@ -1,0 +1,12 @@
+{
+  "compositions": [
+    {
+      "id": "test",
+      "elements": [
+        {
+          "id": "buttonMenu"
+        }
+      ]
+    }
+  ]
+}
