@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Scope;
 
 import net.kiberion.swampmachine.entities.common.impl.resources.ResourcesStorage;
 import net.kiberion.swampmachine.factories.MetaFactory;
+import net.kiberion.swampmachine.loaders.ResourcesLoader;
 import net.kiberion.swampmachine.registries.ResourceRegistry;
 
 /**
@@ -25,7 +26,8 @@ public class SwampmachineExtrasConfiguration {
 
     @Bean
     @Scope("prototype")
-    public ResourcesStorage resourceStorageInstance (ResourceRegistry resourceRegistry) {
+    //resourceLoader is needed to make it sure it was created and loaded before the injection happens
+    public ResourcesStorage resourceStorageInstance (ResourceRegistry resourceRegistry, ResourcesLoader resourceLoader) {
         return new ResourcesStorage (resourceRegistry.getExistingResources());
     }
     

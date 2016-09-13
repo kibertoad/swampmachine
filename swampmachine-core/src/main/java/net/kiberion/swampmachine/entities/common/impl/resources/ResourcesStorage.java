@@ -15,6 +15,7 @@ public class ResourcesStorage implements EntityProvider<MutableLongWithID>{
     private final Map<String, MutableLongWithID> backingMap;
 
     public ResourcesStorage(Collection<String> supportedResources) {
+        Validate.notNull(supportedResources, "Supported resources cannot be null");
         backingMap = new HashMap<>(supportedResources.size());
         for (String resourceId : supportedResources) {
             backingMap.put(resourceId, new MutableLongWithID(resourceId));
