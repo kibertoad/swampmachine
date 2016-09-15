@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Getter;
+import net.kiberion.swampmachine.entities.common.impl.AbstractModelEntityDescriptor;
 import net.kiberion.swampmachine.gui.elements.CompositionElement;
 
-public class Composition {
+public class Composition extends AbstractModelEntityDescriptor{
 
-    @Getter
-    private String id;
-    
     @Getter
     private final List <CompositionElement> elements  = new ArrayList<>();
     

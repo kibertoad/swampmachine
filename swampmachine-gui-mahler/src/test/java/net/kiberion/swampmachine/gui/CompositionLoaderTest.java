@@ -3,24 +3,26 @@ package net.kiberion.swampmachine.gui;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import net.kiberion.swampmachine.gui.composer.Composition;
 import net.kiberion.swampmachine.gui.composer.CompositionLoader;
-import net.kiberion.swampmachine.gui.composer.CompositionTree;
+import net.kiberion.swampmachine.gui.composer.CompositionRegistry;
+import net.kiberion.swampmachine.gui.spring.MahlerContextBasedTest;
 
-public class CompositionLoaderTest {
+public class CompositionLoaderTest extends MahlerContextBasedTest{
 
-    private static final Resource TEST_COMPOSITION_RESOURCE = new ClassPathResource("TestMenu.json"); 
+    @Autowired
+    private CompositionLoader loader;
+    
+    @Autowired
+    private CompositionRegistry registry;
     
     @Test
     public void testLoadFile () {
-        CompositionLoader loader = new CompositionLoader();
-        CompositionTree compositionTree = loader.load(TEST_COMPOSITION_RESOURCE);
-        assertNotNull (compositionTree);
-        assertEquals(1, compositionTree.getCompositions().size());
-        Composition composition = compositionTree.getCompositions().get(0);
+        loader.load();
+        assertEquals(1, registry.getCompositions().size());
+        Composition composition = registry.getCompositions().get("test");
         assertEquals ("test", composition.getId());
         
         assertEquals (1, composition.getElements().size());

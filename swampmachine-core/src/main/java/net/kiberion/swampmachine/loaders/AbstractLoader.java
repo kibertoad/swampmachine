@@ -23,7 +23,7 @@ import net.kiberion.swampmachine.utils.MapUtils;
  * @author kibertoad
  *
  */
-public abstract class AbstractLoader implements SyncLoader{
+public abstract class AbstractLoader implements SyncLoader {
 
     private static final Logger log = LogManager.getLogger();
 
@@ -46,34 +46,38 @@ public abstract class AbstractLoader implements SyncLoader{
         return readerHelper.fileExists(directoryName);
     }
 
-    public abstract <T extends EntityModelDescriptor> Map<String, T> getTargetMap ();
-    
-    public abstract String getLoadDirectory ();
-    public abstract String getLoadFileExtension ();
+    public abstract <T extends EntityModelDescriptor> Map<String, T> getTargetMap();
+
+    public abstract String getLoadDirectory();
+
+    public abstract String getLoadFileExtension();
+
     public abstract Class<? extends EntityModelDescriptor> getEntityClass();
-    
+
     @Override
-    public void load () {
+    public void load() {
         loadDataNodes(getTargetMap(), getLoadDirectory(), getLoadFileExtension(), getEntityClass());
+    }
+
+    protected Path getEntityDirectory(String loadDirectory) {
+        return config.getPathToResources().resolve(loadDirectory);
     }
     
     protected <T extends EntityModelDescriptor> void loadDataNodes(Map<String, T> targetMap, String loadDirectory,
             String loadExtension, Class<T> clazz) {
         try {
             if (fileExists(loadDirectory)) {
-                Path entityDirectory = config.getPathToResources().resolve(loadDirectory);
+                Path entityDirectory = getEntityDirectory(loadDirectory);
                 log.info("Loading entities from: " + entityDirectory.toString());
-
                 POJOYamlLoader<T> entityLoader = new POJOYamlLoader<>(entityDirectory, clazz, loadExtension);
                 List<T> entities = entityLoader.loadList();
 
                 MapUtils.putAllEntities(targetMap, entities);
-                log.info("Loaded "+entities.size()+" "+getEntityClass().getSimpleName()+" entities.");
+                log.info("Loaded " + entities.size() + " " + getEntityClass().getSimpleName() + " entities.");
             }
         } catch (Exception e) {
             throw new IllegalStateException("Error while loading: ", e);
         }
-
     }
-
+    
 }
