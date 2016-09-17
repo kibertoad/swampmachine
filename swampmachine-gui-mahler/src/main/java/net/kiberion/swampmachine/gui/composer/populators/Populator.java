@@ -1,5 +1,7 @@
 package net.kiberion.swampmachine.gui.composer.populators;
 
+import java.util.Collection;
+
 import net.kiberion.swampmachine.gui.api.CompositionConsumer;
 import net.kiberion.swampmachine.gui.composer.Composition;
 
@@ -10,6 +12,6 @@ public interface Populator {
      * @param targetConsumer
      * @param sourceComposition
      */
-    public void populate (CompositionConsumer targetConsumer, Composition sourceComposition);
+    public void populate (CompositionConsumer targetConsumer, Collection<Composition> sourceComposition);
     
 }

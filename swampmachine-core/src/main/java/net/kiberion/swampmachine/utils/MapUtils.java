@@ -68,6 +68,14 @@ public class MapUtils {
         return map;
     }
     
+    public static <T extends EntityModelDescriptor> Map<String, T> toMap (Collection<T> sourceCollection) {
+        Map<String, T> result = new HashMap<>();
+        for (T entity : sourceCollection) {
+            result.put(entity.getId(), entity);
+        }
+        return result;
+    }
+    
     @SuppressWarnings("unchecked")
 	public <T> T getRandom (Map<?, ?> entityMap) {
         int indexValue = Dice.getRandomInt(0, entityMap.size());

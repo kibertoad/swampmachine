@@ -19,7 +19,9 @@ public class SpringBoundCompositionsExtractor {
         Validate.notNull(compositions, consumer.getClass()
                 + " does not have BoundCompositions annotation but implements CompositionConsumer.");
         for (String compositionId : compositions.compositions()) {
-            result.add(compositionMap.get(compositionId));
+            Composition composition = compositionMap.get(compositionId);
+            Validate.notNull(composition, "Unknown composition: "+compositionId);
+            result.add(composition);
         }
         return result;
     }
