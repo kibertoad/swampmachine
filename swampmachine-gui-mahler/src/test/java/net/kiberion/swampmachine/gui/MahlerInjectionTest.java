@@ -26,7 +26,7 @@ public class MahlerInjectionTest extends MahlerContextBasedTest{
         loader.load();
         injector.inject();
 
-        assertEquals ("dummy", state.getElement());
+        assertNotNull (state.getLabel());
     }
     
 }

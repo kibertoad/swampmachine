@@ -1,9 +1,11 @@
 package net.kiberion.swampmachine.entities.common.api;
 
+import net.kiberion.swampmachine.entityblocks.api.IdHolderBlock;
+
 /**
  * @author kibertoad Generic model entity
  */
-public interface EntityModelDescriptor {
+public interface EntityModelDescriptor extends IdHolderBlock{
 
     /**
      * 

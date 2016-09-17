@@ -68,7 +68,7 @@ public class MapUtils {
         return map;
     }
     
-    public static <T extends EntityModelDescriptor> Map<String, T> toMap (Collection<T> sourceCollection) {
+    public static <T extends IdHolderBlock> Map<String, T> toMap (Collection<T> sourceCollection) {
         Map<String, T> result = new HashMap<>();
         for (T entity : sourceCollection) {
             result.put(entity.getId(), entity);

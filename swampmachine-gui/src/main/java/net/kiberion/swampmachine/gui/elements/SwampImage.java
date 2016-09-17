@@ -11,6 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
+
+@ElementPrototype(id = "swImage") 
 public class SwampImage extends Image {
 
     public TextureRegion originalImage;

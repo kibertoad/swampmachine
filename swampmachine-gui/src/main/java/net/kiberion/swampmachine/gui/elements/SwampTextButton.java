@@ -16,9 +16,11 @@ import net.kiberion.entities.common.api.Invokable;
 import net.kiberion.entities.common.api.Toggleable;
 import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
+import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
 import net.kiberion.swampmachine.gui.listenerconditions.ListenerCondition;
 import net.kiberion.swampmachine.gui.listenerconditions.ListenerConditionContainer;
 
+@ElementPrototype(id = "swTextButton")
 public class SwampTextButton <t extends MetadataHolderBlock> extends TextButton implements Toggleable {
 
     private ListenerConditionContainer changeConditions = new ListenerConditionContainer();

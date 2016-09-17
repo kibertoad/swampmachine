@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 import net.kiberion.entities.common.api.Invokable;
 import net.kiberion.swampmachine.assets.UiManager;
+import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
 import net.kiberion.swampmachine.styling.StyleFactory;
 
 /**
@@ -15,10 +16,16 @@ import net.kiberion.swampmachine.styling.StyleFactory;
  *
  * @author kibertoad
  */
+
+@ElementPrototype(id = "swLabel")
 public class SwampLabel extends Label {
 
     private BitmapFont font;
 
+    public SwampLabel() {
+        super("", UiManager.instance().getDefaultSkin());
+    }
+    
     public SwampLabel(CharSequence text, int setX, int setY, LabelStyle style) {
         super(text, style);
 

@@ -25,7 +25,7 @@ public class CompositionLoaderTest extends MahlerContextBasedTest{
         Composition composition = registry.getCompositions().get("test");
         assertEquals ("test", composition.getId());
         
-        assertEquals (1, composition.getElements().size());
+        assertEquals (2, composition.getElementMap().size());
     }
     
 }

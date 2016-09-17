@@ -1,15 +1,20 @@
 package net.kiberion.swampmachine.gui.composer;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import lombok.Getter;
 import net.kiberion.swampmachine.entities.common.impl.AbstractModelEntityDescriptor;
 import net.kiberion.swampmachine.gui.elements.CompositionElement;
+import net.kiberion.swampmachine.utils.MapUtils;
 
-public class Composition extends AbstractModelEntityDescriptor{
+public class Composition extends AbstractModelEntityDescriptor {
 
     @Getter
-    private final List <CompositionElement> elements  = new ArrayList<>();
-    
+    private Map<String, CompositionElement> elementMap = new HashMap<>();
+
+    public void setElements(Collection<CompositionElement> elements) {
+        elementMap = MapUtils.toMap(elements);
+    }
 }

@@ -4,22 +4,22 @@ import lombok.Getter;
 import net.kiberion.swampmachine.gui.annotations.Bound;
 import net.kiberion.swampmachine.gui.annotations.BoundCompositions;
 import net.kiberion.swampmachine.gui.api.CompositionConsumer;
-import net.kiberion.swampmachine.gui.api.Scene;
-import net.kiberion.swampmachine.gui.scene.GdxScene;
+import net.kiberion.swampmachine.gui.api.GenericScene;
+import net.kiberion.swampmachine.gui.elements.SwampLabel;
 
 @BoundCompositions(compositions = { "test" })
 public class TestState implements CompositionConsumer{
 
-    @Bound(id = "button")
+    @Bound(id = "label")
     @Getter
-    private String element;
+    private SwampLabel label;
     
-    private Scene scene = new GdxScene(null);
+    private GenericScene scene = new GenericScene();
     
     
     @SuppressWarnings("unchecked")
     @Override
-    public Scene getScene() {
+    public GenericScene getScene() {
         return scene;
     }
 

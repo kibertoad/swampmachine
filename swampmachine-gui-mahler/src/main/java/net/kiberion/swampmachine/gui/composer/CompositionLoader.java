@@ -66,7 +66,6 @@ public class CompositionLoader extends AbstractLoader{
                     entities.addAll(loadInternal(new PathResource (entry)));
                 }                
                 
-
                 MapUtils.putAllEntities((Map<String, Composition>)targetMap, entities);
                 log.info("Loaded " + entities.size() + " " + getEntityClass().getSimpleName() + " entities.");
             }

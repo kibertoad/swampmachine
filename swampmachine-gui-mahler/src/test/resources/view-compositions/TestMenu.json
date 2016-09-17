@@ -4,7 +4,12 @@
       "id": "test",
       "elements": [
         {
+          "type": "dummy",
           "id": "buttonMenu"
+        },
+        {
+          "type": "swLabel",
+          "id": "label"
         }
       ]
     }
