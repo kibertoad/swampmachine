@@ -1,12 +1,15 @@
 package net.kiberion.swampmachine.gui.composer.populators;
 
 import org.apache.commons.lang3.Validate;
+import org.springframework.beans.PropertyAccessor;
+import org.springframework.beans.PropertyAccessorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import lombok.Getter;
 import net.kiberion.swampmachine.gui.annotations.ElementHints;
+import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
 import net.kiberion.swampmachine.gui.composer.Composition;
 import net.kiberion.swampmachine.gui.elements.CompositionElement;
 import net.kiberion.swampmachine.gui.elements.ElementPrototypeRegistry;
@@ -18,6 +21,7 @@ public class GdxElementFactory {
     private ElementPrototypeRegistry elementRegistry;
 
     public Actor buildElement(Composition composition, CompositionElement element, ElementHints elementHints) {
+        Validate.notNull(element, "Composition element is null");
         Actor result = null;
 
         String elementType = element.getType();
@@ -26,6 +30,14 @@ public class GdxElementFactory {
         Validate.notNull(clazz, "Unknown element prototype: " + elementType);
         try {
             result = (Actor) clazz.newInstance();
+
+            ElementPrototype prototype = clazz.getAnnotation(ElementPrototype.class);
+            PropertyAccessor targetAccessor = PropertyAccessorFactory.forDirectFieldAccess(result);
+            for (String property : prototype.supportedProperties()) {
+                Object value = element.getProperties().get(property);
+                targetAccessor.setPropertyValue(property, value);
+            }
+
         } catch (InstantiationException | IllegalAccessException e) {
             throw new IllegalStateException(e);
         }

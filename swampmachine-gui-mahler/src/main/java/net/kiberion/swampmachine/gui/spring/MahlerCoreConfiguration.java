@@ -13,4 +13,9 @@ public class MahlerCoreConfiguration {
         return new CompositionRegistry();
     }
     
+    @Bean
+    public CompositionInjector compositionInjector() {
+        return new CompositionInjector();
+    }
+    
 }

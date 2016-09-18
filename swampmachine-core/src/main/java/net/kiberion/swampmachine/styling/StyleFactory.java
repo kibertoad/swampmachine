@@ -27,7 +27,7 @@ import net.kiberion.swampmachine.assets.UiManager;
  * @author kibertoad
  */
 
-//ToDo Very old code, probably should be rewritten and made non-static
+//ToDo Very old code, probably should be rewritten
 @Deprecated
 public class StyleFactory {
 

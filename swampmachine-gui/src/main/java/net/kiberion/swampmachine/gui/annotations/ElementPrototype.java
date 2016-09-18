@@ -11,4 +11,5 @@ import java.lang.annotation.Target;
 public @interface ElementPrototype {
 
     String id();
+    String[] supportedProperties () default {};
 }

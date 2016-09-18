@@ -18,11 +18,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.kiberion.swampmachine.assets.loaders.util.FileReaderFactory;
 import net.kiberion.swampmachine.assets.readers.AbstractFileReader;
+import net.kiberion.swampmachine.assets.util.LoadBeforeStartup;
 import net.kiberion.swampmachine.entities.common.api.EntityModelDescriptor;
 import net.kiberion.swampmachine.loaders.AbstractLoader;
 import net.kiberion.swampmachine.utils.MapUtils;
 import net.kiberion.swampmachine.utils.SetUtils;
 
+@LoadBeforeStartup
 public class CompositionLoader extends AbstractLoader{
 
     private static final Logger log = LogManager.getLogger();

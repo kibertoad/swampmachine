@@ -8,12 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-import net.kiberion.swampmachine.gui.api.CompositionConsumer;
+import net.kiberion.swampmachine.api.CompositionConsumer;
 import net.kiberion.swampmachine.gui.composer.Composition;
 import net.kiberion.swampmachine.gui.composer.CompositionRegistry;
 import net.kiberion.swampmachine.gui.composer.populators.Populator;
+import net.kiberion.swampmachine.mvcips.api.Initter;
 
-public class CompositionInjector implements ApplicationContextAware {
+public class CompositionInjector implements ApplicationContextAware, Initter {
 
     private ApplicationContext context;
 
@@ -38,7 +39,13 @@ public class CompositionInjector implements ApplicationContextAware {
             List<Composition> compositions = compositionsExtractor
                     .extractCompositionsForConsumer(registry.getCompositions(), consumer);
             populator.populate(consumer, compositions);
+            consumer.postInjection();
         }
+    }
+
+    @Override
+    public void init() {
+        inject();
     }
 
 }

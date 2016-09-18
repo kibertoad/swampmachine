@@ -1,5 +1,8 @@
 package net.kiberion.swampmachine.gui.elements;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import lombok.Getter;
@@ -16,6 +19,9 @@ public class CompositionElement implements IdHolderBlock{
     @Getter
     @Setter
     private String id;
+    
+    @Getter
+    private Map<String, Object> properties = new HashMap<>();
     
     @Getter
     private CompositionElement parent;

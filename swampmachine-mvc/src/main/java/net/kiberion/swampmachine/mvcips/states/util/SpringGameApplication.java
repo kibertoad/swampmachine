@@ -1,5 +1,6 @@
 package net.kiberion.swampmachine.mvcips.states.util;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import lombok.Getter;
 import net.kiberion.swampmachine.assets.loaders.api.Loader;
 import net.kiberion.swampmachine.assets.loaders.util.LoaderSpringExtractor;
+import net.kiberion.swampmachine.mvcips.api.Initter;
 import net.kiberion.swampmachine.mvcips.states.GameState;
 import net.kiberion.swampmachine.mvcips.utils.StateSpringLoader;
 import net.kiberion.swampmachine.mvcips.utils.SubViewSpringBinder;
@@ -56,6 +58,12 @@ public abstract class SpringGameApplication extends GameApplication{
         for (Loader loader : preStartupLoaders) {
             loader.load();
         }
+        
+        Collection<Initter> initters = ctx.getBeansOfType(Initter.class).values();
+        for (Initter initter : initters) {
+            initter.init();
+        }
+        
         
         for (GameState state: stateRegistry.getStates().values()) {
             state.initGUIElements();

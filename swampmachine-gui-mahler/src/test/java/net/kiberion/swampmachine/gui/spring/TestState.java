@@ -1,9 +1,9 @@
 package net.kiberion.swampmachine.gui.spring;
 
 import lombok.Getter;
+import net.kiberion.swampmachine.api.CompositionConsumer;
 import net.kiberion.swampmachine.gui.annotations.Bound;
 import net.kiberion.swampmachine.gui.annotations.BoundCompositions;
-import net.kiberion.swampmachine.gui.api.CompositionConsumer;
 import net.kiberion.swampmachine.gui.api.GenericScene;
 import net.kiberion.swampmachine.gui.elements.SwampLabel;
 

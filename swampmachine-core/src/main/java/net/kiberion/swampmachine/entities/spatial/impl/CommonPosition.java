@@ -9,6 +9,11 @@ public class CommonPosition implements Position {
     private float x;
     private float y;
 
+
+    public CommonPosition(int[] coords) {
+        this (coords[0], coords[1]);
+    }
+    
     public CommonPosition(float x, float y) {
         setX(x);
         setY(y);

@@ -5,7 +5,9 @@ import java.util.Set;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-public interface StateView {
+import net.kiberion.swampmachine.api.CompositionConsumer;
+
+public interface StateView extends CompositionConsumer {
 
     public Stage getMainStage();
     public void setMainStage(Stage stage);

@@ -74,6 +74,10 @@
             <groupId>net.kiberion</groupId>
             <artifactId>swampmachine-scripting</artifactId>
         </dependency>
+        <dependency>
+            <groupId>net.kiberion</groupId>
+            <artifactId>swampmachine-mvc</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>junit</groupId>

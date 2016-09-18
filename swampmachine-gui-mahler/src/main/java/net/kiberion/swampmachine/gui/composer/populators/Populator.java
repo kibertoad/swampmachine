@@ -2,7 +2,7 @@ package net.kiberion.swampmachine.gui.composer.populators;
 
 import java.util.Collection;
 
-import net.kiberion.swampmachine.gui.api.CompositionConsumer;
+import net.kiberion.swampmachine.api.CompositionConsumer;
 import net.kiberion.swampmachine.gui.composer.Composition;
 
 public interface Populator {

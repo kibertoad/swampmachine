@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.PropertyAccessor;
 import org.springframework.beans.PropertyAccessorFactory;
 
@@ -20,6 +22,8 @@ import net.kiberion.utils.InlineGList;
 
 public class CompositionElementDeserializer extends JsonDeserializer<CompositionElement> {
 
+    private static final Logger log = LogManager.getLogger();
+
     private static final List<String> supportedTextProperties = new InlineGList<>("id", "type");
     private static final Set<String> mandatoryTextProperties = SetUtils.buildSet("id", "type");
 
@@ -28,22 +32,25 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
             throws IOException, JsonProcessingException {
         JsonNode node = jp.getCodec().readTree(jp);
         CompositionElement result = new CompositionElement();
+        PropertyAccessor beanAccessor = PropertyAccessorFactory.forDirectFieldAccess(result);
 
-        Iterator<Entry<String, JsonNode>> s = node.fields();
-        while (s.hasNext()) {
-            Entry<String, JsonNode> entry = s.next();
-        }
-
-        for (String supportedProperty : supportedTextProperties) {
-            JsonNode value = node.get(supportedProperty);
-            if (value == null && mandatoryTextProperties.contains(supportedProperty)) {
-                throw new IllegalArgumentException("Missing mandatory property: " + supportedProperty);
-            }
-            if (value != null) {
-                PropertyAccessor beanAccessor = PropertyAccessorFactory.forDirectFieldAccess(result);
-                beanAccessor.setPropertyValue(supportedProperty, value.asText());
+        for (Iterator<Entry<String, JsonNode>> iter = node.fields(); iter.hasNext();) {
+            Entry<String, JsonNode> subNode = iter.next();
+            if (supportedTextProperties.contains(subNode.getKey())) {
+                beanAccessor.setPropertyValue(subNode.getKey(), subNode.getValue().asText());
+            } else {
+                result.getProperties().put(subNode.getKey(), subNode.getValue().asText());
             }
         }
+
+        /*
+         * JsonNode value = node.get(supportedProperty); if (value == null &&
+         * mandatoryTextProperties.contains(supportedProperty)) { throw new
+         * IllegalArgumentException("Missing mandatory property: " +
+         * supportedProperty); } if (value != null) { PropertyAccessor
+         * beanAccessor = PropertyAccessorFactory.forDirectFieldAccess(result);
+         * beanAccessor.setPropertyValue(supportedProperty, value.asText()); }
+         */
 
         return result;
     }

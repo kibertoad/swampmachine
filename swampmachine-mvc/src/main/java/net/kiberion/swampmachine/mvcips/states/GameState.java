@@ -76,7 +76,11 @@ public abstract class GameState implements Screen, InitializingBean {
         addProcessorsForAllViews();
         ((AbstractStateView) getView()).debugToLog();
     }
-    
+
+    /**
+     * Use composition injection and postInjection instead
+     */
+    @Deprecated
     public void initGUIElements () {
         Validate.isTrue(!guiInitted);
         getView().initGUIElements();

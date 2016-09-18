@@ -174,6 +174,12 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
             subView.collectAllStages(result);
         }
     }
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public Stage getScene() {
+        return getMainStage();
+    }
 
     /*
      * public void addAnimation(PyramideAnimation animation) {

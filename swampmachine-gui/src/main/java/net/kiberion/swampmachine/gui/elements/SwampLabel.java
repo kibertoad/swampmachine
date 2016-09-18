@@ -17,7 +17,7 @@ import net.kiberion.swampmachine.styling.StyleFactory;
  * @author kibertoad
  */
 
-@ElementPrototype(id = "swLabel")
+@ElementPrototype(id = "swLabel", supportedProperties = {"text", "position"})
 public class SwampLabel extends Label {
 
     private BitmapFont font;
@@ -56,6 +56,10 @@ public class SwampLabel extends Label {
 
     public void setText(int newText) {
         super.setText(Integer.toString(newText));    //To change body of overridden methods use File | Settings | File Templates.
+    }
+    
+    public void setPosition (int[] coords) {
+        setPosition (coords[0], coords[1]);
     }
 
     public void setFont() {
