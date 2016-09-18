@@ -17,7 +17,7 @@ import net.kiberion.swampmachine.styling.StyleFactory;
  * @author kibertoad
  */
 
-@ElementPrototype(id = "swLabel", supportedProperties = {"text", "position"})
+@ElementPrototype(id = "swLabel", supportedProperties = {"text"})
 public class SwampLabel extends Label {
 
     private BitmapFont font;

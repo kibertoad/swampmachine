@@ -20,12 +20,12 @@ public class GdxElementFactory {
     @Getter
     private ElementPrototypeRegistry elementRegistry;
 
-    public Actor buildElement(Composition composition, CompositionElement element, ElementHints elementHints) {
-        Validate.notNull(element, "Composition element is null");
+    public Actor buildElement(Composition composition, CompositionElement sourceElement, ElementHints elementHints) {
+        Validate.notNull(sourceElement, "Composition element is null");
         Actor result = null;
 
-        String elementType = element.getType();
-        Validate.notNull(elementType, "No element prototype set for element: " + element.getId());
+        String elementType = sourceElement.getType();
+        Validate.notNull(elementType, "No element prototype set for element: " + sourceElement.getId());
         Class<?> clazz = elementRegistry.getElementMap().get(elementType);
         Validate.notNull(clazz, "Unknown element prototype: " + elementType);
         try {
@@ -34,9 +34,11 @@ public class GdxElementFactory {
             ElementPrototype prototype = clazz.getAnnotation(ElementPrototype.class);
             PropertyAccessor targetAccessor = PropertyAccessorFactory.forDirectFieldAccess(result);
             for (String property : prototype.supportedProperties()) {
-                Object value = element.getProperties().get(property);
+                Object value = sourceElement.getProperties().get(property);
                 targetAccessor.setPropertyValue(property, value);
             }
+            
+            result.setPosition(sourceElement.getPosition().getX(), sourceElement.getPosition().getY());
 
         } catch (InstantiationException | IllegalAccessException e) {
             throw new IllegalStateException(e);

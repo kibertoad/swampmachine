@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 
+import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 import net.kiberion.swampmachine.utils.SetUtils;
 import net.kiberion.utils.InlineGList;
 
@@ -25,6 +26,8 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
     private static final Logger log = LogManager.getLogger();
 
     private static final List<String> supportedTextProperties = new InlineGList<>("id", "type");
+    private static final List<String> consumedProperties = new InlineGList<>("position");
+
     private static final Set<String> mandatoryTextProperties = SetUtils.buildSet("id", "type");
 
     @Override
@@ -36,7 +39,14 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
 
         for (Iterator<Entry<String, JsonNode>> iter = node.fields(); iter.hasNext();) {
             Entry<String, JsonNode> subNode = iter.next();
-            if (supportedTextProperties.contains(subNode.getKey())) {
+
+            if (consumedProperties.contains(subNode.getKey())) {
+                if (subNode.getKey().equals("position")) {
+                    result.setPosition(
+                            new CommonPosition(subNode.getValue().get(0).asInt(), subNode.getValue().get(1).asInt()));
+                }
+
+            } else if (supportedTextProperties.contains(subNode.getKey())) {
                 beanAccessor.setPropertyValue(subNode.getKey(), subNode.getValue().asText());
             } else {
                 result.getProperties().put(subNode.getKey(), subNode.getValue().asText());
