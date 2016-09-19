@@ -30,5 +30,9 @@ public class CompositionElement implements IdHolderBlock{
     
     @Getter
     private CompositionElement parent;
-    
+
+    @Override
+    public String toString() {
+        return type+": "+id;
+    }
 }

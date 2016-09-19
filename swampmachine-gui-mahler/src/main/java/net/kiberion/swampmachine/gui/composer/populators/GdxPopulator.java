@@ -2,7 +2,9 @@ package net.kiberion.swampmachine.gui.composer.populators;
 
 import java.lang.reflect.Field;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,7 @@ public class GdxPopulator implements Populator {
 
     @Autowired
     private GdxElementFactory elementFactory;
-    
+
     @Override
     public void populate(CompositionConsumer targetConsumer, Collection<Composition> sourceCompositions) {
         Map<String, Composition> compositionMap = MapUtils.toMap(sourceCompositions);
@@ -30,36 +32,61 @@ public class GdxPopulator implements Populator {
         BoundElementsExtractor elementsExtractor = new BoundElementsExtractor();
         Collection<Field> elementFields = elementsExtractor.extractElementFields(targetConsumer);
 
+        Set<CompositionElement> processedElements = new HashSet<>();
+
+        //Create and attach bound elements
         for (Field field : elementFields) {
             Bound bindInfo = field.getAnnotation(Bound.class);
             ElementHints elementHints = field.getAnnotation(ElementHints.class);
             Composition composition = resolveCompositionForBoundElement(bindInfo, compositionMap);
             CompositionElement element = composition.getElementMap().get(bindInfo.id());
-            Validate.notNull (element, "Bound element "+bindInfo.id()+" not found in composition "+composition.getId());
-            
-            field.setAccessible(true);
-            try {
-                Actor builtElement = elementFactory.buildElement(composition, element, elementHints);
-                field.set(targetConsumer, builtElement);
-                Stage stage = targetConsumer.getScene();
-                attachToStage (stage, builtElement);
-            } catch (IllegalArgumentException | IllegalAccessException e) {
-                throw new IllegalStateException(e);
-            }
+            Validate.notNull(element,
+                    "Bound element " + bindInfo.id() + " not found in composition " + composition.getId());
+
+            Actor builtElement = buildElement(composition, element, elementHints);
+            injectElement(targetConsumer, field, builtElement);
+
+            processedElements.add(element);
         }
 
-        
+        //Create and attach unbound elements
+        for (Composition composition : sourceCompositions) {
+            for (CompositionElement element : composition.getElementMap().values()) {
+                if (processedElements.contains(element)) {
+                    continue;
+                }
+
+                Actor builtElement = buildElement(composition, element, null);
+                attachToStage(targetConsumer, builtElement);
+                processedElements.add(element);
+            }
+        }
     }
-    
-    protected Composition resolveCompositionForBoundElement (Bound bindInfo, Map<String, Composition> compositionMap) {
+
+    protected Actor buildElement(Composition composition, CompositionElement element, ElementHints elementHints) {
+        return elementFactory.buildElement(composition, element, elementHints);
+    }
+
+    protected void injectElement(CompositionConsumer targetConsumer, Field field, Actor builtElement) {
+        field.setAccessible(true);
+        try {
+            field.set(targetConsumer, builtElement);
+            attachToStage(targetConsumer, builtElement);
+        } catch (IllegalArgumentException | IllegalAccessException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    protected Composition resolveCompositionForBoundElement(Bound bindInfo, Map<String, Composition> compositionMap) {
         if (compositionMap.size() == 1) {
             return compositionMap.values().iterator().next();
         } else {
             throw new UnsupportedOperationException("Not supported yet");
         }
     }
-    
-    protected void attachToStage (Stage stage, Actor actor) {
+
+    protected void attachToStage(CompositionConsumer targetConsumer, Actor actor) {
+        Stage stage = targetConsumer.getScene();
         stage.addActor(actor);
     }
 

@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 import net.kiberion.swampmachine.gui.composer.populators.GdxElementFactory;
 import net.kiberion.swampmachine.gui.composer.populators.GdxPopulator;
+import net.kiberion.swampmachine.gui.composer.transformers.ImageTransformer;
 
 @Configuration
 public class MahlerGdxConfiguration {
@@ -17,6 +18,10 @@ public class MahlerGdxConfiguration {
     @Bean
     public GdxPopulator populator() {
         return new GdxPopulator();
+    }
+    
+    public ImageTransformer imageTransformer() {
+        return new ImageTransformer();
     }
 
     

@@ -10,7 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import lombok.Getter;
 import net.kiberion.swampmachine.gui.annotations.ElementHints;
 import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
+import net.kiberion.swampmachine.gui.api.ParameterTransformer;
 import net.kiberion.swampmachine.gui.composer.Composition;
+import net.kiberion.swampmachine.gui.composer.transformers.TransformerRegistry;
 import net.kiberion.swampmachine.gui.elements.CompositionElement;
 import net.kiberion.swampmachine.gui.elements.ElementPrototypeRegistry;
 
@@ -19,6 +21,10 @@ public class GdxElementFactory {
     @Autowired
     @Getter
     private ElementPrototypeRegistry elementRegistry;
+
+    @Autowired
+    @Getter
+    private TransformerRegistry transformerRegistry;
 
     public Actor buildElement(Composition composition, CompositionElement sourceElement, ElementHints elementHints) {
         Validate.notNull(sourceElement, "Composition element is null");
@@ -34,10 +40,14 @@ public class GdxElementFactory {
             ElementPrototype prototype = clazz.getAnnotation(ElementPrototype.class);
             PropertyAccessor targetAccessor = PropertyAccessorFactory.forDirectFieldAccess(result);
             for (String property : prototype.supportedProperties()) {
+                ParameterTransformer transformer = transformerRegistry.getTransformers().get(property);
                 Object value = sourceElement.getProperties().get(property);
+                if (transformer != null) {
+                    value = transformer.transform(value);
+                }
                 targetAccessor.setPropertyValue(property, value);
             }
-            
+
             result.setPosition(sourceElement.getPosition().getX(), sourceElement.getPosition().getY());
 
         } catch (InstantiationException | IllegalAccessException e) {

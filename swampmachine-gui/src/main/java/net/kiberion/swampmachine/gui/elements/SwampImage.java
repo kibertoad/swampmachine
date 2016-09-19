@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
 
-@ElementPrototype(id = "swImage") 
+@ElementPrototype(id = "swImage", supportedProperties = {"image"}) 
 public class SwampImage extends Image {
 
     public TextureRegion originalImage;
