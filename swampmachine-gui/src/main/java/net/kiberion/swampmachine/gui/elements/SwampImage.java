@@ -3,6 +3,7 @@ package net.kiberion.swampmachine.gui.elements;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -13,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
 
-@ElementPrototype(id = "swImage", supportedProperties = {"image"}) 
+@ElementPrototype(id = "swImage", supportedProperties = {"image"}, constructorProperties = {"image"}) 
 public class SwampImage extends Image {
 
     public TextureRegion originalImage;
@@ -43,6 +44,11 @@ public class SwampImage extends Image {
 
         setTouchable(false);
     }
+    
+    public SwampImage(AtlasRegion region) {
+        this ((TextureRegion)region);
+    }
+
 
     public SwampImage(NinePatch ninePatch) {
         super(ninePatch);

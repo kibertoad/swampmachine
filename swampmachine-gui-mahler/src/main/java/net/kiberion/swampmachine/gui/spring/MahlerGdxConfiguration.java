@@ -20,6 +20,7 @@ public class MahlerGdxConfiguration {
         return new GdxPopulator();
     }
     
+    @Bean
     public ImageTransformer imageTransformer() {
         return new ImageTransformer();
     }

@@ -4,17 +4,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 import lombok.Getter;
 import net.kiberion.swampmachine.gui.api.ParameterTransformer;
 
-public class TransformerRegistry implements InitializingBean{
+public class TransformerRegistry implements InitializingBean, ApplicationContextAware{
 
-    @Autowired
     private ApplicationContext context;
+    
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.context = applicationContext;
+    }
     
     @Getter
     private final Map<String, ParameterTransformer> transformers = new HashMap<>();
