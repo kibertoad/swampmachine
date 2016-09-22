@@ -27,13 +27,11 @@ public abstract class AbstractCompressorTest {
 
     protected abstract Codec getCodec();
     
-    protected abstract int expectedCompressedSize();
-    
     @Test
     public void codecTest() throws Exception {
         log.info("Codec: "+getCodec().toString());
         
-        assertEquals(2927, testFile.contentLength());
+        long fileLength = testFile.contentLength();
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
         StopWatch compressionStopWatch = new StopWatch();
@@ -45,7 +43,7 @@ public abstract class AbstractCompressorTest {
         compressionStopWatch.endAndLog("Compression");
 
         byte[] compressedData = bos.toByteArray();
-        assertEquals(expectedCompressedSize(), compressedData.length);
+        assertTrue("Compressed file size should be less than original", compressedData.length < fileLength);
 
         InputStream bis = new ByteArrayInputStream(compressedData);
         ByteArrayOutputStream bos2 = new ByteArrayOutputStream();
@@ -57,7 +55,7 @@ public abstract class AbstractCompressorTest {
         decompressionStopWatch.endAndLog("Decompression");
         
         byte[] decompressedData = bos2.toByteArray();
-        assertEquals(2927, decompressedData.length);
+        assertEquals(decompressedData.length, fileLength);
 
         try (InputStream is = testFile.getInputStream()) {
             assertTrue(IOUtils.contentEquals(is, new ByteArrayInputStream(bos2.toByteArray())));
