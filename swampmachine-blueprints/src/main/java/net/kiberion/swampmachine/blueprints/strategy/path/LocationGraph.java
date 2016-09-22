@@ -29,7 +29,7 @@ public class LocationGraph<V> {
     private final Map<Pair<V, V>, List<V>> pathCache = new HashMap<>();
     private final Pathfinder pathfinder;
 
-    private final WeightedGraph<V, LocationPathEdge<V>> graph = new SimpleDirectedWeightedGraph<>(
+    private final WeightedGraph<V, LocationPathEdge<V>> graph = new SimpleDirectedWeightedGraph(
             LocationPathEdge.class);
 
     public LocationGraph() {
