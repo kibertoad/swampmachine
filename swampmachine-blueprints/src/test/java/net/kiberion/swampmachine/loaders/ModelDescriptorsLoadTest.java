@@ -37,7 +37,7 @@ public class ModelDescriptorsLoadTest extends BlueprintsContextBasedTest {
         viewLoader.setImagesAreMandatory(false);
     }
 
-    
+    // TODO: FIXME
     @Ignore("Fails due to CommonViewInfoLoader not setting the imageID")
     @Test
     public void testLoadingCreatures() {
