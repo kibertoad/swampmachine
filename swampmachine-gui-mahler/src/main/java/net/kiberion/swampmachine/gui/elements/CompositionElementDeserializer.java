@@ -16,6 +16,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 import net.kiberion.swampmachine.utils.SetUtils;
@@ -26,13 +27,16 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
     private static final Logger log = LogManager.getLogger();
 
     private static final List<String> supportedTextProperties = new InlineGList<>("id", "type");
-    private static final List<String> consumedProperties = new InlineGList<>("position");
+    private static final List<String> consumedProperties = new InlineGList<>("position", "buttons");
 
     private static final Set<String> mandatoryTextProperties = SetUtils.buildSet("id", "type");
 
     @Override
     public CompositionElement deserialize(JsonParser jp, DeserializationContext ctxt)
             throws IOException, JsonProcessingException {
+        
+        ObjectMapper mapper = new ObjectMapper();
+        
         JsonNode node = jp.getCodec().readTree(jp);
         CompositionElement result = new CompositionElement();
         PropertyAccessor beanAccessor = PropertyAccessorFactory.forDirectFieldAccess(result);
@@ -45,7 +49,11 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
                     result.setPosition(
                             new CommonPosition(subNode.getValue().get(0).asInt(), subNode.getValue().get(1).asInt()));
                 }
+                if (subNode.getKey().equals("buttons")) {
+                    result.getProperties().put(subNode.getKey(), mapper.treeToValue(subNode.getValue(), List.class));
+                }
 
+                
             } else if (supportedTextProperties.contains(subNode.getKey())) {
                 beanAccessor.setPropertyValue(subNode.getKey(), subNode.getValue().asText());
             } else {

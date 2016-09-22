@@ -2,6 +2,7 @@ package net.kiberion.swampmachine.gui.composer.populators;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,8 +10,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.Validate;
+import org.pacesys.reflect.Reflect;
 import org.springframework.beans.PropertyAccessor;
 import org.springframework.beans.PropertyAccessorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import lombok.Getter;
 import net.kiberion.swampmachine.gui.annotations.ElementHints;
 import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
+import net.kiberion.swampmachine.gui.annotations.InjectChild;
 import net.kiberion.swampmachine.gui.api.ParameterTransformer;
 import net.kiberion.swampmachine.gui.composer.Composition;
 import net.kiberion.swampmachine.gui.composer.transformers.TransformerRegistry;
@@ -61,6 +65,7 @@ public class GdxElementFactory {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public Actor buildElement(Composition composition, CompositionElement sourceElement, ElementHints elementHints) {
         Validate.notNull(sourceElement, "Composition element is null");
         Actor result = null;
@@ -71,6 +76,11 @@ public class GdxElementFactory {
         Validate.notNull(clazz, "Unknown element prototype: " + elementType);
         ElementPrototype prototype = clazz.getAnnotation(ElementPrototype.class);
 
+        List<Method> injectionMethods = Reflect.on(clazz).methods().annotatedWith(InjectChild.class).stream().filter( method -> {
+            InjectChild metadata = method.getAnnotation(InjectChild.class);
+            return sourceElement.getProperties().keySet().contains(metadata.id());
+        }).collect(Collectors.toList());
+        
         List<Class<?>> constructorValueClasses = new ArrayList<>();
         List<Object> constructorPropertiesToSet = new ArrayList<>();
         Map<String, Object> propertiesToSet = new HashMap<>();
@@ -90,7 +100,7 @@ public class GdxElementFactory {
             Object value = getTransformedProperty(sourceElement, property);
             propertiesToSet.put(property, value);
         }
-
+        
         result = buildActor(prototype, clazz, constructorValueClasses, constructorPropertiesToSet);
         
         Validate.notNull(sourceElement.getPosition(), "Position not defined for element: "+sourceElement.getId());
@@ -101,6 +111,28 @@ public class GdxElementFactory {
             targetAccessor.setPropertyValue(entry.getKey(), entry.getValue());
         }
 
+
+        for (Method injectionMethod : injectionMethods) {
+            InjectChild metadata = injectionMethod.getAnnotation(InjectChild.class);
+            
+            for (String injectionProperty : metadata.methodProperties()) {
+                List<Map<String, Object>> entries = (List<Map<String, Object>>) sourceElement.getProperties().get(metadata.id());
+                for (Map<String, Object> props : entries ) {
+                    List<Object> args = new ArrayList<>();
+                    args.add(props.get(injectionProperty));
+                    try {
+                        injectionMethod.invoke(result, args.toArray());
+                    } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                        throw new IllegalStateException (e);
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        
         return result;
     }
 
