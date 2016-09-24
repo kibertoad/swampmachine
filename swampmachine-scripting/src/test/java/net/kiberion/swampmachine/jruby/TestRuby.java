@@ -10,6 +10,9 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
+import org.junit.Test;
+import org.junit.Ignore;
+
 import org.jruby.embed.jsr223.JRubyEngineFactory;
 
 import net.kiberion.swampmachine.factories.ScriptEntityFactory;
@@ -22,6 +25,20 @@ public class TestRuby extends AbstractScriptTest{
     
     
     private final RubyEntityFactory factory = new RubyEntityFactory();
+    
+    @Ignore("Fails due to jython bug (http://bugs.jython.org/issue2502)")
+    @Test
+    @Override
+    public void testThreadSafety() {
+        super.testThreadSafety();
+    }
+    
+    @Ignore("Fails due to jython bug (http://bugs.jython.org/issue2502)")
+    @Test
+    @Override
+    public void testInvokeScript() {
+        super.testInvokeScript();
+    }
     
     @Override
     protected ScriptEntityFactory getEntityFactory() {
