@@ -4,9 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
+import net.kiberion.swampmachine.annotations.ConstructableEntity;
+
 /**
  * @author kibertoad
  */
+
+@ConstructableEntity(id = "quit")
 public class QuitListener extends ChangeListener {
 
     @Override

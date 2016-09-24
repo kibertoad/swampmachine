@@ -27,7 +27,7 @@ public class TransformerRegistry implements InitializingBean, ApplicationContext
     @Override
     public void afterPropertiesSet() throws Exception {
         for (ParameterTransformer<?, ?> transformer : context.getBeansOfType(ParameterTransformer.class).values()) {
-            Validate.isTrue(!transformers.containsKey(transformer.getParameterName()));
+            Validate.isTrue(!transformers.containsKey(transformer.getParameterName()), "No transformer for property: "+transformer.getParameterName());
             transformers.put(transformer.getParameterName(), transformer);
         }
         

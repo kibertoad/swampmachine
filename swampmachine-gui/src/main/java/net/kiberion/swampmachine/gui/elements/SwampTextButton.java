@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -40,7 +41,7 @@ public class SwampTextButton <t extends MetadataHolderBlock> extends TextButton 
         addListener(listener);
         return this;
     }
-    
+
     public SwampTextButton (String text, Invokable invokeEffect) {
         super(text, UiManager.instance().getDefaultSkin());
         this.invokeEffects.add(invokeEffect);
@@ -63,6 +64,14 @@ public class SwampTextButton <t extends MetadataHolderBlock> extends TextButton 
         invokeEffects.add(invokableEffect);
         return this;
     }
+    
+    @NodeId (id = "onClickListener")
+    @InjectTransformedProperty
+    @Override
+    public boolean addListener(EventListener listener) {
+        return super.addListener(listener);
+    }
+    
     
 
     public void clearUserListeners() {
