@@ -3,7 +3,9 @@ package net.kiberion.swampmachine.events;
 import org.springframework.context.ApplicationEvent;
 
 import lombok.Getter;
+import net.kiberion.swampmachine.annotations.ConstructableEntity;
 
+@ConstructableEntity(id = "changeState", constructorProperties = {"source", "stateId"})
 public class ChangeStateEvent extends ApplicationEvent{
 
     /**
@@ -14,9 +16,9 @@ public class ChangeStateEvent extends ApplicationEvent{
     @Getter
     private final String stateCode;
     
-    public ChangeStateEvent(Object source, String stateCode) {
+    public ChangeStateEvent(Object source, String stateId) {
         super(source);
-        this.stateCode = stateCode;
+        this.stateCode = stateId;
     }
     
 

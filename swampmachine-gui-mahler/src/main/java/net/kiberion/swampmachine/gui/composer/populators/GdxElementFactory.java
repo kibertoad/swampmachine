@@ -10,10 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.Validate;
-import org.pacesys.reflect.Reflect;
 import org.springframework.beans.PropertyAccessor;
 import org.springframework.beans.PropertyAccessorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +21,14 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import lombok.Getter;
 import net.kiberion.swampmachine.gui.annotations.ElementHints;
 import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
-import net.kiberion.swampmachine.gui.annotations.InjectChild;
-import net.kiberion.swampmachine.gui.api.ParameterTransformer;
+import net.kiberion.swampmachine.gui.annotations.InjectProperty;
+import net.kiberion.swampmachine.gui.annotations.InjectTransformedProperty;
 import net.kiberion.swampmachine.gui.composer.Composition;
-import net.kiberion.swampmachine.gui.composer.transformers.TransformerRegistry;
+import net.kiberion.swampmachine.gui.composer.transformers.TransformerHelper;
 import net.kiberion.swampmachine.gui.elements.CompositionElement;
 import net.kiberion.swampmachine.gui.elements.ElementPrototypeRegistry;
+import net.kiberion.swampmachine.gui.utils.InjectionUtils;
+import net.kiberion.utils.ReflectionUtils;
 
 public class GdxElementFactory {
 
@@ -38,16 +38,7 @@ public class GdxElementFactory {
 
     @Autowired
     @Getter
-    private TransformerRegistry transformerRegistry;
-
-    protected Object getTransformedProperty(CompositionElement sourceElement, String property) {
-        ParameterTransformer transformer = transformerRegistry.getTransformers().get(property);
-        Object value = sourceElement.getProperties().get(property);
-        if (transformer != null) {
-            value = transformer.transform(value);
-        }
-        return value;
-    }
+    private TransformerHelper transformer;
 
     protected Actor buildActor(ElementPrototype prototype, Class<?> clazz, List<Class<?>> constructorValueClasses,
             List<Object> constructorPropertiesToSet) {
@@ -76,10 +67,9 @@ public class GdxElementFactory {
         Validate.notNull(clazz, "Unknown element prototype: " + elementType);
         ElementPrototype prototype = clazz.getAnnotation(ElementPrototype.class);
 
-        List<Method> injectionMethods = Reflect.on(clazz).methods().annotatedWith(InjectChild.class).stream().filter( method -> {
-            InjectChild metadata = method.getAnnotation(InjectChild.class);
-            return sourceElement.getProperties().keySet().contains(metadata.id());
-        }).collect(Collectors.toList());
+        List<Method> injectionMethods = ReflectionUtils.getSupportedMethodsWithAnnotation(clazz, InjectProperty.class, sourceElement.getProperties().keySet());
+        List<Method> transformedInjectionMethods = ReflectionUtils.getSupportedMethodsWithAnnotation(clazz, InjectTransformedProperty.class, sourceElement.getProperties().keySet());
+        
         
         List<Class<?>> constructorValueClasses = new ArrayList<>();
         List<Object> constructorPropertiesToSet = new ArrayList<>();
@@ -87,7 +77,7 @@ public class GdxElementFactory {
         Set<String> resolvedProperties = new HashSet<>();
 
         for (String constructorProperty : prototype.constructorProperties()) {
-            Object value = getTransformedProperty(sourceElement, constructorProperty);
+            Object value = transformer.getTransformedProperty(sourceElement.getProperties(), constructorProperty);
             constructorPropertiesToSet.add(value);
             constructorValueClasses.add(value.getClass());
             resolvedProperties.add(constructorProperty);
@@ -97,7 +87,7 @@ public class GdxElementFactory {
             if (resolvedProperties.contains(property)) {
                 continue;
             }
-            Object value = getTransformedProperty(sourceElement, property);
+            Object value = transformer.getTransformedProperty(sourceElement.getProperties(), property);
             propertiesToSet.put(property, value);
         }
         
@@ -113,7 +103,7 @@ public class GdxElementFactory {
 
 
         for (Method injectionMethod : injectionMethods) {
-            InjectChild metadata = injectionMethod.getAnnotation(InjectChild.class);
+            InjectProperty metadata = injectionMethod.getAnnotation(InjectProperty.class);
             
             for (String injectionProperty : metadata.methodProperties()) {
                 List<Map<String, Object>> entries = (List<Map<String, Object>>) sourceElement.getProperties().get(metadata.id());
@@ -125,13 +115,11 @@ public class GdxElementFactory {
                     } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
                         throw new IllegalStateException (e);
                     }
-                    
                 }
-                
             }
-            
         }
         
+        InjectionUtils.injectTransformedValues(result, transformedInjectionMethods, sourceElement.getProperties(), transformer);
         
         return result;
     }

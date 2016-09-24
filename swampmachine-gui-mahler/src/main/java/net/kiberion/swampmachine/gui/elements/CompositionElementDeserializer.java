@@ -3,6 +3,7 @@ package net.kiberion.swampmachine.gui.elements;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -27,22 +28,30 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
     private static final Logger log = LogManager.getLogger();
 
     private static final List<String> supportedTextProperties = new InlineGList<>("id", "type");
-    private static final List<String> consumedProperties = new InlineGList<>("position", "buttons");
+    private static final List<String> consumedProperties = new InlineGList<>("position");
+    private static final List<String> consumedMapProperties = new InlineGList<>("onClickEvent");
+    private static final List<String> consumedListProperties = new InlineGList<>("buttons");
 
     private static final Set<String> mandatoryTextProperties = SetUtils.buildSet("id", "type");
 
     @Override
     public CompositionElement deserialize(JsonParser jp, DeserializationContext ctxt)
             throws IOException, JsonProcessingException {
-        
+
         ObjectMapper mapper = new ObjectMapper();
-        
+
         JsonNode node = jp.getCodec().readTree(jp);
         CompositionElement result = new CompositionElement();
         PropertyAccessor beanAccessor = PropertyAccessorFactory.forDirectFieldAccess(result);
 
         for (Iterator<Entry<String, JsonNode>> iter = node.fields(); iter.hasNext();) {
             Entry<String, JsonNode> subNode = iter.next();
+
+            if (consumedListProperties.contains(subNode.getKey())) {
+                result.getProperties().put(subNode.getKey(), mapper.treeToValue(subNode.getValue(), List.class));
+            } else if (consumedMapProperties.contains(subNode.getKey())) {
+                result.getProperties().put(subNode.getKey(), mapper.treeToValue(subNode.getValue(), Map.class));
+            } else
 
             if (consumedProperties.contains(subNode.getKey())) {
                 if (subNode.getKey().equals("position")) {
@@ -52,8 +61,6 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
                 if (subNode.getKey().equals("buttons")) {
                     result.getProperties().put(subNode.getKey(), mapper.treeToValue(subNode.getValue(), List.class));
                 }
-
-                
             } else if (supportedTextProperties.contains(subNode.getKey())) {
                 beanAccessor.setPropertyValue(subNode.getKey(), subNode.getValue().asText());
             } else {

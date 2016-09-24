@@ -4,31 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import net.kiberion.swampmachine.gui.api.ParameterTransformer;
 import net.kiberion.swampmachine.registries.ImageRegistry;
 
-public class ImageTransformer implements ParameterTransformer{
+public class ImageTransformer extends AbstractTransformer<String, TextureRegion> {
 
     public static final String IMAGE_PARAMETER = "image";
-    
+
     @Autowired
     private ImageRegistry imageRegistry;
-    
-    
-    @SuppressWarnings({ "unchecked", "hiding" })
-    @Override
-    public <String, TextureRegion> TextureRegion transform(String parameter) {
-        return (TextureRegion) imageRegistry.getImages().get(parameter).getImage();
-    }
 
     @Override
-    public Class<String> getInputClass() {
-        return String.class;
-    }
-
-    @Override
-    public Class<TextureRegion> getOutputClass() {
-        return TextureRegion.class;
+    public TextureRegion transformSingle(String parameter) {
+        return imageRegistry.getImages().get(parameter).getImage();
     }
 
     @Override
@@ -36,6 +23,4 @@ public class ImageTransformer implements ParameterTransformer{
         return IMAGE_PARAMETER;
     }
 
-    
-    
 }

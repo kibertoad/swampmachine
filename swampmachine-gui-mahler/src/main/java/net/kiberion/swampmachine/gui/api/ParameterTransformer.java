@@ -1,12 +1,9 @@
 package net.kiberion.swampmachine.gui.api;
 
-public interface ParameterTransformer {
+public interface ParameterTransformer<I, O> {
 
-    public <I, O> O transform (I parameter);
-    
-    public Class<?> getInputClass();
-    public Class<?> getOutputClass();
-    
+    public Object transform(Object parameter);
+
     public String getParameterName();
-    
+
 }

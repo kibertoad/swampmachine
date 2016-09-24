@@ -4,7 +4,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import net.kiberion.swampmachine.gui.composer.CompositionRegistry;
+import net.kiberion.swampmachine.gui.composer.transformers.InvokableEventTransformer;
+import net.kiberion.swampmachine.gui.composer.transformers.TransformerHelper;
 import net.kiberion.swampmachine.gui.composer.transformers.TransformerRegistry;
+import net.kiberion.swampmachine.registries.EventClassRegistry;
+import net.kiberion.swampmachine.utils.SetUtils;
 
 @Configuration
 public class MahlerCoreConfiguration {
@@ -23,5 +27,22 @@ public class MahlerCoreConfiguration {
     public TransformerRegistry transformerRegistry() {
         return new TransformerRegistry();
     }
+
+    @Bean
+    public EventClassRegistry eventClassRegistry () {
+        return new EventClassRegistry(SetUtils.buildSet("net.kiberion"));
+    }
+    
+    @Bean
+    public InvokableEventTransformer invokableEventTransformer() {
+        return new InvokableEventTransformer();
+    }
+    
+    @Bean
+    public TransformerHelper transformerHelper () {
+        return new TransformerHelper();
+    }
+    
+    
     
 }

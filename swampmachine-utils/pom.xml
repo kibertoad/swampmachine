@@ -127,8 +127,13 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
         </dependency>
-        
-        <!-- used by 7z by default-->
+        <dependency>
+            <groupId>org.pacesys</groupId>
+            <artifactId>reflect</artifactId>
+        </dependency>
+
+
+        <!-- used by 7z by default -->
         <dependency>
             <groupId>org.tukaani</groupId>
             <artifactId>xz</artifactId>

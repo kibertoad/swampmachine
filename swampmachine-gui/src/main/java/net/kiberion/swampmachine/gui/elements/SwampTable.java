@@ -6,16 +6,19 @@ package net.kiberion.swampmachine.gui.elements;
  */
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
+import net.kiberion.swampmachine.annotations.NodeId;
 import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
 import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
-import net.kiberion.swampmachine.gui.annotations.InjectChild;
+import net.kiberion.swampmachine.gui.annotations.InjectProperty;
+import net.kiberion.swampmachine.gui.annotations.InjectTransformedProperty;
 
 /**
  *
@@ -61,9 +64,21 @@ public class SwampTable<T extends MetadataHolderBlock> extends Table {
         return button;
     }
 
-    @InjectChild(id = "buttons", methodProperties = "text")
+    @InjectProperty(id = "textButtons", methodProperties = "text")
     public SwampTextButton<T> addButton(String text) {
         SwampTextButton<T> button = new SwampTextButton<>(text);
+        return addButton (button);
+    }
+    
+    @NodeId (id = "buttons")
+    @InjectTransformedProperty
+    public void addButtons(Collection <SwampTextButton<T>> buttons) {
+        for (SwampTextButton<T> button : buttons) {
+            addButton (button);
+        }
+    }
+    
+    public SwampTextButton<T> addButton(SwampTextButton<T> button) {
         add(button).space(OPTION_SPACING);
         row();
 

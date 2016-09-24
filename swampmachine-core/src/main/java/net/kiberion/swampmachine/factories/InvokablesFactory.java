@@ -1,5 +1,6 @@
 package net.kiberion.swampmachine.factories;
 
+import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 
@@ -17,7 +18,11 @@ public class InvokablesFactory implements ApplicationEventPublisherAware{
     }
 
     public Invokable createStateChangeInvokable (String stateId) {
-        return new PublishEventInvokable (publisher, new ChangeStateEvent (this, stateId)); 
+        return createEventInvokable (new ChangeStateEvent (this, stateId)); 
+    }
+
+    public Invokable createEventInvokable (ApplicationEvent event) {
+        return new PublishEventInvokable (publisher, event); 
     }
     
 }

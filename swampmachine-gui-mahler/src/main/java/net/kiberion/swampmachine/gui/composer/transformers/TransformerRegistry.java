@@ -22,11 +22,11 @@ public class TransformerRegistry implements InitializingBean, ApplicationContext
     }
     
     @Getter
-    private final Map<String, ParameterTransformer> transformers = new HashMap<>();
+    private final Map<String, ParameterTransformer<?, ?>> transformers = new HashMap<>();
     
     @Override
     public void afterPropertiesSet() throws Exception {
-        for (ParameterTransformer transformer : context.getBeansOfType(ParameterTransformer.class).values()) {
+        for (ParameterTransformer<?, ?> transformer : context.getBeansOfType(ParameterTransformer.class).values()) {
             Validate.isTrue(!transformers.containsKey(transformer.getParameterName()));
             transformers.put(transformer.getParameterName(), transformer);
         }

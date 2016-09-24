@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.gui.annotations;
+package net.kiberion.swampmachine.annotations;
 
 import static java.lang.annotation.RetentionPolicy.*;
 
@@ -6,11 +6,11 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-@Target({ ElementType.METHOD })
+@Target({ ElementType.TYPE })
 @Retention(RUNTIME)
-public @interface InjectChild {
+public @interface ConstructableEntity {
 
     String id();
-    String[] methodProperties() default {};
+    String[] constructorProperties() default {};
     
 }
