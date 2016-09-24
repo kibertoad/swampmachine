@@ -1,9 +1,11 @@
 package net.kiberion.swampmachine.gui.composer.transformers;
 
+import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import net.kiberion.swampmachine.assets.viewinfo.ViewInfo;
 import net.kiberion.swampmachine.registries.ImageRegistry;
 
 public class ImageTransformer extends AbstractTransformer<String, TextureRegion> {
@@ -15,7 +17,9 @@ public class ImageTransformer extends AbstractTransformer<String, TextureRegion>
 
     @Override
     public TextureRegion transformSingle(String parameter) {
-        return imageRegistry.getImages().get(parameter).getImage();
+        ViewInfo viewInfo = imageRegistry.getImages().get(parameter);
+        Validate.notNull(viewInfo, "Unknown viewInfo: "+parameter);
+        return viewInfo.getImage();
     }
 
     @Override
