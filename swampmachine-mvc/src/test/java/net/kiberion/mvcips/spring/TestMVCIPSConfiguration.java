@@ -4,6 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import net.kiberion.swampmachine.factories.ScriptEntityFactory;
+import net.kiberion.swampmachine.groovy.GroovyEntityFactory;
 import net.kiberion.swampmachine.gui.view.StateView;
 import net.kiberion.swampmachine.mvcips.spring.CommonMVCIPSConfiguration;
 import net.kiberion.swampmachine.mvcips.states.GameState;
@@ -39,6 +41,11 @@ public class TestMVCIPSConfiguration {
     @Bean
     public GameState state4() {
         return new ThirdState();
+    }
+    
+    @Bean
+    public ScriptEntityFactory scriptEntityFactory() {
+        return new GroovyEntityFactory();
     }
     
     ///////////////

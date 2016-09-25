@@ -149,7 +149,11 @@ public abstract class GameState implements Screen, InitializingBean {
 
     protected Set<StateView> getAllViews() {
         Set<StateView> result = new HashSet<>();
-        getView().collectAllViews(result);
+
+        StateView view = getView();
+        if (view != null) {
+            view.collectAllViews(result);
+        }
         return result;
     }
 
