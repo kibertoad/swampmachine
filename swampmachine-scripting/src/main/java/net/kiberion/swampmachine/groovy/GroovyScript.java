@@ -35,8 +35,8 @@ public class GroovyScript implements SwampScript {
 
     @Override
     public SwampScriptInvokationResult invoke(SwampBinding binding) {
-        GroovyInvokationResult result = new GroovyInvokationResult();
         Validate.notNull(binding, "Binding cannot be null.");
+        GroovyInvokationResult result = new GroovyInvokationResult();
         try {
             Script invokableScript = compiledScript.getClass().newInstance();
             invokableScript.setBinding((GroovyBinding) binding);

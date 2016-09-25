@@ -1,5 +1,8 @@
 package net.kiberion.swampmachine.gui.spring;
 
+import java.util.Collections;
+import java.util.Map;
+
 import lombok.Getter;
 import net.kiberion.swampmachine.api.CompositionConsumer;
 import net.kiberion.swampmachine.gui.annotations.Bound;
@@ -21,6 +24,12 @@ public class TestState implements CompositionConsumer{
     @Override
     public GenericScene getScene() {
         return scene;
+    }
+
+
+    @Override
+    public Map<String, Object> getContext() {
+        return Collections.emptyMap();
     }
 
 }

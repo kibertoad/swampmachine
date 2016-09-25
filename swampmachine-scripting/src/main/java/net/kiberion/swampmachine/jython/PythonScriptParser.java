@@ -24,7 +24,7 @@ public class PythonScriptParser extends AbstractScriptParser {
     private Set<String> extensions = ImmutableSet.of("py");
 
     @Override
-    protected PythonScript parseScript(Reader reader) {
+    public PythonScript parseScript(Reader reader) {
         try (PythonInterpreter interp = new PythonInterpreter()) {
             PyCode compiledCode = interp.compile(reader);
             PythonScript activeScript = new PythonScript(compiledCode);
@@ -33,7 +33,7 @@ public class PythonScriptParser extends AbstractScriptParser {
     }
 
     @Override
-    protected PythonScript parseScript(String script) {
+    public PythonScript parseScript(String script) {
         try (PythonInterpreter interp = new PythonInterpreter()) {
             PyCode compiledCode = interp.compile(script);
             PythonScript activeScript = new PythonScript(compiledCode);

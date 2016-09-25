@@ -6,6 +6,7 @@ import java.util.Set;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import net.kiberion.swampmachine.api.CompositionConsumer;
+import net.kiberion.swampmachine.scripting.SwampBinding;
 
 public interface StateView extends CompositionConsumer {
 
@@ -40,5 +41,11 @@ public interface StateView extends CompositionConsumer {
      */
     public void collectAllStages(Set<Stage> targetSet);
     
+    /**
+     * Recursively extracts all subviews from the view. Also includes the view itself
+     * @param targetSet
+     */
+    public void collectAllViews(Set<StateView> targetSet);
+    public void setBinding(SwampBinding binding);
 
 }

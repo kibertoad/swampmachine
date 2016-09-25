@@ -20,11 +20,11 @@ public class ButtonTransformer extends AbstractTransformer<Map<String, Object>, 
     private TransformerHelper transformer;
     
     @Override
-    public SwampTextButton<MetadataHolderBlock> transformSingle(Map<String,Object> parameter) {
+    public SwampTextButton<MetadataHolderBlock> transformSingle(Map<String,Object> parameter, Map<String, Object> context) {
         SwampTextButton<MetadataHolderBlock> button = new SwampTextButton<>((String) parameter.get("text"));
         List<Method> transformedInjectionMethods = ReflectionUtils.getSupportedMethodsWithAnnotation(SwampTextButton.class, InjectTransformedProperty.class, parameter.keySet());
         
-        InjectionUtils.injectTransformedValues(button, transformedInjectionMethods, parameter, transformer);
+        InjectionUtils.injectTransformedValues(button, transformedInjectionMethods, parameter, transformer, context);
         return button;
     };
     

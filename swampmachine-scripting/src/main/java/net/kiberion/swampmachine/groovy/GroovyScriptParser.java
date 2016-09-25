@@ -3,10 +3,15 @@ package net.kiberion.swampmachine.groovy;
 import java.io.Reader;
 import java.util.Set;
 
-import org.python.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableSet;
 
 import net.kiberion.swampmachine.scripting.AbstractScriptParser;
 
+/**
+ * Is thread-safe
+ * @author kibertoad
+ *
+ */
 public class GroovyScriptParser extends AbstractScriptParser {
 
     private Set<String> extensions = ImmutableSet.of("groovy");
@@ -17,12 +22,12 @@ public class GroovyScriptParser extends AbstractScriptParser {
     }
 
     @Override
-    protected GroovyScript parseScript(String script) {
+    public GroovyScript parseScript(String script) {
         return new GroovyScript (script);
     }
 
     @Override
-    protected GroovyScript parseScript(Reader script) {
+    public GroovyScript parseScript(Reader script) {
         return new GroovyScript (script);
     }
 

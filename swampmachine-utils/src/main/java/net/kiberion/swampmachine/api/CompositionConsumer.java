@@ -1,5 +1,7 @@
 package net.kiberion.swampmachine.api;
 
+import java.util.Map;
+
 public interface CompositionConsumer {
 
     /**
@@ -14,5 +16,11 @@ public interface CompositionConsumer {
 
     public default void postInjection() {
     }
+
+    /**
+     * Return consumer-related values that might affect composition value transformations
+     * @return
+     */
+    public Map<String, Object> getContext();
 
 }

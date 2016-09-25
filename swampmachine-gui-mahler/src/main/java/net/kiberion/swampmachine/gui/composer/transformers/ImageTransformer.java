@@ -1,5 +1,7 @@
 package net.kiberion.swampmachine.gui.composer.transformers;
 
+import java.util.Map;
+
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,7 +18,7 @@ public class ImageTransformer extends AbstractTransformer<String, TextureRegion>
     private ImageRegistry imageRegistry;
 
     @Override
-    public TextureRegion transformSingle(String parameter) {
+    public TextureRegion transformSingle(String parameter, Map<String, Object> context) {
         ViewInfo viewInfo = imageRegistry.getImages().get(parameter);
         Validate.notNull(viewInfo, "Unknown viewInfo: "+parameter);
         return viewInfo.getImage();

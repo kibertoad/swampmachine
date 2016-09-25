@@ -21,9 +21,9 @@ public abstract class AbstractScriptParser {
 
     protected abstract Set<String> getScriptExtensions();
 
-    protected abstract SwampScript parseScript(String script);
+    public abstract SwampScript parseScript(String script);
 
-    protected abstract SwampScript parseScript(Reader script);
+    public abstract SwampScript parseScript(Reader script);
 
     public List<SwampScript> parseScriptsFromPath(Path directory) {
         List<SwampScript> compiledScrips = new ArrayList<>();

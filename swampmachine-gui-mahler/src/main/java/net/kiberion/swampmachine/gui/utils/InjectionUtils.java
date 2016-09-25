@@ -16,10 +16,10 @@ public class InjectionUtils {
     }
 
     public static void injectTransformedValues(Object injectionTarget, Collection<Method> transformedInjectionMethods,
-            Map<String, Object> propertySource, TransformerHelper transformer) {
+            Map<String, Object> propertySource, TransformerHelper transformer, Map<String, Object> context) {
         for (Method injectionMethod : transformedInjectionMethods) {
             NodeId metadata = injectionMethod.getAnnotation(NodeId.class);
-            Object value = transformer.getTransformedProperty(propertySource, metadata.id());
+            Object value = transformer.getTransformedProperty(propertySource, metadata.id(), context);
             List<Object> args = new ArrayList<>();
             args.add(value);
             try {

@@ -46,7 +46,7 @@ public class MahlerCoreConfiguration {
     }
 
     @Bean
-    public ListenerTransformer дшыеутукTransformer() {
+    public ListenerTransformer listenerTransformer() {
         return new ListenerTransformer();
     }
     

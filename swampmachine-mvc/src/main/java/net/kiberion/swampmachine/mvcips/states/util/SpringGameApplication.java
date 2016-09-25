@@ -64,7 +64,6 @@ public abstract class SpringGameApplication extends GameApplication{
             initter.init();
         }
         
-        
         for (GameState state: stateRegistry.getStates().values()) {
             state.initGUIElements();
         }

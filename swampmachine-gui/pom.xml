@@ -66,6 +66,10 @@
             <groupId>net.kiberion</groupId>
             <artifactId>swampmachine-utils</artifactId>
         </dependency>
+        <dependency>
+            <groupId>net.kiberion</groupId>
+            <artifactId>swampmachine-scripting</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>junit</groupId>

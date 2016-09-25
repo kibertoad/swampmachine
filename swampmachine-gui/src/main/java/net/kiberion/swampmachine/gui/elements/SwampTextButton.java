@@ -22,6 +22,7 @@ import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
 import net.kiberion.swampmachine.gui.annotations.InjectTransformedProperty;
 import net.kiberion.swampmachine.gui.listenerconditions.ListenerCondition;
 import net.kiberion.swampmachine.gui.listenerconditions.ListenerConditionContainer;
+import net.kiberion.swampmachine.gui.listeners.onclick.OnClickScriptListener;
 
 @ElementPrototype(id = "swTextButton")
 public class SwampTextButton <t extends MetadataHolderBlock> extends TextButton implements Toggleable {
@@ -58,10 +59,22 @@ public class SwampTextButton <t extends MetadataHolderBlock> extends TextButton 
     }
     
 
+    /**
+     * In order to make button generate events, invokable with event payload gets added
+     * @param invokableEffect
+     * @return
+     */
     @NodeId (id = "onClickEvent")
     @InjectTransformedProperty
     public SwampTextButton<t> addInvokable(Invokable invokableEffect) {
         invokeEffects.add(invokableEffect);
+        return this;
+    }
+
+    @NodeId (id = "onClickScript")
+    @InjectTransformedProperty
+    public SwampTextButton<t> addOnClickScript(OnClickScriptListener onClickScript) {
+        addListener (onClickScript);
         return this;
     }
     

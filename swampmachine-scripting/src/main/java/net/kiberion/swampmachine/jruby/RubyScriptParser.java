@@ -34,7 +34,7 @@ public class RubyScriptParser extends AbstractScriptParser {
     private Set<String> extensions = ImmutableSet.of("rb");
 
     @Override
-    protected RubyScript parseScript(Reader reader) {
+    public RubyScript parseScript(Reader reader) {
         try {
             CompiledScript compiledScript = engine.compile(reader);
             return new RubyScript(compiledScript);
@@ -44,7 +44,7 @@ public class RubyScriptParser extends AbstractScriptParser {
     }
 
     @Override
-    protected RubyScript parseScript(String script) {
+    public RubyScript parseScript(String script) {
         try {
             CompiledScript compiledScript = engine.compile(script);
             return new RubyScript(compiledScript);

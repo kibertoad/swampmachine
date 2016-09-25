@@ -57,7 +57,7 @@ public class GdxElementFactory {
     }
 
     @SuppressWarnings("unchecked")
-    public Actor buildElement(Composition composition, CompositionElement sourceElement, ElementHints elementHints) {
+    public Actor buildElement(Composition composition, CompositionElement sourceElement, ElementHints elementHints, Map<String, Object> context) {
         Validate.notNull(sourceElement, "Composition element is null");
         Actor result = null;
 
@@ -77,7 +77,7 @@ public class GdxElementFactory {
         Set<String> resolvedProperties = new HashSet<>();
 
         for (String constructorProperty : prototype.constructorProperties()) {
-            Object value = transformer.getTransformedProperty(sourceElement.getProperties(), constructorProperty);
+            Object value = transformer.getTransformedProperty(sourceElement.getProperties(), constructorProperty, context);
             constructorPropertiesToSet.add(value);
             constructorValueClasses.add(value.getClass());
             resolvedProperties.add(constructorProperty);
@@ -87,7 +87,7 @@ public class GdxElementFactory {
             if (resolvedProperties.contains(property)) {
                 continue;
             }
-            Object value = transformer.getTransformedProperty(sourceElement.getProperties(), property);
+            Object value = transformer.getTransformedProperty(sourceElement.getProperties(), property, context);
             propertiesToSet.put(property, value);
         }
         
@@ -119,7 +119,7 @@ public class GdxElementFactory {
             }
         }
         
-        InjectionUtils.injectTransformedValues(result, transformedInjectionMethods, sourceElement.getProperties(), transformer);
+        InjectionUtils.injectTransformedValues(result, transformedInjectionMethods, sourceElement.getProperties(), transformer, context);
         
         return result;
     }

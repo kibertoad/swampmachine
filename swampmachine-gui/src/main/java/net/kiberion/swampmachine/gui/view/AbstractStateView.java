@@ -1,7 +1,9 @@
 package net.kiberion.swampmachine.gui.view;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
@@ -15,10 +17,12 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import lombok.Getter;
+import lombok.Setter;
 import net.kiberion.entities.common.api.Recalculable;
 import net.kiberion.swampmachine.factories.InvokablesFactory;
 import net.kiberion.swampmachine.gui.elements.SwampLabel;
 import net.kiberion.swampmachine.gui.managers.GuiManager;
+import net.kiberion.swampmachine.scripting.SwampBinding;
 
 public abstract class AbstractStateView<T> implements StateView, Recalculable, InitializingBean {
 
@@ -37,6 +41,10 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
 
     @Getter
     private T model;
+    
+    @Getter
+    @Setter
+    private SwampBinding binding;
 
     private GuiManager guiManager;
 
@@ -198,10 +206,26 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
         }
     }
 
+    @Override
+    public void collectAllViews(Set<StateView> result) {
+        result.add(this);
+        for (StateView subView : getSubViews()) {
+            subView.collectAllViews(result);
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     @Override
     public Stage getScene() {
         return getMainStage();
+    }
+    
+    @Override
+    public Map<String, Object> getContext() {
+        Map<String, Object> context = new HashMap<>();
+        Validate.notNull(binding);
+        context.put("binding", binding);
+        return context;
     }
 
     /*

@@ -23,7 +23,7 @@ public class InvokableEventTransformer extends AbstractTransformer<Map<String, O
     private EventClassRegistry registry;
 
     @Override
-    public Invokable transformSingle(Map<String, Object> parameter) {
+    public Invokable transformSingle(Map<String, Object> parameter, Map<String, Object> context) {
         Class<? extends ApplicationEvent> eventClass = registry.getEvents().get(parameter.get("type"));
         ConstructableEntity metadata = eventClass.getAnnotation(ConstructableEntity.class);
 

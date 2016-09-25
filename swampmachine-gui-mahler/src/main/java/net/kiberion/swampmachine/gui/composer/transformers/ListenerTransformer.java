@@ -19,7 +19,7 @@ public class ListenerTransformer extends AbstractTransformer<Map<String, Object>
     private ListenerClassRegistry registry;
 
     @Override
-    public ChangeListener transformSingle(Map<String, Object> parameter) {
+    public ChangeListener transformSingle(Map<String, Object> parameter, Map<String, Object> context) {
         Class<? extends ChangeListener> eventClass = registry.getListeners().get(parameter.get("type"));
         ConstructableEntity metadata = eventClass.getAnnotation(ConstructableEntity.class);
 

@@ -43,7 +43,7 @@ public class GdxPopulator implements Populator {
             Validate.notNull(element,
                     "Bound element " + bindInfo.id() + " not found in composition " + composition.getId());
 
-            Actor builtElement = buildElement(composition, element, elementHints);
+            Actor builtElement = buildElement(composition, element, elementHints, targetConsumer.getContext());
             injectElement(targetConsumer, field, builtElement);
 
             processedElements.add(element);
@@ -56,15 +56,15 @@ public class GdxPopulator implements Populator {
                     continue;
                 }
 
-                Actor builtElement = buildElement(composition, element, null);
+                Actor builtElement = buildElement(composition, element, null, targetConsumer.getContext());
                 attachToStage(targetConsumer, builtElement);
                 processedElements.add(element);
             }
         }
     }
 
-    protected Actor buildElement(Composition composition, CompositionElement element, ElementHints elementHints) {
-        return elementFactory.buildElement(composition, element, elementHints);
+    protected Actor buildElement(Composition composition, CompositionElement element, ElementHints elementHints, Map<String, Object> context) {
+        return elementFactory.buildElement(composition, element, elementHints, context);
     }
 
     protected void injectElement(CompositionConsumer targetConsumer, Field field, Actor builtElement) {
