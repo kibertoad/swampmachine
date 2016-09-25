@@ -64,6 +64,12 @@
         </dependency>
         <dependency>
             <groupId>net.kiberion</groupId>
+            <artifactId>swampmachine-core</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.kiberion</groupId>
             <artifactId>swampmachine-gui</artifactId>
         </dependency>
         <dependency>

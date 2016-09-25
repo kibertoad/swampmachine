@@ -15,6 +15,7 @@
         <module>swampmachine-mvc</module>
         <module>swampmachine-tiled</module>
         <module>swampmachine-gui</module>
+        <module>swampmachine-gui-mahler</module>
         <module>swampmachine-multimedia</module>
         <module>swampmachine-blueprints</module>
         <module>swampmachine-scripting</module>
