@@ -25,20 +25,20 @@ import net.kiberion.swampmachine.gui.listenerconditions.ListenerConditionContain
 import net.kiberion.swampmachine.gui.listeners.onclick.OnClickScriptListener;
 
 @ElementPrototype(id = "swTextButton")
-public class SwampTextButton <t extends MetadataHolderBlock> extends TextButton implements Toggleable {
+public class SwampTextButton <T extends MetadataHolderBlock> extends TextButton implements Toggleable {
 
     private ListenerConditionContainer changeConditions = new ListenerConditionContainer();
     private List<Invokable> invokeEffects = new ArrayList<>();
     private TextButton.TextButtonStyle styleOnHover;
     private TextButton.TextButtonStyle styleUsual;
     
-    public t linkedNode = null;
+    public T linkedNode = null;
 
     public SwampTextButton(String text) {
         super(text, UiManager.instance().getDefaultSkin());
     }
 
-    public SwampTextButton<t> addListenerChain(ChangeListener listener) {
+    public SwampTextButton<T> addListenerChain(ChangeListener listener) {
         addListener(listener);
         return this;
     }
@@ -48,7 +48,7 @@ public class SwampTextButton <t extends MetadataHolderBlock> extends TextButton 
         this.invokeEffects.add(invokeEffect);
     }
 
-    public SwampTextButton(String text, t setNode) {
+    public SwampTextButton(String text, T setNode) {
         super(text, UiManager.instance().getDefaultSkin());
         linkedNode = setNode;
     }
@@ -66,14 +66,14 @@ public class SwampTextButton <t extends MetadataHolderBlock> extends TextButton 
      */
     @NodeId (id = "onClickEvent")
     @InjectTransformedProperty
-    public SwampTextButton<t> addInvokable(Invokable invokableEffect) {
+    public SwampTextButton<T> addInvokable(Invokable invokableEffect) {
         invokeEffects.add(invokableEffect);
         return this;
     }
 
     @NodeId (id = "onClickScript")
     @InjectTransformedProperty
-    public SwampTextButton<t> addOnClickScript(OnClickScriptListener onClickScript) {
+    public SwampTextButton<T> addOnClickScript(OnClickScriptListener onClickScript) {
         addListener (onClickScript);
         return this;
     }

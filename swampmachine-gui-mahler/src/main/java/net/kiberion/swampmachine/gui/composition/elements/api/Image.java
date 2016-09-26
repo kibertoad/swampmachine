@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.gui.elements.api;
+package net.kiberion.swampmachine.gui.composition.elements.api;
 
 public interface Image {
 

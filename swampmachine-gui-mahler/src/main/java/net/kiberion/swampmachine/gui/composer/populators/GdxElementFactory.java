@@ -25,8 +25,8 @@ import net.kiberion.swampmachine.gui.annotations.InjectProperty;
 import net.kiberion.swampmachine.gui.annotations.InjectTransformedProperty;
 import net.kiberion.swampmachine.gui.composer.Composition;
 import net.kiberion.swampmachine.gui.composer.transformers.TransformerHelper;
-import net.kiberion.swampmachine.gui.elements.CompositionElement;
-import net.kiberion.swampmachine.gui.elements.ElementPrototypeRegistry;
+import net.kiberion.swampmachine.gui.composition.elements.CompositionElement;
+import net.kiberion.swampmachine.gui.composition.elements.ElementPrototypeRegistry;
 import net.kiberion.swampmachine.gui.utils.InjectionUtils;
 import net.kiberion.utils.ReflectionUtils;
 

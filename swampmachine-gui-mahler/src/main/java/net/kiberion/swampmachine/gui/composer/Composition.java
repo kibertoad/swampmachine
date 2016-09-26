@@ -6,7 +6,7 @@ import java.util.Map;
 
 import lombok.Getter;
 import net.kiberion.swampmachine.entities.common.impl.AbstractModelEntityDescriptor;
-import net.kiberion.swampmachine.gui.elements.CompositionElement;
+import net.kiberion.swampmachine.gui.composition.elements.CompositionElement;
 import net.kiberion.swampmachine.utils.MapUtils;
 
 public class Composition extends AbstractModelEntityDescriptor {

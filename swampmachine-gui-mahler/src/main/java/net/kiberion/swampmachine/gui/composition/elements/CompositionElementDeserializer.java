@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.gui.elements;
+package net.kiberion.swampmachine.gui.composition.elements;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -29,7 +29,7 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
 
     private static final List<String> supportedTextProperties = new InlineGList<>("id", "type");
     private static final List<String> consumedProperties = new InlineGList<>("position");
-    private static final List<String> consumedMapProperties = new InlineGList<>("onClickEvent");
+    private static final List<String> consumedMapProperties = new InlineGList<>("onClickEvent", "plus", "minus");
     private static final List<String> consumedListProperties = new InlineGList<>("buttons");
 
     private static final Set<String> mandatoryTextProperties = SetUtils.buildSet("id", "type");

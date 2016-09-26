@@ -2,22 +2,44 @@ package net.kiberion.swampmachine.gui.composer.transformers;
 
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import net.kiberion.swampmachine.gui.api.ParameterTransformer;
 
 public class TransformerHelper {
 
+    private static final Logger log = LogManager.getLogger();
+    
     @Autowired
     private TransformerRegistry transformerRegistry;
 
-    @SuppressWarnings({ "rawtypes" })
-    public Object getTransformedProperty(Map<String, Object> propertySource, String property, Map<String, Object> context) {
+    public Object getTransformedProperty(ParameterTransformer<?, ?> transformer, Map<String, Object> propertySource,
+            String property, Map<String, Object> context) {
+        if (transformer == null) {
+            transformer = transformerRegistry.getTransformers().get(property);
+        }
+
         Object value = propertySource.get(property);
-        ParameterTransformer transformer = transformerRegistry.getTransformers().get(property);
         if (transformer == null) {
             return value;
         }
+        
+        log.info("Transforming value: "+value+" for property "+property);
         return transformer.transform(value, context);
     }
+
+    public Object getTransformedProperty(Map<String, Object> propertySource, String property,
+            Map<String, Object> context) {
+        return getTransformedProperty(null, propertySource, property, context);
+    }
+
+    public ParameterTransformer<?, ?> getTransformerForClass (Class<? extends ParameterTransformer<?, ?>> transformerClass) {
+        if (transformerClass == null) {
+            return null;
+        }
+        return transformerRegistry.getTransformersByClass().get(transformerClass);
+    }
+    
 }

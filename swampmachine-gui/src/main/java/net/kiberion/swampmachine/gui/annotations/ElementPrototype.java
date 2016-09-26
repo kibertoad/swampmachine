@@ -13,4 +13,6 @@ public @interface ElementPrototype {
     String id();
     String[] supportedProperties () default {};
     String[] constructorProperties() default {}; 
+    
+    
 }

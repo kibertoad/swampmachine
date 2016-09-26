@@ -24,11 +24,15 @@ public class TransformerRegistry implements InitializingBean, ApplicationContext
     @Getter
     private final Map<String, ParameterTransformer<?, ?>> transformers = new HashMap<>();
     
+    @Getter
+    private final Map<Class<? extends ParameterTransformer>, ParameterTransformer<?, ?>> transformersByClass = new HashMap<>();
+    
     @Override
     public void afterPropertiesSet() throws Exception {
         for (ParameterTransformer<?, ?> transformer : context.getBeansOfType(ParameterTransformer.class).values()) {
             Validate.isTrue(!transformers.containsKey(transformer.getParameterName()), "No transformer for property: "+transformer.getParameterName());
             transformers.put(transformer.getParameterName(), transformer);
+            transformersByClass.put(transformer.getClass(), transformer);
         }
         
     }

@@ -16,7 +16,7 @@ import net.kiberion.swampmachine.api.CompositionConsumer;
 import net.kiberion.swampmachine.gui.annotations.Bound;
 import net.kiberion.swampmachine.gui.annotations.ElementHints;
 import net.kiberion.swampmachine.gui.composer.Composition;
-import net.kiberion.swampmachine.gui.elements.CompositionElement;
+import net.kiberion.swampmachine.gui.composition.elements.CompositionElement;
 import net.kiberion.swampmachine.utils.MapUtils;
 
 //Populates GDX scene from a composition 

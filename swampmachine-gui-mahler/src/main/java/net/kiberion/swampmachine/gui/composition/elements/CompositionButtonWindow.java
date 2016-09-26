@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.gui.elements;
+package net.kiberion.swampmachine.gui.composition.elements;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
