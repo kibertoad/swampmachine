@@ -88,7 +88,7 @@ public abstract class GameState implements Screen, InitializingBean {
                 StateController controllerMetadata = controller.getClass().getAnnotation(StateController.class);
                 getStateControllers().add(controller);
 
-                if (binding.getVariableValue(controllerMetadata.nameInBinding()) != null) {
+                if (binding.hasVariable(controllerMetadata.nameInBinding())) {
                     throw new IllegalStateException(
                             "Conflicting bindings exist for controller " + controllerMetadata.nameInBinding());
                 }

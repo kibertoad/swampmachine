@@ -4,7 +4,15 @@ import org.springframework.util.ObjectUtils;
 
 public class ObservableInt extends AbstractObservable<Integer> {
 
-    private Integer value = Integer.valueOf(0);
+    private Integer value;
+
+    public ObservableInt(int i) {
+        value = Integer.valueOf(i);
+    }
+    
+    public ObservableInt() {
+        this (0);
+    }
 
     @Override
     public Integer getValue() {

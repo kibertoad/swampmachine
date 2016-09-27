@@ -4,6 +4,7 @@ import java.util.Map.Entry;
 
 import org.python.core.Py;
 import org.python.core.PyCode;
+import org.python.core.PyObject;
 import org.python.core.PyStringMap;
 import org.python.util.PythonInterpreter;
 
@@ -38,7 +39,8 @@ public class PythonScript implements SwampScript {
             }
 
             final PyStringMap localVars = (PyStringMap) interpreter.getLocals();
-            Py.runCode(compiledScript, localVars, interpreter.getLocals());
+            PyObject resultObject = Py.runCode(compiledScript, localVars, interpreter.getLocals());
+            localVars.getMap().put(SCRIPT_RESULT, resultObject);
 
             return new PyMapWrapper(localVars);
         }

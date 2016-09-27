@@ -34,4 +34,9 @@ public class PythonBinding extends HashMap<String, Object> implements SwampBindi
         return this;
     }
 
+    @Override
+    public boolean hasVariable(String name) {
+        return containsKey(name);
+    }
+
 }

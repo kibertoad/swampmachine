@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 import net.kiberion.swampmachine.gui.composer.populators.GdxElementFactory;
 import net.kiberion.swampmachine.gui.composer.populators.GdxPopulator;
+import net.kiberion.swampmachine.gui.composer.transformers.BoundLabelTransformer;
 import net.kiberion.swampmachine.gui.composer.transformers.ButtonTransformer;
 import net.kiberion.swampmachine.gui.composer.transformers.ImageTransformer;
 
@@ -31,4 +32,9 @@ public class MahlerGdxConfiguration {
         return new ButtonTransformer();
     }
 
+    @Bean
+    public BoundLabelTransformer boundLabelTransformer() {
+        return new BoundLabelTransformer();
+    }
+    
 }

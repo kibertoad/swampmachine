@@ -9,7 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import net.kiberion.entities.common.api.Invokable;
 import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
+import net.kiberion.swampmachine.gui.observers.LabelUpdatingObserver;
 import net.kiberion.swampmachine.styling.StyleFactory;
+import net.kiberion.swampmachine.subscription.AbstractObservable;
 
 /**
  * Label using default skin
@@ -32,6 +34,11 @@ public class SwampLabel extends Label {
         this.setPosition(setX, setY);
     }
 
+    public SwampLabel(AbstractObservable observable) {
+        this(observable.getValue().toString());
+        observable.addObserver(new LabelUpdatingObserver (this));
+    }
+    
     public SwampLabel(CharSequence text) {
         super(text, UiManager.instance().getDefaultSkin());
     }

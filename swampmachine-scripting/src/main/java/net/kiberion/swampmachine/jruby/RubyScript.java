@@ -23,12 +23,13 @@ public class RubyScript implements SwampScript {
 
     @Override
     public SwampScriptInvokationResult invoke(SwampBinding param) {
-        RubyBinding rubyBinding = (RubyBinding) param;
+        RubyBinding rubyBinding = new RubyBinding((RubyBinding) param);
         try {
             ScriptEngine engine = engineManager.getEngineByName("jruby");
             ScriptContext context = engine.getContext();
             context.setBindings(rubyBinding, ScriptContext.ENGINE_SCOPE);
-            script.eval(context);
+            Object resultObject = script.eval(context);
+            rubyBinding.put(SCRIPT_RESULT, resultObject);
         } catch (ScriptException e) {
             throw new IllegalStateException(e);
         }

@@ -10,10 +10,9 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-import org.junit.Test;
-import org.junit.Ignore;
-
 import org.jruby.embed.jsr223.JRubyEngineFactory;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import net.kiberion.swampmachine.factories.ScriptEntityFactory;
 import net.kiberion.swampmachine.scripting.AbstractScriptTest;

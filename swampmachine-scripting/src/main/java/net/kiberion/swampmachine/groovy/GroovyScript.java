@@ -13,6 +13,7 @@ import net.kiberion.swampmachine.scripting.SwampScriptInvokationResult;
 
 /**
  * This class is thread-safe
+ * 
  * @author kibertoad
  *
  */
@@ -40,11 +41,12 @@ public class GroovyScript implements SwampScript {
         try {
             Script invokableScript = compiledScript.getClass().newInstance();
             invokableScript.setBinding((GroovyBinding) binding);
-            invokableScript.run();
+            Object resultObject = invokableScript.run();
+            result.setVariables(new HashMap<>(binding.getVariableMap()));
+            result.getVariables().put(SCRIPT_RESULT, resultObject);
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
-        result.setVariables(new HashMap<>(binding.getVariableMap()));
 
         return result;
     }
