@@ -19,10 +19,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import net.kiberion.entities.common.api.Recalculable;
+import net.kiberion.swampmachine.api.elements.Label;
+import net.kiberion.swampmachine.api.scripting.SwampBinding;
 import net.kiberion.swampmachine.factories.InvokablesFactory;
-import net.kiberion.swampmachine.gui.elements.SwampLabel;
 import net.kiberion.swampmachine.gui.managers.GuiManager;
-import net.kiberion.swampmachine.scripting.SwampBinding;
 
 public abstract class AbstractStateView<T> implements StateView, Recalculable, InitializingBean {
 
@@ -57,7 +57,8 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
 
     private boolean isEnabled = true;
 
-    private SwampLabel coordsLabel;
+    @Autowired
+    private Label coordsLabel;
 
     @Override
     public void addSubView(StateView view) {
@@ -75,9 +76,8 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
 
     @Override
     public void postInjection() {
-        coordsLabel = new SwampLabel();
         coordsLabel.setPosition(1800, 1050);
-        mainStage.addActor(coordsLabel);
+        mainStage.addActor((Actor) coordsLabel);
     }
 
     @Autowired

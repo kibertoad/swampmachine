@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import groovy.lang.Binding;
-import net.kiberion.swampmachine.scripting.SwampBinding;
+import net.kiberion.swampmachine.api.scripting.SwampBinding;
 
 @SuppressWarnings("unchecked")
 public class GroovyBinding extends Binding implements SwampBinding{

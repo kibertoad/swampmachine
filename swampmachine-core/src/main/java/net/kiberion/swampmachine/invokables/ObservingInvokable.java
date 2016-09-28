@@ -3,7 +3,7 @@ package net.kiberion.swampmachine.invokables;
 import java.util.Observable;
 import java.util.Observer;
 
-import net.kiberion.entities.common.api.ParametrizedInvokable;
+import net.kiberion.swampmachine.api.invokables.ParametrizedInvokable;
 
 @FunctionalInterface
 public interface ObservingInvokable<T> extends Observer, ParametrizedInvokable<T>{

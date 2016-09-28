@@ -11,7 +11,7 @@ import lombok.Getter;
  * @author kibertoad
  *
  */
-public class ObservableMutableString extends AbstractObservable<String> {
+public class ObservableMutableString extends AbstractObservable<String, String> {
 
     @Getter
     private String value;

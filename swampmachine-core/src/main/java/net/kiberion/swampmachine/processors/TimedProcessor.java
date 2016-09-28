@@ -2,8 +2,8 @@ package net.kiberion.swampmachine.processors;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.kiberion.entities.common.api.Invokable;
 import net.kiberion.entities.common.api.RealtimeUpdatable;
+import net.kiberion.swampmachine.api.invokables.Invokable;
 
 /**
  * Processor that is expected to invoke specific logic periodically

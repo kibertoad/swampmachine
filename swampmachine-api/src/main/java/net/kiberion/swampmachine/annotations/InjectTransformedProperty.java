@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.gui.annotations;
+package net.kiberion.swampmachine.annotations;
 
 import static java.lang.annotation.RetentionPolicy.*;
 

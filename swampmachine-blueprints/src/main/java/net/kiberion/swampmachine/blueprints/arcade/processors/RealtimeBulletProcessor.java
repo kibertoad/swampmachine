@@ -21,8 +21,7 @@ public class RealtimeBulletProcessor extends TimedProcessor {
     private final List<Bullet> cleanupList = new ArrayList<>();
 
     @Override
-    public void invoke() {
-
+    public <T> T invoke() {
         bulletHolder.getBullets().stream().parallel().forEach(bullet -> {
             controller.moveCreature(bullet, bullet.getMovementDelta());
             if (!bullet.isAlive()) {
@@ -38,6 +37,7 @@ public class RealtimeBulletProcessor extends TimedProcessor {
             cleanupList.remove(0);
         }
 
+        return null;
     }
 
 }

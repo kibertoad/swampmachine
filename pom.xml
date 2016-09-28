@@ -11,6 +11,7 @@
 
     <modules>
         <module>swampmachine-parent</module>
+        <module>swampmachine-api</module>
         <module>swampmachine-core</module>
         <module>swampmachine-mvc</module>
         <module>swampmachine-tiled</module>

@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.github.mustachejava.Mustache;
 
-import net.kiberion.swampmachine.templating.api.Template;
+import net.kiberion.swampmachine.api.templating.Template;
 
 public class MustacheTemplate implements Template{
 

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
-import net.kiberion.entities.common.api.Invokable;
+import net.kiberion.swampmachine.api.invokables.Invokable;
 import net.kiberion.swampmachine.assets.GameConfig;
 import net.kiberion.swampmachine.gui.view.StateView;
 import net.kiberion.swampmachine.loaders.LoaderHelper;

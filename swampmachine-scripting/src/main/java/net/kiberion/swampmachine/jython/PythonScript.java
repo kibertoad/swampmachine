@@ -8,9 +8,9 @@ import org.python.core.PyObject;
 import org.python.core.PyStringMap;
 import org.python.util.PythonInterpreter;
 
-import net.kiberion.swampmachine.scripting.SwampBinding;
-import net.kiberion.swampmachine.scripting.SwampScript;
-import net.kiberion.swampmachine.scripting.SwampScriptInvokationResult;
+import net.kiberion.swampmachine.api.scripting.SwampBinding;
+import net.kiberion.swampmachine.api.scripting.SwampScript;
+import net.kiberion.swampmachine.api.scripting.SwampScriptInvokationResult;
 
 /**
  * This class is thread-safe

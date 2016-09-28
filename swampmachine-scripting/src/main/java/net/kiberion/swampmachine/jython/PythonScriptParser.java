@@ -9,8 +9,8 @@ import org.python.core.PyCode;
 import org.python.google.common.collect.ImmutableSet;
 import org.python.util.PythonInterpreter;
 
+import net.kiberion.swampmachine.api.scripting.SwampScript;
 import net.kiberion.swampmachine.scripting.AbstractScriptParser;
-import net.kiberion.swampmachine.scripting.SwampScript;
 
 /**
  * 

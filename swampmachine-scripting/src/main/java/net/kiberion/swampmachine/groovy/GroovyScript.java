@@ -7,9 +7,9 @@ import org.apache.commons.lang3.Validate;
 
 import groovy.lang.GroovyShell;
 import groovy.lang.Script;
-import net.kiberion.swampmachine.scripting.SwampBinding;
-import net.kiberion.swampmachine.scripting.SwampScript;
-import net.kiberion.swampmachine.scripting.SwampScriptInvokationResult;
+import net.kiberion.swampmachine.api.scripting.SwampBinding;
+import net.kiberion.swampmachine.api.scripting.SwampScript;
+import net.kiberion.swampmachine.api.scripting.SwampScriptInvokationResult;
 
 /**
  * This class is thread-safe

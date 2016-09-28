@@ -6,9 +6,9 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-import net.kiberion.swampmachine.scripting.SwampBinding;
-import net.kiberion.swampmachine.scripting.SwampScript;
-import net.kiberion.swampmachine.scripting.SwampScriptInvokationResult;
+import net.kiberion.swampmachine.api.scripting.SwampBinding;
+import net.kiberion.swampmachine.api.scripting.SwampScript;
+import net.kiberion.swampmachine.api.scripting.SwampScriptInvokationResult;
 
 //ToDo As tests show, currently this implementation is not thread-safe
 public class RubyScript implements SwampScript {

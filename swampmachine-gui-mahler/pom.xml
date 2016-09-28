@@ -70,6 +70,10 @@
         </dependency>
         <dependency>
             <groupId>net.kiberion</groupId>
+            <artifactId>swampmachine-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.kiberion</groupId>
             <artifactId>swampmachine-gui</artifactId>
         </dependency>
         <dependency>

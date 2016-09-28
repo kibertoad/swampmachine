@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.scripting;
+package net.kiberion.swampmachine.api.scripting;
 
 public interface SwampScriptInvokationResult {
 

@@ -6,8 +6,8 @@ import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
 
-import net.kiberion.swampmachine.templating.api.Template;
-import net.kiberion.swampmachine.templating.api.TemplateFactory;
+import net.kiberion.swampmachine.api.templating.Template;
+import net.kiberion.swampmachine.api.templating.TemplateFactory;
 
 public class MustacheTemplateFactory implements TemplateFactory{
 

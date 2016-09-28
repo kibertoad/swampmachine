@@ -20,6 +20,10 @@
         </dependency>
         <dependency>
             <groupId>net.kiberion</groupId>
+            <artifactId>swampmachine-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.kiberion</groupId>
             <artifactId>swampmachine-utils</artifactId>
         </dependency>
         <dependency>

@@ -13,6 +13,7 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.kiberion.swampmachine.api.scripting.SwampScript;
 import net.kiberion.utils.FilePathUtils;
 
 public abstract class AbstractScriptParser {

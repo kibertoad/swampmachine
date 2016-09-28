@@ -1,6 +1,6 @@
 package net.kiberion.swampmachine.gui.composition.elements.api;
 
-import net.kiberion.swampmachine.scripting.SwampScript;
+import net.kiberion.swampmachine.api.scripting.SwampScript;
 
 public interface Clickable {
 

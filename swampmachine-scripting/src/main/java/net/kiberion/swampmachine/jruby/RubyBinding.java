@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.script.SimpleBindings;
 
-import net.kiberion.swampmachine.scripting.SwampBinding;
+import net.kiberion.swampmachine.api.scripting.SwampBinding;
 
 public class RubyBinding extends SimpleBindings implements SwampBinding{
 

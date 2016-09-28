@@ -19,10 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import lombok.Getter;
+import net.kiberion.swampmachine.annotations.InjectTransformedProperty;
 import net.kiberion.swampmachine.gui.annotations.ElementHints;
 import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
 import net.kiberion.swampmachine.gui.annotations.InjectProperty;
-import net.kiberion.swampmachine.gui.annotations.InjectTransformedProperty;
 import net.kiberion.swampmachine.gui.composer.Composition;
 import net.kiberion.swampmachine.gui.composer.transformers.TransformerHelper;
 import net.kiberion.swampmachine.gui.composition.elements.CompositionElement;

@@ -14,6 +14,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
+import net.kiberion.swampmachine.api.scripting.SwampBinding;
+import net.kiberion.swampmachine.api.scripting.SwampScript;
+import net.kiberion.swampmachine.api.scripting.SwampScriptInvokationResult;
 import net.kiberion.swampmachine.factories.ScriptEntityFactory;
 import net.kiberion.swampmachine.scripting.entities.TestCaster;
 import net.kiberion.utils.StopWatch;

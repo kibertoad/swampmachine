@@ -8,13 +8,13 @@ import java.util.Observable;
  *
  * @param <T>
  */
-public abstract class AbstractObservable<T> extends Observable {
+public abstract class AbstractObservable<I, O> extends Observable {
 
-    protected abstract void setValueInternal(T newValue);
+    protected abstract void setValueInternal(I newValue);
 
-    public abstract T getValue ();
+    public abstract O getValue ();
     
-    public synchronized void setValue(T newValue) {
+    public synchronized void setValue(I newValue) {
         setValueInternal(newValue);
         setChanged();
         notifyObservers(getValue());

@@ -1,6 +1,6 @@
-package net.kiberion.swampmachine.scripting;
+package net.kiberion.swampmachine.api.scripting;
 
-import net.kiberion.entities.common.api.ParametrizedInvokableWithResult;
+import net.kiberion.swampmachine.api.invokables.ParametrizedInvokableWithResult;
 
 public interface SwampScript extends ParametrizedInvokableWithResult<SwampBinding, SwampScriptInvokationResult>{
 

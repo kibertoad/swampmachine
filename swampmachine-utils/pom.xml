@@ -64,6 +64,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>net.kiberion</groupId>
+            <artifactId>swampmachine-api</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>

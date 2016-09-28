@@ -14,8 +14,8 @@ import org.jruby.embed.LocalVariableBehavior;
 import org.jruby.embed.jsr223.JRubyEngine;
 import org.python.google.common.collect.ImmutableSet;
 
+import net.kiberion.swampmachine.api.scripting.SwampScript;
 import net.kiberion.swampmachine.scripting.AbstractScriptParser;
-import net.kiberion.swampmachine.scripting.SwampScript;
 
 /**
  *

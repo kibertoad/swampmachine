@@ -5,7 +5,7 @@ import java.util.Map;
 import org.apache.commons.lang3.Validate;
 
 import lombok.Getter;
-import net.kiberion.swampmachine.scripting.SwampScriptInvokationResult;
+import net.kiberion.swampmachine.api.scripting.SwampScriptInvokationResult;
 
 public class GroovyInvokationResult implements SwampScriptInvokationResult{
 

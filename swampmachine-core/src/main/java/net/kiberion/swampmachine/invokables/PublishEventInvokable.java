@@ -3,7 +3,7 @@ package net.kiberion.swampmachine.invokables;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 
-import net.kiberion.entities.common.api.Invokable;
+import net.kiberion.swampmachine.api.invokables.Invokable;
 
 public class PublishEventInvokable implements Invokable{
 
@@ -17,7 +17,8 @@ public class PublishEventInvokable implements Invokable{
     }
 
     @Override
-    public void invoke() {
+    public <T> T invoke() {
         publisher.publishEvent(event);
+        return null;
     }
 }

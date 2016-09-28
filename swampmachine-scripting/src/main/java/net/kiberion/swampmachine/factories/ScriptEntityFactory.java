@@ -1,7 +1,7 @@
 package net.kiberion.swampmachine.factories;
 
+import net.kiberion.swampmachine.api.scripting.SwampBinding;
 import net.kiberion.swampmachine.scripting.AbstractScriptParser;
-import net.kiberion.swampmachine.scripting.SwampBinding;
 
 public interface ScriptEntityFactory {
 

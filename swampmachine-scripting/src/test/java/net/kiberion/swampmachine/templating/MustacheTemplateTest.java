@@ -7,8 +7,8 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import net.kiberion.swampmachine.templating.api.Template;
-import net.kiberion.swampmachine.templating.api.TemplateFactory;
+import net.kiberion.swampmachine.api.templating.Template;
+import net.kiberion.swampmachine.api.templating.TemplateFactory;
 import net.kiberion.swampmachine.templating.mustache.MustacheTemplateFactory;
 
 public class MustacheTemplateTest {

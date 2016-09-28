@@ -2,7 +2,7 @@ package net.kiberion.swampmachine.subscription;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class ObservableString extends AbstractObservable<String>{
+public class ObservableString extends AbstractObservable<String, String>{
 
     private String value = StringUtils.EMPTY;
     

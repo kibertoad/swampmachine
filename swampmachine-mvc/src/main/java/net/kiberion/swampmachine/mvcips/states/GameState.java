@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import net.kiberion.entities.common.api.RealtimeUpdatable;
+import net.kiberion.swampmachine.api.scripting.SwampBinding;
 import net.kiberion.swampmachine.factories.ScriptEntityFactory;
 import net.kiberion.swampmachine.gui.view.AbstractStateView;
 import net.kiberion.swampmachine.gui.view.StateView;
@@ -28,7 +29,6 @@ import net.kiberion.swampmachine.mvcips.states.annotations.StateControllers;
 import net.kiberion.swampmachine.mvcips.states.api.AbstractStateController;
 import net.kiberion.swampmachine.mvcips.utils.UpdatableStageWrapper;
 import net.kiberion.swampmachine.processors.TimedProcessor;
-import net.kiberion.swampmachine.scripting.SwampBinding;
 
 /**
  * MVCIPS stands for "Model View Controller Input adapter Processor State"

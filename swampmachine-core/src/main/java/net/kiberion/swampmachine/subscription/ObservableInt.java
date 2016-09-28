@@ -2,7 +2,7 @@ package net.kiberion.swampmachine.subscription;
 
 import org.springframework.util.ObjectUtils;
 
-public class ObservableInt extends AbstractObservable<Integer> {
+public class ObservableInt extends AbstractObservable<Integer, Integer> {
 
     private Integer value;
 

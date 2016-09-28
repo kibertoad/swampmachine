@@ -4,7 +4,7 @@ import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 
-import net.kiberion.entities.common.api.Invokable;
+import net.kiberion.swampmachine.api.invokables.Invokable;
 import net.kiberion.swampmachine.events.ChangeStateEvent;
 import net.kiberion.swampmachine.invokables.PublishEventInvokable;
 

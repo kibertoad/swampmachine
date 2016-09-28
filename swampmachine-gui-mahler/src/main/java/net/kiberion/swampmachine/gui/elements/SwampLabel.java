@@ -6,10 +6,16 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
-import net.kiberion.entities.common.api.Invokable;
+import net.kiberion.swampmachine.annotations.InjectTransformedProperty;
+import net.kiberion.swampmachine.annotations.NodeId;
+import net.kiberion.swampmachine.api.invokables.Invokable;
 import net.kiberion.swampmachine.assets.UiManager;
+import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
+import net.kiberion.swampmachine.gui.annotations.ElementTransformedProperty;
+import net.kiberion.swampmachine.gui.composer.transformers.ScriptTransformer;
 import net.kiberion.swampmachine.gui.observers.LabelUpdatingObserver;
+import net.kiberion.swampmachine.invokables.ScriptInvokable;
 import net.kiberion.swampmachine.styling.StyleFactory;
 import net.kiberion.swampmachine.subscription.AbstractObservable;
 
@@ -20,7 +26,8 @@ import net.kiberion.swampmachine.subscription.AbstractObservable;
  */
 
 @ElementPrototype(id = "swLabel", supportedProperties = {"text"})
-public class SwampLabel extends Label {
+@ElementTransformedProperty(sourceProperty = "labelValue", targetTransformer = ScriptTransformer.class)
+public class SwampLabel extends Label implements net.kiberion.swampmachine.api.elements.Label {
 
     private BitmapFont font;
 
@@ -33,8 +40,16 @@ public class SwampLabel extends Label {
 
         this.setPosition(setX, setY);
     }
+    
+    @NodeId (id = "labelValue")
+    @InjectTransformedProperty
+    public void setText(ScriptInvokable script) {
+        AbstractObservable<?, ?> observable = script.invoke();
+        setText (observable.getValue().toString());
+        observable.addObserver(new LabelUpdatingObserver (this));
+    }    
 
-    public SwampLabel(AbstractObservable observable) {
+    public SwampLabel(AbstractObservable<?, ?> observable) {
         this(observable.getValue().toString());
         observable.addObserver(new LabelUpdatingObserver (this));
     }
@@ -68,6 +83,11 @@ public class SwampLabel extends Label {
     public void setPosition (int[] coords) {
         setPosition (coords[0], coords[1]);
     }
+    
+    public void setPosition (Position coords) {
+        setPosition (coords.getX(), coords.getY());
+    }
+    
 
     public void setFont() {
         getStyle().font = new BitmapFont();

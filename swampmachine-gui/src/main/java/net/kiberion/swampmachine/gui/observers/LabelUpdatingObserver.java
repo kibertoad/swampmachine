@@ -5,13 +5,13 @@ import java.util.Observer;
 
 import org.apache.commons.lang3.StringUtils;
 
-import net.kiberion.swampmachine.gui.elements.SwampLabel;
+import net.kiberion.swampmachine.api.elements.Label;
 
 public class LabelUpdatingObserver implements Observer {
 
-    private final SwampLabel label;
+    private final Label label;
 
-    public LabelUpdatingObserver(SwampLabel label) {
+    public LabelUpdatingObserver(Label label) {
         this.label = label;
     }
 

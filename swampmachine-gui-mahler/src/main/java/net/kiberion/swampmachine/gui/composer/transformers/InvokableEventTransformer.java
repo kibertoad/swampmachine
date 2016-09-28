@@ -6,8 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
 
-import net.kiberion.entities.common.api.Invokable;
 import net.kiberion.swampmachine.annotations.ConstructableEntity;
+import net.kiberion.swampmachine.api.invokables.Invokable;
 import net.kiberion.swampmachine.factories.InvokablesFactory;
 import net.kiberion.swampmachine.registries.EventClassRegistry;
 import net.kiberion.utils.ReflectionUtils;

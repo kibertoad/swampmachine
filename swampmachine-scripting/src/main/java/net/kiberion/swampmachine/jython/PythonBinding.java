@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.kiberion.swampmachine.scripting.SwampBinding;
+import net.kiberion.swampmachine.api.scripting.SwampBinding;
 
 public class PythonBinding extends HashMap<String, Object> implements SwampBinding{
 

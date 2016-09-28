@@ -6,7 +6,7 @@ import org.python.core.PyInteger;
 import org.python.core.PyObject;
 import org.python.core.PyStringMap;
 
-import net.kiberion.swampmachine.scripting.SwampScriptInvokationResult;
+import net.kiberion.swampmachine.api.scripting.SwampScriptInvokationResult;
 
 public class PyMapWrapper implements SwampScriptInvokationResult {
 

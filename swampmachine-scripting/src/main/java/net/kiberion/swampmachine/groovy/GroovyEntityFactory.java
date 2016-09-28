@@ -1,8 +1,8 @@
 package net.kiberion.swampmachine.groovy;
 
+import net.kiberion.swampmachine.api.scripting.SwampBinding;
 import net.kiberion.swampmachine.factories.ScriptEntityFactory;
 import net.kiberion.swampmachine.scripting.AbstractScriptParser;
-import net.kiberion.swampmachine.scripting.SwampBinding;
 
 public class GroovyEntityFactory implements ScriptEntityFactory{
 

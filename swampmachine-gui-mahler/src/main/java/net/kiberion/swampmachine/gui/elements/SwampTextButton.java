@@ -13,16 +13,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-import net.kiberion.entities.common.api.Invokable;
 import net.kiberion.entities.common.api.Toggleable;
+import net.kiberion.swampmachine.annotations.InjectTransformedProperty;
 import net.kiberion.swampmachine.annotations.NodeId;
+import net.kiberion.swampmachine.api.invokables.Invokable;
 import net.kiberion.swampmachine.assets.UiManager;
+import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
 import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
-import net.kiberion.swampmachine.gui.annotations.InjectTransformedProperty;
 import net.kiberion.swampmachine.gui.listenerconditions.ListenerCondition;
 import net.kiberion.swampmachine.gui.listenerconditions.ListenerConditionContainer;
-import net.kiberion.swampmachine.gui.listeners.onclick.OnClickScriptListener;
+import net.kiberion.swampmachine.invokables.ScriptInvokable;
 
 @ElementPrototype(id = "swTextButton")
 public class SwampTextButton <T extends MetadataHolderBlock> extends TextButton implements Toggleable {
@@ -57,6 +58,10 @@ public class SwampTextButton <T extends MetadataHolderBlock> extends TextButton 
         this(setText);
         setPosition(setX, setY);
     }
+
+    public void setPosition(Position position) {
+        setPosition(position.getX(), position.getY());
+    }
     
 
     /**
@@ -73,8 +78,8 @@ public class SwampTextButton <T extends MetadataHolderBlock> extends TextButton 
 
     @NodeId (id = "onClickScript")
     @InjectTransformedProperty
-    public SwampTextButton<T> addOnClickScript(OnClickScriptListener onClickScript) {
-        addListener (onClickScript);
+    public SwampTextButton<T> addOnClickScript(ScriptInvokable onClickScript) {
+        addInvokable (onClickScript);
         return this;
     }
     
@@ -189,6 +194,5 @@ public class SwampTextButton <T extends MetadataHolderBlock> extends TextButton 
         });        
         
     }
-    
-    
+
 }

@@ -9,9 +9,9 @@ import net.kiberion.swampmachine.subscription.AbstractObservable;
  */
 public class ObservableSynchronizingObservingInvokable<T> implements ObservingInvokable<T>{
 
-    private final AbstractObservable<T> target;
+    private final AbstractObservable<T, T> target;
     
-    public ObservableSynchronizingObservingInvokable(AbstractObservable<T> target) {
+    public ObservableSynchronizingObservingInvokable(AbstractObservable<T, T> target) {
         this.target = target;
     }
     

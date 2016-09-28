@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.script.Bindings;
 
-import net.kiberion.swampmachine.scripting.SwampScriptInvokationResult;
+import net.kiberion.swampmachine.api.scripting.SwampScriptInvokationResult;
 
 public class RubyResultWrapper implements SwampScriptInvokationResult {
 

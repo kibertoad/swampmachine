@@ -1,6 +1,8 @@
 package net.kiberion.swampmachine.scripting;
 
 import lombok.Getter;
+import net.kiberion.swampmachine.api.scripting.SwampBinding;
+import net.kiberion.swampmachine.api.scripting.SwampScript;
 import net.kiberion.swampmachine.entities.common.impl.resources.ResourcesDelta;
 import net.kiberion.swampmachine.entities.common.impl.resources.ResourcesStorage;
 

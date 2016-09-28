@@ -5,11 +5,11 @@ import java.util.Map;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import net.kiberion.swampmachine.api.scripting.SwampBinding;
 import net.kiberion.swampmachine.factories.ScriptEntityFactory;
-import net.kiberion.swampmachine.gui.listeners.onclick.OnClickScriptListener;
-import net.kiberion.swampmachine.scripting.SwampBinding;
+import net.kiberion.swampmachine.invokables.ScriptInvokable;
 
-public class ScriptTransformer extends AbstractTransformer<String, OnClickScriptListener> {
+public class ScriptTransformer extends AbstractTransformer<String, ScriptInvokable> {
 
     public static final String PARAMETER_PARAMETER = "onClickScript";
 
@@ -17,10 +17,10 @@ public class ScriptTransformer extends AbstractTransformer<String, OnClickScript
     private ScriptEntityFactory scriptEntityFactory;
     
     @Override
-    public OnClickScriptListener transformSingle(String parameter, Map<String, Object> context) {
+    public ScriptInvokable transformSingle(String parameter, Map<String, Object> context) {
         Validate.notBlank(parameter);
         SwampBinding binding = (SwampBinding) context.get("binding");
-        return new OnClickScriptListener (scriptEntityFactory.getParserInstance().parseScript(parameter), binding);
+        return new ScriptInvokable (scriptEntityFactory.getParserInstance().parseScript(parameter), binding);
     }
 
     @Override

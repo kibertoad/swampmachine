@@ -2,8 +2,8 @@ package net.kiberion.swampmachine.blueprints.common.entities.impl;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.kiberion.swampmachine.api.scripting.SwampScript;
 import net.kiberion.swampmachine.entities.common.impl.CommonModelEntityDescriptor;
-import net.kiberion.swampmachine.scripting.SwampScript;
 
 
 

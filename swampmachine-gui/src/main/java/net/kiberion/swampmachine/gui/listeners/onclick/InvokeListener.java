@@ -3,7 +3,7 @@ package net.kiberion.swampmachine.gui.listeners.onclick;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
-import net.kiberion.entities.common.api.Invokable;
+import net.kiberion.swampmachine.api.invokables.Invokable;
 
 
 /**

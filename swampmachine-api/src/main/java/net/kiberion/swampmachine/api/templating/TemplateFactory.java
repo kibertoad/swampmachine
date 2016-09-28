@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.templating.api;
+package net.kiberion.swampmachine.api.templating;
 
 public interface TemplateFactory {
     

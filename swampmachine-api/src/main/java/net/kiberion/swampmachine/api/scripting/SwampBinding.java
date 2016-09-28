@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.scripting;
+package net.kiberion.swampmachine.api.scripting;
 
 import java.util.Collection;
 import java.util.Map;

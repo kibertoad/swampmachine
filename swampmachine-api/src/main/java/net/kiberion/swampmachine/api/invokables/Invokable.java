@@ -1,9 +1,9 @@
-package net.kiberion.entities.common.api;
+package net.kiberion.swampmachine.api.invokables;
 
 /**
  * @author caryoscelus
  */
 @FunctionalInterface
 public interface Invokable {
-    public void invoke();
+    public <T> T invoke();
 }

@@ -181,6 +181,11 @@
             </dependency>
             <dependency>
                 <groupId>net.kiberion</groupId>
+                <artifactId>swampmachine-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.kiberion</groupId>
                 <artifactId>swampmachine-core</artifactId>
                 <version>${project.version}</version>
                 <type>test-jar</type>

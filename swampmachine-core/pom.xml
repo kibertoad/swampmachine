@@ -116,8 +116,13 @@
             <artifactId>swampmachine-utils</artifactId>
         </dependency>
         <dependency>
+            <groupId>net.kiberion</groupId>
+            <artifactId>swampmachine-api</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy</artifactId>
+            <scope>optional</scope>
         </dependency>
         <dependency>
             <groupId>org.yaml</groupId>
