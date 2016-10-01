@@ -32,7 +32,7 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
     private static final List<String> supportedIntProperties = new InlineGList<>("zIndex");
 
     private static final List<String> consumedProperties = new InlineGList<>("position", "image", "text", "labelValue",
-            "labelText");
+            "labelText", "buttonSource");
     private static final List<String> consumedMapProperties = new InlineGList<>("onClickEvent", "plus", "minus",
             "button");
     private static final List<String> consumedIntProperties = new InlineGList<>();

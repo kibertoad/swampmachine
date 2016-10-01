@@ -12,16 +12,16 @@ import net.kiberion.swampmachine.gui.composer.transformers.ButtonTransformer;
 import net.kiberion.swampmachine.gui.elements.SwampLabel;
 import net.kiberion.swampmachine.gui.elements.SwampTextButton;
 
-@ElementPrototype(id = "swRadioButton")
+@ElementPrototype(id = "swCheckButton")
 @ElementTransformedProperty(sourceProperty = "button", targetTransformer = ButtonTransformer.class)
-public class RadioButton extends Group{
+public class CheckButton extends Group{
 
     protected SwampLabel selectionLabel;
     protected SwampTextButton<?> button;
 
     private boolean isSelected = false;
 
-    public RadioButton() {
+    public CheckButton() {
         selectionLabel = new SwampLabel("-");
         this.addActor(selectionLabel);
     }

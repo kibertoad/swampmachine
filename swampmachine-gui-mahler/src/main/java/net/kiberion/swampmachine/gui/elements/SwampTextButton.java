@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import net.kiberion.entities.common.api.Toggleable;
 import net.kiberion.swampmachine.annotations.InjectTransformedProperty;
 import net.kiberion.swampmachine.annotations.NodeId;
+import net.kiberion.swampmachine.api.elements.ButtonEntry;
 import net.kiberion.swampmachine.api.invokables.Invokable;
 import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.swampmachine.entities.spatial.api.Position;
@@ -57,6 +58,11 @@ public class SwampTextButton <T extends MetadataHolderBlock> extends TextButton 
     public SwampTextButton(String setText, int setX, int setY) {
         this(setText);
         setPosition(setX, setY);
+    }
+
+    public SwampTextButton(ButtonEntry buttonEntry) {
+        this (buttonEntry.getText());
+        addInvokable(buttonEntry.getOnClickEffect());
     }
 
     public void setPosition(Position position) {

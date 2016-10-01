@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.gui.elements;
+package net.kiberion.swampmachine.gui.elements.containers;
 
 /*
  * To change this template, choose Tools | Templates
@@ -22,6 +22,7 @@ import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
 import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
 import net.kiberion.swampmachine.gui.annotations.InjectProperty;
+import net.kiberion.swampmachine.gui.elements.SwampTextButton;
 
 /**
  *
