@@ -1,8 +1,11 @@
 package net.kiberion.swampmachine.gui.composer.populators;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -51,7 +54,10 @@ public class GdxPopulator implements Populator {
 
         //Create and attach unbound elements
         for (Composition composition : sourceCompositions) {
-            for (CompositionElement element : composition.getElementMap().values()) {
+            List<CompositionElement> elements = new ArrayList<>(composition.getElementMap().values());
+            Collections.sort(elements);
+            
+            for (CompositionElement element : elements) {
                 if (processedElements.contains(element)) {
                     continue;
                 }

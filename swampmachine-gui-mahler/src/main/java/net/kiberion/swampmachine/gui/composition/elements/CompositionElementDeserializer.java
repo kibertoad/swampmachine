@@ -27,9 +27,15 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
 
     private static final Logger log = LogManager.getLogger();
 
+    // will be set via setters
     private static final List<String> supportedTextProperties = new InlineGList<>("id", "type");
-    private static final List<String> consumedProperties = new InlineGList<>("position");
-    private static final List<String> consumedMapProperties = new InlineGList<>("onClickEvent", "plus", "minus");
+    private static final List<String> supportedIntProperties = new InlineGList<>("zIndex");
+
+    private static final List<String> consumedProperties = new InlineGList<>("position", "image", "text", "labelValue",
+            "labelText");
+    private static final List<String> consumedMapProperties = new InlineGList<>("onClickEvent", "plus", "minus",
+            "button");
+    private static final List<String> consumedIntProperties = new InlineGList<>();
     private static final List<String> consumedListProperties = new InlineGList<>("buttons");
 
     private static final Set<String> mandatoryTextProperties = SetUtils.buildSet("id", "type");
@@ -51,31 +57,27 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
                 result.getProperties().put(subNode.getKey(), mapper.treeToValue(subNode.getValue(), List.class));
             } else if (consumedMapProperties.contains(subNode.getKey())) {
                 result.getProperties().put(subNode.getKey(), mapper.treeToValue(subNode.getValue(), Map.class));
-            } else
-
-            if (consumedProperties.contains(subNode.getKey())) {
+            } else if (consumedIntProperties.contains(subNode.getKey())) {
+                result.getProperties().put(subNode.getKey(), mapper.treeToValue(subNode.getValue(), Integer.class));
+            } else if (consumedProperties.contains(subNode.getKey())) {
                 if (subNode.getKey().equals("position")) {
                     result.setPosition(
                             new CommonPosition(subNode.getValue().get(0).asInt(), subNode.getValue().get(1).asInt()));
-                }
-                if (subNode.getKey().equals("buttons")) {
+                } else if (subNode.getKey().equals("buttons")) {
                     result.getProperties().put(subNode.getKey(), mapper.treeToValue(subNode.getValue(), List.class));
+                } else {
+                    result.getProperties().put(subNode.getKey(), subNode.getValue().asText());
                 }
             } else if (supportedTextProperties.contains(subNode.getKey())) {
                 beanAccessor.setPropertyValue(subNode.getKey(), subNode.getValue().asText());
+            } else if (supportedIntProperties.contains(subNode.getKey())) {
+                beanAccessor.setPropertyValue(subNode.getKey(), subNode.getValue().asInt());
             } else {
-                result.getProperties().put(subNode.getKey(), subNode.getValue().asText());
+                throw new IllegalArgumentException("Unknown property: " + subNode.getKey());
+                // result.getProperties().put(subNode.getKey(),
+                // subNode.getValue().asText());
             }
         }
-
-        /*
-         * JsonNode value = node.get(supportedProperty); if (value == null &&
-         * mandatoryTextProperties.contains(supportedProperty)) { throw new
-         * IllegalArgumentException("Missing mandatory property: " +
-         * supportedProperty); } if (value != null) { PropertyAccessor
-         * beanAccessor = PropertyAccessorFactory.forDirectFieldAccess(result);
-         * beanAccessor.setPropertyValue(supportedProperty, value.asText()); }
-         */
 
         return result;
     }
