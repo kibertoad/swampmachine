@@ -26,9 +26,5 @@ public class MustacheTemplate implements Template{
         } catch (IOException e) {
             throw new IllegalStateException (e);
         }        
-        
     }
-    
-    
-    
 }

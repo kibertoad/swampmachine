@@ -11,7 +11,7 @@ import net.kiberion.swampmachine.api.templating.TemplateFactory;
 
 public class MustacheTemplateFactory implements TemplateFactory{
 
-    private MustacheFactory mf = new DefaultMustacheFactory();
+    private final MustacheFactory mf = new DefaultMustacheFactory();
     
     @Override
     public Template produceTemplate(String templateBody) {
