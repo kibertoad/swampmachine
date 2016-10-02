@@ -2,6 +2,7 @@ package net.kiberion.swampmachine.gui.spring;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 import com.badlogic.gdx.Gdx;
 
@@ -49,6 +50,7 @@ public class MahlerGdxConfiguration {
 
     //ToDo FixMe
     @Bean
+    @Scope("prototype")
     public Label coordsLabel() {
         if (Gdx.app != null) {
             return new SwampLabel("Dummy");

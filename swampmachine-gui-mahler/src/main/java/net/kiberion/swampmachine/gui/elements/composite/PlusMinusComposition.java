@@ -69,7 +69,7 @@ public class PlusMinusComposition extends Group {
     
 
     protected Position getPlusPosition() {
-        return new CommonPosition (60, 30);
+        return new CommonPosition (40, 30);
     }
 
     protected Position getMinusPosition() {
@@ -77,12 +77,11 @@ public class PlusMinusComposition extends Group {
     }
     
     protected Position getValuePosition() {
-        return new CommonPosition (30, 30);
+        return new CommonPosition (20, 30);
     }
     
     protected Position getTextPosition() {
-        return new CommonPosition (30, 0);
+        return new CommonPosition (20, 0);
     }
-    
     
 }
