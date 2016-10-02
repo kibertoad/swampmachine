@@ -1,4 +1,4 @@
-package net.kiberion.persistence.test;
+package net.kiberion.persistence.test.spring;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -13,11 +14,12 @@ import net.kiberion.swampmachine.assets.loaders.api.Loader;
 import net.kiberion.swampmachine.assets.loaders.util.LoaderSpringExtractor;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = TestConfiguration.class)
-public abstract class ContextBasedTest implements ApplicationContextAware {
+@ContextConfiguration(classes = MybatisTestConfiguration.class)
+@Rollback
+public abstract class ContextBasedMybatisTest implements ApplicationContextAware {
 
     protected ApplicationContext applicationContext;
-
+    
     protected void loadAssets() {
         List<Loader> assetLoaders = LoaderSpringExtractor
                 .extractSortedStartupAssetLoadersFromContext(applicationContext);

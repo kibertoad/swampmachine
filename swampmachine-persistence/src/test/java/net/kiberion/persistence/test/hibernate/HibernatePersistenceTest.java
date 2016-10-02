@@ -1,17 +1,16 @@
-package net.kiberion.persistence;
+package net.kiberion.persistence.test.hibernate;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import net.kiberion.persistence.test.ContextBasedTest;
-import net.kiberion.persistence.test.TestDao;
+import net.kiberion.persistence.test.spring.ContextBasedHibernateTest;
 
-public class PersistenceTest extends ContextBasedTest{
+public class HibernatePersistenceTest extends ContextBasedHibernateTest{
 
 	@Autowired
-	private TestDao dao;
+	private TestHibernateDao dao;
 	
 	@Test
 	public void testPersistEntity () {

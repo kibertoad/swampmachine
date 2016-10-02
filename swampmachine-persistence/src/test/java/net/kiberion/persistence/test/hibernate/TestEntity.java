@@ -1,7 +1,9 @@
-package net.kiberion.persistence;
+package net.kiberion.persistence.test.hibernate;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import net.kiberion.persistence.BaseEntity;
 
 @Entity
 @Table(name = "test_entity")

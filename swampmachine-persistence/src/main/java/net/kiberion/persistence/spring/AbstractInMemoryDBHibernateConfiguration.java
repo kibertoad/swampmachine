@@ -17,9 +17,8 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)
-public abstract class AbstractInMemoryDBConfiguration {
+public abstract class AbstractInMemoryDBHibernateConfiguration {
 
-    
     @Bean
     public HikariConfig hikariConfig () {
         HikariConfig config = new HikariConfig();
