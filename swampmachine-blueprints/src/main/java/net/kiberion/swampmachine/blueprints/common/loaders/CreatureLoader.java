@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import net.kiberion.swampmachine.blueprints.common.entities.impl.CreatureModelInfo;
+import net.kiberion.swampmachine.blueprints.common.registries.CreatureRegistry;
 import net.kiberion.swampmachine.loaders.CommonSyncStartupLoader;
 
 public class CreatureLoader extends CommonSyncStartupLoader {

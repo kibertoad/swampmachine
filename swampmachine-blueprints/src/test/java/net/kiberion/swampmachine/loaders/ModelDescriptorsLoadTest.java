@@ -11,7 +11,7 @@ import org.springframework.context.ApplicationContext;
 import net.kiberion.swampmachine.assets.loaders.api.SyncLoader;
 import net.kiberion.swampmachine.blueprints.common.entities.impl.CreatureModelInfo;
 import net.kiberion.swampmachine.blueprints.common.loaders.CommonViewInfoLoader;
-import net.kiberion.swampmachine.blueprints.common.loaders.CreatureRegistry;
+import net.kiberion.swampmachine.blueprints.common.registries.CreatureRegistry;
 import net.kiberion.swampmachine.blueprints.spring.BlueprintsContextBasedTest;
 import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
 

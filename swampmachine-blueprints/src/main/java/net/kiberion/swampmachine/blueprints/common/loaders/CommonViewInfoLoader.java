@@ -16,6 +16,7 @@ import net.kiberion.swampmachine.assets.loaders.impl.EntityViewInfoLoader.ImageM
 import net.kiberion.swampmachine.assets.readers.ReaderHelper;
 import net.kiberion.swampmachine.assets.util.LoadOnStartup;
 import net.kiberion.swampmachine.blueprints.common.entities.impl.CreatureModelInfo;
+import net.kiberion.swampmachine.blueprints.common.registries.CreatureRegistry;
 import net.kiberion.swampmachine.registries.CommonModelInfoRegistry;
 import net.kiberion.swampmachine.registries.CommonViewInfoRegistry;
 

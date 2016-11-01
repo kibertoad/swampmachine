@@ -18,23 +18,14 @@ import net.kiberion.swampmachine.entities.common.api.Taggable;
  */
 public class CommonModelEntityDescriptor extends AbstractModelEntityDescriptor implements Taggable {
 
-	@Setter
-	@Getter
-    private String group;
+    @Setter
+    @Getter
+    private String groupID;
 	
-	@Setter
-	@Getter
-	private String subGroup;
+	
 	private Set<String> tags = new HashSet<>();
 
-	@Setter
-	@Getter
-    private String groupID;
 
-    @Getter
-    @Setter
-    private String subGroupID;
-    
     public CommonModelEntityDescriptor() {
     }
 
@@ -88,6 +79,5 @@ public class CommonModelEntityDescriptor extends AbstractModelEntityDescriptor i
     }
 
     public void setImage(String imageCode) {
-
     }
 }

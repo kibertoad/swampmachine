@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.blueprints.common.loaders;
+package net.kiberion.swampmachine.blueprints.common.registries;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +10,5 @@ public class CreatureRegistry {
 
     @Getter
     private final Map<String, CreatureModelInfo> creatures = new HashMap<>();
-    
     
 }

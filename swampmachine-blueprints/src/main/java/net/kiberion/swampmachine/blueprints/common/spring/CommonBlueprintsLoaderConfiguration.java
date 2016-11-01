@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 import net.kiberion.swampmachine.blueprints.common.loaders.CommonViewInfoLoader;
 import net.kiberion.swampmachine.blueprints.common.loaders.CreatureLoader;
-import net.kiberion.swampmachine.blueprints.common.loaders.CreatureRegistry;
+import net.kiberion.swampmachine.blueprints.common.registries.CreatureRegistry;
 
 @Configuration
 public class CommonBlueprintsLoaderConfiguration {

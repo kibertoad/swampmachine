@@ -40,11 +40,7 @@ public abstract class AbstractModelEntityDescriptor extends CommonMetadataHolder
 
     @Override
     public void setGroup(String toGroup) {
-    	throw new UnsupportedOperationException("Unsupported operation");
-    }
-
-    public void setSubGroup(String toGroup) {
-    	throw new UnsupportedOperationException("Unsupported operation");
+    	this.getMetadata().setGroup(toGroup);
     }
 
     @Override

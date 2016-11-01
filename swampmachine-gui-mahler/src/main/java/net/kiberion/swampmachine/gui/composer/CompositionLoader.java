@@ -25,26 +25,32 @@ import net.kiberion.swampmachine.utils.MapUtils;
 import net.kiberion.swampmachine.utils.SetUtils;
 
 @LoadBeforeStartup
-public class CompositionLoader extends AbstractLoader{
+public class CompositionLoader extends AbstractLoader {
 
     private static final Logger log = LogManager.getLogger();
-    
+
     private static final String COMPOSITION_DIRECTORY = "view-compositions";
-    
+
     @Autowired
     private CompositionRegistry compositionRegistry;
-    
+
     private AbstractFileReader fileReader;
-    
-    
-    public List<Composition> loadInternal (Resource source) {
+
+    public CompositionLoader() {
+    }
+
+    public CompositionLoader(int priority) {
+        this.setPriority(priority);
+    }
+
+    public List<Composition> loadInternal(Resource source) {
         Validate.notNull(source);
         ObjectMapper mapper = new ObjectMapper();
-        
-        try (InputStream is = source.getInputStream()){
+
+        try (InputStream is = source.getInputStream()) {
             return mapper.readValue(is, CompositionTree.class).getCompositions();
         } catch (IOException e) {
-            throw new IllegalStateException (e);
+            throw new IllegalStateException(e);
         }
     }
 
@@ -52,8 +58,7 @@ public class CompositionLoader extends AbstractLoader{
     @Override
     protected <T extends EntityModelDescriptor> void loadDataNodes(Map<String, T> targetMap, String loadDirectory,
             String loadExtension, Class<T> clazz) {
-        
-        
+
         try {
             if (fileExists(loadDirectory)) {
                 Path entityDirectory = getEntityDirectory(loadDirectory);
@@ -62,13 +67,14 @@ public class CompositionLoader extends AbstractLoader{
                 log.info("Loading entities from: " + entityDirectory.toString());
 
                 List<Composition> entities = new ArrayList<>();
-                
-                List<Path> filesToLoad = fileReader.getListOfFilesByWildcard(entityDirectory, SetUtils.buildSet(loadExtension));
+
+                List<Path> filesToLoad = fileReader.getListOfFilesByWildcard(entityDirectory,
+                        SetUtils.buildSet(loadExtension));
                 for (Path entry : filesToLoad) {
-                    entities.addAll(loadInternal(new PathResource (entry)));
-                }                
-                
-                MapUtils.putAllEntities((Map<String, Composition>)targetMap, entities);
+                    entities.addAll(loadInternal(new PathResource(entry)));
+                }
+
+                MapUtils.putAllEntities((Map<String, Composition>) targetMap, entities);
                 log.info("Loaded " + entities.size() + " " + getEntityClass().getSimpleName() + " entities.");
             }
         } catch (Exception e) {
@@ -76,7 +82,6 @@ public class CompositionLoader extends AbstractLoader{
         }
     }
 
-    
     @SuppressWarnings("unchecked")
     @Override
     public Map<String, Composition> getTargetMap() {
@@ -97,5 +102,5 @@ public class CompositionLoader extends AbstractLoader{
     public Class<? extends EntityModelDescriptor> getEntityClass() {
         return Composition.class;
     }
-    
+
 }
