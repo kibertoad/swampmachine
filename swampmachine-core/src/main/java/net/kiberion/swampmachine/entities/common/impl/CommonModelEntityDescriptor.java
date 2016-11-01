@@ -23,6 +23,7 @@ public class CommonModelEntityDescriptor extends AbstractModelEntityDescriptor i
     private String groupID;
 	
 	
+    @Setter
 	private Set<String> tags = new HashSet<>();
 
 
