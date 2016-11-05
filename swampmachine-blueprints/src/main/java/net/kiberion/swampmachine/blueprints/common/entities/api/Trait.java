@@ -5,5 +5,6 @@ import java.util.List;
 public interface Trait {
 
     public List<String> getExclusiveWithTag();
+    public boolean hasTag(String tag);
     
 }

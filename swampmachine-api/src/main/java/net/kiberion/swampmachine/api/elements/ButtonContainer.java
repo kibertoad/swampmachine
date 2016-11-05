@@ -1,13 +1,13 @@
 package net.kiberion.swampmachine.api.elements;
 
-import net.kiberion.swampmachine.api.sources.EntrySource;
+import java.util.Collection;
 
 public interface ButtonContainer {
 
-    public default void setButtons(EntrySource<ButtonEntry> entrySource) {
+    public default void setButtons(Collection<ButtonEntry> entrySource) {
         clear();
         if (entrySource != null) {
-            for (ButtonEntry buttonEntry : entrySource.getEntries()) {
+            for (ButtonEntry buttonEntry : entrySource) {
                 addButton(buttonEntry);
             }
         }

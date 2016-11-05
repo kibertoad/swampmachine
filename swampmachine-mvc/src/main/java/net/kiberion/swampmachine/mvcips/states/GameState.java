@@ -122,6 +122,10 @@ public abstract class GameState implements Screen, InitializingBean {
     @SuppressWarnings("rawtypes")
     @Override
     public void show() {
+        for (AbstractStateController controller : stateControllers) {
+            controller.show();
+        }
+        
         getView().show();
         addProcessorsForAllViews();
         ((AbstractStateView) getView()).debugToLog();

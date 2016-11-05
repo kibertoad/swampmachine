@@ -1,11 +1,13 @@
 package net.kiberion.swampmachine.gui.observers;
 
+import java.util.Collection;
 import java.util.Observable;
 import java.util.Observer;
 
+import org.apache.commons.lang3.Validate;
+
 import net.kiberion.swampmachine.api.elements.ButtonContainer;
 import net.kiberion.swampmachine.api.elements.ButtonEntry;
-import net.kiberion.swampmachine.api.sources.EntrySource;
 
 public class ButtonContainerUpdatingObserver implements Observer{
 
@@ -17,8 +19,9 @@ public class ButtonContainerUpdatingObserver implements Observer{
     
     @SuppressWarnings("unchecked")
     @Override
-    public void update(Observable o, Object arg) {
-        container.setButtons((EntrySource<ButtonEntry>) arg);
+    public void update(Observable observableSource, Object newValue) {
+        Validate.isInstanceOf(Collection.class, newValue);
+        container.setButtons((Collection<ButtonEntry>) newValue);
     }    
     
 }

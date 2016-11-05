@@ -18,21 +18,29 @@ import net.kiberion.swampmachine.subscription.ObservableButtonEntrySource;
 @ElementTransformedProperty(sourceProperty = "buttonSource", targetTransformer = ScriptTransformer.class)
 public class CheckButtonList extends Group implements ButtonContainer{
     
+    private boolean hasObserver;
+    
+    /**
+     * Should only be invoked once to avoid depending on multiple sources
+     * 
+     * @param buttonSource Script that is expected to link to a controller method which will provide a buttonSource
+     */
     @NodeId (id = "buttonSource")
     @InjectTransformedProperty
-    public void addButtons(ScriptInvokable buttonSource) {
+    public void setButtonSource(ScriptInvokable buttonSource) {
+        if (hasObserver) {
+            throw new IllegalStateException ("Container cannot be linked to multiple sources.");
+        }
+        
         ObservableButtonEntrySource entrySource = buttonSource.invoke();
         
-        setButtons (entrySource);
-        entrySource.addObserver(new ButtonContainerUpdatingObserver(this));        
-    }
-
-    protected void setButtons(ObservableButtonEntrySource entrySource) {
         for (ButtonEntry buttonEntry : entrySource.getValue()) {
             addButton (buttonEntry);
-        }
+        }        
+        entrySource.addObserver(new ButtonContainerUpdatingObserver(this));
+        hasObserver = true;
     }
-    
+
     @Override
     public void addButton (ButtonEntry buttonEntry) {
         SwampTextButton<?> button = new SwampTextButton<> (buttonEntry);
