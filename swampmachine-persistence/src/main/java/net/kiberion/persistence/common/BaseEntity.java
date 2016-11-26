@@ -1,4 +1,4 @@
-package net.kiberion.persistence;
+package net.kiberion.persistence.common;
 
 import java.io.Serializable;
 

@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import net.kiberion.persistence.spring.AbstractInMemoryDBHibernateConfiguration;
-import net.kiberion.persistence.test.hibernate.TestEntity;
+import net.kiberion.persistence.test.hibernate.entities.TestEntity;
 
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)

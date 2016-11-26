@@ -1,4 +1,4 @@
-package net.kiberion.persistence.test.mybatis;
+package net.kiberion.persistence.test.mybatis.entities;
 
 import lombok.Getter;
 import lombok.Setter;

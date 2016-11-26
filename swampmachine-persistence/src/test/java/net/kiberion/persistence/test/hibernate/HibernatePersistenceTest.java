@@ -5,20 +5,22 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import net.kiberion.persistence.test.hibernate.entities.TestEntity;
+import net.kiberion.persistence.test.hibernate.entities.TestHibernateDao;
 import net.kiberion.persistence.test.spring.ContextBasedHibernateTest;
 
-public class HibernatePersistenceTest extends ContextBasedHibernateTest{
+public class HibernatePersistenceTest extends ContextBasedHibernateTest {
 
-	@Autowired
-	private TestHibernateDao dao;
-	
-	@Test
-	public void testPersistEntity () {
-		TestEntity entity = new TestEntity();
-		dao.save(entity);
-		
-		assertNotNull (dao.findById(entity.getOid()));
-		dao.delete(entity);
-		assertNull (dao.findById(entity.getOid()));
-	}
+    @Autowired
+    private TestHibernateDao dao;
+
+    @Test
+    public void testPersistEntity() {
+        TestEntity entity = new TestEntity();
+        dao.save(entity);
+
+        assertNotNull(dao.findById(entity.getOid()));
+        dao.delete(entity);
+        assertNull(dao.findById(entity.getOid()));
+    }
 }

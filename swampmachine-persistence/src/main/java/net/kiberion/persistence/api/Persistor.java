@@ -1,4 +1,4 @@
-package net.kiberion.persistence;
+package net.kiberion.persistence.api;
 
 import net.kiberion.swampmachine.assets.loaders.api.SyncLoader;
 import net.kiberion.swampmachine.assets.util.LoadOnStartup;

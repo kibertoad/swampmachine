@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import net.kiberion.persistence.spring.AbstractInMemoryDBMybatisConfiguration;
-import net.kiberion.persistence.test.mybatis.LanguageMapper;
-import net.kiberion.persistence.test.mybatis.TestMybatisDao;
+import net.kiberion.persistence.test.mybatis.entities.LanguageMapper;
+import net.kiberion.persistence.test.mybatis.entities.TestMybatisDao;
 import net.kiberion.utils.InlineGList;
 
 @Configuration
