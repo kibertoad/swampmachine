@@ -33,7 +33,6 @@ public abstract class AbstractScriptTest {
 
     @Test
     public void testThreadSafety() {
-
         final AtomicInteger counter = new AtomicInteger();
         
         log.info("==========================");

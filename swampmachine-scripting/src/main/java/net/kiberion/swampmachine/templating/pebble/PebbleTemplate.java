@@ -9,6 +9,13 @@ import com.mitchellbosecke.pebble.error.PebbleException;
 
 import net.kiberion.swampmachine.api.templating.Template;
 
+/**
+ * Pebble-based template implementation.
+ * @see <a href="https://github.com/PebbleTemplates</a>
+ * 
+ * @author kibertoad
+ *
+ */
 public class PebbleTemplate implements Template {
 
     private final com.mitchellbosecke.pebble.template.PebbleTemplate template;

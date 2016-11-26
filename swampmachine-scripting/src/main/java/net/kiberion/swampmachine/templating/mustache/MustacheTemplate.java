@@ -9,6 +9,13 @@ import com.github.mustachejava.Mustache;
 
 import net.kiberion.swampmachine.api.templating.Template;
 
+/**
+ * Mustache-based template implementation.
+ * @see <a href="https://github.com/spullara/mustache.java</a>
+ * 
+ * @author kibertoad
+ *
+ */
 public class MustacheTemplate implements Template{
 
     private final Mustache mustache;
