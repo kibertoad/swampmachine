@@ -1,7 +1,6 @@
 package net.kiberion.swampmachine.scripting;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -14,11 +13,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
+import net.kiberion.swampmachine.api.scripting.ScriptEntityFactory;
+import net.kiberion.swampmachine.api.scripting.ScriptParser;
 import net.kiberion.swampmachine.api.scripting.SwampBinding;
 import net.kiberion.swampmachine.api.scripting.SwampScript;
 import net.kiberion.swampmachine.api.scripting.SwampScriptInvokationResult;
-import net.kiberion.swampmachine.factories.ScriptEntityFactory;
-import net.kiberion.swampmachine.scripting.entities.TestCaster;
+import net.kiberion.swampmachine.scripting.common.TestCaster;
 import net.kiberion.swampmachine.utils.common.StopWatch;
 
 public abstract class AbstractScriptTest {
@@ -90,7 +90,7 @@ public abstract class AbstractScriptTest {
             stopWatchInit.start();
         }
 
-        AbstractScriptParser invoker = getEntityFactory().getParserInstance();
+        ScriptParser invoker = getEntityFactory().getParserInstance();
         List<SwampScript> scripts = invoker.parseScriptsFromPath(getPathToTestResourcres());
         if (writeLogs) {
             // Measure script initialization time

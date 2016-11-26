@@ -5,8 +5,8 @@ import java.util.Map;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import net.kiberion.swampmachine.api.scripting.ScriptEntityFactory;
 import net.kiberion.swampmachine.api.scripting.SwampBinding;
-import net.kiberion.swampmachine.factories.ScriptEntityFactory;
 import net.kiberion.swampmachine.invokables.ScriptInvokable;
 
 public class ScriptTransformer extends AbstractTransformer<String, ScriptInvokable> {
