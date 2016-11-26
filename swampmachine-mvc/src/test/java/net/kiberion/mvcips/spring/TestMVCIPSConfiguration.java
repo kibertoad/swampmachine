@@ -4,8 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import net.kiberion.swampmachine.api.scripting.SwampBinding;
 import net.kiberion.swampmachine.factories.ScriptEntityFactory;
-import net.kiberion.swampmachine.groovy.GroovyEntityFactory;
 import net.kiberion.swampmachine.gui.view.StateView;
 import net.kiberion.swampmachine.mvcips.spring.CommonMVCIPSConfiguration;
 import net.kiberion.swampmachine.mvcips.states.GameState;
@@ -13,6 +13,7 @@ import net.kiberion.swampmachine.mvcips.states.annotations.LoadingState;
 import net.kiberion.swampmachine.mvcips.states.annotations.NewGameState;
 import net.kiberion.swampmachine.mvcips.states.annotations.StartingState;
 import net.kiberion.swampmachine.mvcips.states.annotations.State;
+import net.kiberion.swampmachine.scripting.AbstractScriptParser;
 
 @Configuration
 @Import({ CommonMVCIPSConfiguration.class })
@@ -42,12 +43,22 @@ public class TestMVCIPSConfiguration {
     public GameState state4() {
         return new ThirdState();
     }
-    
+
     @Bean
     public ScriptEntityFactory scriptEntityFactory() {
-        return new GroovyEntityFactory();
+        return new ScriptEntityFactory() {
+            @Override
+            public SwampBinding getBindingInstance() {
+                return null;
+            }
+
+            @Override
+            public AbstractScriptParser getParserInstance() {
+                return null;
+            }
+        };
     }
-    
+
     ///////////////
     // Test states//
     ///////////////
@@ -94,5 +105,5 @@ public class TestMVCIPSConfiguration {
         }
 
     }
-    
+
 }

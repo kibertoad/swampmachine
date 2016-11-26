@@ -28,7 +28,7 @@ import net.kiberion.swampmachine.mvcips.states.annotations.StateController;
 import net.kiberion.swampmachine.mvcips.states.annotations.StateControllers;
 import net.kiberion.swampmachine.mvcips.states.api.AbstractStateController;
 import net.kiberion.swampmachine.mvcips.utils.UpdatableStageWrapper;
-import net.kiberion.swampmachine.processors.TimedProcessor;
+import net.kiberion.swampmachine.processors.AbstractTimedProcessor;
 
 /**
  * MVCIPS stands for "Model View Controller Input adapter Processor State"
@@ -64,7 +64,7 @@ public abstract class GameState implements Screen, InitializingBean {
     public List<RealtimeUpdatable> entitiesForUpdate = new ArrayList<>();
 
     @Getter
-    private final List<TimedProcessor> realtimeProcessors = new ArrayList<>();
+    private final List<AbstractTimedProcessor> realtimeProcessors = new ArrayList<>();
 
     @Getter
     private final List<AbstractStateController> stateControllers = new ArrayList<>();
@@ -167,7 +167,7 @@ public abstract class GameState implements Screen, InitializingBean {
             entity.update(delta);
         }
 
-        for (TimedProcessor processor : realtimeProcessors) {
+        for (AbstractTimedProcessor processor : realtimeProcessors) {
             processor.update(delta);
         }
 

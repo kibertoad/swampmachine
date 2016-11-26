@@ -29,24 +29,6 @@
             </plugin>
 
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <useUniqueVersions>false</useUniqueVersions>
-                        </manifest>
-                    </archive>
-
-                    <includes>
-                        <include>net/kiberion/**</include>
-                    </includes>
-                </configuration>
-            </plugin>
-
-            <plugin>
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
                     <!-- During release:perform, enable the "release" profile -->
@@ -102,10 +84,6 @@
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.googlecode.soundlibs</groupId>
-            <artifactId>jorbis</artifactId>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>

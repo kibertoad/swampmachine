@@ -6,7 +6,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import net.kiberion.swampmachine.processors.TimedProcessor;
+import net.kiberion.swampmachine.processors.AbstractTimedProcessor;
 
 /**
  * This annotation should be applied to states that have realtime processors.
@@ -24,6 +24,6 @@ public @interface RealtimeProcessors {
      * Beans of what classes should be autowired as realtime processors for annotated state
      * @return
      */
-    Class<? extends TimedProcessor>[] beansOfClasses() default {};
+    Class<? extends AbstractTimedProcessor>[] beansOfClasses() default {};
     
 }

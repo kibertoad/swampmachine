@@ -13,7 +13,7 @@ import net.kiberion.swampmachine.mvcips.states.annotations.NewGameState;
 import net.kiberion.swampmachine.mvcips.states.annotations.RealtimeProcessors;
 import net.kiberion.swampmachine.mvcips.states.annotations.StartingState;
 import net.kiberion.swampmachine.mvcips.states.util.StateRegistry;
-import net.kiberion.swampmachine.processors.TimedProcessor;
+import net.kiberion.swampmachine.processors.AbstractTimedProcessor;
 
 public class StateSpringLoader {
 
@@ -60,8 +60,8 @@ public class StateSpringLoader {
             // Attach realtime processors
             RealtimeProcessors realtimeProcessors = bean.getClass().getAnnotation(RealtimeProcessors.class);
             if (realtimeProcessors != null) {
-                for (Class<? extends TimedProcessor> clazz : realtimeProcessors.beansOfClasses()) {
-                    TimedProcessor processor = context.getBean(clazz);
+                for (Class<? extends AbstractTimedProcessor> clazz : realtimeProcessors.beansOfClasses()) {
+                    AbstractTimedProcessor processor = context.getBean(clazz);
                     bean.getRealtimeProcessors().add(processor);
                 }
             }

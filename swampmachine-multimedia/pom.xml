@@ -29,24 +29,6 @@
             </plugin>
 
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <useUniqueVersions>false</useUniqueVersions>
-                        </manifest>
-                    </archive>
-
-                    <includes>
-                        <include>net/kiberion/**</include>
-                    </includes>
-                </configuration>
-            </plugin>
-
-            <plugin>
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
                     <!-- During release:perform, enable the "release" profile -->
@@ -79,10 +61,6 @@
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
-            <artifactId>gdx-freetype</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-freetype-platform</artifactId>
             <classifier>natives-desktop</classifier>
         </dependency>
@@ -98,16 +76,14 @@
         </dependency>
 
         <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.googlecode.soundlibs</groupId>
-            <artifactId>jorbis</artifactId>
+            <groupId>com.github.trilarion</groupId>
+            <artifactId>vorbis-support</artifactId>
+            <version>1.1.0</version>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>

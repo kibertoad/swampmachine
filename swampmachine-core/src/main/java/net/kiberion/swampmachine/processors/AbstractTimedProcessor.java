@@ -10,7 +10,7 @@ import net.kiberion.swampmachine.api.invokables.Invokable;
  * @author kibertoad
  *
  */
-public abstract class TimedProcessor implements RealtimeUpdatable, Invokable{
+public abstract class AbstractTimedProcessor implements RealtimeUpdatable, Invokable{
 
     @Setter
     @Getter

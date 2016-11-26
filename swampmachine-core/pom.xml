@@ -44,12 +44,6 @@
 
                 <executions>
                     <execution>
-                        <id>jar</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                    <execution>
                         <id>testjar</id>
                         <goals>
                             <goal>test-jar</goal>
@@ -57,7 +51,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
@@ -120,17 +113,8 @@
             <artifactId>swampmachine-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.googlecode.soundlibs</groupId>
-            <artifactId>jorbis</artifactId>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>

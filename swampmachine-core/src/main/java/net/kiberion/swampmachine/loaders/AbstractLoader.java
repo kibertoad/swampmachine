@@ -18,7 +18,9 @@ import net.kiberion.swampmachine.entities.common.api.EntityModelDescriptor;
 import net.kiberion.swampmachine.utils.MapUtils;
 
 /**
- * 
+ * Synchronous loader that fills target map with data from source.
+ * Is supposed to get all necessary configuration during construction.
+ * Actual loading is invoked via no-args method
  * 
  * @author kibertoad
  *

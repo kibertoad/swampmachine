@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import net.kiberion.swampmachine.blueprints.arcade.controller.api.CreatureMovementController;
 import net.kiberion.swampmachine.blueprints.arcade.entities.Bullet;
 import net.kiberion.swampmachine.blueprints.arcade.entityblocks.BulletHolderBlock;
-import net.kiberion.swampmachine.processors.TimedProcessor;
+import net.kiberion.swampmachine.processors.AbstractTimedProcessor;
 
-public class RealtimeBulletProcessor extends TimedProcessor {
+public class RealtimeBulletProcessor extends AbstractTimedProcessor {
 
     @Autowired
     private BulletHolderBlock bulletHolder;
