@@ -1,4 +1,4 @@
-package net.kiberion.utils;
+package net.kiberion.swampmachine.utils.common;
 
 public class NumberUtils {
 

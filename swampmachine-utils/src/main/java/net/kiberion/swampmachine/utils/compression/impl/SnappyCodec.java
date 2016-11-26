@@ -1,4 +1,4 @@
-package net.kiberion.utils.compression.impl;
+package net.kiberion.swampmachine.utils.compression.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,7 +9,7 @@ import org.apache.commons.lang3.Validate;
 import org.xerial.snappy.SnappyInputStream;
 import org.xerial.snappy.SnappyOutputStream;
 
-import net.kiberion.utils.compression.api.Codec;
+import net.kiberion.swampmachine.utils.compression.api.Codec;
 
 public class SnappyCodec implements Codec {
 

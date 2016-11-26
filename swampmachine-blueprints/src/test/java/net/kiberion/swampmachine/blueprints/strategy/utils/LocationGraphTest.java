@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import net.kiberion.swampmachine.blueprints.strategy.path.LocationGraph;
 import net.kiberion.swampmachine.utils.AssertUtils;
-import net.kiberion.utils.InlineGList;
+import net.kiberion.swampmachine.utils.common.InlineGList;
 
 public class LocationGraphTest {
 

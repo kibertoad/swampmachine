@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
-import net.kiberion.entities.common.api.ParametrizedRecalculable;
+import net.kiberion.swampmachine.api.common.ParametrizedRecalculable;
 import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entityblocks.api.EntityProvider;
 import net.kiberion.swampmachine.entityblocks.api.IdHolderBlock;

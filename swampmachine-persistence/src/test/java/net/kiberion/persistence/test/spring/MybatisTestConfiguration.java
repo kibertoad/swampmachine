@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
 import net.kiberion.persistence.spring.AbstractInMemoryDBMybatisConfiguration;
 import net.kiberion.persistence.test.mybatis.entities.LanguageMapper;
 import net.kiberion.persistence.test.mybatis.entities.TestMybatisDao;
-import net.kiberion.utils.InlineGList;
+import net.kiberion.swampmachine.utils.common.InlineGList;
 
 @Configuration
 @Import({net.kiberion.swampmachine.spring.TestCoreConfiguration.class}) 

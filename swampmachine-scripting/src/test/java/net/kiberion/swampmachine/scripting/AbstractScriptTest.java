@@ -19,7 +19,7 @@ import net.kiberion.swampmachine.api.scripting.SwampScript;
 import net.kiberion.swampmachine.api.scripting.SwampScriptInvokationResult;
 import net.kiberion.swampmachine.factories.ScriptEntityFactory;
 import net.kiberion.swampmachine.scripting.entities.TestCaster;
-import net.kiberion.utils.StopWatch;
+import net.kiberion.swampmachine.utils.common.StopWatch;
 
 public abstract class AbstractScriptTest {
 

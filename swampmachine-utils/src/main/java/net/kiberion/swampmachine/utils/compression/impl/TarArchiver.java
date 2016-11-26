@@ -1,4 +1,4 @@
-package net.kiberion.utils.compression.impl;
+package net.kiberion.swampmachine.utils.compression.impl;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,7 +12,7 @@ import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 import org.apache.commons.compress.archivers.tar.TarArchiveOutputStream;
 import org.apache.commons.io.IOUtils;
 
-import net.kiberion.utils.compression.api.Archiver;
+import net.kiberion.swampmachine.utils.compression.api.Archiver;
 
 public class TarArchiver implements Archiver {
 

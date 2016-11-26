@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 import net.kiberion.swampmachine.utils.SetUtils;
-import net.kiberion.utils.InlineGList;
+import net.kiberion.swampmachine.utils.common.InlineGList;
 
 public class CompositionElementDeserializer extends JsonDeserializer<CompositionElement> {
 

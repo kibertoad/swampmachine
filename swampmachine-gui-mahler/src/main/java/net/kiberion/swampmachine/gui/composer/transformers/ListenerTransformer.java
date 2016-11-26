@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import net.kiberion.swampmachine.annotations.ConstructableEntity;
 import net.kiberion.swampmachine.registries.ListenerClassRegistry;
-import net.kiberion.utils.ReflectionUtils;
+import net.kiberion.swampmachine.utils.common.ReflectionUtils;
 
 public class ListenerTransformer extends AbstractTransformer<Map<String, Object>, ChangeListener> {
 

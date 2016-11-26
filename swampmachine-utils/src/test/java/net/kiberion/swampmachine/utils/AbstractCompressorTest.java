@@ -14,10 +14,10 @@ import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-import net.kiberion.utils.StopWatch;
-import net.kiberion.utils.compression.api.Codec;
-import net.kiberion.utils.compression.api.Compressor;
-import net.kiberion.utils.compression.api.Decompressor;
+import net.kiberion.swampmachine.utils.common.StopWatch;
+import net.kiberion.swampmachine.utils.compression.api.Codec;
+import net.kiberion.swampmachine.utils.compression.api.Compressor;
+import net.kiberion.swampmachine.utils.compression.api.Decompressor;
 
 public abstract class AbstractCompressorTest {
 

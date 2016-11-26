@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import net.kiberion.swampmachine.api.templating.Template;
 import net.kiberion.swampmachine.api.templating.TemplateFactory;
-import net.kiberion.utils.StopWatch;
+import net.kiberion.swampmachine.utils.common.StopWatch;
 
 public abstract class AbstractTemplateTest {
 

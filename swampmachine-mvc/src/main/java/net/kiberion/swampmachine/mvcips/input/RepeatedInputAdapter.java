@@ -2,7 +2,7 @@ package net.kiberion.swampmachine.mvcips.input;
 
 import com.badlogic.gdx.Input;
 
-import net.kiberion.entities.common.api.RealtimeUpdatable;
+import net.kiberion.swampmachine.api.common.RealtimeUpdatable;
 
 
 public class RepeatedInputAdapter extends GenericInputAdapter implements RealtimeUpdatable{

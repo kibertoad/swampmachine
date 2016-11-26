@@ -22,8 +22,8 @@ import net.kiberion.swampmachine.assets.loaders.util.FileReaderFactory;
 import net.kiberion.swampmachine.assets.readers.AbstractFileReader;
 import net.kiberion.swampmachine.assets.util.LoadOnStartup;
 import net.kiberion.swampmachine.utils.SetUtils;
+import net.kiberion.swampmachine.utils.common.FilePathUtils;
 import net.kiberion.tiled.MapRegistry;
-import net.kiberion.utils.FilePathUtils;
 
 @LoadOnStartup
 public class MapLoader extends AbstractAsyncLoader {

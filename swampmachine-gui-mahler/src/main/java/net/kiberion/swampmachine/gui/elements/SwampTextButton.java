@@ -13,9 +13,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-import net.kiberion.entities.common.api.Toggleable;
 import net.kiberion.swampmachine.annotations.InjectTransformedProperty;
 import net.kiberion.swampmachine.annotations.NodeId;
+import net.kiberion.swampmachine.api.common.Toggleable;
 import net.kiberion.swampmachine.api.elements.ButtonEntry;
 import net.kiberion.swampmachine.api.invokables.Invokable;
 import net.kiberion.swampmachine.assets.UiManager;

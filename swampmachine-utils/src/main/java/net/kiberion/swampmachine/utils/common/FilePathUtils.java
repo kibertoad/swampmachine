@@ -1,4 +1,4 @@
-package net.kiberion.utils;
+package net.kiberion.swampmachine.utils.common;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

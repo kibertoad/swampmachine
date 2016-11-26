@@ -2,7 +2,7 @@ package net.kiberion.swampmachine.processors;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.kiberion.entities.common.api.RealtimeUpdatable;
+import net.kiberion.swampmachine.api.common.RealtimeUpdatable;
 import net.kiberion.swampmachine.api.invokables.Invokable;
 
 /**

@@ -14,7 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.kiberion.swampmachine.api.scripting.SwampScript;
-import net.kiberion.utils.FilePathUtils;
+import net.kiberion.swampmachine.utils.common.FilePathUtils;
 
 public abstract class AbstractScriptParser {
 

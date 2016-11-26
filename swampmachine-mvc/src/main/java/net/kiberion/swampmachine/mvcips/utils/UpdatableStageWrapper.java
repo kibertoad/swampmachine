@@ -2,7 +2,7 @@ package net.kiberion.swampmachine.mvcips.utils;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-import net.kiberion.entities.common.api.RealtimeUpdatable;
+import net.kiberion.swampmachine.api.common.RealtimeUpdatable;
 
 public class UpdatableStageWrapper implements RealtimeUpdatable{
 

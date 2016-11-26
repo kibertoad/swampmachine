@@ -10,7 +10,7 @@ import net.kiberion.swampmachine.annotations.ConstructableEntity;
 import net.kiberion.swampmachine.api.invokables.Invokable;
 import net.kiberion.swampmachine.factories.InvokablesFactory;
 import net.kiberion.swampmachine.registries.EventClassRegistry;
-import net.kiberion.utils.ReflectionUtils;
+import net.kiberion.swampmachine.utils.common.ReflectionUtils;
 
 public class InvokableEventTransformer extends AbstractTransformer<Map<String, Object>, Invokable> {
 

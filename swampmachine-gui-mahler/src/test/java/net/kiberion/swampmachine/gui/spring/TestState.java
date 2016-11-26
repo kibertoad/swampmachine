@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Map;
 
 import lombok.Getter;
-import net.kiberion.swampmachine.api.CompositionConsumer;
+import net.kiberion.swampmachine.api.composition.CompositionConsumer;
 import net.kiberion.swampmachine.gui.annotations.Bound;
 import net.kiberion.swampmachine.gui.annotations.BoundCompositions;
 import net.kiberion.swampmachine.gui.api.GenericScene;

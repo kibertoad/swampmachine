@@ -5,7 +5,7 @@ import java.util.List;
 import net.kiberion.swampmachine.factories.EntityFactory;
 import net.kiberion.swampmachine.factories.entities.DummyFactory.Dummy;
 import net.kiberion.swampmachine.factories.params.CommonSpawnParams;
-import net.kiberion.utils.InlineGList;
+import net.kiberion.swampmachine.utils.common.InlineGList;
 
 public class DummyFactory implements EntityFactory<Dummy, CommonSpawnParams> {
 

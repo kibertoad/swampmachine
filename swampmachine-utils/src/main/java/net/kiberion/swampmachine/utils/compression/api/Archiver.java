@@ -1,4 +1,4 @@
-package net.kiberion.utils.compression.api;
+package net.kiberion.swampmachine.utils.compression.api;
 
 import java.io.File;
 import java.io.InputStream;

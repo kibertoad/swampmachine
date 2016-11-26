@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.context.ApplicationContext;
 
-import net.kiberion.swampmachine.api.CompositionConsumer;
+import net.kiberion.swampmachine.api.composition.CompositionConsumer;
 import net.kiberion.swampmachine.gui.annotations.BoundCompositions;
 
 public class SpringCompositionConsumerExtractor {

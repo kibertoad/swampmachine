@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
 import lombok.Getter;
-import net.kiberion.entities.common.api.ParametrizedRecalculable;
+import net.kiberion.swampmachine.api.common.ParametrizedRecalculable;
 import net.kiberion.swampmachine.entityblocks.api.IdHolderBlock;
 import net.kiberion.swampmachine.gui.elements.SwampImage;
 import net.kiberion.swampmachine.gui.elements.SwampLabel;

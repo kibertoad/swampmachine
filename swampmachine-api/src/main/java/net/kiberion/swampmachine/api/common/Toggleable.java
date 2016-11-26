@@ -1,4 +1,4 @@
-package net.kiberion.entities.common.api;
+package net.kiberion.swampmachine.api.common;
 
 
 /**

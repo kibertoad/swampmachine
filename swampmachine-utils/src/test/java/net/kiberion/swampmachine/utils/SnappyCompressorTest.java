@@ -1,7 +1,7 @@
 package net.kiberion.swampmachine.utils;
 
-import net.kiberion.utils.compression.api.Codec;
-import net.kiberion.utils.compression.impl.SnappyCodec;
+import net.kiberion.swampmachine.utils.compression.api.Codec;
+import net.kiberion.swampmachine.utils.compression.impl.SnappyCodec;
 
 public class SnappyCompressorTest extends AbstractCompressorTest{
 

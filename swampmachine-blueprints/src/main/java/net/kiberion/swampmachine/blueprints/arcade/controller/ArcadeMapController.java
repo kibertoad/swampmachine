@@ -31,7 +31,6 @@ public class ArcadeMapController<TModel extends AbstractTiledMapModel<? extends 
     @Autowired
     protected CreatureCollisionProcessor<TModel> creatureCollisisionProcessor;
     
-    //Needs binding code like binder.bind(new TypeLiteral<AbstractTiledMapView<MapModel>>(){}).to(MapView.class);
     @Autowired
     protected AbstractTiledMapView<TModel> view;
 

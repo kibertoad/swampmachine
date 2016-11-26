@@ -1,4 +1,4 @@
-package net.kiberion.utils.compression.impl;
+package net.kiberion.swampmachine.utils.compression.impl;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -16,7 +16,7 @@ import org.apache.commons.compress.archivers.sevenz.SevenZOutputFile;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
-import net.kiberion.utils.compression.api.Codec;
+import net.kiberion.swampmachine.utils.compression.api.Codec;
 
 public class SevenZCodec implements Codec {
 

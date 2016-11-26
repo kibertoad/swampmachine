@@ -1,4 +1,4 @@
-package net.kiberion.utils;
+package net.kiberion.swampmachine.utils.common;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;

@@ -8,7 +8,7 @@ import org.apache.commons.lang3.Validate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.kiberion.swampmachine.api.CompositionConsumer;
+import net.kiberion.swampmachine.api.composition.CompositionConsumer;
 import net.kiberion.swampmachine.gui.annotations.BoundCompositions;
 import net.kiberion.swampmachine.gui.composer.Composition;
 

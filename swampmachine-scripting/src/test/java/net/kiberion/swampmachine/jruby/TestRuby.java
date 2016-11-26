@@ -16,7 +16,7 @@ import org.junit.Test;
 
 import net.kiberion.swampmachine.factories.ScriptEntityFactory;
 import net.kiberion.swampmachine.scripting.AbstractScriptTest;
-import net.kiberion.utils.FilePathUtils;
+import net.kiberion.swampmachine.utils.common.FilePathUtils;
 
 
 public class TestRuby extends AbstractScriptTest{

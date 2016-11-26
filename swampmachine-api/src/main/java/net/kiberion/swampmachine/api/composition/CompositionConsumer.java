@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.api;
+package net.kiberion.swampmachine.api.composition;
 
 import java.util.Map;
 

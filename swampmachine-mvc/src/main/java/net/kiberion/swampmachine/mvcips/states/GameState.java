@@ -18,7 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.kiberion.entities.common.api.RealtimeUpdatable;
+import net.kiberion.swampmachine.api.common.RealtimeUpdatable;
 import net.kiberion.swampmachine.api.scripting.SwampBinding;
 import net.kiberion.swampmachine.factories.ScriptEntityFactory;
 import net.kiberion.swampmachine.gui.view.AbstractStateView;

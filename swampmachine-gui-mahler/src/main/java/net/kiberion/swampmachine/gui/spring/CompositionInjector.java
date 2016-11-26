@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-import net.kiberion.swampmachine.api.CompositionConsumer;
+import net.kiberion.swampmachine.api.composition.CompositionConsumer;
 import net.kiberion.swampmachine.gui.composer.Composition;
 import net.kiberion.swampmachine.gui.composer.CompositionRegistry;
 import net.kiberion.swampmachine.gui.composer.populators.Populator;

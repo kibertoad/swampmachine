@@ -4,7 +4,7 @@ import java.nio.file.Path;
 
 import net.kiberion.swampmachine.factories.ScriptEntityFactory;
 import net.kiberion.swampmachine.scripting.AbstractScriptTest;
-import net.kiberion.utils.FilePathUtils;
+import net.kiberion.swampmachine.utils.common.FilePathUtils;
 
 
 public class TestPython extends AbstractScriptTest{

@@ -5,7 +5,7 @@ import java.util.Set;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-import net.kiberion.swampmachine.api.CompositionConsumer;
+import net.kiberion.swampmachine.api.composition.CompositionConsumer;
 import net.kiberion.swampmachine.api.scripting.SwampBinding;
 
 public interface StateView extends CompositionConsumer {

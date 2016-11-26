@@ -10,7 +10,7 @@ import net.kiberion.swampmachine.annotations.InjectTransformedProperty;
 import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
 import net.kiberion.swampmachine.gui.elements.SwampTextButton;
 import net.kiberion.swampmachine.gui.utils.InjectionUtils;
-import net.kiberion.utils.ReflectionUtils;
+import net.kiberion.swampmachine.utils.common.ReflectionUtils;
 
 public class ButtonTransformer extends AbstractTransformer<Map<String, Object>, SwampTextButton<MetadataHolderBlock>>{
 

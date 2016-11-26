@@ -28,7 +28,7 @@ import net.kiberion.swampmachine.gui.composer.transformers.TransformerHelper;
 import net.kiberion.swampmachine.gui.composition.elements.CompositionElement;
 import net.kiberion.swampmachine.gui.composition.elements.ElementPrototypeRegistry;
 import net.kiberion.swampmachine.gui.utils.InjectionUtils;
-import net.kiberion.utils.ReflectionUtils;
+import net.kiberion.swampmachine.utils.common.ReflectionUtils;
 
 public class GdxElementFactory {
 

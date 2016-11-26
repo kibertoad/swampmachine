@@ -5,7 +5,7 @@ import java.util.Collection;
 
 import org.reflections.ReflectionUtils;
 
-import net.kiberion.swampmachine.api.CompositionConsumer;
+import net.kiberion.swampmachine.api.composition.CompositionConsumer;
 import net.kiberion.swampmachine.gui.annotations.Bound;
 import net.kiberion.swampmachine.utils.predicates.HasAnnotationPredicate;
 
