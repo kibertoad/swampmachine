@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 
 /**
  * Link to a specific JSON Node
+ * When deserializing JSON, described entity will be passed to the method with this annotation
  * @author kibertoad
  *
  */

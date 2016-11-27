@@ -3,6 +3,8 @@ package net.kiberion.swampmachine.gui.elements;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.Validate;
+
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
@@ -41,13 +43,14 @@ public class SwampTextButton <T extends MetadataHolderBlock> extends TextButton 
     }
 
     public SwampTextButton<T> addListenerChain(ChangeListener listener) {
+        Validate.notNull(listener);
         addListener(listener);
         return this;
     }
 
     public SwampTextButton (String text, Invokable invokeEffect) {
         super(text, UiManager.instance().getDefaultSkin());
-        this.invokeEffects.add(invokeEffect);
+        addInvokable (invokeEffect);
     }
 
     public SwampTextButton(String text, T setNode) {
@@ -78,6 +81,7 @@ public class SwampTextButton <T extends MetadataHolderBlock> extends TextButton 
     @NodeId (id = "onClickEvent")
     @InjectTransformedProperty
     public SwampTextButton<T> addInvokable(Invokable invokableEffect) {
+        Validate.notNull(invokableEffect);
         invokeEffects.add(invokableEffect);
         return this;
     }
@@ -145,7 +149,6 @@ public class SwampTextButton <T extends MetadataHolderBlock> extends TextButton 
     */
 
     public void addHideWindowEffect(final Window window, final int swooshToX, final int swooshToY) {
-
         addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -170,12 +173,6 @@ public class SwampTextButton <T extends MetadataHolderBlock> extends TextButton 
     public boolean isEnabled() {
         return (isVisible());
     }
-
-    /*
-    @Override
-    public void update() {
-    }
-    */
 
     public void clearConditions() {
         changeConditions.clear();
