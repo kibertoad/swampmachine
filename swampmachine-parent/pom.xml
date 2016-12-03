@@ -417,6 +417,18 @@
                 <version>1.0.0</version>
             </dependency>
             <dependency>
+                <groupId>com.github.spullara.mustache.java</groupId>
+                <artifactId>compiler</artifactId>
+                <version>0.9.4</version>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>com.mitchellbosecke</groupId>
+                <artifactId>pebble</artifactId>
+                <version>2.3.0</version>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>1.16.10</version>

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.logging.log4j.LogManager;
@@ -22,6 +23,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.Setter;
+import net.kiberion.swampmachine.api.templating.Template;
+import net.kiberion.swampmachine.api.templating.TemplateFactory;
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
 import net.kiberion.swampmachine.gui.templates.ElementTemplate;
 import net.kiberion.swampmachine.gui.templates.ElementTemplateRegistry;
@@ -33,6 +36,9 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
     // Should be set by template registry itself after it is initialized.
     @Setter
     private static ElementTemplateRegistry templateRegistry;
+    
+    @Setter
+    private static TemplateFactory templateFactory;
 
     private static final Logger log = LogManager.getLogger();
 
@@ -57,18 +63,26 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
         }
     }
 
+    private String getValueOrOverride (Entry<String, JsonNode> subNode, Map<String, Object> valueMap) {
+        if (MapUtils.isEmpty(valueMap) || templateFactory == null) {
+            return subNode.getValue().asText();
+        }
+        Template valueTemplate = templateFactory.produceTemplate(subNode.getValue().asText());
+        return valueTemplate.eval(valueMap);
+    }
+    
     private void processConsumedProperty(CompositionElement result, Entry<String, JsonNode> subNode,
-            ObjectMapper mapper) throws JsonProcessingException {
+            ObjectMapper mapper, Map<String, Object> valueMap) throws JsonProcessingException {
         if (subNode.getKey().equals("position")) {
             setPosition(result, subNode);
         } else if (subNode.getKey().equals("buttons")) {
             result.getProperties().put(subNode.getKey(), mapper.treeToValue(subNode.getValue(), List.class));
         } else {
-            result.getProperties().put(subNode.getKey(), subNode.getValue().asText());
+            result.getProperties().put(subNode.getKey(), getValueOrOverride (subNode, valueMap));
         }
     }
 
-    private CompositionElement deserializeNonTemplate(JsonNode node) throws JsonProcessingException {
+    private CompositionElement deserializeNonTemplate(JsonNode node, Map<String, Object> valueMap) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         CompositionElement result = new CompositionElement();
         PropertyAccessor beanAccessor = PropertyAccessorFactory.forDirectFieldAccess(result);
@@ -83,7 +97,7 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
             } else if (consumedIntProperties.contains(subNode.getKey())) {
                 result.getProperties().put(subNode.getKey(), mapper.treeToValue(subNode.getValue(), Integer.class));
             } else if (consumedProperties.contains(subNode.getKey())) {
-                processConsumedProperty(result, subNode, mapper);
+                processConsumedProperty(result, subNode, mapper, valueMap);
             } else if (supportedTextProperties.contains(subNode.getKey())) {
                 beanAccessor.setPropertyValue(subNode.getKey(), subNode.getValue().asText());
             } else if (supportedIntProperties.contains(subNode.getKey())) {
@@ -97,7 +111,9 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
         return result;
     }
 
+    @SuppressWarnings("unchecked")
     private CompositionElement deserializeTemplate(JsonNode node) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
         String templateId = node.get("templateId").asText();
         Validate.notBlank(templateId);
         Validate.notNull(templateRegistry);
@@ -105,8 +121,9 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
         Validate.notNull(template, "Unknown template: " + templateId + ". Known templates: "
                 + templateRegistry.getElementTemplates().keySet());
         JsonNode templateNode = template.getTemplate();
+        Map<String, Object> params = mapper.treeToValue(node.get("parameters"), Map.class);
 
-        CompositionElement result = deserializeNonTemplate(templateNode);
+        CompositionElement result = deserializeNonTemplate(templateNode, params);
         String id = node.get("id").asText();
         Validate.notBlank(id);
         result.setId(id);
@@ -119,7 +136,7 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
         JsonNode node = jp.getCodec().readTree(jp);
         String type = node.get("type").asText();
         if (!StringUtils.equals(type, "template")) {
-            return deserializeNonTemplate(node);
+            return deserializeNonTemplate(node, null);
         } else {
             log.info("is template");
             return deserializeTemplate(node);

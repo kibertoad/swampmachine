@@ -36,6 +36,7 @@ public class CompositionLoaderTest extends MahlerContextBasedTest{
         CompositionElement compositionFromTemplate = composition.getElementMap().get("statElement");
         assertNotNull (compositionFromTemplate);
         assertEquals ("swPlusMinusComposition", compositionFromTemplate.getType());
+        assertEquals ("controller.getStat('intelligence')", compositionFromTemplate.getProperties().get("labelValue"));
     }
     
 }
