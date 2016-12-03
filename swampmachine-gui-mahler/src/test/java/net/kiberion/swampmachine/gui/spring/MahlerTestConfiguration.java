@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Import;
 import net.kiberion.swampmachine.assets.readers.ReaderHelper;
 import net.kiberion.swampmachine.gui.composer.CompositionLoader;
 import net.kiberion.swampmachine.gui.composition.elements.ElementPrototypeRegistry;
+import net.kiberion.swampmachine.gui.templates.ElementTemplateLoader;
 import net.kiberion.swampmachine.spring.CommonLoaderConfiguration;
 import net.kiberion.swampmachine.spring.TestCoreConfiguration;
 
@@ -27,12 +28,17 @@ public class MahlerTestConfiguration extends TestCoreConfiguration {
 
     @Bean
     public CompositionLoader compositionLoader() {
-        return new CompositionLoader();
+        return new CompositionLoader(100);
     }
 
+    @Bean
+    public ElementTemplateLoader elementTemplateLoader() {
+        return new ElementTemplateLoader(50);
+    }
+    
     @Bean
     public ElementPrototypeRegistry elementRegistry() {
         return new ElementPrototypeRegistry("net.kiberion.swampmachine.gui.elements");
     }
-
+    
 }

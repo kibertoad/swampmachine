@@ -40,6 +40,13 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
 
     private static final Set<String> mandatoryTextProperties = SetUtils.buildSet("id", "type");
 
+    private void setPosition(CompositionElement result, Entry<String, JsonNode> sourceNode) {
+        if (sourceNode.getValue().size() == 2) {
+            result.setPosition(
+                    new CommonPosition(sourceNode.getValue().get(0).asInt(), sourceNode.getValue().get(1).asInt()));
+        }
+    }
+
     @Override
     public CompositionElement deserialize(JsonParser jp, DeserializationContext ctxt)
             throws IOException, JsonProcessingException {
@@ -61,8 +68,7 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
                 result.getProperties().put(subNode.getKey(), mapper.treeToValue(subNode.getValue(), Integer.class));
             } else if (consumedProperties.contains(subNode.getKey())) {
                 if (subNode.getKey().equals("position")) {
-                    result.setPosition(
-                            new CommonPosition(subNode.getValue().get(0).asInt(), subNode.getValue().get(1).asInt()));
+                    setPosition(result, subNode);
                 } else if (subNode.getKey().equals("buttons")) {
                     result.getProperties().put(subNode.getKey(), mapper.treeToValue(subNode.getValue(), List.class));
                 } else {
