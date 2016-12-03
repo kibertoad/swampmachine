@@ -40,8 +40,11 @@ public class CompositionLoaderTest extends MahlerContextBasedTest{
         assertNotNull (compositionFromTemplate);
         assertEquals ("swPlusMinusComposition", compositionFromTemplate.getType());
         assertEquals ("controller.getStat('intelligence')", compositionFromTemplate.getProperties().get("labelValue"));
+        assertEquals ("Intelligence", compositionFromTemplate.getProperties().get("labelText"));
         Map<String, Object> plusMap = (Map<String, Object>) compositionFromTemplate.getProperties().get("plus");
         assertEquals ("controller.incrementStat('intelligence')", plusMap.get("onClickScript"));
+        assertNotNull (compositionFromTemplate.getPosition());
+        assertEquals (710, compositionFromTemplate.getPosition().getIntX());
     }
     
 }

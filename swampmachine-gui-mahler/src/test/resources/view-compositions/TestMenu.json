@@ -14,9 +14,12 @@
             "type":"template",
             "templateId":"plusMinusTemplate",
             "parameters":{  
-               "statName":"intelligence",
-               "position":[]
+               "statName":"intelligence"
             },
+            "position":[  
+               710,
+               250
+            ],
             "id":"statElement"
          }
       ]

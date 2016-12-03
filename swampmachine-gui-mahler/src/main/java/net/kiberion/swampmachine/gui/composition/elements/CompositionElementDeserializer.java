@@ -58,10 +58,9 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
 
     private static final Set<String> mandatoryTextProperties = SetUtils.buildSet("id", "type");
 
-    private void setPosition(CompositionElement result, Entry<String, JsonNode> sourceNode) {
-        if (sourceNode.getValue().size() == 2) {
-            result.setPosition(
-                    new CommonPosition(sourceNode.getValue().get(0).asInt(), sourceNode.getValue().get(1).asInt()));
+    private void setPosition(CompositionElement result, JsonNode sourceNode) {
+        if (sourceNode.size() == 2) {
+            result.setPosition(new CommonPosition(sourceNode.get(0).asInt(), sourceNode.get(1).asInt()));
         }
     }
 
@@ -76,7 +75,7 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
     private void processConsumedProperty(CompositionElement result, Entry<String, JsonNode> subNode,
             Map<String, Object> valueMap) throws JsonProcessingException {
         if (subNode.getKey().equals("position")) {
-            setPosition(result, subNode);
+            setPosition(result, subNode.getValue());
         } else if (subNode.getKey().equals("buttons")) {
             result.getProperties().put(subNode.getKey(), mapper.treeToValue(subNode.getValue(), List.class));
         } else {
@@ -138,6 +137,11 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
         String id = node.get("id").asText();
         Validate.notBlank(id);
         result.setId(id);
+
+        // ToDo temporary solution until LayoutManager is in place
+        JsonNode position = node.get("position");
+        Validate.notNull(position);
+        setPosition(result, position);
         return result;
     }
 

@@ -2,17 +2,13 @@
 {  
    "id":"plusMinusTemplate",
    "mandatoryParameters":[  
-      "statName",
-      "position"
+      "statName"
    ],
    "template":{  
       "type":"swPlusMinusComposition",
       "id":"fitness",
       "labelValue":"controller.getStat('{{statName}}')",
-      "labelText":"Fitness",
-      "position":{  
-
-      },
+      "labelText":"{{statName | capitalize}}",
       "plus":{  
          "text":"+",
          "onClickScript":"controller.incrementStat('{{statName}}')"

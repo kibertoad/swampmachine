@@ -13,7 +13,7 @@ import net.kiberion.swampmachine.spring.TestCoreConfiguration;
 
 @Configuration
 @Import(value = { MahlerCoreConfiguration.class, MahlerGdxConfiguration.class, CommonGuiConfiguration.class,
-        CommonLoaderConfiguration.class, MahlerGroovyConfiguration.class, MahlerMustacheConfiguration.class })
+        CommonLoaderConfiguration.class, MahlerGroovyConfiguration.class, MahlerPebbleConfiguration.class })
 public class MahlerTestConfiguration extends TestCoreConfiguration {
 
     @Bean
