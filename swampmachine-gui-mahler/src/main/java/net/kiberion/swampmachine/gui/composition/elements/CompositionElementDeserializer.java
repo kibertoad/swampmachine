@@ -33,10 +33,12 @@ import net.kiberion.swampmachine.utils.common.InlineGList;
 
 public class CompositionElementDeserializer extends JsonDeserializer<CompositionElement> {
 
+    private static final ObjectMapper mapper = new ObjectMapper();
+
     // Should be set by template registry itself after it is initialized.
     @Setter
     private static ElementTemplateRegistry templateRegistry;
-    
+
     @Setter
     private static TemplateFactory templateFactory;
 
@@ -63,27 +65,37 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
         }
     }
 
-    private String getValueOrOverride (Entry<String, JsonNode> subNode, Map<String, Object> valueMap) {
+    private String getValueOrOverride(String value, Map<String, Object> valueMap) {
         if (MapUtils.isEmpty(valueMap) || templateFactory == null) {
-            return subNode.getValue().asText();
+            return value;
         }
-        Template valueTemplate = templateFactory.produceTemplate(subNode.getValue().asText());
+        Template valueTemplate = templateFactory.produceTemplate(value);
         return valueTemplate.eval(valueMap);
     }
-    
+
     private void processConsumedProperty(CompositionElement result, Entry<String, JsonNode> subNode,
-            ObjectMapper mapper, Map<String, Object> valueMap) throws JsonProcessingException {
+            Map<String, Object> valueMap) throws JsonProcessingException {
         if (subNode.getKey().equals("position")) {
             setPosition(result, subNode);
         } else if (subNode.getKey().equals("buttons")) {
             result.getProperties().put(subNode.getKey(), mapper.treeToValue(subNode.getValue(), List.class));
         } else {
-            result.getProperties().put(subNode.getKey(), getValueOrOverride (subNode, valueMap));
+            result.getProperties().put(subNode.getKey(), getValueOrOverride(subNode.getValue().asText(), valueMap));
         }
     }
 
-    private CompositionElement deserializeNonTemplate(JsonNode node, Map<String, Object> valueMap) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
+    @SuppressWarnings("unchecked")
+    private void processMapProperty(CompositionElement result, Entry<String, JsonNode> subNode,
+            Map<String, Object> valueMap) throws JsonProcessingException {
+        Map<String, String> deserializedMap = mapper.treeToValue(subNode.getValue(), Map.class);
+        for (Entry<String, String> entry : deserializedMap.entrySet()) {
+            deserializedMap.put(entry.getKey(), getValueOrOverride(entry.getValue(), valueMap));
+        }
+        result.getProperties().put(subNode.getKey(), deserializedMap);
+    }
+
+    private CompositionElement deserializeNonTemplate(JsonNode node, Map<String, Object> valueMap)
+            throws JsonProcessingException {
         CompositionElement result = new CompositionElement();
         PropertyAccessor beanAccessor = PropertyAccessorFactory.forDirectFieldAccess(result);
 
@@ -93,11 +105,11 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
             if (consumedListProperties.contains(subNode.getKey())) {
                 result.getProperties().put(subNode.getKey(), mapper.treeToValue(subNode.getValue(), List.class));
             } else if (consumedMapProperties.contains(subNode.getKey())) {
-                result.getProperties().put(subNode.getKey(), mapper.treeToValue(subNode.getValue(), Map.class));
+                processMapProperty(result, subNode, valueMap);
             } else if (consumedIntProperties.contains(subNode.getKey())) {
                 result.getProperties().put(subNode.getKey(), mapper.treeToValue(subNode.getValue(), Integer.class));
             } else if (consumedProperties.contains(subNode.getKey())) {
-                processConsumedProperty(result, subNode, mapper, valueMap);
+                processConsumedProperty(result, subNode, valueMap);
             } else if (supportedTextProperties.contains(subNode.getKey())) {
                 beanAccessor.setPropertyValue(subNode.getKey(), subNode.getValue().asText());
             } else if (supportedIntProperties.contains(subNode.getKey())) {
@@ -113,7 +125,6 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
 
     @SuppressWarnings("unchecked")
     private CompositionElement deserializeTemplate(JsonNode node) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
         String templateId = node.get("templateId").asText();
         Validate.notBlank(templateId);
         Validate.notNull(templateRegistry);

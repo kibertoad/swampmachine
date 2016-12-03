@@ -2,6 +2,8 @@ package net.kiberion.swampmachine.gui;
 
 import static org.junit.Assert.*;
 
+import java.util.Map;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,6 +25,7 @@ public class CompositionLoaderTest extends MahlerContextBasedTest{
     @Autowired
     private CompositionRegistry registry;
     
+    @SuppressWarnings("unchecked")
     @Test
     public void testLoadFile () {
         templateLoader.load();
@@ -37,6 +40,8 @@ public class CompositionLoaderTest extends MahlerContextBasedTest{
         assertNotNull (compositionFromTemplate);
         assertEquals ("swPlusMinusComposition", compositionFromTemplate.getType());
         assertEquals ("controller.getStat('intelligence')", compositionFromTemplate.getProperties().get("labelValue"));
+        Map<String, Object> plusMap = (Map<String, Object>) compositionFromTemplate.getProperties().get("plus");
+        assertEquals ("controller.incrementStat('intelligence')", plusMap.get("onClickScript"));
     }
     
 }

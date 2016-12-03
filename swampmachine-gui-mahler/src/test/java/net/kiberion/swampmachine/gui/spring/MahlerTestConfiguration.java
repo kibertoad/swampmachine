@@ -4,19 +4,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import net.kiberion.swampmachine.api.templating.TemplateFactory;
 import net.kiberion.swampmachine.assets.readers.ReaderHelper;
 import net.kiberion.swampmachine.gui.composer.CompositionLoader;
-import net.kiberion.swampmachine.gui.composition.elements.CompositionElementDeserializer;
 import net.kiberion.swampmachine.gui.composition.elements.ElementPrototypeRegistry;
 import net.kiberion.swampmachine.gui.templates.ElementTemplateLoader;
 import net.kiberion.swampmachine.spring.CommonLoaderConfiguration;
 import net.kiberion.swampmachine.spring.TestCoreConfiguration;
-import net.kiberion.swampmachine.templating.mustache.MustacheTemplateFactory;
 
 @Configuration
 @Import(value = { MahlerCoreConfiguration.class, MahlerGdxConfiguration.class, CommonGuiConfiguration.class,
-        CommonLoaderConfiguration.class, MahlerGroovyConfiguration.class })
+        CommonLoaderConfiguration.class, MahlerGroovyConfiguration.class, MahlerMustacheConfiguration.class })
 public class MahlerTestConfiguration extends TestCoreConfiguration {
 
     @Bean
@@ -42,13 +39,6 @@ public class MahlerTestConfiguration extends TestCoreConfiguration {
     @Bean
     public ElementPrototypeRegistry elementRegistry() {
         return new ElementPrototypeRegistry("net.kiberion.swampmachine.gui.elements");
-    }
-
-    @Bean
-    public TemplateFactory templateFactory() {
-        TemplateFactory templateFactory = new MustacheTemplateFactory();
-        CompositionElementDeserializer.setTemplateFactory(templateFactory);
-        return templateFactory;
     }
 
 }
