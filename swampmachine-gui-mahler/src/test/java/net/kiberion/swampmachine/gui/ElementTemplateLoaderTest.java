@@ -25,7 +25,7 @@ public class ElementTemplateLoaderTest extends MahlerContextBasedTest{
         ElementTemplate template = registry.getElementTemplates().get("plusMinusTemplate");
         assertEquals ("plusMinusTemplate", template.getId());
         
-        //assertEquals (2, template.getElementMap().size());
+        assertEquals ("swPlusMinusComposition", template.getTemplate().get("type").asText());
     }
     
 }

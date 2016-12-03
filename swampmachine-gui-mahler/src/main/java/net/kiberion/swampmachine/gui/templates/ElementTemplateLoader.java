@@ -23,6 +23,7 @@ public class ElementTemplateLoader extends AbstractJsonLoader<ElementTemplate> {
     private ElementTemplateRegistry compositionRegistry;
 
     public ElementTemplateLoader() {
+        setPriority(50);
     }
     
     public ElementTemplateLoader(int priority) {

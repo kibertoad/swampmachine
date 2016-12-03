@@ -19,6 +19,7 @@ public class CompositionLoader extends AbstractJsonLoader<Composition> {
     private CompositionRegistry compositionRegistry;
 
     public CompositionLoader() {
+        this.setPriority(70);
     }
 
     public CompositionLoader(int priority) {

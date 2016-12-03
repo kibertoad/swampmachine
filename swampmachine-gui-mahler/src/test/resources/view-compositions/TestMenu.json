@@ -9,7 +9,14 @@
         {
           "type": "swLabel",
           "id": "label"
-        }
+        },
+        
+        {
+          "type": "template",
+          "templateId": "plusMinusTemplate",
+          "id": "statElement"
+        }        
+        
       ]
     }
 ]

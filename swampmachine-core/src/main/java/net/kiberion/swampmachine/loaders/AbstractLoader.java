@@ -29,6 +29,7 @@ public abstract class AbstractLoader implements SyncLoader {
 
     private static final Logger log = LogManager.getLogger();
 
+    //Lower number means higher priority
     @Setter
     @Getter
     private int priority = 100;

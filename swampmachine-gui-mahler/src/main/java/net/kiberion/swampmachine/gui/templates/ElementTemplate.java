@@ -3,10 +3,11 @@ package net.kiberion.swampmachine.gui.templates;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import lombok.Getter;
 import lombok.Setter;
 import net.kiberion.swampmachine.entities.common.impl.AbstractModelEntityDescriptor;
-import net.kiberion.swampmachine.gui.composition.elements.CompositionElement;
 
 public class ElementTemplate extends AbstractModelEntityDescriptor {
 
@@ -18,6 +19,6 @@ public class ElementTemplate extends AbstractModelEntityDescriptor {
 
     @Getter
     @Setter
-    private CompositionElement template;
+    private JsonNode template;
     
 }

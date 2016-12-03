@@ -8,6 +8,7 @@ import net.kiberion.swampmachine.gui.composer.transformers.InvokableEventTransfo
 import net.kiberion.swampmachine.gui.composer.transformers.ListenerTransformer;
 import net.kiberion.swampmachine.gui.composer.transformers.TransformerHelper;
 import net.kiberion.swampmachine.gui.composer.transformers.TransformerRegistry;
+import net.kiberion.swampmachine.gui.composition.elements.CompositionElementDeserializer;
 import net.kiberion.swampmachine.gui.templates.ElementTemplateRegistry;
 import net.kiberion.swampmachine.registries.EventClassRegistry;
 import net.kiberion.swampmachine.registries.ListenerClassRegistry;
@@ -23,8 +24,9 @@ public class MahlerCoreConfiguration {
 
     @Bean
     public ElementTemplateRegistry elementTemplateRegistry() {
-        return new ElementTemplateRegistry();
-        
+        ElementTemplateRegistry registry = new ElementTemplateRegistry();;
+        CompositionElementDeserializer.setTemplateRegistry(registry);
+        return registry; 
     }
     
     @Bean
