@@ -43,7 +43,7 @@ public abstract class AbstractLoader implements SyncLoader {
     public AbstractLoader() {
         readerHelper = new ReaderHelper();
     }
-
+    
     protected boolean fileExists(String directoryName) {
         return readerHelper.fileExists(directoryName);
     }
@@ -80,6 +80,10 @@ public abstract class AbstractLoader implements SyncLoader {
         } catch (Exception e) {
             throw new IllegalStateException("Error while loading: ", e);
         }
+    }
+    
+    protected Logger getLog () {
+        return log;
     }
     
 }

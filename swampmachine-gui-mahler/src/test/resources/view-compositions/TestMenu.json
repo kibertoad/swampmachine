@@ -1,5 +1,4 @@
-{
-  "compositions": [
+[
     {
       "id": "test",
       "elements": [
@@ -13,5 +12,4 @@
         }
       ]
     }
-  ]
-}
+]

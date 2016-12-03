@@ -1,5 +1,7 @@
 package net.kiberion.swampmachine.assets.readers;
 
+import java.nio.file.Path;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +28,20 @@ public class ReaderHelper {
     @Autowired
     @Setter
     private GameConfig config;
-    
+
     public AbstractFileReader getReader() {
         if (reader == null) {
+            getReader(config.getPathToResources());
+        }
+        return reader;
+    }
+
+    public AbstractFileReader getReader(Path sourceDirectory) {
+        if (reader == null) {
             if (Gdx.app != null) {
-                reader = new GDXFileReader(config.getPathToResources());
+                reader = new GDXFileReader(sourceDirectory);
             } else {
-                reader = new SimpleFileReader(config.getPathToResources());
+                reader = new SimpleFileReader(sourceDirectory);
             }
         }
         return reader;
