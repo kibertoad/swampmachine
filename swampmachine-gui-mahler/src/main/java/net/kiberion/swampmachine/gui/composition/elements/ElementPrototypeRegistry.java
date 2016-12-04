@@ -39,6 +39,7 @@ public class ElementPrototypeRegistry implements InitializingBean {
 
         for (Class<?> clazz : elementPrototypes) {
             ElementPrototype prototypeInfo = clazz.getAnnotation(ElementPrototype.class);
+            Validate.notNull(prototypeInfo, "No ElementPrototype annotation on class "+clazz.getCanonicalName());
             elementMap.put(prototypeInfo.id(), clazz);
         }
     }

@@ -25,6 +25,8 @@ import net.kiberion.swampmachine.assets.viewinfo.ViewInfo;
 /**
  * @author kibertoad
  */
+//Use ImageRegistry and create moar registries instead
+@Deprecated
 public class GameViewInfoProvider {
 
     private static final Logger log = LogManager.getLogger();

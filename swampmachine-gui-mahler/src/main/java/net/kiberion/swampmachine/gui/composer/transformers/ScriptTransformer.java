@@ -1,6 +1,8 @@
 package net.kiberion.swampmachine.gui.composer.transformers;
 
+import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import net.kiberion.swampmachine.api.scripting.ScriptEntityFactory;
 import net.kiberion.swampmachine.api.scripting.SwampBinding;
 import net.kiberion.swampmachine.invokables.ScriptInvokable;
+import net.kiberion.swampmachine.utils.SetUtils;
 
 public class ScriptTransformer extends AbstractTransformer<String, ScriptInvokable> {
 
-    public static final String PARAMETER_PARAMETER = "onClickScript";
+    public static final Set<String> TRANSFORMED_PARAMETER = SetUtils.buildSet("onClickScript");
 
     @Autowired
     private ScriptEntityFactory scriptEntityFactory;
@@ -24,8 +27,8 @@ public class ScriptTransformer extends AbstractTransformer<String, ScriptInvokab
     }
 
     @Override
-    public String getParameterName() {
-        return PARAMETER_PARAMETER;
+    public Collection<String> getParameterNames() {
+        return TRANSFORMED_PARAMETER;
     }
 
 }

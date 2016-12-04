@@ -67,6 +67,7 @@ public class InjectionUtils {
                 log.error("Error while invoking '" + injectionMethod + "' with args: " + args + " into "
                         + injectionTarget);
                 log.error("Transformed property: " + metadata.id());
+                log.error("Was transformed into: "+value.getClass().getCanonicalName());
                 throw new IllegalStateException(e);
             }
         }

@@ -1,5 +1,6 @@
 package net.kiberion.swampmachine.gui.api;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
@@ -11,6 +12,6 @@ public interface ParameterTransformer<I, O> {
         return transform(parameter, Collections.emptyMap());
     }
 
-    public String getParameterName();
+    public Collection<String> getParameterNames();
 
 }

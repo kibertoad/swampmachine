@@ -1,7 +1,9 @@
 package net.kiberion.swampmachine.gui.composer.transformers;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
@@ -10,11 +12,12 @@ import net.kiberion.swampmachine.annotations.ConstructableEntity;
 import net.kiberion.swampmachine.api.invokables.Invokable;
 import net.kiberion.swampmachine.factories.InvokablesFactory;
 import net.kiberion.swampmachine.registries.EventClassRegistry;
+import net.kiberion.swampmachine.utils.SetUtils;
 import net.kiberion.swampmachine.utils.common.ReflectionUtils;
 
 public class InvokableEventTransformer extends AbstractTransformer<Map<String, Object>, Invokable> {
 
-    public static final String PARAMETER_PARAMETER = "onClickEvent";
+    public static final Set<String> TRANSFORMED_PARAMETER = SetUtils.buildSet("onClickEvent");
 
     @Autowired
     private InvokablesFactory invokablesFactory;
@@ -34,8 +37,8 @@ public class InvokableEventTransformer extends AbstractTransformer<Map<String, O
     }
 
     @Override
-    public String getParameterName() {
-        return PARAMETER_PARAMETER;
+    public Collection<String> getParameterNames() {
+        return TRANSFORMED_PARAMETER;
     }
 
 }
