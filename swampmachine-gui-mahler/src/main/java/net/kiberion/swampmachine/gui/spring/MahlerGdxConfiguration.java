@@ -13,6 +13,7 @@ import net.kiberion.swampmachine.gui.composer.transformers.BoundLabelTransformer
 import net.kiberion.swampmachine.gui.composer.transformers.ButtonTransformer;
 import net.kiberion.swampmachine.gui.composer.transformers.ImageTransformer;
 import net.kiberion.swampmachine.gui.composer.transformers.LabelTransformer;
+import net.kiberion.swampmachine.gui.composer.transformers.ViewInfoTransformer;
 import net.kiberion.swampmachine.gui.elements.SwampLabel;
 
 @Configuration
@@ -31,6 +32,11 @@ public class MahlerGdxConfiguration {
     @Bean
     public ImageTransformer imageTransformer() {
         return new ImageTransformer();
+    }
+
+    @Bean
+    public ViewInfoTransformer viewInfoTransformer() {
+        return new ViewInfoTransformer();
     }
 
     @Bean
