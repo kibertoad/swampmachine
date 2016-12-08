@@ -245,6 +245,11 @@
                 <artifactId>swampmachine-scripting</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>net.kiberion</groupId>
+                <artifactId>swampmachine-multimedia</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>junit</groupId>

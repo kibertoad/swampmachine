@@ -26,7 +26,7 @@ public class CheckButton extends Group{
         this.addActor(selectionLabel);
     }
     
-    @NodeId(id = "button")
+    @NodeId(ids = {"button"})
     @InjectTransformedProperty
     public void addPlusButton(SwampTextButton<?> button) {
         this.button = button;

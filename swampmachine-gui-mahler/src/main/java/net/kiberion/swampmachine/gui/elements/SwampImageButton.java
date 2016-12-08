@@ -47,7 +47,7 @@ public class SwampImageButton extends ImageButton {
      * @param invokableEffect
      * @return
      */
-    @NodeId(id = "onClickEvent")
+    @NodeId(ids = {"onClickEvent", "onClickSound"})
     @InjectTransformedProperty
     public SwampImageButton addInvokable(Invokable invokableEffect) {
         Validate.notNull(invokableEffect);
@@ -55,14 +55,14 @@ public class SwampImageButton extends ImageButton {
         return this;
     }
 
-    @NodeId(id = "onClickScript")
+    @NodeId(ids = {"onClickScript"})
     @InjectTransformedProperty
     public SwampImageButton addOnClickScript(ScriptInvokable onClickScript) {
         addInvokable(onClickScript);
         return this;
     }
 
-    @NodeId(id = "onClickListener")
+    @NodeId(ids = {"onClickListener"})
     @InjectTransformedProperty
     @Override
     public boolean addListener(EventListener listener) {

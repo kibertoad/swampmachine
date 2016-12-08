@@ -41,7 +41,7 @@ public class SwampLabel extends Label implements net.kiberion.swampmachine.api.e
         this.setPosition(setX, setY);
     }
     
-    @NodeId (id = "labelValue")
+    @NodeId (ids = {"labelValue"})
     @InjectTransformedProperty
     public void setText(ScriptInvokable script) {
         AbstractObservable<?, ?> observable = script.invoke();

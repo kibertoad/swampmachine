@@ -78,7 +78,7 @@ public class SwampTable<T extends MetadataHolderBlock> extends Table {
         return addButton (button);
     }
     
-    @NodeId (id = "buttons")
+    @NodeId (ids = {"buttons"})
     @InjectTransformedProperty
     public void addButtons(Collection <SwampTextButton<T>> buttons) {
         for (SwampTextButton<T> button : buttons) {

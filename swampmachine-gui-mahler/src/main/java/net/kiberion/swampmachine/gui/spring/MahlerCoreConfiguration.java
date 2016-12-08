@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import net.kiberion.swampmachine.gui.composer.CompositionRegistry;
 import net.kiberion.swampmachine.gui.composer.transformers.InvokableEventTransformer;
 import net.kiberion.swampmachine.gui.composer.transformers.ListenerTransformer;
+import net.kiberion.swampmachine.gui.composer.transformers.SoundTransformer;
 import net.kiberion.swampmachine.gui.composer.transformers.TransformerHelper;
 import net.kiberion.swampmachine.gui.composer.transformers.TransformerRegistry;
 import net.kiberion.swampmachine.gui.composition.elements.CompositionElementDeserializer;
@@ -60,10 +61,14 @@ public class MahlerCoreConfiguration {
     }
     
     @Bean
+    public SoundTransformer soundTransformer() {
+        return new SoundTransformer();
+    }
+    
+    @Bean
     public TransformerHelper transformerHelper () {
         return new TransformerHelper();
     }
     
-    
-    
+   
 }

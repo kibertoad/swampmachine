@@ -52,7 +52,7 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
     private static final List<String> consumedProperties = new InlineGList<>("position", "image", "text", "labelValue",
             "labelText", "buttonSource", "selectedIcon", "unselectedIcon");
     private static final List<String> consumedMapProperties = new InlineGList<>("onClickEvent", "plus", "minus",
-            "button");
+            "button", "onClickSound");
     private static final List<String> consumedIntProperties = new InlineGList<>();
     private static final List<String> consumedListProperties = new InlineGList<>("buttons");
 
@@ -64,12 +64,17 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
         }
     }
 
-    private String getValueOrOverride(String value, Map<String, Object> valueMap) {
-        if (MapUtils.isEmpty(valueMap) || templateFactory == null) {
-            return value;
+    private Object getValueOrOverride(Object value, Map<String, Object> valueMap) {
+        if (value instanceof String) {
+
+            if (MapUtils.isEmpty(valueMap) || templateFactory == null) {
+                return value;
+            }
+            Template valueTemplate = templateFactory.produceTemplate((String) value);
+            return valueTemplate.eval(valueMap);
         }
-        Template valueTemplate = templateFactory.produceTemplate(value);
-        return valueTemplate.eval(valueMap);
+
+        return value;
     }
 
     private void processConsumedProperty(CompositionElement result, Entry<String, JsonNode> subNode,
@@ -86,8 +91,8 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
     @SuppressWarnings("unchecked")
     private void processMapProperty(CompositionElement result, Entry<String, JsonNode> subNode,
             Map<String, Object> valueMap) throws JsonProcessingException {
-        Map<String, String> deserializedMap = mapper.treeToValue(subNode.getValue(), Map.class);
-        for (Entry<String, String> entry : deserializedMap.entrySet()) {
+        Map<String, Object> deserializedMap = mapper.treeToValue(subNode.getValue(), Map.class);
+        for (Entry<String, Object> entry : deserializedMap.entrySet()) {
             deserializedMap.put(entry.getKey(), getValueOrOverride(entry.getValue(), valueMap));
         }
         result.getProperties().put(subNode.getKey(), deserializedMap);

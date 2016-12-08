@@ -16,17 +16,18 @@ public class TransformerHelper {
     private TransformerRegistry transformerRegistry;
 
     public Object getTransformedProperty(ParameterTransformer<?, ?> transformer, Map<String, Object> propertySource,
-            String property, Map<String, Object> context) {
+            String propertyId, Map<String, Object> context) {
+        
         if (transformer == null) {
-            transformer = transformerRegistry.getTransformers().get(property);
+            transformer = transformerRegistry.getTransformers().get(propertyId);
         }
 
-        Object value = propertySource.get(property);
+        Object value = propertySource.get(propertyId);
         if (transformer == null) {
             return value;
         }
         
-        log.info("Transforming value: "+value+" for property "+property);
+        log.info("Transforming value: "+value+" for property "+propertyId);
         return transformer.transform(value, context);
     }
 

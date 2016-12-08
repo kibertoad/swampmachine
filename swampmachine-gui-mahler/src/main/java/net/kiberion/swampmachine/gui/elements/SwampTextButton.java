@@ -78,7 +78,7 @@ public class SwampTextButton <T extends MetadataHolderBlock> extends TextButton 
      * @param invokableEffect
      * @return
      */
-    @NodeId (id = "onClickEvent")
+    @NodeId (ids = {"onClickEvent", "onClickSound"})
     @InjectTransformedProperty
     public SwampTextButton<T> addInvokable(Invokable invokableEffect) {
         Validate.notNull(invokableEffect);
@@ -86,14 +86,14 @@ public class SwampTextButton <T extends MetadataHolderBlock> extends TextButton 
         return this;
     }
 
-    @NodeId (id = "onClickScript")
+    @NodeId (ids = {"onClickScript"})
     @InjectTransformedProperty
     public SwampTextButton<T> addOnClickScript(ScriptInvokable onClickScript) {
         addInvokable (onClickScript);
         return this;
     }
     
-    @NodeId (id = "onClickListener")
+    @NodeId (ids = {"onClickListener"})
     @InjectTransformedProperty
     @Override
     public boolean addListener(EventListener listener) {

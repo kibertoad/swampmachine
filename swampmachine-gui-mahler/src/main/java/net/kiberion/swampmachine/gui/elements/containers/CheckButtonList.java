@@ -37,7 +37,7 @@ public class CheckButtonList extends Group implements ButtonContainer {
      *            Script that is expected to link to a controller method which
      *            will provide a buttonSource
      */
-    @NodeId(id = "buttonSource")
+    @NodeId(ids = {"buttonSource"})
     @InjectTransformedProperty
     public void setButtonSource(ScriptInvokable buttonSource) {
         if (hasObserver) {
@@ -53,13 +53,13 @@ public class CheckButtonList extends Group implements ButtonContainer {
         hasObserver = true;
     }
     
-    @NodeId(id = "selectedIcon")
+    @NodeId(ids = {"selectedIcon"})
     @InjectTransformedProperty
     public void setSelectedIcon(ViewInfo selectedIcon) {
         this.selectedIcon = selectedIcon;
     }
 
-    @NodeId(id = "unselectedIcon")
+    @NodeId(ids = {"unselectedIcon"})
     @InjectTransformedProperty
     public void setUnselectedIcon(ViewInfo unselectedIcon) {
         this.unselectedIcon = unselectedIcon;

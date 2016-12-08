@@ -35,7 +35,7 @@ public class PlusMinusComposition extends Group {
     protected SwampTextButton<?> plusButton;
     protected SwampTextButton<?> minusButton;
 
-    @NodeId(id = "plus")
+    @NodeId(ids = {"plus"})
     @InjectTransformedProperty
     public void addPlusButton(SwampTextButton<?> button) {
         this.plusButton = button;
@@ -43,7 +43,7 @@ public class PlusMinusComposition extends Group {
         this.addActor(button);
     }
 
-    @NodeId(id = "minus")
+    @NodeId(ids = {"minus"})
     @InjectTransformedProperty
     public void addMinusButton(SwampTextButton<?> button) {
         this.minusButton = button;
@@ -51,7 +51,7 @@ public class PlusMinusComposition extends Group {
         this.addActor(button);
     }
 
-    @NodeId(id = "labelValue")
+    @NodeId(ids = {"labelValue"})
     @InjectTransformedProperty
     public void addValueLabel(SwampLabel label) {
         this.numberLabel = label;
@@ -59,7 +59,7 @@ public class PlusMinusComposition extends Group {
         this.addActor(label);
     }
     
-    @NodeId(id = "labelText")
+    @NodeId(ids = {"labelText"})
     @InjectTransformedProperty
     public void addTextLabel(SwampLabel label) {
         this.numberLabel = label;

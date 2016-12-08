@@ -55,20 +55,23 @@ public class InjectionUtils {
         for (Method injectionMethod : transformedInjectionMethods) {
             NodeId metadata = injectionMethod.getAnnotation(NodeId.class);
 
-            ParameterTransformer<?, ?> transformer = transformerHelper
-                    .getTransformerForClass(getTransformerForProperty(metadata.id(), injectionTarget));
-            Object value = transformerHelper.getTransformedProperty(transformer, propertySource, metadata.id(),
-                    context);
-            List<Object> args = new ArrayList<>();
-            args.add(value);
-            try {
-                injectionMethod.invoke(injectionTarget, args.toArray());
-            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                log.error("Error while invoking '" + injectionMethod + "' with args: " + args + " into "
-                        + injectionTarget);
-                log.error("Transformed property: " + metadata.id());
-                log.error("Was transformed into: "+value.getClass().getCanonicalName());
-                throw new IllegalStateException(e);
+            for (String propertyId : metadata.ids()) {
+                if (propertySource.containsKey(propertyId)) {
+                    ParameterTransformer<?, ?> transformer = transformerHelper
+                            .getTransformerForClass(getTransformerForProperty(propertyId, injectionTarget));
+                    Object value = transformerHelper.getTransformedProperty(transformer, propertySource, propertyId, context);
+                    List<Object> args = new ArrayList<>();
+                    args.add(value);
+                    try {
+                        injectionMethod.invoke(injectionTarget, args.toArray());
+                    } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                        log.error("Error while invoking '" + injectionMethod + "' with args: " + args + " into "
+                                + injectionTarget);
+                        log.error("Transformed property: " + propertyId);
+                        log.error("Was transformed into: " + value.getClass().getCanonicalName());
+                        throw new IllegalStateException(e);
+                    }
+                }
             }
         }
 
