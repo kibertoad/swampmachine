@@ -2,7 +2,9 @@ package net.kiberion.swampmachine.mvcips.states;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
@@ -27,6 +29,7 @@ import net.kiberion.swampmachine.mvcips.input.GenericInputAdapter;
 import net.kiberion.swampmachine.mvcips.states.annotations.State;
 import net.kiberion.swampmachine.mvcips.states.annotations.StateController;
 import net.kiberion.swampmachine.mvcips.states.annotations.StateControllers;
+import net.kiberion.swampmachine.mvcips.states.annotations.SubView;
 import net.kiberion.swampmachine.mvcips.states.api.AbstractStateController;
 import net.kiberion.swampmachine.mvcips.utils.UpdatableStageWrapper;
 import net.kiberion.swampmachine.processors.AbstractTimedProcessor;
@@ -53,17 +56,6 @@ public abstract class GameState implements Screen, InitializingBean {
     @Setter
     private InputAdapter input;
 
-    private InputMultiplexer inputMultiplexer = new InputMultiplexer(); // used
-                                                                        // for
-                                                                        // stacking
-                                                                        // multiple
-                                                                        // input
-                                                                        // adapters
-
-    private boolean guiInitted;
-
-    public List<RealtimeUpdatable> entitiesForUpdate = new ArrayList<>();
-
     @Getter
     private final List<AbstractTimedProcessor> realtimeProcessors = new ArrayList<>();
 
@@ -76,7 +68,17 @@ public abstract class GameState implements Screen, InitializingBean {
     @Autowired
     private ScriptEntityFactory scriptEntityFactory;
 
+    // used for stacking multiple input adapters
+    private InputMultiplexer inputMultiplexer = new InputMultiplexer();
+
+    private boolean guiInitted;
+
+    public List<RealtimeUpdatable> entitiesForUpdate = new ArrayList<>();
+
     private SwampBinding binding;
+
+    // Includes subviews
+    private final Map<String, StateView> allSubViews = new LinkedHashMap<>();
 
     public GameState() {
         InputAdapter adapter = initInputAdapter();
@@ -88,7 +90,7 @@ public abstract class GameState implements Screen, InitializingBean {
     protected InputAdapter initInputAdapter() {
         return new GenericInputAdapter();
     }
-    
+
     @Override
     public void afterPropertiesSet() throws Exception {
         binding = scriptEntityFactory.getBindingInstance();
@@ -109,7 +111,31 @@ public abstract class GameState implements Screen, InitializingBean {
             }
         }
 
-        addBindingForAllViews();
+        allSubViews.clear();
+        for (StateView stateView : getAllViews()) {
+            // map subViews for later access e. g. via events
+            SubView subViewMetadata = stateView.getClass().getAnnotation(SubView.class);
+            if (subViewMetadata != null) {
+                allSubViews.put(subViewMetadata.id(), stateView);
+            }
+
+            // add state binding for invoking scripts inside the view
+            stateView.setBinding(binding);
+        }
+    }
+
+    public void showView(String viewId, boolean disableOtherSubViews) {
+        StateView subViewToEnable = allSubViews.get(viewId);
+        Validate.notNull(subViewToEnable);
+        subViewToEnable.show();
+
+        if (disableOtherSubViews) {
+            for (StateView view : allSubViews.values()) {
+                if (view != subViewToEnable) {
+                    view.hide();
+                }
+            }
+        }
     }
 
     protected void addProcessorsForAllViews() {
@@ -125,19 +151,13 @@ public abstract class GameState implements Screen, InitializingBean {
         }
     }
 
-    protected void addBindingForAllViews() {
-        for (StateView view : getAllViews()) {
-            view.setBinding(binding);
-        }
-    }
-
     @SuppressWarnings("rawtypes")
     @Override
     public void show() {
         for (AbstractStateController controller : stateControllers) {
             controller.show();
         }
-        
+
         getView().show();
         addProcessorsForAllViews();
         ((AbstractStateView) getView()).debugToLog();
@@ -218,7 +238,7 @@ public abstract class GameState implements Screen, InitializingBean {
         return getClass().getAnnotation(State.class).id();
     }
 
-    public abstract StateView getView(); // don't forget to set View stage from
-                                         // gamestate stage
+    // don't forget to set View stage from gamestate stage
+    public abstract StateView getView();
 
 }

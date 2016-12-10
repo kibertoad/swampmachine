@@ -1,5 +1,6 @@
 package net.kiberion.swampmachine.gui.view;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -45,7 +46,7 @@ public interface StateView extends CompositionConsumer {
      * Recursively extracts all subviews from the view. Also includes the view itself
      * @param targetSet
      */
-    public void collectAllViews(Set<StateView> targetSet);
+    public void collectAllViews(Collection<StateView> targetSet);
     public void setBinding(SwampBinding binding);
-
+    
 }

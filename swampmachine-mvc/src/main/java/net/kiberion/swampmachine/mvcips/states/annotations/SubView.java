@@ -18,6 +18,7 @@ import net.kiberion.swampmachine.gui.view.StateView;
 @Retention(RUNTIME)
 public @interface SubView {
     
+    String id();
     Class<? extends StateView> parentView();
     boolean usesOverlayStage() default true;
     

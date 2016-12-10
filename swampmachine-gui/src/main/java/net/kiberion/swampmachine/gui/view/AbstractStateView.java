@@ -1,6 +1,7 @@
 package net.kiberion.swampmachine.gui.view;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,20 +29,19 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
 
     private static final Logger log = LogManager.getLogger();
 
+    // Current level stage, used for elements in this view
     @Getter
-    protected Stage mainStage; // Current level stage, used for elements in this
-                               // view
+    protected Stage mainStage;
 
+    // Lower level, used for elements in all SubViews (which will consider it
+    // their mainStage, and if they have their own children - can also have
+    // their own overlayStage)
     @Getter
-    protected Stage overlayStage; // Lower level, used for elements in all
-                                  // SubViews (which will consider it their
-                                  // mainStage, and if they have their own
-                                  // children - can also have their own
-                                  // overlayStage)
+    protected Stage overlayStage;
 
     @Getter
     private T model;
-    
+
     @Getter
     @Setter
     private SwampBinding binding;
@@ -60,12 +60,6 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
     @Autowired
     private Label coordsLabel;
 
-    @Override
-    public void addSubView(StateView view) {
-        Validate.notNull(view);
-        subViews.add(view);
-    }
-
     public AbstractStateView() {
         initStage();
     }
@@ -73,6 +67,12 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
     protected void initStage() {
         mainStage = new Stage();
     }
+    @Override
+    public void addSubView(StateView view) {
+        Validate.notNull(view);
+        subViews.add(view);
+    }
+
 
     @Override
     public void postInjection() {
@@ -93,7 +93,7 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
     public void setModel(T model) {
         this.model = model;
     }
-
+    
     @Override
     public void hide() {
         isEnabled = false;
@@ -112,7 +112,6 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
 
     @Override
     public void render() {
-
         if (isEnabled) {
             updateCoordsLabel();
             mainStage.draw();
@@ -165,6 +164,7 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
         return guiManager;
     }
 
+    @SuppressWarnings("unchecked")
     public void debugToLog() {
         log.info("View: " + toString());
         log.info("View Stage: " + mainStage.toString());
@@ -207,19 +207,19 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
     }
 
     @Override
-    public void collectAllViews(Set<StateView> result) {
+    public void collectAllViews(Collection<StateView> result) {
         result.add(this);
         for (StateView subView : getSubViews()) {
             subView.collectAllViews(result);
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     @Override
     public Stage getScene() {
         return getMainStage();
     }
-    
+
     @Override
     public Map<String, Object> getContext() {
         Map<String, Object> context = new HashMap<>();
