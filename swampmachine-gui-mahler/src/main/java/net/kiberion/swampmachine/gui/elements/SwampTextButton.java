@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import net.kiberion.swampmachine.annotations.InjectTransformedProperty;
 import net.kiberion.swampmachine.annotations.NodeId;
+import net.kiberion.swampmachine.api.common.Condition;
 import net.kiberion.swampmachine.api.common.Toggleable;
 import net.kiberion.swampmachine.api.elements.ButtonEntry;
 import net.kiberion.swampmachine.api.invokables.Invokable;
@@ -24,7 +25,6 @@ import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
 import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
-import net.kiberion.swampmachine.gui.listenerconditions.ListenerCondition;
 import net.kiberion.swampmachine.gui.listenerconditions.ListenerConditionContainer;
 import net.kiberion.swampmachine.invokables.ScriptInvokable;
 
@@ -109,7 +109,7 @@ public class SwampTextButton <T extends MetadataHolderBlock> extends TextButton 
         addListener(listener);
     }
 
-    public void addCondition(ListenerCondition condition) {
+    public void addCondition(Condition condition) {
         changeConditions.add(condition);
     }
 

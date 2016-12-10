@@ -1,9 +1,11 @@
 package net.kiberion.swampmachine.gui.listenerconditions;
 
+import net.kiberion.swampmachine.api.common.Condition;
+
 /**
  * @author kibertoad
  */
-public class BooleanProviderCondition implements ListenerCondition {
+public class BooleanProviderCondition implements Condition {
 
     private final BooleanProvider provider;
     private final boolean expectedValue;

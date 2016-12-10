@@ -2,10 +2,12 @@ package net.kiberion.swampmachine.gui.listenerconditions;
 
 import java.util.ArrayList;
 
+import net.kiberion.swampmachine.api.common.Condition;
+
 /**
  * @author kibertoad
  */
-public class ListenerConditionContainer extends ArrayList<ListenerCondition> implements ListenerCondition {
+public class ListenerConditionContainer extends ArrayList<Condition> implements Condition {
 
     /**
      * 
@@ -14,7 +16,7 @@ public class ListenerConditionContainer extends ArrayList<ListenerCondition> imp
 
     @Override
     public boolean isSatisfied() {
-        for (ListenerCondition condition: this) {
+        for (Condition condition: this) {
             if (!condition.isSatisfied()) {
                 return false;
             }
