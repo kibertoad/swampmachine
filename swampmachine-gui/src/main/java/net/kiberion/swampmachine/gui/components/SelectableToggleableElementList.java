@@ -26,6 +26,11 @@ import net.kiberion.swampmachine.subscription.ObservableSelectableButtonEntrySou
  */
 public abstract class SelectableToggleableElementList<T extends MetadataHolderBlock> {
 
+    /**
+     * Filled list of elements that is exposed for the View to consume
+     */
+    @Getter
+    private final ObservableSelectableButtonEntrySource buttonSource = new ObservableSelectableButtonEntrySource();
     public abstract Collection<T> getElementList();
     private final Map<T, Boolean> selectedElements = new HashMap<>(); // toggled elements
 
@@ -85,13 +90,6 @@ public abstract class SelectableToggleableElementList<T extends MetadataHolderBl
         buttonEntry.setOnClickEffect(onClickEffect);
     }
 
-    /**
-     * Filled list of elements that is exposed for the View to consume
-     */
-    @Getter
-    private final ObservableSelectableButtonEntrySource buttonSource = new ObservableSelectableButtonEntrySource();
-    
-    
     protected class InvalidateList implements Invokable {
         @Override
         public <Y> Y invoke() {

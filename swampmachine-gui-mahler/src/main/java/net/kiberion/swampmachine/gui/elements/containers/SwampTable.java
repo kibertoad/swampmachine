@@ -18,11 +18,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 import net.kiberion.swampmachine.annotations.InjectTransformedProperty;
 import net.kiberion.swampmachine.annotations.NodeId;
+import net.kiberion.swampmachine.api.elements.ButtonContainer;
+import net.kiberion.swampmachine.api.elements.ButtonEntry;
 import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
 import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
+import net.kiberion.swampmachine.gui.annotations.ElementTransformedProperty;
 import net.kiberion.swampmachine.gui.annotations.InjectProperty;
+import net.kiberion.swampmachine.gui.composer.transformers.ScriptTransformer;
 import net.kiberion.swampmachine.gui.elements.SwampTextButton;
+import net.kiberion.swampmachine.gui.observers.ButtonContainerUpdatingObserver;
+import net.kiberion.swampmachine.invokables.ScriptInvokable;
+import net.kiberion.swampmachine.subscription.ObservableButtonEntrySource;
 
 /**
  *
@@ -30,7 +37,10 @@ import net.kiberion.swampmachine.gui.elements.SwampTextButton;
  */
 
 @ElementPrototype(id = "swTable", supportedProperties = {})
-public class SwampTable<T extends MetadataHolderBlock> extends Table {
+@ElementTransformedProperty(sourceProperty = "buttonSource", targetTransformer = ScriptTransformer.class)
+public class SwampTable<T extends MetadataHolderBlock> extends Table implements ButtonContainer{
+
+    private boolean hasObserver;
 
     private static final Logger log = LogManager.getLogger();
     
@@ -70,6 +80,34 @@ public class SwampTable<T extends MetadataHolderBlock> extends Table {
 
         textButtons.add(button);
         return button;
+    }
+
+    /**
+     * Should only be invoked once to avoid depending on multiple sources
+     * 
+     * @param buttonSource
+     *            Script that is expected to link to a controller method which
+     *            will provide a buttonSource
+     */
+    @NodeId(ids = {"buttonSource"})
+    @InjectTransformedProperty
+    public void setButtonSource(ScriptInvokable buttonSource) {
+        if (hasObserver) {
+            throw new IllegalStateException("Container cannot be linked to multiple sources.");
+        }
+
+        ObservableButtonEntrySource entrySource = buttonSource.invoke();
+
+        for (ButtonEntry buttonEntry : entrySource.getValue()) {
+            addButton(buttonEntry);
+        }
+        entrySource.addObserver(new ButtonContainerUpdatingObserver(this));
+        hasObserver = true;
+    }    
+    
+    @Override
+    public void addButton(ButtonEntry buttonEntry) {
+        addButton (new SwampTextButton<>(buttonEntry));
     }
 
     @InjectProperty(id = "textButtons", methodProperties = "text")
