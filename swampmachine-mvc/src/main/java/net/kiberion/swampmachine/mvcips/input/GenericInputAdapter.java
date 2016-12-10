@@ -18,20 +18,12 @@ public class GenericInputAdapter extends InputAdapter {
         }
 
         if ((keycode == Input.Keys.F12) || (keycode == Input.Keys.ESCAPE)) {
-            // Display display = new Display();
-
-            // Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),
-            // !(Gdx.graphics.isFullscreen()
-            // DisplayMode display = new DisplayMode(Gdx.graphics.getWidth(),
-            // Gdx.graphics.getHeight(), 60, 32);
-            // Gdx.graphics.setFullscreenMode(displayMode);
-            Gdx.graphics.setVSync(true);
-
-            if (Gdx.graphics.isFullscreen()) {
+            if (!Gdx.graphics.isFullscreen()) {
                 Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
             } else {
-                Gdx.graphics.setWindowedMode(1024, 768);
+                Gdx.graphics.setWindowedMode(1280, 720);
             }
+            Gdx.graphics.setVSync(true);
 
             return true;
         }

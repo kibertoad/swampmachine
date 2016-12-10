@@ -23,6 +23,7 @@ import net.kiberion.swampmachine.api.scripting.ScriptEntityFactory;
 import net.kiberion.swampmachine.api.scripting.SwampBinding;
 import net.kiberion.swampmachine.gui.view.AbstractStateView;
 import net.kiberion.swampmachine.gui.view.StateView;
+import net.kiberion.swampmachine.mvcips.input.GenericInputAdapter;
 import net.kiberion.swampmachine.mvcips.states.annotations.State;
 import net.kiberion.swampmachine.mvcips.states.annotations.StateController;
 import net.kiberion.swampmachine.mvcips.states.annotations.StateControllers;
@@ -77,6 +78,17 @@ public abstract class GameState implements Screen, InitializingBean {
 
     private SwampBinding binding;
 
+    public GameState() {
+        InputAdapter adapter = initInputAdapter();
+        if (adapter != null) {
+            this.setInput(adapter);
+        }
+    }
+
+    protected InputAdapter initInputAdapter() {
+        return new GenericInputAdapter();
+    }
+    
     @Override
     public void afterPropertiesSet() throws Exception {
         binding = scriptEntityFactory.getBindingInstance();
