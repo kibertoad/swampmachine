@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
 import org.apache.logging.log4j.LogManager;
@@ -32,12 +31,6 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
     // Current level stage, used for elements in this view
     @Getter
     protected Stage mainStage;
-
-    // Lower level, used for elements in all SubViews (which will consider it
-    // their mainStage, and if they have their own children - can also have
-    // their own overlayStage)
-    @Getter
-    protected Stage overlayStage;
 
     @Getter
     private T model;
@@ -67,12 +60,12 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
     protected void initStage() {
         mainStage = new Stage();
     }
+
     @Override
     public void addSubView(StateView view) {
         Validate.notNull(view);
         subViews.add(view);
     }
-
 
     @Override
     public void postInjection() {
@@ -93,7 +86,7 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
     public void setModel(T model) {
         this.model = model;
     }
-    
+
     @Override
     public void hide() {
         isEnabled = false;
@@ -189,20 +182,16 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
     }
 
     @Override
-    public void setOverlayStage(Stage stage) {
-        Validate.isTrue(this.overlayStage == null);
-        this.overlayStage = stage;
-    }
-
-    @Override
     public void update() {
     }
 
     @Override
-    public void collectAllStages(Set<Stage> result) {
-        result.add(getMainStage());
+    public void collectAllStages(Collection<Stage> result, boolean enabledViewsOnly) {
+        if (isEnabled) {
+            result.add(getMainStage());
+        }
         for (StateView subView : getSubViews()) {
-            subView.collectAllStages(result);
+            subView.collectAllStages(result, enabledViewsOnly);
         }
     }
 

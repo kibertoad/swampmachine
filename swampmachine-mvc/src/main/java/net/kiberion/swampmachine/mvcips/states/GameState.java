@@ -1,6 +1,7 @@
 package net.kiberion.swampmachine.mvcips.states;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -135,13 +136,15 @@ public abstract class GameState implements Screen {
                 }
             }
         }
+        
+        attachInputProcessorsForAllEnabledViews();
     }
 
-    protected void addProcessorsForAllViews() {
+    protected void attachInputProcessorsForAllEnabledViews() {
         Gdx.input.setInputProcessor(inputMultiplexer);
         inputMultiplexer.clear();
 
-        for (Stage stage : getAllStages()) {
+        for (Stage stage : getAllStages(true)) {
             inputMultiplexer.addProcessor(stage);
         }
 
@@ -158,7 +161,7 @@ public abstract class GameState implements Screen {
         }
 
         getView().show();
-        addProcessorsForAllViews();
+        attachInputProcessorsForAllEnabledViews();
         ((AbstractStateView) getView()).debugToLog();
     }
 
@@ -170,15 +173,16 @@ public abstract class GameState implements Screen {
         Validate.isTrue(!guiInitted);
         getView().initGUIElements();
         guiInitted = true;
-        Set<Stage> stages = getAllStages();
+        Collection<Stage> stages = getAllStages(false);
         for (Stage stage : stages) {
             entitiesForUpdate.add(new UpdatableStageWrapper(stage));
         }
     }
 
-    protected Set<Stage> getAllStages() {
-        Set<Stage> result = new HashSet<>();
-        getView().collectAllStages(result);
+    protected Collection<Stage> getAllStages(boolean enabledViewsOnly) {
+        //we only want unique stages
+        Collection<Stage> result = new HashSet<>();
+        getView().collectAllStages(result, enabledViewsOnly);
         return result;
     }
 

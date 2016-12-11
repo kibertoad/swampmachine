@@ -2,7 +2,6 @@ package net.kiberion.swampmachine.gui.view;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
@@ -14,13 +13,6 @@ public interface StateView extends CompositionConsumer {
     public Stage getMainStage();
     public void setMainStage(Stage stage);
     
-    /**
-     * Is only supposed to be used to set main stage for subviews of this view
-     * @return
-     */
-    public Stage getOverlayStage();
-    public void setOverlayStage(Stage stage);
-
     public void render();
     public void act(float delta);
 
@@ -39,8 +31,9 @@ public interface StateView extends CompositionConsumer {
     /**
      * Recursively extracts all stages from view and its subviews
      * @param targetSet
+     * @param enabledViewsOnly skip stages for disabled views
      */
-    public void collectAllStages(Set<Stage> targetSet);
+    public void collectAllStages(Collection<Stage> targetSet, boolean enabledViewsOnly);
     
     /**
      * Recursively extracts all subviews from the view. Also includes the view itself

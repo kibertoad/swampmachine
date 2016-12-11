@@ -27,10 +27,7 @@ public class SubViewSpringBinder {
             parentView.addSubView(childView);
 
             if (subViewAnnotation.usesOverlayStage()) {
-                if (parentView.getOverlayStage() == null) {
-                    parentView.setOverlayStage(new Stage());
-                }
-                childView.setMainStage(parentView.getOverlayStage());
+                childView.setMainStage(new Stage());
             } else {
                 childView.setMainStage(parentView.getMainStage());
             }
