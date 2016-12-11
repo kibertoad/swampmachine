@@ -212,8 +212,11 @@ public abstract class GameState implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        // TODO Auto-generated method stub
-
+        // Fix mouse input coordinates
+        // TODO: check what stages we need to update, maybe?
+        for (Stage stage : getAllStages(false)) {
+            stage.getViewport().update(width, height, true);
+        }
     }
 
     @Override
