@@ -100,8 +100,6 @@ public class SwampTextButton <T extends MetadataHolderBlock> extends TextButton 
         return super.addListener(listener);
     }
     
-    
-
     public void clearUserListeners() {
         ClickListener listener = getClickListener();
         clearListeners();

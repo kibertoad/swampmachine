@@ -69,7 +69,7 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
 
     @Override
     public void postInjection() {
-        coordsLabel.setPosition(1800, 1050);
+        coordsLabel.setPosition(1200, 650);
         mainStage.addActor((Actor) coordsLabel);
     }
 
@@ -89,11 +89,20 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
 
     @Override
     public void hide() {
+        log.info("Hiding: "+getClass().getCanonicalName());
         isEnabled = false;
     }
 
+    protected void hideAllSubViews () {
+        for (StateView subView : getSubViews()) {
+            subView.hide();
+        }
+    }
+    
     @Override
     public void show() {
+        hideAllSubViews();
+        log.info("Showing: "+getClass().getCanonicalName());
         isEnabled = true;
     }
 
@@ -212,7 +221,7 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
     @Override
     public Map<String, Object> getContext() {
         Map<String, Object> context = new HashMap<>();
-        Validate.notNull(binding);
+        Validate.notNull(binding, "No binding is set for "+getClass().getCanonicalName());
         context.put("binding", binding);
         return context;
     }
