@@ -12,6 +12,7 @@ public class CommonMetadataBlock implements EntityInstanceMetadataBlock {
     public int UID = -1;
 
     private String id;
+    private String groupId;
     private String name; // used for display to user
     
     private Set<String> tags = new HashSet<>();
@@ -50,16 +51,12 @@ public class CommonMetadataBlock implements EntityInstanceMetadataBlock {
 
     @Override
     public String getGroup() {
-        return "-";
+        return this.groupId;
     }
 
     @Override
     public void setGroup(String toGroup) {
-
-    }
-
-    public void setSubGroup(String toGroup) {
-
+        this.groupId = toGroup;
     }
 
     @Override
