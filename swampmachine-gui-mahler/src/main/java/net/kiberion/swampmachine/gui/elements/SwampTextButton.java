@@ -28,7 +28,7 @@ import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
 import net.kiberion.swampmachine.gui.listenerconditions.ListenerConditionContainer;
 import net.kiberion.swampmachine.invokables.ScriptInvokable;
 
-@ElementPrototype(id = "swTextButton")
+@ElementPrototype(id = "swTextButton", constructorProperties="text")
 public class SwampTextButton <T extends MetadataHolderBlock> extends TextButton implements Toggleable {
 
     private ListenerConditionContainer changeConditions = new ListenerConditionContainer();
