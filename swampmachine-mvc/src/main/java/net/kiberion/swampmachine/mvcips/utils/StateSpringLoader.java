@@ -54,7 +54,7 @@ public class StateSpringLoader {
                 stateRegistry.setNewGameState(bean);
             }
 
-            
+            bean.afterContextSet();
             stateRegistry.registerState(bean);
 
             // Attach realtime processors

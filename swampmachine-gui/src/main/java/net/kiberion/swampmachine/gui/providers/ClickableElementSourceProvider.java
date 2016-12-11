@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.gui.components;
+package net.kiberion.swampmachine.gui.providers;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,7 +17,7 @@ import net.kiberion.swampmachine.subscription.ObservableButtonEntrySource;
  * @author kibertoad
  *
  */
-public abstract class ClickableElementList<T extends MetadataHolderBlock> {
+public abstract class ClickableElementSourceProvider<T extends MetadataHolderBlock> {
 
     /**
      * Filled list of elements that is exposed for the View to consume

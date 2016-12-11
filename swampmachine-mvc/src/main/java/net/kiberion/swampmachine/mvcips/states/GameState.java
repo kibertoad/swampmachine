@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
@@ -50,7 +49,7 @@ import net.kiberion.swampmachine.processors.AbstractTimedProcessor;
  * @author kibertoad
  *
  */
-public abstract class GameState implements Screen, InitializingBean {
+public abstract class GameState implements Screen {
 
     @Getter
     @Setter
@@ -91,8 +90,7 @@ public abstract class GameState implements Screen, InitializingBean {
         return new GenericInputAdapter();
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterContextSet() {
         binding = scriptEntityFactory.getBindingInstance();
         StateControllers stateControllers = getClass().getAnnotation(StateControllers.class);
 
@@ -117,6 +115,7 @@ public abstract class GameState implements Screen, InitializingBean {
             SubView subViewMetadata = stateView.getClass().getAnnotation(SubView.class);
             if (subViewMetadata != null) {
                 allSubViews.put(subViewMetadata.id(), stateView);
+                binding.setVariable(subViewMetadata.id(), stateView);
             }
 
             // add state binding for invoking scripts inside the view

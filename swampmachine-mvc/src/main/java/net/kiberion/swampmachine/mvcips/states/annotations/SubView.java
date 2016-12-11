@@ -18,8 +18,12 @@ import net.kiberion.swampmachine.gui.view.StateView;
 @Retention(RUNTIME)
 public @interface SubView {
     
+    //Used both for events and for script binding
     String id();
+    
+    //Used for automatic binding to parent view after spring context is initted
     Class<? extends StateView> parentView();
+    
     boolean usesOverlayStage() default true;
     
 }

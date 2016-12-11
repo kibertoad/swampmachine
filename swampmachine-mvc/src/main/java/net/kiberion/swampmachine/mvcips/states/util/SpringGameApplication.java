@@ -48,8 +48,8 @@ public abstract class SpringGameApplication extends GameApplication{
         log.info("Done loading Spring context.");
 
         stateRegistry = ctx.getBean(StateRegistry.class);
-        StateSpringLoader.registerStatesFromContext(ctx, stateRegistry);
         SubViewSpringBinder.bindSubViewsFromContext(ctx);
+        StateSpringLoader.registerStatesFromContext(ctx, stateRegistry);
         
         stateManager = ctx.getBean(StateManager.class);
         stateManager.setGame(this);
