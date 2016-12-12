@@ -81,7 +81,7 @@ public class SwampTextButton <T extends MetadataHolderBlock> extends TextButton 
     @NodeId (ids = {"onClickEvent", "onClickSound"})
     @InjectTransformedProperty
     public SwampTextButton<T> addInvokable(Invokable invokableEffect) {
-        Validate.notNull(invokableEffect);
+        Validate.notNull(invokableEffect, "No onClick effect is set for this button.");
         invokeEffects.add(invokableEffect);
         return this;
     }
