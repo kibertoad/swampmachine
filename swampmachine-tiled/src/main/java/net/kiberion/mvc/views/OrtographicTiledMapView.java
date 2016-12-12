@@ -1,8 +1,12 @@
 package net.kiberion.mvc.views;
 
+import java.util.Collection;
+import java.util.Collections;
+
 import net.kiberion.mvc.model.AbstractTiledMapModel;
 import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
+import net.kiberion.swampmachine.gui.view.AbstractStateSubView;
 import net.kiberion.tiled.TiledOrthographicCoordsUtils;
 import net.kiberion.tiled.model.TiledMapInfo;
 import net.kiberion.tiled.renderers.OrthogonalTiledMapRendererWithObjects;
@@ -38,5 +42,9 @@ public class OrtographicTiledMapView<T extends AbstractTiledMapModel<?>> extends
         setRendererCameraToCenter();
     }
 
+    @Override
+    protected Collection<AbstractStateSubView<?>> getAutoEnabledSubViews() {
+        return Collections.emptyList();
+    }
 	
 }

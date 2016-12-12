@@ -124,9 +124,14 @@ public abstract class GameState implements Screen {
         }
     }
 
+    /**
+     * Shows specified views/subviews
+     * @param viewId
+     * @param disableOtherSubViews
+     */
     public void showView(String viewId, boolean disableOtherSubViews) {
         StateView subViewToEnable = allSubViews.get(viewId);
-        Validate.notNull(subViewToEnable);
+        Validate.notNull(subViewToEnable, "Unknown subView: "+viewId+". Available views: "+allSubViews);
         subViewToEnable.show();
 
         if (disableOtherSubViews) {

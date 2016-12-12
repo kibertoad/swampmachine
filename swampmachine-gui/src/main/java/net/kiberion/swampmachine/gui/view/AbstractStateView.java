@@ -2,6 +2,7 @@ package net.kiberion.swampmachine.gui.view;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,21 +90,38 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
 
     @Override
     public void hide() {
-        log.info("Hiding: "+getClass().getCanonicalName());
+        log.info("Hiding: " + getClass().getCanonicalName());
         isEnabled = false;
     }
 
-    protected void hideAllSubViews () {
+    protected void hideAllSubViews(Collection<AbstractStateSubView<?>> exceptions) {
         for (StateView subView : getSubViews()) {
-            subView.hide();
+            if (!exceptions.contains(subView)) {
+                subView.hide();
+            }
         }
     }
-    
+
+    protected void hideAllSubViews() {
+        hideAllSubViews(Collections.emptyList());
+    }
+
+    protected void showSubViews(Collection<AbstractStateSubView<?>> subViewsToEnable) {
+        for (StateView subView : getSubViews()) {
+            if (subViewsToEnable.contains(subView)) {
+                subView.show();
+            }
+        }
+    }
+
     @Override
     public void show() {
         hideAllSubViews();
-        log.info("Showing: "+getClass().getCanonicalName());
-        isEnabled = true;
+        showSubViews (getAutoEnabledSubViews());
+        if (isEnabled == false) {
+            log.info("Showing: " + getClass().getCanonicalName());
+            isEnabled = true;
+        }
     }
 
     private void updateCoordsLabel() {
@@ -221,7 +239,7 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
     @Override
     public Map<String, Object> getContext() {
         Map<String, Object> context = new HashMap<>();
-        Validate.notNull(binding, "No binding is set for "+getClass().getCanonicalName());
+        Validate.notNull(binding, "No binding is set for " + getClass().getCanonicalName());
         context.put("binding", binding);
         return context;
     }
@@ -233,4 +251,11 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
      * public void addAnimationSafe(PyramideAnimation animation) {
      * animationAdditionList.add(animation); }
      */
+
+    /**
+     * These subviews automatically get enabled after this view is shown
+     * 
+     * @return
+     */
+    protected abstract Collection<AbstractStateSubView<?>> getAutoEnabledSubViews();
 }
