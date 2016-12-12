@@ -17,7 +17,7 @@ public class ElementTemplateLoader extends AbstractJsonLoader<ElementTemplate> {
 
     private static final Logger log = LogManager.getLogger();
 
-    private static final String LOAD_DIRECTORY = "view-compositions/templates";
+    private static final String LOAD_DIRECTORY = "view-templates";
 
     @Autowired
     private ElementTemplateRegistry compositionRegistry;
