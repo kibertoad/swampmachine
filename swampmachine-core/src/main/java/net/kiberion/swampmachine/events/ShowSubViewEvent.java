@@ -24,11 +24,20 @@ public class ShowSubViewEvent extends ApplicationEvent{
      */
     @Getter
     private final boolean hideOther;
+
+    @Getter
+    private final boolean keepConstantSubViews;
     
-    public ShowSubViewEvent(Object source, String subViewId, boolean hideOther) {
+    
+    public ShowSubViewEvent(Object source, String subViewId, boolean hideOther, boolean keepConstantSubViews) {
         super(source);
         this.subViewId = subViewId;
         this.hideOther = hideOther;
+        this.keepConstantSubViews = keepConstantSubViews; 
     }
 
+    public ShowSubViewEvent(Object source, String subViewId, boolean hideOther) {
+        this (source, subViewId, hideOther, true);
+    }
+    
 }

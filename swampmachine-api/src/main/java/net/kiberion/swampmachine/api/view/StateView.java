@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.gui.view;
+package net.kiberion.swampmachine.api.view;
 
 import java.util.Collection;
 import java.util.List;

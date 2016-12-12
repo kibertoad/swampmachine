@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Import;
 
 import net.kiberion.swampmachine.api.scripting.ScriptEntityFactory;
 import net.kiberion.swampmachine.api.scripting.SwampBinding;
-import net.kiberion.swampmachine.gui.view.StateView;
+import net.kiberion.swampmachine.api.view.StateView;
 import net.kiberion.swampmachine.mvcips.spring.CommonMVCIPSConfiguration;
 import net.kiberion.swampmachine.mvcips.states.GameState;
 import net.kiberion.swampmachine.mvcips.states.annotations.LoadingState;

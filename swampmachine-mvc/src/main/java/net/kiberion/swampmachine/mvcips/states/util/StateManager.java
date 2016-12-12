@@ -31,7 +31,7 @@ public class StateManager {
     @EventListener
     public void showSubView(ShowSubViewEvent event) {
         GameState currentState = (GameState) game.getScreen();
-        currentState.showView(event.getSubViewId(), event.isHideOther());
+        currentState.showView(event.getSubViewId(), event.isHideOther(), event.isKeepConstantSubViews());
     }
     
     

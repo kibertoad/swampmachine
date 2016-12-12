@@ -24,7 +24,7 @@ public class CommonLoadingView extends AbstractStateView<CommonLoadingModel> {
     }
     
     @Override
-    protected Collection<AbstractStateSubView<?>> getAutoEnabledSubViews() {
+    protected Collection<Class<? extends AbstractStateSubView<?>>> getAutoEnabledSubViews() {
         return Collections.emptyList();
     }
 }

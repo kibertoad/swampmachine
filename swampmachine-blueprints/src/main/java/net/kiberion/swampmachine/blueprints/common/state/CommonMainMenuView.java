@@ -21,7 +21,7 @@ public class CommonMainMenuView extends AbstractStateView<Object> {
     }
     
     @Override
-    protected Collection<AbstractStateSubView<?>> getAutoEnabledSubViews() {
+    protected Collection<Class<? extends AbstractStateSubView<?>>> getAutoEnabledSubViews() {
         return Collections.emptyList();
     }
 }

@@ -3,6 +3,7 @@ package net.kiberion.swampmachine.gui.view;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,9 +20,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.kiberion.swampmachine.annotations.SubView;
 import net.kiberion.swampmachine.api.common.Recalculable;
 import net.kiberion.swampmachine.api.elements.Label;
 import net.kiberion.swampmachine.api.scripting.SwampBinding;
+import net.kiberion.swampmachine.api.view.StateView;
 import net.kiberion.swampmachine.factories.InvokablesFactory;
 import net.kiberion.swampmachine.gui.managers.GuiManager;
 
@@ -106,16 +109,29 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
         hideAllSubViews(Collections.emptyList());
     }
 
-    protected void showSubViews(Collection<AbstractStateSubView<?>> subViewsToEnable) {
+    protected void showSubViews(Collection<Class<? extends AbstractStateSubView<?>>> collection) {
         for (StateView subView : getSubViews()) {
-            if (subViewsToEnable.contains(subView)) {
+            if (collection.contains(subView.getClass())) {
                 subView.show();
             }
         }
     }
 
+    private void sortSubViews () {
+        Collections.sort(subViews, new Comparator<StateView>() {
+            @Override
+            public int compare(StateView subView1, StateView subView2)
+            {
+                SubView metadata1 = subView1.getClass().getAnnotation(SubView.class);
+                SubView metadata2 = subView2.getClass().getAnnotation(SubView.class);
+                return Integer.compare(metadata1.zIndex(), metadata2.zIndex());
+            }
+        });        
+    }
+    
     @Override
     public void show() {
+        sortSubViews();
         hideAllSubViews();
         showSubViews (getAutoEnabledSubViews());
         if (isEnabled == false) {
@@ -257,5 +273,5 @@ public abstract class AbstractStateView<T> implements StateView, Recalculable, I
      * 
      * @return
      */
-    protected abstract Collection<AbstractStateSubView<?>> getAutoEnabledSubViews();
+    protected abstract Collection<Class<? extends AbstractStateSubView<?>>> getAutoEnabledSubViews();
 }

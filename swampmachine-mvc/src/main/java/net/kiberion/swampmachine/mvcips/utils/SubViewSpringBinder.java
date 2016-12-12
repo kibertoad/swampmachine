@@ -8,8 +8,8 @@ import org.springframework.context.ApplicationContext;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-import net.kiberion.swampmachine.gui.view.StateView;
-import net.kiberion.swampmachine.mvcips.states.annotations.SubView;
+import net.kiberion.swampmachine.annotations.SubView;
+import net.kiberion.swampmachine.api.view.StateView;
 
 public class SubViewSpringBinder {
 

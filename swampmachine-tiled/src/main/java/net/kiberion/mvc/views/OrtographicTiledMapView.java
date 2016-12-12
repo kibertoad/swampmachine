@@ -43,7 +43,7 @@ public class OrtographicTiledMapView<T extends AbstractTiledMapModel<?>> extends
     }
 
     @Override
-    protected Collection<AbstractStateSubView<?>> getAutoEnabledSubViews() {
+    protected Collection<Class<? extends AbstractStateSubView<?>>> getAutoEnabledSubViews() {
         return Collections.emptyList();
     }
 	

@@ -20,16 +20,16 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.kiberion.swampmachine.annotations.SubView;
 import net.kiberion.swampmachine.api.common.RealtimeUpdatable;
 import net.kiberion.swampmachine.api.scripting.ScriptEntityFactory;
 import net.kiberion.swampmachine.api.scripting.SwampBinding;
+import net.kiberion.swampmachine.api.view.StateView;
 import net.kiberion.swampmachine.gui.view.AbstractStateView;
-import net.kiberion.swampmachine.gui.view.StateView;
 import net.kiberion.swampmachine.mvcips.input.GenericInputAdapter;
 import net.kiberion.swampmachine.mvcips.states.annotations.State;
 import net.kiberion.swampmachine.mvcips.states.annotations.StateController;
 import net.kiberion.swampmachine.mvcips.states.annotations.StateControllers;
-import net.kiberion.swampmachine.mvcips.states.annotations.SubView;
 import net.kiberion.swampmachine.mvcips.states.api.AbstractStateController;
 import net.kiberion.swampmachine.mvcips.utils.UpdatableStageWrapper;
 import net.kiberion.swampmachine.processors.AbstractTimedProcessor;
@@ -128,15 +128,16 @@ public abstract class GameState implements Screen {
      * Shows specified views/subviews
      * @param viewId
      * @param disableOtherSubViews
+     * @param b 
      */
-    public void showView(String viewId, boolean disableOtherSubViews) {
+    public void showView(String viewId, boolean disableOtherSubViews, boolean keepConstantViews) {
         StateView subViewToEnable = allSubViews.get(viewId);
         Validate.notNull(subViewToEnable, "Unknown subView: "+viewId+". Available views: "+allSubViews);
         subViewToEnable.show();
 
         if (disableOtherSubViews) {
             for (StateView view : allSubViews.values()) {
-                if (view != subViewToEnable) {
+                if ((view != subViewToEnable) && (!view.getClass().getAnnotation(SubView.class).isConstant() || !keepConstantViews)) {
                     view.hide();
                 }
             }

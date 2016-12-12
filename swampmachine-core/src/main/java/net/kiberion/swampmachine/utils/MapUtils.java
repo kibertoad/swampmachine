@@ -1,11 +1,15 @@
 package net.kiberion.swampmachine.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.apache.commons.lang3.Validate;
 
 import net.kiberion.swampmachine.entities.common.api.EntityModelDescriptor;
 import net.kiberion.swampmachine.entityblocks.api.IdHolderBlock;
@@ -58,11 +62,16 @@ public class MapUtils {
     }
 
 
-    public static Map<String, Object> buildMap (Object ... object) {
-        Map<String, Object> map = new HashMap<>();
+    public static <T> Map<String, T> buildMap (Object ... object) {
+        if (object == null) {
+            return Collections.emptyMap();
+        }
+        
+        Validate.isTrue(((object.length & 1) == 0), "Length should be even. Received: "+Arrays.toString(object));
+        Map<String, T> map = new HashMap<>();
 
         for (int x = 0; x < object.length; x += 2) {
-            map.put((String)object[x], object[x+1]);
+            map.put((String)object[x], (T) object[x+1]);
         }
 
         return map;

@@ -24,7 +24,7 @@ public class AbstractStateSubView<T> extends AbstractStateView<T> implements App
     }
     
     @Override
-    protected Collection<AbstractStateSubView<?>> getAutoEnabledSubViews() {
+    protected Collection<Class<? extends AbstractStateSubView<?>>> getAutoEnabledSubViews() {
         return Collections.emptyList();
     }
     

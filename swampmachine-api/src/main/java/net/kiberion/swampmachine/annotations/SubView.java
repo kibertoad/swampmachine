@@ -1,4 +1,4 @@
-package net.kiberion.swampmachine.mvcips.states.annotations;
+package net.kiberion.swampmachine.annotations;
 
 import static java.lang.annotation.RetentionPolicy.*;
 
@@ -6,7 +6,8 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import net.kiberion.swampmachine.gui.view.StateView;
+import net.kiberion.swampmachine.api.view.StateView;
+
 
 /**
  * Apply this to the state that uses additional overlay view for GUI
@@ -25,5 +26,11 @@ public @interface SubView {
     Class<? extends StateView>[] parentViews();
     
     boolean usesOverlayStage() default true;
+    
+    //Whether this subview should be kept when new shown subview hides previous subviews
+    boolean isConstant() default false;
+    
+    //Priority of being rendered. Higher zIndex means being drawn on top (later)
+    int zIndex() default 50;
     
 }
