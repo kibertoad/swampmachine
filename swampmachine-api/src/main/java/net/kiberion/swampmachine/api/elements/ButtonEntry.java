@@ -2,10 +2,9 @@ package net.kiberion.swampmachine.api.elements;
 
 import net.kiberion.swampmachine.api.invokables.Invokable;
 
-public interface ButtonEntry {
+public interface ButtonEntry extends TextEntry{
 
     public boolean isActive ();
-    public String getText();
     public Invokable getOnClickEffect();
     
 }

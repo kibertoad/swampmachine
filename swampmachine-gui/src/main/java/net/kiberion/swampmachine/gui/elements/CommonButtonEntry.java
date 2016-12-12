@@ -9,11 +9,11 @@ public class CommonButtonEntry implements ButtonEntry{
 
     @Getter
     @Setter
-    private boolean active;
-
+    private String text;
+    
     @Getter
     @Setter
-    private String text;
+    private boolean active;
 
     @Getter
     @Setter

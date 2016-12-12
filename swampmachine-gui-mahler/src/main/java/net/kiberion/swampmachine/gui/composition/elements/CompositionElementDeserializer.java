@@ -50,7 +50,7 @@ public class CompositionElementDeserializer extends JsonDeserializer<Composition
 
     // processed in a special way
     private static final List<String> consumedProperties = new InlineGList<>("position", "image", "text", "labelValue",
-            "labelText", "buttonSource", "selectedIcon", "unselectedIcon", "onClickScript");
+            "labelText", "buttonSource", "labelSource", "selectedIcon", "unselectedIcon", "onClickScript");
     private static final List<String> consumedMapProperties = new InlineGList<>("onClickEvent", "plus", "minus",
             "button", "onClickSound");
     private static final List<String> consumedIntProperties = new InlineGList<>();

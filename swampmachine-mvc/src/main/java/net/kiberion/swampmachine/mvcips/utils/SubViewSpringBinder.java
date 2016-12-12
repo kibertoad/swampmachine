@@ -22,15 +22,20 @@ public class SubViewSpringBinder {
 
             SubView subViewAnnotation = entry.getValue().getClass().getAnnotation(SubView.class);
 
-            StateView parentView = context.getBean(subViewAnnotation.parentView());
-            StateView childView = (StateView) entry.getValue();
-            parentView.addSubView(childView);
+            for (Class<? extends StateView> parentId : subViewAnnotation.parentViews()) {
+                StateView parentView = context.getBean(parentId);
+                StateView childView = (StateView) entry.getValue();
+                parentView.addSubView(childView);
 
-            if (subViewAnnotation.usesOverlayStage()) {
-                childView.setMainStage(new Stage());
-            } else {
-                childView.setMainStage(parentView.getMainStage());
+                if (childView.getMainStage() == null) {
+                    if (subViewAnnotation.usesOverlayStage()) {
+                        childView.setMainStage(new Stage());
+                    } else {
+                        childView.setMainStage(parentView.getMainStage());
+                    }
+                }
             }
         }
+
     }
 }

@@ -22,7 +22,7 @@ public @interface SubView {
     String id();
     
     //Used for automatic binding to parent view after spring context is initted
-    Class<? extends StateView> parentView();
+    Class<? extends StateView>[] parentViews();
     
     boolean usesOverlayStage() default true;
     

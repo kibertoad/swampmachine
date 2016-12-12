@@ -12,6 +12,11 @@ import net.kiberion.swampmachine.api.scripting.SwampBinding;
 import net.kiberion.swampmachine.invokables.ScriptInvokable;
 import net.kiberion.swampmachine.utils.SetUtils;
 
+/**
+ * Most common cause - scripted reference to a bound entity, e. g. view or controller to provide entity source
+ * @author kibertoad
+ *
+ */
 public class ScriptTransformer extends AbstractTransformer<String, ScriptInvokable> {
 
     public static final Set<String> TRANSFORMED_PARAMETER = SetUtils.buildSet("onClickScript");

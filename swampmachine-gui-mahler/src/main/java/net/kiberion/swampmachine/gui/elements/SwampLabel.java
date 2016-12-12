@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 import net.kiberion.swampmachine.annotations.InjectTransformedProperty;
 import net.kiberion.swampmachine.annotations.NodeId;
+import net.kiberion.swampmachine.api.elements.TextEntry;
 import net.kiberion.swampmachine.api.invokables.Invokable;
 import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.swampmachine.entities.spatial.api.Position;
@@ -74,6 +75,10 @@ public class SwampLabel extends Label implements net.kiberion.swampmachine.api.e
 
     public SwampLabel(int text) {
         super(Integer.toString(text), UiManager.instance().getDefaultSkin());
+    }
+
+    public SwampLabel(TextEntry buttonEntry) {
+        this (buttonEntry.getText());
     }
 
     public void setText(int newText) {

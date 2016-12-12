@@ -38,7 +38,7 @@ import net.kiberion.swampmachine.subscription.ObservableButtonEntrySource;
 
 @ElementPrototype(id = "swTable", supportedProperties = {})
 @ElementTransformedProperty(sourceProperty = "buttonSource", targetTransformer = ScriptTransformer.class)
-public class SwampTable<T extends MetadataHolderBlock> extends Table implements ButtonContainer{
+public class SwampButtonTable<T extends MetadataHolderBlock> extends Table implements ButtonContainer{
 
     private boolean hasObserver;
 
@@ -52,11 +52,11 @@ public class SwampTable<T extends MetadataHolderBlock> extends Table implements 
 
     public List<SwampTextButton<T>> textButtons = new ArrayList<>();
 
-    public SwampTable() {
+    public SwampButtonTable() {
         super(UiManager.instance().getDefaultSkin());
     }
 
-    public SwampTable(int setX, int setY) {
+    public SwampButtonTable(int setX, int setY) {
         this();
         this.setPosition(setX, setY);
     }
