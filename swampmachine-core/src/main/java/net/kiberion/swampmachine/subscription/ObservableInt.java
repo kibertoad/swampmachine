@@ -31,6 +31,11 @@ public class ObservableInt extends AbstractObservable<Integer, Integer> {
     public void decrement() {
         setValue(value - 1);
     }
+    
+    public void applyDelta(int delta) {
+        setValue(value + delta);
+    }
+    
 
     @Override
     public boolean equals(Object obj) {
