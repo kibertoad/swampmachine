@@ -109,6 +109,8 @@ public abstract class GameState implements Screen {
                 binding.setVariable(controllerMetadata.nameInBinding(), controller);
             }
         }
+        
+        binding.setVariable("view", getView());
 
         allSubViews.clear();
         for (StateView stateView : getAllViews()) {

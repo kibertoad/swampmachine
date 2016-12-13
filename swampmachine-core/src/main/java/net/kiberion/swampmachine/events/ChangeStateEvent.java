@@ -20,6 +20,10 @@ public class ChangeStateEvent extends ApplicationEvent{
         super(source);
         this.stateCode = stateId;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Change to state: "+stateCode;
+    }
 
 }
