@@ -1,9 +1,9 @@
 package net.kiberion.swampmachine.events;
 
+import net.kiberion.swampmachine.annotations.ConstructableEntity;
 import org.springframework.context.ApplicationEvent;
 
 import lombok.Getter;
-import net.kiberion.swampmachine.annotations.ConstructableEntity;
 
 @ConstructableEntity(id = "showSubView", constructorProperties = {"source", "subViewId", "hideOther"})
 public class ShowSubViewEvent extends ApplicationEvent{

@@ -1,5 +1,6 @@
 package net.kiberion.swampmachine.gui.spring;
 
+import net.kiberion.swampmachine.spring.TestCoreConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -8,8 +9,7 @@ import net.kiberion.swampmachine.assets.readers.ReaderHelper;
 import net.kiberion.swampmachine.gui.composer.CompositionLoader;
 import net.kiberion.swampmachine.gui.composition.elements.ElementPrototypeRegistry;
 import net.kiberion.swampmachine.gui.templates.ElementTemplateLoader;
-import net.kiberion.swampmachine.spring.CommonLoaderConfiguration;
-import net.kiberion.swampmachine.spring.TestCoreConfiguration;
+import spring.CommonLoaderConfiguration;
 
 @Configuration
 @Import(value = { MahlerCoreConfiguration.class, MahlerGdxConfiguration.class, CommonGuiConfiguration.class,

@@ -3,7 +3,7 @@ package net.kiberion.swampmachine.gui.spring;
 import java.util.Collection;
 import java.util.List;
 
-import net.kiberion.swampmachine.assets.loaders.api.Initter;
+import net.kiberion.swampmachine.api.Initter;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;

@@ -2,6 +2,9 @@ package net.kiberion.swampmachine.gui.managers;
 
 import java.util.Map;
 
+import net.kiberion.swampmachine.registries.CommonViewInfoRegistry;
+import net.kiberion.swampmachine.registries.ImageRegistry;
+import net.kiberion.swampmachine.utils.ImmutableEnumMapBuilder;
 import org.apache.commons.lang3.Validate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,9 +18,6 @@ import lombok.Getter;
 import net.kiberion.swampmachine.assets.viewinfo.ViewInfo;
 import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
-import net.kiberion.swampmachine.registries.CommonViewInfoRegistry;
-import net.kiberion.swampmachine.registries.ImageRegistry;
-import net.kiberion.swampmachine.utils.ImmutableEnumMapBuilder;
 
 public class GuiManager {
 
@@ -38,7 +38,7 @@ public class GuiManager {
     }
     
     //TODO replace with proper layouts later
-    private static final Map<PositionCode, Position> positionMap = new ImmutableEnumMapBuilder<PositionCode, Position> (PositionCode.class)
+    private static final Map<PositionCode, Position> positionMap = new ImmutableEnumMapBuilder<PositionCode, Position>(PositionCode.class)
             .put(PositionCode.CENTER, new CommonPosition(600, 500))
             .build();
     

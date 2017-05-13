@@ -1,9 +1,10 @@
 package net.kiberion.swampmachine.utils;
 
+import net.kiberion.swampmachine.api.common.Prioritizable;
+
 import java.util.HashSet;
 import java.util.Set;
 
-import net.kiberion.swampmachine.assets.loaders.api.Prioritizable;
 
 /**
  * @author kibertoad

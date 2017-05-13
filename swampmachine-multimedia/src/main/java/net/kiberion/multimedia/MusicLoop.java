@@ -9,8 +9,6 @@ import com.badlogic.gdx.audio.Music.OnCompletionListener;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.kiberion.swampmachine.assets.readers.AbstractFileReader;
-import net.kiberion.swampmachine.assets.readers.GDXFileReader;
 
 public class MusicLoop {
 
@@ -28,6 +26,8 @@ public class MusicLoop {
 
     private String lastPlayedTrack;
 
+    //ToDo add proper loader
+    /*
     private AbstractFileReader fileReader;
 
     public MusicLoop() {
@@ -45,6 +45,7 @@ public class MusicLoop {
             randomizedPlaylist = new ArrayList<>(playlist);
         }
     }
+    */
 
     public void reshuffle() {
         randomizedPlaylist = new ArrayList<>(playlist);

@@ -20,7 +20,7 @@ import net.kiberion.swampmachine.assets.GameConfig;
 import net.kiberion.swampmachine.assets.loaders.api.AbstractAsyncLoader;
 import net.kiberion.swampmachine.assets.loaders.util.FileReaderFactory;
 import net.kiberion.swampmachine.assets.readers.AbstractFileReader;
-import net.kiberion.swampmachine.assets.util.LoadOnStartup;
+import net.kiberion.swampmachine.annotations.LoadOnStartup;
 import net.kiberion.swampmachine.utils.SetUtils;
 import net.kiberion.swampmachine.utils.common.FilePathUtils;
 import net.kiberion.tiled.MapRegistry;

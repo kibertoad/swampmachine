@@ -27,7 +27,17 @@
         </dependency>
         <dependency>
             <groupId>net.kiberion</groupId>
+            <artifactId>swampmachine-loaders</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.kiberion</groupId>
             <artifactId>swampmachine-core</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.kiberion</groupId>
+            <artifactId>swampmachine-loaders</artifactId>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>

@@ -2,6 +2,7 @@ package net.kiberion.swampmachine.factories;
 
 import static org.junit.Assert.*;
 
+import net.kiberion.swampmachine.BasicContextBasedTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -10,9 +11,8 @@ import net.kiberion.swampmachine.factories.entities.DummyAfterSpawnListener;
 import net.kiberion.swampmachine.factories.entities.DummyFactory;
 import net.kiberion.swampmachine.factories.events.SpawnEntityEvent;
 import net.kiberion.swampmachine.factories.params.CommonSpawnParams;
-import net.kiberion.swampmachine.spring.CoreContextBasedTest;
 
-public class MetaFactoryTest extends CoreContextBasedTest {
+public class MetaFactoryTest extends BasicContextBasedTest{
 
     @Autowired
     private ApplicationEventPublisher eventPublisher;

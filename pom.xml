@@ -13,6 +13,7 @@
         <module>swampmachine-parent</module>
         <module>swampmachine-api</module>
         <module>swampmachine-core</module>
+        <module>swampmachine-loaders</module>
         <module>swampmachine-mvc</module>
         <module>swampmachine-tiled</module>
         <module>swampmachine-gui</module>
@@ -22,6 +23,7 @@
         <module>swampmachine-scripting</module>
         <module>swampmachine-persistence</module>
         <module>swampmachine-utils</module>
+        <module>swampmachine-preflight</module>
     </modules>
 
     <repositories>

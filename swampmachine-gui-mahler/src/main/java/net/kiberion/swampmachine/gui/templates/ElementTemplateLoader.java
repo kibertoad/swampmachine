@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 
-import net.kiberion.swampmachine.assets.util.LoadBeforeStartup;
+import net.kiberion.swampmachine.annotations.LoadBeforeStartup;
 import net.kiberion.swampmachine.loaders.AbstractJsonLoader;
 
 @LoadBeforeStartup

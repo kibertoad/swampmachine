@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import net.kiberion.swampmachine.annotations.LoadOnStartup;
 import org.apache.commons.lang3.Validate;
 
 import lombok.Getter;
 import lombok.Setter;
 import net.kiberion.persistence.api.CrudDao;
 import net.kiberion.persistence.api.Persistor;
-import net.kiberion.swampmachine.assets.util.LoadOnStartup;
 
 /**
  * Common implementation of {@link Persistor} that persists entities from

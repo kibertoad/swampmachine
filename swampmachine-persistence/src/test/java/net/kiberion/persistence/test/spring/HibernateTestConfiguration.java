@@ -1,5 +1,6 @@
 package net.kiberion.persistence.test.spring;
 
+import net.kiberion.swampmachine.spring.TestCoreConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -11,7 +12,7 @@ import net.kiberion.persistence.test.hibernate.entities.TestEntity;
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)
 @ComponentScan("net.kiberion.persistence.test.hibernate")
-@Import({net.kiberion.swampmachine.spring.TestCoreConfiguration.class}) 
+@Import({TestCoreConfiguration.class})
 public class HibernateTestConfiguration extends AbstractInMemoryDBHibernateConfiguration {
 
     @Override

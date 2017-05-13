@@ -3,6 +3,7 @@ package net.kiberion.swampmachine.mvcips.states.util;
 import java.util.Collection;
 import java.util.List;
 
+import net.kiberion.swampmachine.api.Initter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -12,7 +13,6 @@ import org.springframework.context.annotation.Configuration;
 import lombok.Getter;
 import net.kiberion.swampmachine.assets.loaders.api.Loader;
 import net.kiberion.swampmachine.assets.loaders.util.LoaderSpringExtractor;
-import net.kiberion.swampmachine.assets.loaders.api.Initter;
 import net.kiberion.swampmachine.mvcips.states.GameState;
 import net.kiberion.swampmachine.mvcips.utils.StateSpringLoader;
 import net.kiberion.swampmachine.mvcips.utils.SubViewSpringBinder;
