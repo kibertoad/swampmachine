@@ -2,7 +2,7 @@ package net.kiberion.swampmachine.blueprints.common.state;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import net.kiberion.swampmachine.api.view.StateView;
+import net.kiberion.swampmachine.gui.view.StateView;
 import net.kiberion.swampmachine.mvcips.states.GameState;
 import net.kiberion.swampmachine.mvcips.states.annotations.State;
 

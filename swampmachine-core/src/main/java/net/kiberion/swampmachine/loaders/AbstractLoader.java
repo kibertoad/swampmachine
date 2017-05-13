@@ -21,9 +21,8 @@ import net.kiberion.swampmachine.utils.MapUtils;
  * Synchronous loader that fills target map with data from source.
  * Is supposed to get all necessary configuration during construction.
  * Actual loading is invoked via no-args method
- * 
- * @author kibertoad
  *
+ * @author kibertoad
  */
 public abstract class AbstractLoader implements SyncLoader {
 
@@ -44,7 +43,7 @@ public abstract class AbstractLoader implements SyncLoader {
     public AbstractLoader() {
         readerHelper = new ReaderHelper();
     }
-    
+
     protected boolean fileExists(String directoryName) {
         return readerHelper.fileExists(directoryName);
     }
@@ -65,9 +64,9 @@ public abstract class AbstractLoader implements SyncLoader {
     protected Path getEntityDirectory(String loadDirectory) {
         return config.getPathToResources().resolve(loadDirectory);
     }
-    
+
     protected <T extends EntityModelDescriptor> void loadDataNodes(Map<String, T> targetMap, String loadDirectory,
-            String loadExtension, Class<T> clazz) {
+                                                                   String loadExtension, Class<T> clazz) {
         try {
             if (fileExists(loadDirectory)) {
                 Path entityDirectory = getEntityDirectory(loadDirectory);
@@ -77,14 +76,16 @@ public abstract class AbstractLoader implements SyncLoader {
 
                 MapUtils.putAllEntities(targetMap, entities);
                 log.info("Loaded " + entities.size() + " " + getEntityClass().getSimpleName() + " entities.");
+            } else {
+                log.warn("Loading directory not found: " + loadDirectory);
             }
         } catch (Exception e) {
             throw new IllegalStateException("Error while loading: ", e);
         }
     }
-    
-    protected Logger getLog () {
+
+    protected Logger getLog() {
         return log;
     }
-    
+
 }

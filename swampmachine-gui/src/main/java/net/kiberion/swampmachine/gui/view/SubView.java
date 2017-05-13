@@ -1,12 +1,10 @@
-package net.kiberion.swampmachine.annotations;
+package net.kiberion.swampmachine.gui.view;
 
 import static java.lang.annotation.RetentionPolicy.*;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
-
-import net.kiberion.swampmachine.api.view.StateView;
 
 
 /**

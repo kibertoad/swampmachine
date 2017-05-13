@@ -20,11 +20,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.kiberion.swampmachine.annotations.SubView;
+import net.kiberion.swampmachine.gui.view.SubView;
 import net.kiberion.swampmachine.api.common.RealtimeUpdatable;
 import net.kiberion.swampmachine.api.scripting.ScriptEntityFactory;
 import net.kiberion.swampmachine.api.scripting.SwampBinding;
-import net.kiberion.swampmachine.api.view.StateView;
+import net.kiberion.swampmachine.gui.view.StateView;
 import net.kiberion.swampmachine.gui.view.AbstractStateView;
 import net.kiberion.swampmachine.mvcips.input.GenericInputAdapter;
 import net.kiberion.swampmachine.mvcips.states.annotations.State;

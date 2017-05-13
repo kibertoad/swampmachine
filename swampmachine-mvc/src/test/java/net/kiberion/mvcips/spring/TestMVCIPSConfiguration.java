@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Import;
 
 import net.kiberion.swampmachine.api.scripting.ScriptEntityFactory;
 import net.kiberion.swampmachine.api.scripting.SwampBinding;
-import net.kiberion.swampmachine.api.view.StateView;
+import net.kiberion.swampmachine.gui.view.StateView;
 import net.kiberion.swampmachine.mvcips.spring.CommonMVCIPSConfiguration;
 import net.kiberion.swampmachine.mvcips.states.GameState;
 import net.kiberion.swampmachine.mvcips.states.annotations.LoadingState;
@@ -14,6 +14,9 @@ import net.kiberion.swampmachine.mvcips.states.annotations.NewGameState;
 import net.kiberion.swampmachine.mvcips.states.annotations.StartingState;
 import net.kiberion.swampmachine.mvcips.states.annotations.State;
 import net.kiberion.swampmachine.scripting.common.AbstractScriptParser;
+
+import java.util.Collection;
+import java.util.Map;
 
 @Configuration
 @Import({ CommonMVCIPSConfiguration.class })
@@ -49,7 +52,32 @@ public class TestMVCIPSConfiguration {
         return new ScriptEntityFactory() {
             @Override
             public SwampBinding getBindingInstance() {
-                return null;
+                return new SwampBinding() {
+                    @Override
+                    public <T> T getVariableValue(String name) {
+                        return null;
+                    }
+
+                    @Override
+                    public boolean hasVariable(String name) {
+                        return false;
+                    }
+
+                    @Override
+                    public void setVariable(String name, Object value) {
+
+                    }
+
+                    @Override
+                    public Collection<Map.Entry<String, Object>> getVariableEntries() {
+                        return null;
+                    }
+
+                    @Override
+                    public Map<String, Object> getVariableMap() {
+                        return null;
+                    }
+                };
             }
 
             @Override

@@ -9,7 +9,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 import net.kiberion.swampmachine.api.invokables.Invokable;
-import net.kiberion.swampmachine.api.view.StateView;
+import net.kiberion.swampmachine.gui.view.StateView;
 import net.kiberion.swampmachine.assets.GameConfig;
 import net.kiberion.swampmachine.loaders.LoaderHelper;
 import net.kiberion.swampmachine.mvcips.states.annotations.LoadingState;
