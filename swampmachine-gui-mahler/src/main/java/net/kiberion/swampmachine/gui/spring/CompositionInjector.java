@@ -3,6 +3,7 @@ package net.kiberion.swampmachine.gui.spring;
 import java.util.Collection;
 import java.util.List;
 
+import net.kiberion.swampmachine.assets.loaders.api.Initter;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -12,7 +13,6 @@ import net.kiberion.swampmachine.api.composition.CompositionConsumer;
 import net.kiberion.swampmachine.gui.composer.Composition;
 import net.kiberion.swampmachine.gui.composer.CompositionRegistry;
 import net.kiberion.swampmachine.gui.composer.populators.Populator;
-import net.kiberion.swampmachine.mvcips.api.Initter;
 
 public class CompositionInjector implements ApplicationContextAware, Initter {
 

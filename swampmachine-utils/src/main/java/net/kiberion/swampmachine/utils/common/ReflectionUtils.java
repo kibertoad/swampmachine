@@ -11,9 +11,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.Validate;
 import org.pacesys.reflect.Reflect;
-import org.springframework.util.CollectionUtils;
 
 import net.kiberion.swampmachine.annotations.NodeId;
 
