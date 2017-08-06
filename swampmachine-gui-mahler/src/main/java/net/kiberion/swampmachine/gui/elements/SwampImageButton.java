@@ -20,10 +20,10 @@ import net.kiberion.swampmachine.annotations.InjectTransformedProperty;
 import net.kiberion.swampmachine.annotations.NodeId;
 import net.kiberion.swampmachine.api.invokables.Invokable;
 import net.kiberion.swampmachine.entities.spatial.api.Position;
-import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
+import net.kiberion.swampmachine.gui.annotations.ElementBlueprint;
 import net.kiberion.swampmachine.invokables.ScriptInvokable;
 
-@ElementPrototype(id = "swImageButton")
+@ElementBlueprint(id = "swImageButton")
 public class SwampImageButton extends ImageButton {
 
     public TextureRegion originalImage;

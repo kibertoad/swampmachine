@@ -24,11 +24,11 @@ import net.kiberion.swampmachine.api.invokables.Invokable;
 import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
-import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
+import net.kiberion.swampmachine.gui.annotations.ElementBlueprint;
 import net.kiberion.swampmachine.gui.listenerconditions.ListenerConditionContainer;
 import net.kiberion.swampmachine.invokables.ScriptInvokable;
 
-@ElementPrototype(id = "swTextButton", constructorProperties="text")
+@ElementBlueprint(id = "swTextButton", constructorProperties="text")
 public class SwampTextButton <T extends MetadataHolderBlock> extends TextButton implements Toggleable {
 
     private ListenerConditionContainer changeConditions = new ListenerConditionContainer();

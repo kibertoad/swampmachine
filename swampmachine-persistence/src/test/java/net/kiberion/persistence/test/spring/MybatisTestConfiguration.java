@@ -25,5 +25,5 @@ public class MybatisTestConfiguration extends AbstractInMemoryDBMybatisConfigura
     protected List<Class<?>> getMapperClasses() {
         return new InlineGList<>(LanguageMapper.class);
     }
-    
+
 }

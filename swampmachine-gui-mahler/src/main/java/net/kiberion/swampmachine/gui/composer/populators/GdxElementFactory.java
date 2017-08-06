@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import net.kiberion.swampmachine.gui.annotations.ElementBlueprint;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.PropertyAccessor;
 import org.springframework.beans.PropertyAccessorFactory;
@@ -21,7 +22,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import lombok.Getter;
 import net.kiberion.swampmachine.annotations.InjectTransformedProperty;
 import net.kiberion.swampmachine.gui.annotations.ElementHints;
-import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
 import net.kiberion.swampmachine.gui.annotations.InjectProperty;
 import net.kiberion.swampmachine.gui.composer.Composition;
 import net.kiberion.swampmachine.gui.composer.transformers.TransformerHelper;
@@ -40,8 +40,8 @@ public class GdxElementFactory {
     @Getter
     private TransformerHelper transformer;
 
-    protected Actor buildActor(ElementPrototype prototype, Class<?> clazz, List<Class<?>> constructorValueClasses,
-            List<Object> constructorPropertiesToSet) {
+    protected Actor buildActor(ElementBlueprint prototype, Class<?> clazz, List<Class<?>> constructorValueClasses,
+                               List<Object> constructorPropertiesToSet) {
         try {
             if (prototype.constructorProperties().length == 0) {
                 return (Actor) clazz.newInstance();
@@ -65,7 +65,7 @@ public class GdxElementFactory {
         Validate.notNull(elementType, "No element prototype set for element: " + sourceElement.getId());
         Class<?> clazz = elementRegistry.getElementMap().get(elementType);
         Validate.notNull(clazz, "Unknown element prototype: " + elementType);
-        ElementPrototype prototype = clazz.getAnnotation(ElementPrototype.class);
+        ElementBlueprint prototype = clazz.getAnnotation(ElementBlueprint.class);
 
         List<Method> injectionMethods = ReflectionUtils.getSupportedMethodsWithAnnotation(clazz, InjectProperty.class, sourceElement.getProperties().keySet());
         List<Method> transformedInjectionMethods = ReflectionUtils.getSupportedMethodsWithAnnotation(clazz, InjectTransformedProperty.class, sourceElement.getProperties().keySet());

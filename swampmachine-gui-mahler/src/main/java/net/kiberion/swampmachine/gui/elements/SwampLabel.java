@@ -12,7 +12,7 @@ import net.kiberion.swampmachine.api.elements.TextEntry;
 import net.kiberion.swampmachine.api.invokables.Invokable;
 import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.swampmachine.entities.spatial.api.Position;
-import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
+import net.kiberion.swampmachine.gui.annotations.ElementBlueprint;
 import net.kiberion.swampmachine.gui.annotations.ElementTransformedProperty;
 import net.kiberion.swampmachine.gui.composer.transformers.ScriptTransformer;
 import net.kiberion.swampmachine.gui.observers.LabelUpdatingObserver;
@@ -26,7 +26,7 @@ import net.kiberion.swampmachine.subscription.AbstractObservable;
  * @author kibertoad
  */
 
-@ElementPrototype(id = "swLabel", supportedProperties = {"text"})
+@ElementBlueprint(id = "swLabel", supportedProperties = {"text"})
 @ElementTransformedProperty(sourceProperty = "labelValue", targetTransformer = ScriptTransformer.class)
 public class SwampLabel extends Label implements net.kiberion.swampmachine.api.elements.Label {
 

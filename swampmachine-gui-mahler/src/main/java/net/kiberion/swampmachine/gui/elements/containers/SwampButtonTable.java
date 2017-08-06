@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import net.kiberion.swampmachine.gui.annotations.ElementBlueprint;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,7 +23,6 @@ import net.kiberion.swampmachine.api.elements.ButtonContainer;
 import net.kiberion.swampmachine.api.elements.ButtonEntry;
 import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
-import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
 import net.kiberion.swampmachine.gui.annotations.ElementTransformedProperty;
 import net.kiberion.swampmachine.gui.annotations.InjectProperty;
 import net.kiberion.swampmachine.gui.composer.transformers.ScriptTransformer;
@@ -36,7 +36,7 @@ import net.kiberion.swampmachine.subscription.ObservableButtonEntrySource;
  * @author kibertoad
  */
 
-@ElementPrototype(id = "swTable", supportedProperties = {})
+@ElementBlueprint(id = "swTable", supportedProperties = {})
 @ElementTransformedProperty(sourceProperty = "buttonSource", targetTransformer = ScriptTransformer.class)
 public class SwampButtonTable<T extends MetadataHolderBlock> extends Table implements ButtonContainer{
 

@@ -12,9 +12,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import net.kiberion.swampmachine.entities.spatial.api.Position;
-import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
+import net.kiberion.swampmachine.gui.annotations.ElementBlueprint;
 
-@ElementPrototype(id = "swImage", supportedProperties = { "image" }, constructorProperties = { "image" })
+@ElementBlueprint(id = "swImage", supportedProperties = { "image" }, constructorProperties = { "image" })
 public class SwampImage extends Image {
 
     public TextureRegion originalImage;

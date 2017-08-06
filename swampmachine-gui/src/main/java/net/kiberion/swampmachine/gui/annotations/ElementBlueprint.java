@@ -6,9 +6,13 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+
+/**
+ * Defines rules for deserializing this entity
+ */
 @Target({ ElementType.TYPE })
 @Retention(RUNTIME)
-public @interface ElementPrototype {
+public @interface ElementBlueprint {
 
     String id();
     String[] supportedProperties () default {};

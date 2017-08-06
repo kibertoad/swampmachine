@@ -21,7 +21,7 @@ import net.kiberion.swampmachine.api.elements.LabelContainer;
 import net.kiberion.swampmachine.api.elements.TextEntry;
 import net.kiberion.swampmachine.assets.UiManager;
 import net.kiberion.swampmachine.entityblocks.api.MetadataHolderBlock;
-import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
+import net.kiberion.swampmachine.gui.annotations.ElementBlueprint;
 import net.kiberion.swampmachine.gui.annotations.ElementTransformedProperty;
 import net.kiberion.swampmachine.gui.annotations.InjectProperty;
 import net.kiberion.swampmachine.gui.composer.transformers.ScriptTransformer;
@@ -35,7 +35,7 @@ import net.kiberion.swampmachine.subscription.ObservableTextEntrySource;
  * @author kibertoad
  */
 
-@ElementPrototype(id = "swLabelTable", supportedProperties = {})
+@ElementBlueprint(id = "swLabelTable", supportedProperties = {})
 @ElementTransformedProperty(sourceProperty = "labelSource", targetTransformer = ScriptTransformer.class)
 public class SwampLabelTable<T extends MetadataHolderBlock> extends Table implements LabelContainer{
 

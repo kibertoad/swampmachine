@@ -11,7 +11,7 @@ import net.kiberion.swampmachine.api.elements.SelectableButtonEntry;
 import net.kiberion.swampmachine.assets.viewinfo.ViewInfo;
 import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
-import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
+import net.kiberion.swampmachine.gui.annotations.ElementBlueprint;
 import net.kiberion.swampmachine.gui.annotations.ElementTransformedProperty;
 import net.kiberion.swampmachine.gui.composer.transformers.ScriptTransformer;
 import net.kiberion.swampmachine.gui.elements.SwampImageButton;
@@ -21,7 +21,7 @@ import net.kiberion.swampmachine.gui.observers.ButtonContainerUpdatingObserver;
 import net.kiberion.swampmachine.invokables.ScriptInvokable;
 import net.kiberion.swampmachine.subscription.ObservableSelectableButtonEntrySource;
 
-@ElementPrototype(id = "swCheckButtonList")
+@ElementBlueprint(id = "swCheckButtonList")
 @ElementTransformedProperty(sourceProperty = "buttonSource", targetTransformer = ScriptTransformer.class)
 public class CheckButtonList extends Group implements ButtonContainer {
 

@@ -11,7 +11,7 @@ import org.reflections.Reflections;
 import org.springframework.beans.factory.InitializingBean;
 
 import lombok.Getter;
-import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
+import net.kiberion.swampmachine.gui.annotations.ElementBlueprint;
 
 public class ElementPrototypeRegistry implements InitializingBean {
 
@@ -35,11 +35,11 @@ public class ElementPrototypeRegistry implements InitializingBean {
     protected void scanPackage(String packageName) {
         Reflections reflections = new Reflections(packageName);
 
-        Set<Class<?>> elementPrototypes = reflections.getTypesAnnotatedWith(ElementPrototype.class);
+        Set<Class<?>> elementPrototypes = reflections.getTypesAnnotatedWith(ElementBlueprint.class);
 
         for (Class<?> clazz : elementPrototypes) {
-            ElementPrototype prototypeInfo = clazz.getAnnotation(ElementPrototype.class);
-            Validate.notNull(prototypeInfo, "No ElementPrototype annotation on class "+clazz.getCanonicalName());
+            ElementBlueprint prototypeInfo = clazz.getAnnotation(ElementBlueprint.class);
+            Validate.notNull(prototypeInfo, "No ElementBlueprint annotation on class "+clazz.getCanonicalName());
             elementMap.put(prototypeInfo.id(), clazz);
         }
     }

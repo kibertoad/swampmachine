@@ -6,7 +6,7 @@ import net.kiberion.swampmachine.annotations.InjectTransformedProperty;
 import net.kiberion.swampmachine.annotations.NodeId;
 import net.kiberion.swampmachine.entities.spatial.api.Position;
 import net.kiberion.swampmachine.entities.spatial.impl.CommonPosition;
-import net.kiberion.swampmachine.gui.annotations.ElementPrototype;
+import net.kiberion.swampmachine.gui.annotations.ElementBlueprint;
 import net.kiberion.swampmachine.gui.annotations.ElementTransformedProperty;
 import net.kiberion.swampmachine.gui.composer.transformers.BoundLabelTransformer;
 import net.kiberion.swampmachine.gui.composer.transformers.ButtonTransformer;
@@ -22,7 +22,7 @@ import net.kiberion.swampmachine.gui.elements.SwampTextButton;
  *
  */
 
-@ElementPrototype(id = "swPlusMinusComposition")
+@ElementBlueprint(id = "swPlusMinusComposition")
 @ElementTransformedProperty(sourceProperty = "plus", targetTransformer = ButtonTransformer.class)
 @ElementTransformedProperty(sourceProperty = "minus", targetTransformer = ButtonTransformer.class)
 @ElementTransformedProperty(sourceProperty = "labelValue", targetTransformer = BoundLabelTransformer.class)
